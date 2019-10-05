@@ -1,0 +1,39 @@
+var express = require('express');
+var app = express();
+var cors = require('cors')
+var bodyParser = require('body-parser')
+var admin = require("firebase-admin");
+
+var serviceAccount = require("./fyp-project-900e2-firebase-adminsdk-ikoob-b0f213756b.json");
+
+admin.initializeApp({
+    credential: admin.credential.cert(serviceAccount),
+    databaseURL: "https://fyp-project-900e2.firebaseio.com"
+});
+var db = admin.database();
+var identifiers = db.ref("/Identifier Users")
+app.use(cors())
+app.use(bodyParser.json())
+app.post('/register', function (req, res) {
+    var newUser = identifiers.push();
+    newUser.set(req.body);
+    // to get data  
+    res.jsonp({ id: 1, name: 'Ali' });
+});
+app.post('/login',function(req, res){
+    let found = 0 ;
+    identifiers.once("value", function(snapshot) {
+        snapshot.forEach(function(childSnapshot) {
+            var childData = childSnapshot.val();
+            if(childData.email === req.body.email && childData.password === req.body.password ){
+                found = 1;
+            }
+        });
+        res.jsonp({ success: found });
+    }, function (errorObject) {
+        console.log("The read failed: " + errorObject.code);
+      });
+});
+app.listen(3000, function () {
+    console.log('Server listening on port 3000')
+});

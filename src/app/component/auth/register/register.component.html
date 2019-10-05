@@ -1,0 +1,62 @@
+<div class="form-body">
+  <div class="row">
+      <div class="form-holder">
+          <div class="form-content">
+              <div class="form-items">
+                  <div class="website-logo-inside">
+                      <!-- <a href="index.html">
+                              <div class="logo">
+                                  <img class="logo-size" src="images/logo-light.svg" alt="">
+                              </div>
+                          </a> -->
+                  </div>
+                  <h3>Helping Hand</h3>
+                  <p>Access to the most wide Social Network for Community.</p>
+                  <div class="page-links">
+                      <a routerLink="/">Login</a>
+                      <a routerLink="/register" class="active">Register</a>
+                  </div>
+                  <form [formGroup]="myreactiveform" (ngSubmit)="submitFrom()">
+                      <div>
+                          <input class="form-control" type="text" formControlName="name" placeholder="Full Name">
+                          <small class="text-danger" *ngIf="!form.name.valid &&  myreactiveform.get('name').touched">Please Enter Valid Name </small>
+                        </div>
+                        <div>
+                           
+                         <input class="form-control" type="email" formControlName="email" placeholder="E-mail Address" >
+
+                         <small class="text-danger" *ngIf="!form.email.valid && myreactiveform.get('email').touched">Please Enter Valid Email</small>
+                         
+         
+                         
+                            
+                        </div>
+
+                        <div> 
+                            <input class="form-control" type="password" formControlName="password" placeholder="Password" required minlength="4">
+                            
+                        </div>
+
+                        
+
+                      <select name="type" class="form-control" formControlName="accountType">
+                          <option>Select Account Type</option>
+                          <!-- <option disabled="disabled"></option> -->
+                          <option value="identifier">identifier</option>
+                          <option value="volunteer">Volunteer</option>
+                          <option value="motivator">Motivator</option>
+                      </select>
+                      <div class="form-button">
+                          <button id="submit" type="submit"  class="ibtn">Register</button>
+                      </div>
+                  
+                  </form>
+                  <div class="other-links">
+                      <span>Or register with</span><a href="#">Facebook</a><a href="#">Google</a><a
+                          href="#">Linkedin</a>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>

@@ -1,0 +1,59 @@
+.box{
+    background-color: #fff;
+    box-shadow: 0 1px 2px #ccc;
+    overflow: hidden;
+    position: relative;
+    padding: 30px;
+    margin-top: 50px;
+    
+}
+.box .title{
+    border-bottom:1px solid #ccc;
+}
+.box .title h2{
+    position: relative;
+    font-family: 'Merriweather', serif;
+    font-weight: normal;
+    margin: 0px;
+    background: none;
+    line-height: 1.6em;
+}
+.box .title p{
+    line-height: 1.6em;
+    font-size: 14px;
+    margin: 0 0 10px;
+    box-sizing: border-box;
+    display: block;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    color: #777;
+}
+button{
+    color: #fff !important;
+    background-color: #be161e;
+    border-color: #be161e;
+    text-decoration: none;
+    font-size: 14px;
+    letter-spacing: 1px;
+    padding: 14px 25px;
+    border-radius: 1px;
+    transition: all .25s ease-in-out;
+    font-family: 'Merriweather', serif;
+    float: right !important;
+    outline: none!important;
+    box-shadow: none!important;
+}
+button:hover{
+    background:#111;
+    color: #fff;
+    border:1px solid #111;
+}
+.form-group label{
+    font-family: 'Open Sans', sans-serif;
+    font-size: 14px;
+    line-height: 1.8em;
+    font-weight: 600;
+    color: #333
+}
