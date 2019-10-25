@@ -1,0 +1,173 @@
+header.navi{
+    background: #fff;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    min-height: 50px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    z-index: 800;
+    font-size: 14px;
+    color: #fff;
+    border-top: 2px solid #b92b27;
+    border-bottom: 1px solid #ddd;
+    box-shadow: 0 3px 2px -2px rgba(200,200,200,0.2);
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+header.navi .brand img{
+    width: 90px;
+    float: right;
+}
+header.navi ul{
+    display: flex;
+    list-style:none;
+}
+header.navi ul li{
+    display: inline-block;
+    margin-left: 50px;
+}
+header.navi ul li .row{
+    padding-top: 10px;
+}
+header.navi ul li .text{
+    margin-top: -12px;
+    margin-left: 4px;
+}
+header.navi ul li .text span{
+    font-size: 16px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #999;
+    line-height: 50px;
+    cursor: pointer;
+    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;
+    margin-bottom:  5px;
+    white-space: nowrap;    
+    -webkit-box-direction: normal!important;
+}
+header.navi ul li .text a{
+    text-decoration: none;
+}
+header.navi ul li .text span:hover{
+    color: #B92B27!important;
+}
+header.navi ul li .searchbox input{
+    width: 300px;
+    height: 30px;
+    margin-top: -15px;
+    border: 1px solid #e2e2e2;
+    border-radius: 4px;
+    padding-left: 36px;
+    background: url(https://qsf.fs.quoracdn.net/-3-images.new_grid.QuoraSearch.png-26-86c32b1ac26e4161.png) no-repeat 8px center;
+    background-size: 13px;
+    box-shadow: none!important;
+    border:1px solid #999;
+    outline: none!important;
+}
+header button.add_question{
+    min-width: 96px;
+    white-space: nowrap;
+    box-sizing: border-box;
+    transition: opacity ease-in-out 100ms,color ease-in-out 100ms,background-color ease-in-out 100ms,border-color ease-in-out 100ms;
+    border-radius: 3px;
+    box-shadow: 0 1px 1px 0 rgba(200,200,200,0.2);
+    display: inline-block;
+    font-weight: 500;
+    outline: 0;
+    padding: 3px 7px 4px 7px;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    border: 1px solid #b92b27;
+    background: #b92b27;
+    color: #fff;
+    margin-top: 7px;
+    float: left;
+}
+.nav_menu{
+    padding: 0!important;
+}
+.nav_menu ul#menu-explore-not-login li{
+    background: #fff;
+    opacity: 1!important;
+    border: 1px solid #eee;
+    padding: 10px;
+    border-radius: 3px;
+}
+.nav_menu ul#menu-explore-not-login li a{
+    color:#555!important;
+    text-decoration: none;
+}
+.nav_menu ul#menu-explore-not-login li a:hover{
+    color:#B92B27!important;
+}
+.nav_menu ul#menu-explore-not-login li a i{
+    color:#B92B27!important;
+}
+.go-up{
+    background: #B92B27;
+}
+.question-form input{
+    background: #fff;
+    border:none!important;
+    outline:0!important;
+    font-size: 20px;
+    font-weight: 600;
+}
+.question-form input:hover,.question-form input:active,.question-form input:focus{
+    box-shadow: none!important;
+}
+.question-form textarea{
+    background: #fff;
+    border:none!important;
+    outline:0!important;
+    font-size: 20px;
+    font-weight: 600;
+    min-height: 350px;
+}
+.question-form textarea:hover,.question-form textarea:active,.question-form textarea:focus{
+    box-shadow: none!important;
+}
+.question-form #thumbnail{
+    background: #fff;
+    border:1px solid #ccc;
+    cursor: pointer;
+    padding-left:15px;
+    padding-right:15px;
+    padding-top:7px;
+    padding-bottom:7px;
+    font-weight: 600;
+    font-size: 16px;
+    color: #555;
+    border-radius: 3px;
+}
+.question-form #thumbnail:hover{
+    background: #B92B27;
+    border:1px solid #B92B27;
+    color: #f7f7f7;
+}
+.question-form #submit{
+    border-radius: 3px;
+    background: #B92B27;
+    border:1px solid #B92B27;
+    cursor: pointer;
+    padding-left:40px;
+    padding-right:40px;
+    padding-top:7px;
+    padding-bottom:7px;
+    font-weight: 600;
+    font-size: 16px;
+    color: #f7f7f7;
+    float: right;
+}
+.question-form #submit:hover{
+    background: #222;
+    border-color: #222;
+
+}
+.thumb_selector{
+    display: none;
+}

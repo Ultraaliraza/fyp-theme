@@ -7,7 +7,7 @@ export class UserserviceService {
 
   constructor() { }
 
-  ishomeright():boolean{
+  ishomeright(): boolean{
 
      return false ;
   }

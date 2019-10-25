@@ -1,30 +1,26 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { UserserviceService} from './userservice.service';
+import { UserserviceService } from './userservice.service';
+import { AuthenticationService } from './service/auth-service/authentication.service';
 @Injectable({
   providedIn: 'root'
 })
 export class ActivateGuard implements CanActivate {
-
-  constructor(private userservice: UserserviceService , private router:Router){}
+  isLogin: boolean = false;
+  constructor(private userservice: UserserviceService, private router: Router, private authService: AuthenticationService) { 
+  }
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-      if(this.userservice.ishomeright()){
-
-        return true ;
-      }
-
-      else
-      {
-        alert("Redirecting to Home Page");
-          this.router.navigate(['/login']);              
- 
-      }
-
-    return true;
-
+      this.authService.user.subscribe(res => {
+        this.isLogin = res.isLogin;
+      });
+      if (this.isLogin) {
+      console.log('here i am ');
+      return true;
+    } else {
+      return false;
+    }
   }
-  
 }
