@@ -26,4 +26,6 @@ export class RegisterComponent implements OnInit {
     console.log(this.myreactiveform);
     this.authService.register(this.myreactiveform.value);
   }
+
+  
 }

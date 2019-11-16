@@ -15,10 +15,11 @@
                       <a routerLink="/register" routerLinkActive="active">Register</a>
                   </div>
                   <form [formGroup]="myForm" (ngSubmit)="submitFrom()">
+                    
                       <input class="form-control" type="text" formControlName="email" placeholder="E-mail Address" required>
                       <input class="form-control" type="password" formControlName="password" placeholder="Password" required>
                       <div class="form-button">
-                          <button id="submit" type="submit" class="ibtn" >Login</button> <a routerLink="/forgetpassword">Forget password?</a>
+                          <button id="submit" type="submit" class="ibtn" (click)="updateUser()" >Login</button> <a routerLink="/forgetpassword">Forget password?</a>
                       </div>
                   </form>
                   <div class="other-links">

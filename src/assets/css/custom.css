@@ -22,7 +22,7 @@ header.navi .brand img{
     float: right;
 }
 header.navi ul{
-    display: flex;
+    display: flex; 
     list-style:none;
 }
 header.navi ul li{
@@ -170,4 +170,97 @@ header button.add_question{
 }
 .thumb_selector{
     display: none;
+}
+.navi ul li.user img.navuser{
+    border-radius: 50%;
+    width: 35px;
+    margin-top: 5px;
+    cursor: pointer;
+}
+.navi ul li.user .dropdownSettings{
+    position: absolute;
+    width: 250px;
+    height: auto;
+    background: #fff;
+    border: 1px solid #c9c9c9;
+    margin-left: -100px;
+    margin-top: 15px;
+    border-radius: 3px;
+    display: none;
+}
+.navi ul li.user .dropdownSettings li img.user{
+     border-radius: 50%;
+    width: 35px;
+    margin-top: 5px;
+    cursor: pointer;
+}
+.navi ul li.user .dropdownSettings li{
+    font-size: 18px;
+    color: #555;
+    margin-left: -20px;
+}
+.divider{
+    border-top: 1px solid #ccc;
+}
+.navi ul li.user .dropdownSettings li h3{
+    padding-top: 15px;
+}
+.navi ul li.user .dropdownSettings li .form-group{
+    margin-top: 15px;
+}
+.navi ul li.user .dropdownSettings li .form-group a{
+    margin-left: 10px;
+    font-family: Helvetica;
+    font-size: 16px;
+    text-decoration: none;
+    color: #555;
+}
+#myQuestionModal .head{
+    width: 100%;
+    height: 50px;
+    padding-left: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    background: #b92b27;
+    text-align: center;
+}
+#myQuestionModal .head h3{
+    color: #eee;
+}
+
+#myQuestionModal .head .fa-close{
+    color: #fff;
+    margin-left: -20px;
+    font-size: 16px;
+}
+#myQuestionModal .post{
+    background: #b92b27;
+    border:1px solid #b92b27;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 600;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 35px;
+    padding-right:35px;
+    cursor: pointer;
+    float: right;
+}
+/*  MULTIPLE FILES UPLOAD*/
+.inputfile{
+    display: none;
+}
+.sidebar-categories li{
+    background: #eee;
+    padding: 10px;
+}
+.sidebar-categories li:hover{
+    background: #f7f7f7;
+    cursor: pointer;
+}   
+.sidebar-categories li a{
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+    color: #555;
 }

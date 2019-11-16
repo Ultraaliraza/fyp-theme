@@ -8,7 +8,6 @@ import { ForgetpasswordComponent } from './forgetpassword/forgetpassword.compone
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { HomeComponent } from './home/home.component';
-import { CanActivate } from '@angular/router/src/utils/preactivation';
 import { ActivateGuard } from './activate.guard';
 import { UserserviceService } from './userservice.service';
 

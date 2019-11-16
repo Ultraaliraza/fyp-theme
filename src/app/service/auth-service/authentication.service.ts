@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient} from '@angular/common/http';
 import { RouterModule, Routes, Router } from '@angular/router';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Subject } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
 export class AuthenticationService {
 
   user = new BehaviorSubject({});
+  post = new BehaviorSubject({});
   constructor(private http: HttpClient, private router: Router) { }
   register(objR) {
     console.log('Object Received is ', objR);
@@ -20,33 +21,49 @@ export class AuthenticationService {
   login(objR) {
     console.log('Object Received is ', objR);
     // send data to the backend server\
-    this.http.post('http://localhost:3000/login', objR).subscribe((data: any) => {
-      console.log(data);
+    this.http.post('http://localhost:3000/login', objR).subscribe((res: any) => {
+      console.log(res);
 
-      if (data.success === 1) {
-        console.log('login successs');
-        this.user.next({isLogin: true , res: data });
-        localStorage.setItem('isLogin', 'true');
+      if (res.success === 1) {
+        this.user.next(res.data);
+        if(res.data.accountType ==='Identifier')
+        {
         this.router.navigate(['/home']);
-
+        }
+       else if (res.data.accountType==='motivator')
+       {
+         this.router.navigate(['/forgetpassword']);
+       }
+       else if (res.data.accountType==='volunteer')
+       {
+         this.router.navigate(['/forgetpassword']);
+       }
       } else {
         console.log('login fail');
 
 
       }
-      // this.router.navigate(['/dashboard']);
+
+      console.log(res.data);
     });
   }
 
   home(objR) {
     console.log('Object Received is', objR);
-
-    this.http.post('http://localhost:5000/home', objR).subscribe((data: any) => {
-      console.log(data);
-
-      this.router.navigate(['/home']);
-    });
+ return this.http.post('http://localhost:3000/home', objR);
 
 
   }
+
+  forgetpassword(objR){
+
+    console.log('Object Recieved is', objR);
+
+    this.http.post('http://localhost:3000/forgetpassword', objR).subscribe((data: any) => {
+
+    this.router.navigate(['/login']);
+
+    });
+  }
+
 }
