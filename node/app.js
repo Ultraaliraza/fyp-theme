@@ -12,7 +12,9 @@ admin.initializeApp({
 });
 var db = admin.database();
 let posts = db.ref("/Posts");
-let users = db.ref("/Users")
+let allusers = db.ref("/Users")
+let Donors = db.ref("/Donors")
+let users = db.ref("/Users");
 
 app.use(cors())
 app.use(bodyParser.json())
@@ -23,9 +25,9 @@ app.post('/register', function (req, res) {
     const msg = {
         to: req.body.email,
         from: 'ar690780@gmail.com',
-        subject: 'Sending with SendGrid is Fun',
-        text: 'and easy to do anywhere, even with Node.js',
-        html: '<strong>and easy to do anywhere, even with Node.js</strong>',
+        subject: 'Your Account is Succesfful registered',
+        text: 'Your Account is registered on Helping Hand Social Network',
+        html: '<strong></strong>',
     };
     sgMail.send(msg);
     res.jsonp({ id: 1, name: 'Ali' });
@@ -39,6 +41,31 @@ app.post('/home', function (req, res) {
 
     res.json({ success: 1, data: post });
 });
+
+// For Sending Donations
+
+app.post('/home/donations', function (req, res) {
+    let donation = Donors.push();
+    donation.set(req.body);
+
+    res.json({ success: 1, data: donation });
+});
+
+// for getting Posts
+
+app.get('/home/donations', function (req, res) {
+    let donationpost = [];
+    Donors.once("value", function (snapshot) {
+        snapshot.forEach(function (childSnapshot) {
+            allPosts.push({
+                key: childSnapshot.key,
+                donationpost: childSnapshot.val(),
+            })
+        });
+        res.json({ success: 0, data: donationpost });
+    });
+});
+
 
 app.post('/login', function (req, res) {
     let found = 0;
@@ -102,7 +129,43 @@ app.post('/forgetpassword', function (req, res) {
     });
 });
 
+app.get('/question/:key', function (req, res) {
+    let key = req.params.key;
+    let allPosts = {};
+    posts.once("value", function (snapshot) {
+        snapshot.forEach(function (childSnapshot) {
+            if (key === childSnapshot.key) {
+                allPosts = {
+                    key: childSnapshot.key,
+                    post: childSnapshot.val(),
+                };
+            }
+        });
+        res.json({ success: 0, data: allPosts });
+        console.log(allPosts);
+    });
 
+});
+
+// Users with Respect to Key
+
+app.get('/profile/:key', function (req, res) {
+    let key = req.params.key;
+    let userData = {};
+    posts.once("value", function (snapshot) {
+        snapshot.forEach(function (childSnapshot) {
+            if (key === childSnapshot.key) {
+                userData = {
+                    key: childSnapshot.key,
+                    post: childSnapshot.val(),
+                };
+            }
+        });
+        res.json({ success: 0, data: userData });
+        console.log(userData);
+    });
+
+});
 
 // Fetching Posts from Database ( All Posts)
 
@@ -119,6 +182,23 @@ app.get('/posts', function (req, res) {
         res.json({ success: 0, data: allPosts });
     });
 });
+
+// Fetching All Users From Database
+
+app.get('/users', function (req, res) {
+
+    let showusers = [] ;
+users.once("value", function (snapshot) {
+    snapshot.forEach(function (childSnapshot) {
+        showusers.push({
+            key: childSnapshot.key,
+            post: childSnapshot.val(),
+        })
+    });
+    res.json({ success: 0, data: showusers });
+});
+});
+
 
 // Fetching Posts From Database ( Education)
 
@@ -143,45 +223,66 @@ app.get('/education', function (req, res) {
 
 // Fetching Posts From Database ( Proverty)
 
-app.get('/proverty', function (req , res) {
+app.get('/proverty', function (req, res) {
 
     let provertyPosts = [];
-posts.once("value", function (snapshot) {
+    posts.once("value", function (snapshot) {
 
-    snapshot.forEach(function (childSnapshot) {
+        snapshot.forEach(function (childSnapshot) {
 
-        if (childSnapshot.val().Catagory == 'proverty') {
-            provertyPosts.push({
-                key: childSnapshot.key,
-                post: childSnapshot.val(),
-            })
-        }
+            if (childSnapshot.val().Catagory == 'proverty') {
+                provertyPosts.push({
+                    key: childSnapshot.key,
+                    post: childSnapshot.val(),
+                })
+            }
+        });
+
+        res.json({ success: 0, data: provertyPosts });
     });
-
-    res.json({ success: 0, data: provertyPosts });
-});   
-    });
+});
 
 // Fetching Posts From Database ( Marriage)
 
-app.get('/marriage' , function(req , res){
+app.get('/marriage', function (req, res) {
 
     let marriagePosts = [];
-posts.once("value", function (snapshot) {
+    posts.once("value", function (snapshot) {
 
-    snapshot.forEach(function (childSnapshot) {
+        snapshot.forEach(function (childSnapshot) {
 
-        if (childSnapshot.val().Catagory == 'marriage') {
-            marriagePosts.push({
-                key: childSnapshot.key,
-                post: childSnapshot.val(),
-            })
-        }
+            if (childSnapshot.val().Catagory == 'marriage') {
+                marriagePosts.push({
+                    key: childSnapshot.key,
+                    post: childSnapshot.val(),
+                })
+            }
+        });
+
+        res.json({ success: 0, data: marriagePosts });
     });
+});
 
-    res.json({ success: 0, data: marriagePosts });
-});   
+// For listing Down Domation Posts
+app.get('/donations', function (req, res) {
+
+    let donationsPosts = [];
+    posts.once("value", function (snapshot) {
+
+        snapshot.forEach(function (childSnapshot) {
+
+            if (childSnapshot.val().Catagory == 'donation') {
+                donationsPosts.push({
+                    key: childSnapshot.key,
+                    post: childSnapshot.val(),
+                });
+            }
+        });
     });
+});
+// Admin Panel to Delete any User
+
+
 
 //App Listening
 

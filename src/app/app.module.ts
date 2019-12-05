@@ -10,6 +10,15 @@ import { HttpClientModule } from '@angular/common/http';
 import { HomeComponent } from './home/home.component';
 import { ActivateGuard } from './activate.guard';
 import { UserserviceService } from './userservice.service';
+import { MarriageComponent } from './marriage/marriage.component';
+import { ProvertyComponent } from './proverty/proverty.component';
+import { EducationComponent } from './education/education.component';
+import { ContactusComponent } from './contactus/contactus.component';
+import { DonationsComponent } from './donations/donations.component';
+import { MotivatorComponent } from './motivator/motivator.component';
+import { DonorsComponent } from './donors/donors.component';
+import { QuestionComponent } from './question/question.component';
+import { ProfileComponent } from './profile/profile.component';
 
 
 
@@ -20,7 +29,16 @@ import { UserserviceService } from './userservice.service';
     LoginComponent,
     RegisterComponent,
     ForgetpasswordComponent,
-    HomeComponent
+    HomeComponent,
+    MarriageComponent,
+    ProvertyComponent,
+    EducationComponent,
+    ContactusComponent,
+    DonationsComponent,
+    MotivatorComponent,
+    DonorsComponent,
+    QuestionComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,

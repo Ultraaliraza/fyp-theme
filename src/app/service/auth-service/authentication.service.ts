@@ -1,15 +1,23 @@
 import { Injectable } from '@angular/core';
-import { HttpClient} from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { RouterModule, Routes, Router } from '@angular/router';
 import { BehaviorSubject, Subject } from 'rxjs';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFireStorageModule } from '@angular/fire/storage';
+
 @Injectable({
   providedIn: 'root'
 })
 export class AuthenticationService {
+ keyvalue = '';
+  server = 'http://localhost:3000';
 
   user = new BehaviorSubject({});
   post = new BehaviorSubject({});
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(private http: HttpClient, private router: Router) {
+
+  }
   register(objR) {
     console.log('Object Received is ', objR);
     // send data to the backend server\
@@ -26,18 +34,15 @@ export class AuthenticationService {
 
       if (res.success === 1) {
         this.user.next(res.data);
-        if(res.data.accountType ==='Identifier')
-        {
-        this.router.navigate(['/home']);
+        if (res.data.accountType === 'Identifier') {
+          this.router.navigate(['/home']);
         }
-       else if (res.data.accountType==='motivator')
-       {
-         this.router.navigate(['/forgetpassword']);
-       }
-       else if (res.data.accountType==='volunteer')
-       {
-         this.router.navigate(['/forgetpassword']);
-       }
+        else if (res.data.accountType === 'motivator') {
+          this.router.navigate(['/motivator']);
+        }
+        else if (res.data.accountType === 'donor') {
+          this.router.navigate(['/donor']);
+        }
       } else {
         console.log('login fail');
 
@@ -50,20 +55,52 @@ export class AuthenticationService {
 
   home(objR) {
     console.log('Object Received is', objR);
- return this.http.post('http://localhost:3000/home', objR);
+    return this.http.post('http://localhost:3000/home', objR);
 
 
   }
+  getquestion(key: any) {
+  
+    console.log('this.keyvalue' , key);// ksi trha sy wo qid is jgaaa jye tou kaam ho jye ga 
+    return this.http.get(this.server + '/question/' + key);
+  }
 
-  forgetpassword(objR){
+  forgetpassword(objR) {
 
     console.log('Object Recieved is', objR);
 
     this.http.post('http://localhost:3000/forgetpassword', objR).subscribe((data: any) => {
 
-    this.router.navigate(['/login']);
+      this.router.navigate(['/login']);
 
     });
   }
+  getMarriage() {
+    return this.http.get('http://localhost:3000/marriage');
+  }
+  getdonations(objR) {
+    this.http.post('http://localhost:3000/home/donations', objR).subscribe((data: any) => {
+      this.router.navigate(['/home']);
+    });
+  }
+
+  getgetdonations() {
+
+    return this.http.get('http://localhost:3000/home/donations');
+
+  }
+
+  getPosts() {
+    return this.http.get('http://localhost:3000/posts');
+  }
+
+  getEducation() {
+
+    return this.http.get('http://localhost:300/education');
+  }
+  getUsers() {
+    return this.http.get('http://localhost:300/Users');
+  }
+
 
 }

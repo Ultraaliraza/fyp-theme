@@ -1,0 +1,103 @@
+#middleDiv{
+	margin-top: 80px;
+}
+#middleDiv .post .title{
+	font-size: 23px;
+	color: #222222;
+}
+#middleDiv .post .thumbnail{
+	height: 450px;
+	overflow: hidden;
+	margin-top: 15px;
+}
+#middleDiv .post .thumbnail img{
+	width: 100%;
+}
+#middleDiv .post .meta{
+	margin-top: 10px;
+}
+#middleDiv .post .meta ul{
+	list-style:none;
+	display: flex;
+}
+#middleDiv .post .meta ul li{
+	font-size: 14px;
+	color: #555555;
+}
+#middleDiv .post .meta ul li a{
+	color: #555555;
+}
+#middleDiv .post .meta ul.left{
+	float: left;
+	margin-left: -20px;
+}
+#middleDiv .post .meta ul.right{
+	float: right;
+}
+#middleDiv .post .meta ul.left li{
+	margin-left: 20px;
+}
+#middleDiv .post .content{
+	font-size: 16px;
+	color: #555;
+}
+#middleDiv .post .divider{
+	border-top: 1px solid #eee;
+	padding-top: 30px;
+}
+#middleDiv .commentsDiv .title{
+	font-size: 20px;
+	font-weight: 600;
+	color: #555555;
+}
+#middleDiv .commentsDiv .commentInput textarea{
+	border:1px solid #c9c9c9;
+	outline: none!important;
+	box-shadow: none!important;
+	font-size: 14px;
+}
+#middleDiv .commentsDiv .commentInput .btn-comment{
+	background: #E37222;
+	border:1px solid #E37222;
+	color: #f7f7f7;
+	font-weight: 500;
+	float: right;
+	margin-top: 10px;	
+}
+#middleDiv .commentsDiv .wrapper{
+	margin-top: 50px;
+}
+#middleDiv .commentsDiv .comment
+{
+	padding-top: 10px;
+	margin-left: -80px;
+}
+#middleDiv .commentsDiv .comment img{
+	width: 35px;
+	height: 35px;
+	border:2px solid #E37222;
+	padding:3px;
+	border-radius: 50%;
+}
+#middleDiv .commentsDiv .comment .userPic{
+	text-align: right;
+}
+#middleDiv .commentsDiv .comment p.name{
+	font-size: 15px;
+	font-weight: 600;
+	color: #555;
+}
+#middleDiv .commentsDiv .comment p.data{
+	font-size: 15px;
+	margin-top: -8px;
+}
+.commentsDiv{
+	background: #f7f7f7;
+	padding-top: 30px;
+	padding-left:15px;
+	padding-right: 15px;
+}
+.commentsDiv .comment{
+	padding-left: 10px;
+	padding-right: 10px;
+}

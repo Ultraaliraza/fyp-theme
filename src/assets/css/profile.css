@@ -1,0 +1,88 @@
+.topBar{
+	height: 50px;
+	background: #e9e9e9;
+}
+.topBar p.breadcrumbs{
+	font-size: 14px;
+	padding-left: 50px;
+	padding-top: 15px;
+	color: #555;
+}
+.topBar p.breadcrumbs a{
+	color: #555;
+}
+.topBar p.breadcrumbs span{
+	color: #E32222;
+}
+.wrapper .cover{
+	/* background: url(../img/profile-bg.png); */
+	height: 270px;
+}
+.wrapper .cover .img{
+	text-align: right;
+}
+.wrapper .cover .profilePic{
+	width: 150px;
+	height: 150px;
+	margin-top: 50px;
+	border:2px solid #ccc;
+	padding: 5px;
+}
+.wrapper .cover .content{
+	padding-top: 50px;
+}
+.wrapper .cover .content .name{
+	font-size: 24px;
+	font-weight: 600;
+	color: #444;
+}
+.wrapper .cover .content .designation{
+	font-size: 15px;
+	font-style: italic;
+}
+.wrapper .cover .content .social ul{
+	display: flex;
+	list-style: none;
+	margin-left: -20px;
+}
+.wrapper .cover .content .social ul li{
+	margin-left:20px;
+}
+.wrapper .cover .content .social ul li a{
+	color: #555;
+	transition: .3s;
+}
+.wrapper .cover .content .social ul li a:hover{
+	color: #E32222;
+}
+.wrapper .about{
+	padding-left: 60px;
+	padding-top: 30px;
+}
+.wrapper .about .title{
+	font-size:23px;
+	font-weight: 600;
+	color: #444;
+}
+.wrapper .about .desc{
+	font-size: 17px;
+	line-height: 28px;
+	margin-top: 20px;
+}
+.wrapper .about .Questions{
+	padding-left: 70px;
+}
+.wrapper .about .Questions ol{
+	list-style: none;
+	margin-top: 20px;
+}
+.wrapper .about .Questions ol li{
+	margin-top: 10px;
+}
+.wrapper .about .Questions ol li a{
+	font-size: 16px;
+	color: #555;
+}
+.wrapper{
+	padding-bottom: 100px;
+}

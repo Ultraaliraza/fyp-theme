@@ -14,13 +14,15 @@ import { Router } from '@angular/router';
 export class HomeComponent implements OnInit {
 
   datePipe = new DatePipe('en-US');
-
+  posts = [];
   myhomeform: FormGroup;
+  mydonationform: FormGroup;
   user;
- post;
-  constructor(private authService: AuthenticationService, private formBuilder: FormBuilder , private router : Router) {
+  users = [];
+  constructor(private authService: AuthenticationService, private formBuilder: FormBuilder, private router: Router) {
   }
   ngOnInit() {
+
     this.authService.user.subscribe((user: any) => {
       this.user = user;
       this.myhomeform = new FormGroup({
@@ -31,11 +33,44 @@ export class HomeComponent implements OnInit {
         name: new FormControl(this.user.name),
         accountType: new FormControl(this.user.accountType),
         PostBy: new FormControl(this.user.key),
+        PostImage: new FormControl(''),
+        Time: new FormControl(''),
+        User_profile_image: new FormControl(''),
+        id: new FormControl('')
+      });
+
+      this.mydonationform = new FormGroup({
+        Title: new FormControl(''),
+        Description: new FormControl(''),
+        Catagory: new FormControl('education'),
+        date: new FormControl(),
+        name: new FormControl(this.user.name),
+        accountType: new FormControl(this.user.accountType),
+        PostBy: new FormControl(this.user.key),
+        PostImage: new FormControl(''),
+        Time: new FormControl(''),
+        User_profile_image: new FormControl(''),
+        id: new FormControl('')
+
       });
     });
+    this.getPOSTS();
+    this.getUsers();
   }
 
+  getPOSTS() {
+    this.authService.getPosts().subscribe((data: any) => {
+      this.posts = data.data;
+    });
 
+  }
+
+  getUsers() {
+    this.authService.getUsers().subscribe((data: any) => {
+      this.users = data.data;
+    });
+
+  }
   submitFrom() {
     console.log(this.myhomeform);
     const time = this.datePipe.transform(new Date(), 'MM/dd/yyyy hh:mm:ss a');
@@ -44,8 +79,15 @@ export class HomeComponent implements OnInit {
       console.log(data);
 
       this.router.navigate(['/home']);
-    });;
+    });
 
+  }
+
+  donFrom() {
+
+
+    console.log(this.mydonationform);
+    this.authService.getdonations(this.mydonationform.value);
   }
 
 }

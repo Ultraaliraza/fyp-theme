@@ -1,0 +1,22 @@
+$(document).ready(function(){
+	$("#closeBars").click(function(){
+		$('#drawer').animate({right:'-300px'});
+	});	
+	$("#openDrawer").click(function(){
+		$("#drawer").animate({right:'0px'});
+	});
+	$("#openSearch").click(function(){
+		$(".searchbox").toggle("slow");
+	});
+	$("#accountSettingDropdown").click(function(){
+		$("#dropdownPicture").toggle(100);
+	});
+	$("#postQustionPopuopOpener").click(function(){
+		$("#postQuestionModel").fadeIn("slow");
+		$("#postQuestionModelOverlay").fadeIn("slow");
+	});
+	$("#closeQuestionModel").click(function(){
+		$("#postQuestionModel").fadeOut("slow");
+		$("#postQuestionModelOverlay").fadeOut("slow");
+	});
+});
