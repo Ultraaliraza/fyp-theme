@@ -19,6 +19,8 @@ import { MotivatorComponent } from './motivator/motivator.component';
 import { DonorsComponent } from './donors/donors.component';
 import { QuestionComponent } from './question/question.component';
 import { ProfileComponent } from './profile/profile.component';
+import { AboutComponent } from './about/about.component';
+import { WomenComponent } from './women/women.component';
 
 
 
@@ -31,14 +33,16 @@ import { ProfileComponent } from './profile/profile.component';
     ForgetpasswordComponent,
     HomeComponent,
     MarriageComponent,
-    ProvertyComponent,
+     ProvertyComponent,
     EducationComponent,
     ContactusComponent,
     DonationsComponent,
     MotivatorComponent,
     DonorsComponent,
     QuestionComponent,
-    ProfileComponent
+    ProfileComponent,
+    AboutComponent,
+    WomenComponent
   ],
   imports: [
     BrowserModule,

@@ -1,22 +1,9 @@
 
-<!-- <head>
-	<meta charset="UTF-8">
-	<title>Home Page</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-	<link rel="stylesheet" href="css/bootstrap.css" />
-	<link rel="stylesheet" href="css/global.css" />
-	<link rel="stylesheet" href="css/home.css" />
-	<link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
-	<script src="js/jquery.js"></script>
-	<script src="js/bootstrap.min.css"></script>
-	<script src="js/custom.js"></script>
-	<script src="https://kit.fontawesome.com/7557eb5ae5.js" crossorigin="anonymous"></script>
-</head> -->
-
+<div id="homePage">
 	<!-- Header -->
 	<header class="nav container-fluid">
 		<div class="logo">
-			<img src= "src\assets\images\76a504aa-642e-4bf0-9219-be174858b4eb.jpg"  class="img-fluid" alt="Logo">
+			<img src="img/logo.png" class="img-fluid" alt="Logo">
 		</div>
 		<div class="bars ml-auto" id="openDrawer">
 			<i class="fas fa-bars fa-2x"></i>
@@ -61,16 +48,16 @@
 			</div>
 			<ul>
 				<li>
-					<a href="#">Home</a>
+					<a  routerLink="/home">Home</a>
 				</li>
 				<li>
-					<a href="#">Ask Question</a>
+					<a href="#">About Us</a>
 				</li>
 				<li>
-					<a href="#">Ask Donations</a>
+					<a href="#">Jobs</a>
 				</li>
 				<li>
-					<a href="#">About US</a>
+					<a href="#">Funding</a>
 				</li>
 				<li>
 					<a href="#">Contact Us</a>
@@ -87,38 +74,40 @@
 				<ul>
 					<li>
 						<i class="fas fa-rss"></i>
-						<a href="#">Feed</a>
+						<a routerLink="/home">Feed</a>
 					</li>
 					<li>
-						<i class="fas fa-donate"></i>
-						<a href="#">Donations</a>
+							<i class="fas fa-university"></i>		
+						    <a routerLink="/education">Education</a>
 					</li>
 					<li>
-						<i class="fas fa-blind"></i>
-						<a href="#">Poverty</a>
+						<i class="fas fa-microchip"></i>
+						<a routerLink="/marriage">Marriage</a>
 					</li>
 					<li>
-						<i class="fas fa-child"></i>
-						<a href="#">Child Labor</a>
-					</li>
-					<li>
-						<i class="fas fa-university"></i>
-						<a href="#">Education</a>
-					</li>
-					
-					<li>
-						<i class="fa fa-ring"></i>
-						<a href="#">Marriage</a>
+						<i class="fas fa-parachute-box"></i>
+						<a routerLink="/proverty">Proverty</a>
 					</li>
 					<li>
 						<i class="fas fa-female"></i>
-						<a href="#">Women Rights</a>
+						<a routerLink="/women">Women</a>
 					</li>
-				
 					<li>
-						<i class="fas fa-users"></i>
-						<a href="#">Universty Issues</a>
+						<i class="fas fa-child"></i>
+						<a href="#">Child Labour</a>
 					</li>
+					<li>
+						<i class="fas fa-hands-helping"></i>
+						<a href="#">Un-Employment</a>
+					</li>
+					<li>
+						<i class="fas fa-microchip"></i>
+						<a href="#">Others</a>
+					</li>
+					<!-- <li>
+						<i class="fas fa-users"></i>
+						<a href="#">Employees</a>
+					</li> -->
 
 				</ul>
 			</div>
@@ -131,92 +120,20 @@
 					<div class="body">
 						<span id="postQustionPopuopOpener">What's in your mind ?</span>	
 					</div>
-				</div >
-				<div *ngFor="let post of posts" >
-						<article id="{{post.key}}" >
-			<!-- Question -->
-			   <div class="questionBox">
-					<h3 class="title">
-						<a routerLink="/question/{{post.key}}">
-						       {{ post.post.Title }}
-						</a>
-					</h3>
-					<div class="thumbnail">
-						<img src={{post.post.PostImage}} class="img-fluid">
-					</div>
-					<div class="content">
-						<p>
-						{{ post.post.Description }}
-						</p>
-					</div>
-					<div class="meta">
-						<ul class="left">
-							<li>
-								<i class="far fa-calendar"></i>
-								{{post.post.Date}}		
-							</li>
-						</ul>
-						 <ul class="right">
-							<li>
-							  	<p>{{post.post.Catagory}}</p>
-								   
-							</li>
-							 <!-- <li>
-								<i class="far fa-comment"></i>
-								10
-							</li>  -->
-						</ul> 
-					</div>
 				</div>
-			</article>
-
-		</div> 
 				<!-- Question -->
 				<!-- <div class="questionBox">
 					<h3 class="title">
 						<a href="#">
-						{{ post.post.Name }}						</a>
-					</h3>
-					<div class="thumbnail">
-						<img src={{post.post.PostImage}} class="img-fluid">
-					</div>
-					<div class="content">
-						<p>
-						{{ post.post.Description }}			
-									</p>
-					</div>
-					<div class="meta">
-						<ul class="left">
-							<li>
-								<i class="far fa-calendar"></i>
-								20 April, 2019		
-							</li>
-						</ul>
-						<ul class="right">
-							<li>
-								<i class="far fa-thumbs-up"></i>
-								20
-							</li>
-							<li>
-								<i class="far fa-comment"></i>
-								10
-							</li>
-						</ul>
-					</div>
-				</div>  -->
-				<!-- Question
-				<div class="questionBox">
-					<h3 class="title">
-						<a href="#">
-						{{ post.post.Name }}
+							What are some of the best rare natural phenomena that occur on Earth?
 						</a>
 					</h3>
 					<div class="thumbnail">
-						<img src={{post.post.PostImage}} class="img-fluid">
+						<img src="img/q2.webp" class="img-fluid">
 					</div>
 					<div class="content">
 						<p>
-						{{ post.post.Description }}
+							By witnessing so many negative scenarios happening around us, we are becoming pessimistic while slowly and gradually forgetting the hidden treasure of the earth.
 						</p>
 					</div>
 					<div class="meta">
@@ -237,8 +154,79 @@
 							</li>
 						</ul>
 					</div>
-				 </div>-->
-			<!-- </div>   -->
+				</div> -->
+				<!-- Question -->
+				<!-- <div class="questionBox">
+					<h3 class="title">
+						<a href="#">
+							What are non-Bitcoin/cryptocurrency applications of blockchain technology?
+						</a>
+					</h3>
+					<div class="thumbnail">
+						<img src="img/q3.png" class="img-fluid">
+					</div>
+					<div class="content">
+						<p>
+							Blockchain is probably the best idea of this century that will find it's way in our life probably in the next century, probably never.
+						</p>
+					</div>
+					<div class="meta">
+						<ul class="left">
+							<li>
+								<i class="far fa-calendar"></i>
+								20 April, 2019		
+							</li>
+						</ul>
+						<ul class="right">
+							<li>
+								<i class="far fa-thumbs-up"></i>
+								20
+							</li>
+							<li>
+								<i class="far fa-comment"></i>
+								10
+							</li>
+						</ul>
+					</div>
+				</div> -->
+				<!-- Question -->
+				<div *ngFor="let post of posts" >
+				<div class="questionBox">
+					<h3 class="title">
+						<a routerLink="/question/{{post.key}}">
+								{{ post.post.Title }}
+						</a>
+					</h3>
+					<div class="thumbnail">
+						<img src={{post.post.PostImage}} class="img-fluid">
+					</div>
+					<div class="content">
+						<p>
+						    {{post.post.Description}}
+						</p>
+					</div>
+					<div class="meta">
+						<ul class="left">
+							<li>
+								<i class="far fa-calendar"></i>
+								  {{post.post.Date}}		
+							</li>
+						</ul>
+						<ul class="right">
+							<!-- <li>
+								<i class="far fa-thumbs-up"></i>
+								20
+							</li> -->
+							<li>
+								<i class="fas fa-crop"></i>
+								 {{post.post.Category}}
+							</li>
+						</ul>
+					</div>
+				</div>
+
+			</div>
+		</div>
 
 			<div class="col-lg-3" id="rightSidebar">
 				<div class="box questions">
@@ -262,15 +250,15 @@
 					</div>
 				</div>
 				<div class="box members">
-					<h3 class="title">New Registers</h3>
+					<h3 class="title">Popular Members</h3>
 					<div class="content">
 						<!-- Member -->
 						<div class="member">
 							<div class="thumbanil">
-								<img src={{this.users.profile_image}} class="img-fluid" />
+								<img src="img/user.jpg" class="img-fluid" />
 							</div>
 							<div class="">
-								<a href="#" class="name">{{user.user.name}}</a>
+								<a href="#" class="name">Awais Khalid</a>
 								<p class="designation">Web Developer</p>
 							</div>
 						</div>
@@ -319,7 +307,6 @@
 			</div>
 		</div>
 	</div>
-	</div>
 
 	<!-- ================================================================ -->
 	<!-- ================================================================ -->
@@ -327,31 +314,35 @@
 	<!-- ================================================================ -->
 	<!-- ================================================================ -->
 	<!-- ================================================================ -->
-<form	[formGroup]="myhomeform" (ngSubmit)="submitFrom()" >
-	<div id="postQuestionModel">
+
+	<div class="models" id="postQuestionModel">
 		<div class="cancel" id="closeQuestionModel">
 			<i class="fa fa-close"></i>
 		</div>
-
 		<div class="header">
-
 			<h4 class="title">Post your question</h4>
 		</div>
 		<div class="body">
+				<form  [formGroup]="myhomeform" (ngSubmit)="submitFrom()">
+
 			<div class="form-group">
-				<input type="text" formControlName="Title" placeholder="Your Question" />
+				<input type="text"formControlName="Title"  placeholder="Your Question" />
 			</div>
-			<div class="form-group">
-			<select class="form-control" formControlName="Catagory">
->
+			<div class="form-group" >
+				<select class="form-group" formControlName="Catagory">
 					<option selected disabled>Choose Category</option>
 					<option value="Education">Education</option>
-					<option value="Proverty">Proverty</option>
-					<option value="Society">Universty Issues</option>
-					<option value="Marriage">Marriage</option>
-					<option value="Women">Women Rights</option>
-					<option value="UnEmp">Un-Employment</option>
+					<option value="Society">Society</option>
+					<option value="Women">Women</option>
 					<option value="Child">Child Labour</option>
+					<option value="Employment">Un-Employment</option>
+					<option value="Marriage">Marriage</option>
+					<option value="Proverty">Proverty</option>
+					<option value="Others">Others</option>
+
+
+
+
 
 				</select>
 			</div>
@@ -362,15 +353,38 @@
 				<input type="file" />
 			</div>
 			<div class="form-group">
-				<textarea placeholder="Description" formControlName="Description"></textarea>
+				<textarea placeholder="Your Content" formControlName="Description"></textarea>
 			</div>
 			<div class="">
-				<button class="submit" type="submit">Post</button>
+				<button class="submit">Post</button>
 			</div>
+		</form>
 		</div>
 
-
-</div>
-</form>
+	</div>
 
 	<div id="postQuestionModelOverlay"></div>
+
+	<div class="models" id="DonationsModel">
+		<div class="cancel" id="closeDonationsModel">
+			<i class="fa fa-close"></i>
+		</div>
+		<div class="header">
+			<h4 class="title">Ask for donations</h4>
+		</div>
+		<div class="body">
+			<div class="form-group">
+				<input type="text" placeholder="Full Name" />
+			</div>
+			<div class="form-group">
+				<input type="text" placeholder="Email Address" />
+			</div>
+			<div class="form-group">
+				<textarea placeholder="Your Message"></textarea>
+			</div>
+			<div class="">
+				<button class="submit">Post</button>
+			</div>
+		</div>
+	</div>
+</div>

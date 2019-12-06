@@ -12,26 +12,21 @@ export class QuestionComponent implements OnInit {
   qdescription;
   qimage;
   posts = [];
-  constructor(private route: ActivatedRoute, private authService: AuthenticationService, private router: Router) {
+  constructor(private route: ActivatedRoute, private authService: AuthenticationService, private router: Router) { }
 
-    route.params.subscribe(value => {
-      this.qid = value.key;
-      this.qdescription = value.Title;
-      this.qimage = value.User_profile_image;
-
-
-
-      console.log(this.qid); 
-
-    });
-
-  }
   ngOnInit() {
-    this.authService.getquestion(this.qid)
-    .subscribe((post: any) => {
-      this.posts = post.data.post;
-      console.log(this.posts );
+
+
+
+
+    this.route.params.subscribe(postID => {
+      this.authService.getquestion(postID.key)
+        .subscribe((post: any) => {
+          this.posts = post.data.post;
+          console.log(this.posts);
+        });
     });
+
   }
 
 }

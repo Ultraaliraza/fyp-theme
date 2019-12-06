@@ -19,4 +19,47 @@ $(document).ready(function(){
 		$("#postQuestionModel").fadeOut("slow");
 		$("#postQuestionModelOverlay").fadeOut("slow");
 	});
+	$("#openDonations").click(function(){
+		$("#DonationsModel").fadeIn("slow");
+		$("#postQuestionModelOverlay").fadeIn("slow");
+	});
+	$("#closeDonationsModel").click(function(){
+		$("#DonationsModel").fadeOut("slow");
+		$("#postQuestionModelOverlay").fadeOut("slow");
+	});
+	$("#postQuestionModelOverlay").click(function(){
+		$("#postQuestionModel").fadeOut("slow");
+		$("#DonationsModel").fadeOut("slow");
+		$("#postQuestionModelOverlay").fadeOut("slow");
+		$("#reportModel").fadeOut("slow");
+	});
+	$("#openReportModel").click(function(){
+		$("#reportModel").fadeIn("slow");
+		$("#postQuestionModelOverlay").fadeIn("slow");
+	});
+	$("#closeReportModel").click(function(){
+		$("#reportModel").fadeOut("slow");
+		$("#postQuestionModelOverlay").fadeOut("slow");
+	});
+	$("#profileChangeOpener").click(function(){
+		$("#changeProfile").click();
+	});
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
