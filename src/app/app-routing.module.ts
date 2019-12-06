@@ -12,6 +12,12 @@ import { QuestionComponent } from './question/question.component';
 import { EducationComponent } from './education/education.component';
 import { ContactusComponent } from './contactus/contactus.component';
 import { ProfileComponent } from './profile/profile.component';
+import { AboutComponent } from './about/about.component';
+import { ProvertyComponent } from './proverty/proverty.component';
+import { WomenComponent } from './women/women.component';
+
+// import { ProvertyComponent } from './proverty/proverty.component';
+import { from } from 'rxjs';
 
 // import { CanActivate } from '@angular/router';
 // import { ActivateGuard } from './activate.guard';
@@ -20,6 +26,7 @@ const routes: Routes = [
     path: '',
     component: LoginComponent
   },
+
 
   {
     path: 'contactus ',
@@ -31,8 +38,8 @@ const routes: Routes = [
     component: ProfileComponent
   },
   {
-    path: 'contact',
-    component: ContactusComponent
+    path: 'about ',
+    component: AboutComponent
   },
   {
     path: 'motivator',
@@ -42,12 +49,6 @@ const routes: Routes = [
     path: 'education',
     component: EducationComponent
   },
-
-  {
-    path: 'donor',
-    component: DonorsComponent
-  },
-
   {
     path: 'question/:key',
     component: QuestionComponent
@@ -67,11 +68,22 @@ const routes: Routes = [
   }, {
     path: 'forgetpassword',
     component: ForgetpasswordComponent
-  },
-
-  {
+  }, {
+    path: 'about',
+    component: AboutComponent
+  }, {
+    path: 'donors',
+    component: DonorsComponent
+  }, {
     path: 'home',
     component: HomeComponent
+  }, {
+    path: 'proverty',
+    component: ProvertyComponent
+  }, {
+
+    path: 'women',
+    component: WomenComponent
   },
   {
     path: '**',

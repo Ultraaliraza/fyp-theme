@@ -13,7 +13,7 @@ admin.initializeApp({
 var db = admin.database();
 let posts = db.ref("/Posts");
 let allusers = db.ref("/Users")
-let Donors = db.ref("/Donors")
+let Donors = db.ref("/Donations")
 let users = db.ref("/Users");
 
 app.use(cors())
@@ -53,11 +53,11 @@ app.post('/home/donations', function (req, res) {
 
 // for getting Posts
 
-app.get('/home/donations', function (req, res) {
+app.get('/donors', function (req, res) {
     let donationpost = [];
     Donors.once("value", function (snapshot) {
         snapshot.forEach(function (childSnapshot) {
-            allPosts.push({
+           donationpost.push({
                 key: childSnapshot.key,
                 donationpost: childSnapshot.val(),
             })
@@ -187,7 +187,7 @@ app.get('/posts', function (req, res) {
 
 app.get('/users', function (req, res) {
 
-    let showusers = [] ;
+    let showusers = [];
 users.once("value", function (snapshot) {
     snapshot.forEach(function (childSnapshot) {
         showusers.push({
@@ -200,6 +200,8 @@ users.once("value", function (snapshot) {
 });
 
 
+
+
 // Fetching Posts From Database ( Education)
 
 app.get('/education', function (req, res) {
@@ -209,7 +211,7 @@ app.get('/education', function (req, res) {
 
         snapshot.forEach(function (childSnapshot) {
 
-            if (childSnapshot.val().Catagory == 'education') {
+            if (childSnapshot.val().Category == 'Education') {
                 educationPosts.push({
                     key: childSnapshot.key,
                     post: childSnapshot.val(),
@@ -230,7 +232,7 @@ app.get('/proverty', function (req, res) {
 
         snapshot.forEach(function (childSnapshot) {
 
-            if (childSnapshot.val().Catagory == 'proverty') {
+            if (childSnapshot.val().Category == 'Proverty') {
                 provertyPosts.push({
                     key: childSnapshot.key,
                     post: childSnapshot.val(),
@@ -251,7 +253,7 @@ app.get('/marriage', function (req, res) {
 
         snapshot.forEach(function (childSnapshot) {
 
-            if (childSnapshot.val().Catagory == 'marriage') {
+            if (childSnapshot.val().Category == 'Marriage') {
                 marriagePosts.push({
                     key: childSnapshot.key,
                     post: childSnapshot.val(),
@@ -262,6 +264,54 @@ app.get('/marriage', function (req, res) {
         res.json({ success: 0, data: marriagePosts });
     });
 });
+
+// Fetching Posts from Database ( Proverty)
+
+app.get('/women', function (req, res) {
+
+    let womenPosts = [];
+    posts.once("value", function (snapshot) {
+
+        snapshot.forEach(function (childSnapshot) {
+
+            if (childSnapshot.val().Category == 'Women') {
+                womenPosts.push({
+                    key: childSnapshot.key,
+                    post: childSnapshot.val(),
+                })
+            }
+        });
+
+        res.json({ success: 0, data: womenPosts });
+    });
+});
+
+// Fetching Posts of Un-Employment
+
+
+app.get('/employment', function (req, res) {
+
+    let employmentPosts = [];
+    posts.once("value", function (snapshot) {
+
+        snapshot.forEach(function (childSnapshot) {
+
+            if (childSnapshot.val().Category == 'Employment') {
+                employmentPosts.push({
+                    key: childSnapshot.key,
+                    post: childSnapshot.val(),
+                })
+            }
+        });
+
+        res.json({ success: 0, data: employmentPosts });
+    });
+});
+
+
+// For Fetching Posts of Others
+
+
 
 // For listing Down Domation Posts
 app.get('/donations', function (req, res) {

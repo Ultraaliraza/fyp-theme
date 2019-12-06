@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthenticationService } from 'src/app/service/auth-service/authentication.service';
+
 
 @Component({
   selector: 'app-proverty',
@@ -7,9 +9,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProvertyComponent implements OnInit {
 
-  constructor() { }
+  posts = [];
+
+
+  constructor(private authService: AuthenticationService) { }
 
   ngOnInit() {
-  }
 
+       this.getProverty();
+  }
+  getProverty() {
+    this.authService.getProverty().subscribe((data: any) => {
+      this.posts = data.data;
+    });
+
+  }
 }

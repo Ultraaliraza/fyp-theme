@@ -1,0 +1,762 @@
+/* @import url(../fonts/OpenSans-Regular.ttf);
+@import url(../fonts/EricaOne-Regular.ttf);
+
+*{
+	margin:0;
+	padding: 0;
+	font-family: 'Open Sans', sans-serif;
+} */
+
+/*=====================================================================================*/
+/*============================= [ NAVBAR AREA ] =========================================*/
+/*=====================================================================================*/
+/*=====================================================================================*/
+
+.nav{
+	background:#ffffff;
+	border-bottom: 1px solid #ccc;
+	box-shadow: 1px 1px 10px 1px #ccc;
+	width: 100%;
+	height: 80px;
+	padding: 0!important
+}
+.nav .logo img{
+	width: 130px;
+	margin-left: 100px;
+	margin-top: 25px;
+}
+.nav ul.menu{
+	margin-right: 60px;
+	padding-bottom: 11px;
+}
+.nav ul.menu li{
+	display: inline-block;
+	margin-right: 20px;
+	margin-top: 25px;
+	height: 100%;
+}
+.nav ul.menu li:hover{
+	border-bottom: 2px solid #E37222;
+}
+.nav ul.menu li a{
+	color: rgba(14,19,24,.7);
+	font-weight: 400;
+	font-size: 16px;
+	text-decoration: none;	
+	cursor: pointer;
+}
+.nav ul.menu li i{
+	color: rgba(14,19,24,.7);
+	cursor: pointer;
+}
+.nav ul.menu li .searchbox{
+	border:1px solid #ccc;
+	padding-top: 3px;
+	padding-bottom: 3px;
+	padding-left: 15px;
+	padding-right: 15px;
+	border-radius: 30px;
+	font-size: 14px;
+	outline: none;
+	display: none;
+}
+.nav .bars{
+	margin-top: 20px;
+	margin-right: 50px;
+	display: none;
+}
+.nav .bars i{
+	color: rgba(14,19,24,.7);
+	cursor: pointer;
+}
+#drawer{
+	width: 300px;
+	height: 100%;
+	background:#E37222;
+	position: fixed;
+	right: -300px;
+}
+#drawer .close-bars{
+	float: right;
+	margin-top: 20px;
+	margin-right: 30px;
+	cursor: pointer;
+	color: #f7f7f7;
+}
+#drawer .close-bars i{
+	transition: 1s;
+}
+#drawer .close-bars i:hover
+{
+	transform: rotate(360deg);
+}
+#drawer button#closeBars{
+	background:none;
+	border:none;
+	color: #f7f7f7;
+	outline: none;
+}
+#drawer ul{
+	list-style: none;
+	margin-left: 50px;
+	margin-top: 100px;
+}
+#drawer ul li{
+	margin-top: 20px;
+}
+#drawer ul li a{
+	text-decoration: none;
+	font-size: 20px;
+	color: #f7f7f7;
+}
+.nav .accountSettingDropdown{
+	width: 35px;
+	height: 35px;
+	border-radius: 50%;
+	border:1px solid #E37222;
+	padding: 4px;
+	cursor: pointer;
+}
+.nav .dropdownPicture{
+	width:200px;
+	height: auto;
+	background: #ffffff;
+	border:1px solid #eee;
+	z-index: 1000;
+	right: 40px;
+	top: 80px;
+	position: absolute;
+	display: none;
+}
+.nav .dropdownPicture .options{
+	text-align: left;
+	padding-top: 30px;
+	padding-left: 40px;
+	padding-bottom: 20px;
+}
+@media screen and (min-width: 900px)
+{
+	#drawer{
+		display: none;
+	}
+}
+@media screen and (max-width: 900px)
+{
+	#navLaptop{
+		display: none;
+	}
+	.nav .bars{
+		display: block;
+	}
+}
+
+/*=====================================================================================*/
+/*============================= [ LEFT SIDEBAR AREA ] =================================*/
+/*=====================================================================================*/
+/*=====================================================================================*/
+
+#leftSidebar{
+	padding-top: 70px;
+	padding-left: 80px;
+}
+#leftSidebar ul{
+	list-style: none;
+}
+#leftSidebar ul li{
+	margin-top: 25px;
+}
+#leftSidebar ul li a{
+	color: rgba(14,19,24,.7);
+	margin-left: 7px;
+}
+#leftSidebar ul li i{
+	font-size: 18px;
+	color: #555555;
+}
+
+/*=====================================================================================*/
+/*============================= [ RIGHT SIDEBAR AREA ] =================================*/
+/*=====================================================================================*/
+/*=====================================================================================*/
+
+#rightSidebar{
+	margin-top: 34px;
+}
+#rightSidebar .box{
+	background:#f9f9f9;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	padding-left: 30px;
+	padding-left: 20px;
+	margin-top: 7px;
+}
+#rightSidebar .box .title{
+	font-size: 15px;
+	font-weight: 600;
+	color: #555;
+}
+#rightSidebar .box.questions .content {
+	margin-top: 20px;
+}
+#rightSidebar .box.questions p {
+	line-height: 16px;
+	margin-top: -5px;
+}
+#rightSidebar .box.questions p a{
+	font-size: 14px;
+	color: #555;
+}
+#rightSidebar .box.members .member{
+	display: flex;
+}
+#rightSidebar .box.members .member img{
+	width: 35px;
+	height: 35px;
+	border-radius: 50%;
+	border:2px solid #ccc;
+	padding: 3px;
+}
+#rightSidebar .box.members .member .name{
+	font-size: 16px;
+	margin-left: 15px;
+	font-weight: 600;
+	color: #555;
+}
+#rightSidebar .box.members .member .designation{
+	font-size: 13px;
+	margin-left: 17px;
+}
+#rightSidebar .box.members .content{
+	margin-top: 20px;
+}
+
+/*===========================================================*/
+
+.models{
+	width: 500px;
+	height: auto;
+	background:#fff;
+	border:1px solid #fff;
+	position: fixed;
+	left: 30%;
+	top: 5%;
+	z-index: 3000;
+	display: none;
+	padding-bottom: 40px;
+}
+#postQuestionModelOverlay{
+	width: 100%;
+	height: 100%;
+	position: fixed;
+	top: 0;
+	left: 0;
+	opacity: 0.3;
+	background:#999;
+	z-index: 2000;
+	display: none;
+}
+.models .cancel {
+	background: #FF6E0C;
+	padding: 8px;
+	width: 25px;
+	height: 25px;
+	border-radius: 50%;
+	position: absolute;
+	margin-top: -10px;
+	right: -11px;
+	cursor: pointer;
+}
+.models .cancel i{
+	color: #fff;
+	float: right;
+	font-size: 13px;
+	margin-left: 5px;
+	margin-top: -1px;
+}
+.models .header{
+	width: 100%;
+	height: 50px;
+	/* background: url(../img/profile-bg.png); */
+	padding-top: 10px;
+	padding-left: 20px;
+}
+.models .header .title{
+	font-size: 19px;
+}
+.models .body{
+	padding-top: 50px;
+	padding-left: 30px;
+	padding-right: 50px;
+}
+.models .body input, .models .body select{
+	width: 100%;
+	padding-left: 15px;
+	font-size: 15px;	
+	border:1px solid #eee;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	outline-color: #FF6E0C;
+}
+.models .body textarea{
+	width: 100%;
+	height: 150px;
+	padding-left: 15px;
+	font-size: 15px;	
+	border:1px solid #eee;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	outline-color: #FF6E0C;
+}
+.models .body .submit{
+	background: #FF6E0C;
+	border:1px solid #FF6E0C;
+	color: #fff;
+	padding-left: 25px;
+	padding-right: 25px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	border-radius: 3px;
+	outline:none;
+	float: right;
+	cursor: pointer;
+}
+.models .body .submit:hover{
+	opacity: .9;
+}
+#aboutPage .topBar{
+	height: 50px;
+	background: #e9e9e9;
+}
+#aboutPage .topBar p.breadcrumbs{
+	font-size: 14px;
+	padding-left: 50px;
+	padding-top: 15px;
+	color: #555;
+}
+#aboutPage .topBar p.breadcrumbs a{
+	color: #555;
+}
+#aboutPage .topBar p.breadcrumbs span{
+	color: #E32222;
+}
+#aboutPage .wrapper .cover{
+	/* background: url(../img/profile-bg.png); */
+	height: 270px;
+}
+
+#aboutPage .wrapper .cover h1.title{
+	font-family: 'Erica One', cursive;
+	font-size: 70px;
+}
+#aboutPage .wrapper .content {
+	padding-top: 35px;
+	padding-bottom: 100px;
+}
+#aboutPage .wrapper .content p{
+	font-size: 17px;
+	line-height: 1.6em;
+}
+#aboutPage .wrapper .content .subHeading{
+	font-family: "Open Sans", sans-serif;
+	font-size: 22px;
+	font-weight: 600;
+}
+
+#contactPage .topBar{
+	height: 50px;
+	background: #e9e9e9;
+}
+#contactPage .topBar p.breadcrumbs{
+	font-size: 14px;
+	padding-left: 50px;
+	padding-top: 15px;
+	color: #555;
+}
+#contactPage .topBar p.breadcrumbs a{
+	color: #555;
+}
+#contactPage .topBar p.breadcrumbs span{
+	color: #E32222;
+}
+#contactPage .wrapper .body{
+	padding-top: 80px;
+	padding-left: 130px;
+}
+#contactPage .wrapper .body .title{
+	font-size: 35px;
+}
+#contactPage #form{
+	margin-top: 30px;
+	height: auto;
+	padding-bottom: 100px;
+}
+#contactPage #form input{
+	width: 100%;
+	padding-left: 15px;
+	font-size: 15px;	
+	border:1px solid #eee;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	outline-color: #FF6E0C;
+}
+#contactPage #form textarea{
+	width: 100%;
+	height: 150px;
+	padding-left: 15px;
+	font-size: 15px;	
+	border:1px solid #eee;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	outline-color: #FF6E0C;
+}
+#contactPage #form button.submit{
+	background: #FF6E0C;
+	border:1px solid #FF6E0C;
+	color: #fff;
+	padding-left: 25px;
+	padding-right: 25px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	border-radius: 3px;
+	outline:none;
+	float: right;
+	cursor: pointer;
+}
+#homePage #middleDiv{
+	background:#f9f9f9;
+	margin-top: 40px;
+}
+#homePage #middleDiv .ask-question{
+	background:#fff;
+	border:1px solid #f3f3f3;
+	height: auto;
+	margin-top: 10px;
+	clear: left;
+	padding-top: 20px;
+	padding-bottom: 30px;
+	padding-left: 20px;
+}
+#homePage #middleDiv .ask-question .head{
+	display: flex;
+}
+#homePage #middleDiv .ask-question .head img{
+	width: 28px;
+	height: 28px;
+	border-radius: 50%;
+}
+#homePage #middleDiv .ask-question .head a{
+	font-size: 13px;
+	margin-left: 10px;
+	margin-top: 2px;
+	color: #555;
+}
+#homePage #middleDiv .ask-question .body span{
+	margin-top: 10px;
+	font-size: 20px;
+	margin-left: 50px;
+	cursor: pointer;
+}
+#homePage #middleDiv .ask-question .body span:hover{
+	border-bottom: 1px solid #555;
+}
+#homePage .questionBox {
+	background:#fff;
+	border:1px solid #f3f3f3;
+	height: auto;
+	margin-top: 3px;
+	clear: left;
+	padding-top: 20px;
+	padding-bottom: 30px;
+	padding-left: 20px;	
+}
+#homePage .questionBox .title{
+	font-size:22px;
+}
+#homePage .questionBox .title a{
+	color: #333;
+	text-decoration: none;
+}
+#homePage .questionBox .thumbnail{
+	height: 350px;
+	overflow: hidden;
+}
+#homePage .questionBox .content p
+{
+	font-size: 14px;
+	margin-top: 15px;
+}
+#homePage .questionBox .meta ul{
+	display: flex;
+	list-style: none;
+}
+#homePage .questionBox .meta ul li{
+	margin-left: 15px;
+	font-size: 15px;
+	cursor: pointer;
+}
+#homePage .questionBox .meta ul.right li:hover i{
+	color: #E32222;
+}
+#homePage .questionBox .meta ul.left{
+	float: left;
+}
+#homePage .questionBox .meta ul.right{
+	float: right;
+	margin-right: 30px;
+}
+#PostPage #middleDiv{
+	margin-top: 80px;
+}
+#PostPage #middleDiv .post .title{
+	font-size: 23px;
+	color: #222222;
+}
+#PostPage #middleDiv .post .thumbnail{
+	height: 450px;
+	overflow: hidden;
+	margin-top: 15px;
+}
+#PostPage #middleDiv .post .thumbnail img{
+	width: 100%;
+}
+#PostPage #middleDiv .post .meta{
+	margin-top: 10px;
+}
+#PostPage #middleDiv .post .meta ul{
+	list-style:none;
+	display: flex;
+}
+#PostPage #middleDiv .post .meta ul li{
+	font-size: 14px;
+	color: #555555;
+}
+#PostPage #middleDiv .post .meta ul li a{
+	color: #555555;
+}
+#PostPage #middleDiv .post .meta ul.left{
+	float: left;
+	margin-left: -20px;
+}
+#PostPage #middleDiv .post .meta ul.right{
+	float: right;
+}
+#PostPage #middleDiv .post .meta ul.left li{
+	margin-left: 20px;
+}
+#PostPage #middleDiv .post .content{
+	font-size: 16px;
+	color: #555;
+}
+#PostPage #middleDiv .post .divider{
+	border-top: 1px solid #eee;
+	padding-top: 30px;
+}
+#PostPage #middleDiv .commentsDiv .title{
+	font-size: 20px;
+	font-weight: 600;
+	color: #555555;
+}
+#PostPage #middleDiv .commentsDiv .commentInput textarea{
+	border:1px solid #c9c9c9;
+	outline: none!important;
+	box-shadow: none!important;
+	font-size: 14px;
+}
+#PostPage #middleDiv .commentsDiv .commentInput .btn-comment{
+	background: #E37222;
+	border:1px solid #E37222;
+	color: #f7f7f7;
+	font-weight: 500;
+	float: right;
+	margin-top: 10px;	
+}
+#PostPage #middleDiv .commentsDiv .wrapper{
+	margin-top: 50px;
+}
+#PostPage #middleDiv .commentsDiv .comment
+{
+	padding-top: 10px;
+	margin-left: -80px;
+}
+#PostPage #middleDiv .commentsDiv .comment img{
+	width: 35px;
+	height: 35px;
+	border:2px solid #E37222;
+	padding:3px;
+	border-radius: 50%;
+}
+#PostPage #middleDiv .commentsDiv .comment .userPic{
+	text-align: right;
+}
+#PostPage #middleDiv .commentsDiv .comment p.name{
+	font-size: 15px;
+	font-weight: 600;
+	color: #555;
+}
+#PostPage #middleDiv .commentsDiv .comment p.data{
+	font-size: 15px;
+	margin-top: -8px;
+}
+#PostPage .commentsDiv{
+	background: #f7f7f7;
+	padding-top: 30px;
+	padding-left:15px;
+	padding-right: 15px;
+}
+#PostPage .commentsDiv .comment{
+	padding-left: 10px;
+	padding-right: 10px;
+}
+#PostPage button.editPost{
+	background: none;
+	border:none;
+	outline:none;
+	float: right;
+	position: relative;
+	margin-top: -50px;
+	cursor: pointer;
+}
+#profilePage .topBar{
+	height: 50px;
+	background: #e9e9e9;
+}
+#profilePage .topBar p.breadcrumbs{
+	font-size: 14px;
+	padding-left: 50px;
+	padding-top: 15px;
+	color: #555;
+}
+#profilePage .topBar p.breadcrumbs a{
+	color: #555;
+}
+#profilePage .topBar p.breadcrumbs span{
+	color: #E32222;
+}
+#profilePage .wrapper .cover{
+	/* background: url(../img/profile-bg.png); */
+	height: 270px;
+}
+#profilePage .wrapper .cover .img{
+	text-align: right;
+}
+#profilePage .wrapper .cover .profilePic{
+	width: 150px;
+	height: 150px;
+	margin-top: 50px;
+	border:2px solid #ccc;
+	padding: 5px;
+}
+#profilePage .wrapper .cover .content{
+	padding-top: 50px;
+}
+#profilePage .wrapper .cover .content .name{
+	font-size: 24px;
+	font-weight: 600;
+	color: #444;
+}
+#profilePage .wrapper .cover .content .designation{
+	font-size: 15px;
+	font-style: italic;
+}
+#profilePage .wrapper .cover .content .social ul{
+	display: flex;
+	list-style: none;
+	margin-left: -20px;
+}
+#profilePage .wrapper .cover .content .social ul li{
+	margin-left:20px;
+}
+#profilePage .wrapper .cover .content .social ul li a{
+	color: #555;
+	transition: .3s;
+}
+#profilePage .wrapper .cover .content .social ul li a:hover{
+	color: #E32222;
+}
+#profilePage .wrapper .about{
+	padding-left: 60px;
+	padding-top: 30px;
+}
+#profilePage .wrapper .about .title{
+	font-size:23px;
+	font-weight: 600;
+	color: #444;
+}
+#profilePage .wrapper .about .desc{
+	font-size: 17px;
+	line-height: 28px;
+	margin-top: 20px;
+}
+#profilePage .wrapper .about .Questions{
+	padding-left: 70px;
+}
+#profilePage .wrapper .about .Questions ol{
+	list-style: none;
+	margin-top: 20px;
+}
+#profilePage .wrapper .about .Questions ol li{
+	margin-top: 10px;
+}
+#profilePage .wrapper .about .Questions ol li a{
+	font-size: 16px;
+	color: #555;
+}
+#profilePage .wrapper{
+	padding-bottom: 100px;
+}
+#settingsPage .main{
+	background: #f7f7f7;
+	border:1px solid #eee;
+	border-radius: 5px;
+	height:auto;
+	margin-top: 70px;
+	text-align:center;
+	padding-left: 0!important;
+	padding-right: 0!important;
+	padding-bottom: 60px;
+	margin-bottom: 60px;
+}
+#settingsPage .main .header{
+	width: 100%;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	background:#FF6E0C;
+	color: #f7f7f7;
+}
+#settingsPage .main .body {
+	padding-top: 20px;
+}
+#settingsPage .main .body .profile img{
+	width: 150px;
+	height: 150px;
+	border-radius: 50%;
+	padding: 5px;
+	border:2px solid #FF6E0C;
+}
+#settingsPage .main .body .form-group{
+	padding-left: 40px;
+	padding-right: 40px;
+}
+#settingsPage .main .body .form-group input{
+	border-radius:0px!important;
+	border:1px solid #ccc;
+	font-size: 14px;
+	padding-left: 20px;
+	outline:none!important;
+	box-shadow: none!important;
+}
+#settingsPage .main .body .form-group .update{
+	float: right;
+	font-size: 15px;
+	padding-left: 20px;
+	padding-right: 20px;
+	padding-top: 2px;
+	padding-bottom: 2px;
+	background: #FF6E0C;
+	border:1px solid #FF6E0C;
+	color: #f7f7f7;
+	cursor: pointer;
+}
+#settingsPage .main .body .form-group .update:hover{
+	opacity: 0.8;
+}

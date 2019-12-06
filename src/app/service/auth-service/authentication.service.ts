@@ -10,7 +10,7 @@ import { AngularFireStorageModule } from '@angular/fire/storage';
   providedIn: 'root'
 })
 export class AuthenticationService {
- keyvalue = '';
+  keyvalue = '';
   server = 'http://localhost:3000';
 
   user = new BehaviorSubject({});
@@ -60,8 +60,8 @@ export class AuthenticationService {
 
   }
   getquestion(key: any) {
-  
-    console.log('this.keyvalue' , key);// ksi trha sy wo qid is jgaaa jye tou kaam ho jye ga 
+
+    console.log('this.keyvalue', key);
     return this.http.get(this.server + '/question/' + key);
   }
 
@@ -86,7 +86,7 @@ export class AuthenticationService {
 
   getgetdonations() {
 
-    return this.http.get('http://localhost:3000/home/donations');
+    return this.http.get('http://localhost:3000/donors');
 
   }
 
@@ -96,10 +96,31 @@ export class AuthenticationService {
 
   getEducation() {
 
-    return this.http.get('http://localhost:300/education');
+    return this.http.get('http://localhost:3000/education');
   }
   getUsers() {
-    return this.http.get('http://localhost:300/Users');
+    return this.http.get('http://localhost:3000/Users');
+  }
+  getProverty() {
+
+    return this.http.get('http://localhost:3000/proverty');
+  }
+  getWomen() {
+
+    return this.http.get('http://localhost:3000/women');
+  }
+  getChild() {
+
+    return this.http.get('http://localhost:3000/child');
+  }
+
+  getEmployment() {
+
+    return this.http.get('http://localhost:3000/employment');
+  }
+  getOthers() {
+    return this.http.get('http://localhost:3000/others');
+
   }
 
 

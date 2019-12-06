@@ -19,6 +19,8 @@ export class EducationComponent implements OnInit {
   getEducation() {
     this.authService.getEducation().subscribe((data: any) => {
       this.posts = data.data;
+
+      console.log(this.posts);
     });
 
   }
