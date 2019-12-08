@@ -1,17 +1,15 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { RouterModule, Routes, Router } from '@angular/router';
-import { BehaviorSubject, Subject } from 'rxjs';
-import { AngularFireModule } from '@angular/fire';
-import { AngularFirestoreModule } from '@angular/fire/firestore';
-import { AngularFireStorageModule } from '@angular/fire/storage';
+import { Router } from '@angular/router';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthenticationService {
   keyvalue = '';
-  server = 'http://localhost:3000';
+  apiHeader = 'http://localhost:3000/';
+  // apiHeader = 'https://us-central1-helpinghand-90a6a.cloudfunctions.net/apis/';
 
   user = new BehaviorSubject({});
   post = new BehaviorSubject({});
@@ -19,19 +17,15 @@ export class AuthenticationService {
 
   }
   register(objR) {
-    console.log('Object Received is ', objR);
     // send data to the backend server\
-    this.http.post('http://localhost:3000/register', objR).subscribe(data => {
-      console.log(data);
-      this.router.navigate(['/login']);
-    });
+    this.http.post(this.apiHeader + 'register', objR)
+      .subscribe(data => {
+        this.router.navigate(['/login']);
+      });
   }
   login(objR) {
-    console.log('Object Received is ', objR);
     // send data to the backend server\
-    this.http.post('http://localhost:3000/login', objR).subscribe((res: any) => {
-      console.log(res);
-
+    this.http.post(this.apiHeader + 'login', objR).subscribe((res: any) => {
       if (res.success === 1) {
         this.user.next(res.data);
         if (res.data.accountType === 'Identifier') {
@@ -43,84 +37,59 @@ export class AuthenticationService {
         else if (res.data.accountType === 'donor') {
           this.router.navigate(['/donor']);
         }
-      } else {
-        console.log('login fail');
-
-
       }
-
-      console.log(res.data);
     });
   }
 
   home(objR) {
-    console.log('Object Received is', objR);
-    return this.http.post('http://localhost:3000/home', objR);
-
-
+    return this.http.post(this.apiHeader + 'home', objR);
   }
   getquestion(key: any) {
-
-    console.log('this.keyvalue', key);
-    return this.http.get(this.server + '/question/' + key);
+    return this.http.get(this.apiHeader + '/question/' + key);
   }
 
   forgetpassword(objR) {
-
-    console.log('Object Recieved is', objR);
-
-    this.http.post('http://localhost:3000/forgetpassword', objR).subscribe((data: any) => {
-
+    this.http.post(this.apiHeader + 'forgetpassword', objR).subscribe((data: any) => {
       this.router.navigate(['/login']);
-
     });
   }
   getMarriage() {
-    return this.http.get('http://localhost:3000/marriage');
+    return this.http.get(this.apiHeader + 'marriage');
   }
   getdonations(objR) {
-    this.http.post('http://localhost:3000/home/donations', objR).subscribe((data: any) => {
+    this.http.post(this.apiHeader + 'home/donations', objR).subscribe((data: any) => {
       this.router.navigate(['/home']);
     });
   }
 
   getgetdonations() {
-
-    return this.http.get('http://localhost:3000/donors');
-
+    return this.http.get(this.apiHeader + 'donors');
   }
 
   getPosts() {
-    return this.http.get('http://localhost:3000/posts');
+    return this.http.get(this.apiHeader + 'posts');
   }
 
   getEducation() {
-
-    return this.http.get('http://localhost:3000/education');
+    return this.http.get(this.apiHeader + 'education');
   }
   getUsers() {
-    return this.http.get('http://localhost:3000/Users');
+    return this.http.get(this.apiHeader + 'Users');
   }
   getProverty() {
-
-    return this.http.get('http://localhost:3000/proverty');
+    return this.http.get(this.apiHeader + 'proverty');
   }
   getWomen() {
-
-    return this.http.get('http://localhost:3000/women');
+    return this.http.get(this.apiHeader + 'women');
   }
   getChild() {
-
-    return this.http.get('http://localhost:3000/child');
+    return this.http.get(this.apiHeader + 'child');
   }
-
   getEmployment() {
-
-    return this.http.get('http://localhost:3000/employment');
+    return this.http.get(this.apiHeader + 'employment');
   }
   getOthers() {
-    return this.http.get('http://localhost:3000/others');
-
+    return this.http.get(this.apiHeader + 'others');
   }
 
 

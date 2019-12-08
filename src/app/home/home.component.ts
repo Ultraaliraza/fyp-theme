@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { AuthenticationService } from 'src/app/service/auth-service/authentication.service';
 import { Router } from '@angular/router';
+import { UploadfilesService } from '../service/uploadfiles.service';
 
 
 @Component({
@@ -19,7 +20,12 @@ export class HomeComponent implements OnInit {
   mydonationform: FormGroup;
   user;
   users = [];
-  constructor(private authService: AuthenticationService, private formBuilder: FormBuilder, private router: Router) {
+  constructor(
+    private authService: AuthenticationService,
+    private formBuilder: FormBuilder,
+    private uploadfilesService: UploadfilesService,
+    private router: Router
+  ) {
   }
   ngOnInit() {
 
@@ -71,16 +77,20 @@ export class HomeComponent implements OnInit {
     });
 
   }
+
   submitFrom() {
     console.log(this.myhomeform);
     const time = this.datePipe.transform(new Date(), 'MM/dd/yyyy hh:mm:ss a');
     this.myhomeform.controls.date.setValue(time);
-    this.authService.home(this.myhomeform.value).subscribe((data: any) => {
-      console.log(data);
 
-      this.router.navigate(['/home']);
-    });
-
+    this.uploadfilesService.uploadFile()
+      .then((fileMeta) => {
+        this.myhomeform.controls.PostImage.setValue(fileMeta);
+        this.authService.home(this.myhomeform.value).subscribe((data: any) => {
+          console.log(data);
+          this.router.navigate(['/home']);
+        });
+      });
   }
 
   donFrom() {
@@ -90,5 +100,21 @@ export class HomeComponent implements OnInit {
     this.authService.getdonations(this.mydonationform.value);
   }
 
+  //  Display selected file 
+  onSelectFile(event) {
+    if (event.target.files) {
+      const file = event.target.files[0];
+      // if (file.size <= 512000) {
+      var reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = (event) => {
+        this.uploadfilesService.filesMeta = { name: file.name, url: <string>(event.target['result']), size: file.size, file: file };
+      }
+      // }
+    }
+    else {
+      this.uploadfilesService.filesMeta = undefined;
+    }
+  }
 }
 

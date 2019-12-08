@@ -23,7 +23,6 @@ export class RegisterComponent implements OnInit {
     return this.myreactiveform.controls;
   }
   submitFrom() {
-    console.log(this.myreactiveform);
     this.authService.register(this.myreactiveform.value);
   }
 

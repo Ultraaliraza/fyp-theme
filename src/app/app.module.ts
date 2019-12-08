@@ -21,6 +21,7 @@ import { QuestionComponent } from './question/question.component';
 import { ProfileComponent } from './profile/profile.component';
 import { AboutComponent } from './about/about.component';
 import { WomenComponent } from './women/women.component';
+import { UploadfilesService } from './service/uploadfiles.service';
 
 
 
@@ -54,7 +55,7 @@ import { WomenComponent } from './women/women.component';
 
 
   ],
-  providers: [ActivateGuard, UserserviceService],
+  providers: [ActivateGuard, UserserviceService, UploadfilesService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

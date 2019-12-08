@@ -1,40 +1,56 @@
-var express = require('express');
-var app = express();
-var cors = require('cors')
-var bodyParser = require('body-parser')
-var admin = require("firebase-admin");
-var serviceAccount = require("./admin.json");
-var sgMail = require('@sendgrid/mail');
+const express = require('express');
+const app = express();
+const cors = require('cors')
+const bodyParser = require('body-parser')
+const admin = require("firebase-admin");
+const serviceAccount = require("./admin.json");
+const sgMail = require('@sendgrid/mail');
+const firebase = require('firebase');
 
 admin.initializeApp({
     credential: admin.credential.cert(serviceAccount),
     databaseURL: "https://helpinghand-90a6a.firebaseio.com"
 });
-var db = admin.database();
-let posts = db.ref("/Posts");
-let allusers = db.ref("/Users")
-let Donors = db.ref("/Donations")
-let users = db.ref("/Users");
+const db = admin.database();
+const posts = db.ref("/Posts");
+const allusers = db.ref("/Users")
+const Donors = db.ref("/Donations")
+const users = db.ref("/Users");
+const auth = firebase.auth();
 
-app.use(cors())
-app.use(bodyParser.json())
-app.post('/register', function (req, res) {
-    var newUser = users.push();
-    newUser.set(req.body);
-    sgMail.setApiKey('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');
-    const msg = {
-        to: req.body.email,
-        from: 'ar690780@gmail.com',
-        subject: 'Your Account is Succesfful registered',
-        text: 'Your Account is registered on Helping Hand Social Network',
-        html: '<strong></strong>',
-    };
-    sgMail.send(msg);
-    res.jsonp({ id: 1, name: 'Ali' });
+app.use(cors());
+app.use(bodyParser.json());
+
+app.post('/register', (req, res) => {
+    const body = req.body;
+    return auth.createUserWithEmailAndPassword(body.email, body.password)
+        .then((userRecord) => {
+            profileBody.uid = userRecord.user.uid;
+
+            auth.currentUser.sendEmailVerification()
+                .then(() => {
+                    users.push().set(body);
+                    // See the UserRecord reference doc for the contents of userRecord.
+                    return response.status(200);
+                })
+                .catch((error) => {
+                    // An error happened.
+                    return response.send({ error1: error });
+                });
+        })
+        .catch((error) => {
+            if (error.code == 'auth/email-already-in-use') {
+                response.status(401).send({ error2: error });
+            } else if (error.code == 'auth/weak-password') {
+                response.status(402).send({ error3: error });
+            } else {
+                response.send({ error4: error });
+            }
+        });
 });
 
 let key;
-app.post('/home', function (req, res) {
+app.post('/home', (req, res) => {
     let post = posts.push();
     post.set(req.body);
     key = post.key;
@@ -44,7 +60,7 @@ app.post('/home', function (req, res) {
 
 // For Sending Donations
 
-app.post('/home/donations', function (req, res) {
+app.post('/home/donations', (req, res) => {
     let donation = Donors.push();
     donation.set(req.body);
 
@@ -53,11 +69,11 @@ app.post('/home/donations', function (req, res) {
 
 // for getting Posts
 
-app.get('/donors', function (req, res) {
+app.get('/donors', (req, res) => {
     let donationpost = [];
     Donors.once("value", function (snapshot) {
         snapshot.forEach(function (childSnapshot) {
-           donationpost.push({
+            donationpost.push({
                 key: childSnapshot.key,
                 donationpost: childSnapshot.val(),
             })
@@ -67,7 +83,7 @@ app.get('/donors', function (req, res) {
 });
 
 
-app.post('/login', function (req, res) {
+app.post('/login', (req, res) => {
     let found = 0;
     users.once("value", function (snapshot) {
         snapshot.forEach(function (childSnapshot) {
@@ -94,7 +110,7 @@ app.post('/login', function (req, res) {
 
 //   Forget Password
 
-app.post('/forgetpassword', function (req, res) {
+app.post('/forgetpassword', (req, res) => {
     let found = 0;
     key = '';
     user = {};
@@ -129,7 +145,7 @@ app.post('/forgetpassword', function (req, res) {
     });
 });
 
-app.get('/question/:key', function (req, res) {
+app.get('/question/:key', (req, res) => {
     let key = req.params.key;
     let allPosts = {};
     posts.once("value", function (snapshot) {
@@ -149,7 +165,7 @@ app.get('/question/:key', function (req, res) {
 
 // Users with Respect to Key
 
-app.get('/profile/:key', function (req, res) {
+app.get('/profile/:key', (req, res) => {
     let key = req.params.key;
     let userData = {};
     posts.once("value", function (snapshot) {
@@ -170,7 +186,7 @@ app.get('/profile/:key', function (req, res) {
 // Fetching Posts from Database ( All Posts)
 
 
-app.get('/posts', function (req, res) {
+app.get('/posts', (req, res) => {
     let allPosts = [];
     posts.once("value", function (snapshot) {
         snapshot.forEach(function (childSnapshot) {
@@ -185,18 +201,18 @@ app.get('/posts', function (req, res) {
 
 // Fetching All Users From Database
 
-app.get('/users', function (req, res) {
+app.get('/users', (req, res) => {
 
     let showusers = [];
-users.once("value", function (snapshot) {
-    snapshot.forEach(function (childSnapshot) {
-        showusers.push({
-            key: childSnapshot.key,
-            post: childSnapshot.val(),
-        })
+    users.once("value", function (snapshot) {
+        snapshot.forEach(function (childSnapshot) {
+            showusers.push({
+                key: childSnapshot.key,
+                post: childSnapshot.val(),
+            })
+        });
+        res.json({ success: 0, data: showusers });
     });
-    res.json({ success: 0, data: showusers });
-});
 });
 
 
@@ -204,7 +220,7 @@ users.once("value", function (snapshot) {
 
 // Fetching Posts From Database ( Education)
 
-app.get('/education', function (req, res) {
+app.get('/education', (req, res) => {
 
     let educationPosts = [];
     posts.once("value", function (snapshot) {
@@ -225,7 +241,7 @@ app.get('/education', function (req, res) {
 
 // Fetching Posts From Database ( Proverty)
 
-app.get('/proverty', function (req, res) {
+app.get('/proverty', (req, res) => {
 
     let provertyPosts = [];
     posts.once("value", function (snapshot) {
@@ -246,7 +262,7 @@ app.get('/proverty', function (req, res) {
 
 // Fetching Posts From Database ( Marriage)
 
-app.get('/marriage', function (req, res) {
+app.get('/marriage', (req, res) => {
 
     let marriagePosts = [];
     posts.once("value", function (snapshot) {
@@ -267,7 +283,7 @@ app.get('/marriage', function (req, res) {
 
 // Fetching Posts from Database ( Proverty)
 
-app.get('/women', function (req, res) {
+app.get('/women', (req, res) => {
 
     let womenPosts = [];
     posts.once("value", function (snapshot) {
@@ -289,7 +305,7 @@ app.get('/women', function (req, res) {
 // Fetching Posts of Un-Employment
 
 
-app.get('/employment', function (req, res) {
+app.get('/employment', (req, res) => {
 
     let employmentPosts = [];
     posts.once("value", function (snapshot) {
@@ -314,7 +330,7 @@ app.get('/employment', function (req, res) {
 
 
 // For listing Down Domation Posts
-app.get('/donations', function (req, res) {
+app.get('/donations', (req, res) => {
 
     let donationsPosts = [];
     posts.once("value", function (snapshot) {
@@ -331,8 +347,6 @@ app.get('/donations', function (req, res) {
     });
 });
 // Admin Panel to Delete any User
-
-
 
 //App Listening
 
