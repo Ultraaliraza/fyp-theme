@@ -116,12 +116,16 @@ export class AuthenticationService {
 
   getEmployment() {
 
-    return this.http.get('http://localhost:3000/employment');
+    return this.http.get('http://localhost:3000/Pemployment');
   }
   getOthers() {
     return this.http.get('http://localhost:3000/others');
 
   }
+  getLastPosts(){
+    return this.http.get('http://localhost:3000/LastPosts');
+  }
 
+ 
 
 }

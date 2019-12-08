@@ -14,7 +14,8 @@ var db = admin.database();
 let posts = db.ref("/Posts");
 let allusers = db.ref("/Users")
 let Donors = db.ref("/Donations")
-let users = db.ref("/Users");
+let users = db.ref("/Users")
+let LastPosts = db.ref("/Posts")
 
 app.use(cors())
 app.use(bodyParser.json())
@@ -41,6 +42,19 @@ app.post('/home', function (req, res) {
 
     res.json({ success: 1, data: post });
 });
+
+
+// Sending Comments
+
+app.post('/question:key', function (req, res) {
+    let question = posts.push();
+    question.set(req.body);
+    key = post.key;
+
+    res.json({ success: 1, data: question });
+});
+
+
 
 // For Sending Donations
 
@@ -188,7 +202,7 @@ app.get('/posts', function (req, res) {
 app.get('/users', function (req, res) {
 
     let showusers = [];
-users.once("value", function (snapshot) {
+users.limitToFirst(5).once("value", function (snapshot) {
     snapshot.forEach(function (childSnapshot) {
         showusers.push({
             key: childSnapshot.key,
@@ -198,6 +212,23 @@ users.once("value", function (snapshot) {
     res.json({ success: 0, data: showusers });
 });
 });
+
+//Fetching Last Posts From Database
+
+app.get('/LastPosts', function (req, res) {
+
+    let showLast = [];
+LastPosts.limitToLast(1).once("value", function (snapshot) {
+    snapshot.forEach(function (childSnapshot) {
+        showLast.push({
+            key: childSnapshot.key,
+            post: childSnapshot.val(),
+        })
+    });
+    res.json({ success: 0, data: showLast });
+});
+});
+
 
 
 
@@ -223,6 +254,49 @@ app.get('/education', function (req, res) {
     });
 });
 
+
+// Fetching Posts From Databse (Un-Employment)
+
+app.get('/employment', function (req, res) {
+
+    let EmploymentPosts = [];
+    posts.once("value", function (snapshot) {
+
+        snapshot.forEach(function (childSnapshot) {
+
+            if (childSnapshot.val().Category == 'Un-Employment') {
+                EmploymentPosts.push({
+                    key: childSnapshot.key,
+                    post: childSnapshot.val(),
+                })
+            }
+        });
+
+        res.json({ success: 0, data: EmploymentPosts });
+    });
+});
+
+// Fetching Post From Database (Others)
+
+app.get('/others', function (req, res) {
+
+    let OthersPosts = [];
+    posts.once("value", function (snapshot) {
+
+        snapshot.forEach(function (childSnapshot) {
+
+            if (childSnapshot.val().Category == 'Others') {
+                OthersPosts.push({
+                    key: childSnapshot.key,
+                    post: childSnapshot.val(),
+                })
+            }
+        });
+
+        res.json({ success: 0, data:  OthersPosts });
+    });
+});
+
 // Fetching Posts From Database ( Proverty)
 
 app.get('/proverty', function (req, res) {
@@ -232,7 +306,7 @@ app.get('/proverty', function (req, res) {
 
         snapshot.forEach(function (childSnapshot) {
 
-            if (childSnapshot.val().Category == 'Proverty') {
+            if (childSnapshot.val().Category == 'Poverty') {
                 provertyPosts.push({
                     key: childSnapshot.key,
                     post: childSnapshot.val(),

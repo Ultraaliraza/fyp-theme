@@ -19,7 +19,7 @@
 					<a href="#">Ask Donation</a>
 				</li>
 				<li>
-                        <a  routerLink="/About">About Us</a>
+                 <a  routerLink="/About">About Us</a>
 				</li>
 				<li>
 					<a  routerLink="/contactus">Contact Us</a>
@@ -144,20 +144,21 @@
 						<div class="divider"></div>
 						<div class="content">
 							<p>
-								{{post.Description}}
+								{{posts.Description}}
 							</p>
 						</div>
 					</div>
 					<div class="commentsDiv">
 						<h4 class="title">Comments</h4>
+						<form  [formGroup]="commentform" (ngSubmit)="submitFrom()">
 						<div class="commentInput">
 							<textarea class="form-control" placeholder="What's in your mind..."></textarea>
 							<button class="btn btn-warning btn-sm btn-comment">Comment</button>
 						</div>
-
+					</form>
 						<div class="wrapper">
 							<!-- comment -->
-							<div class="row comment">
+							<!-- <div class="row comment">
 								<div class="col-lg-2 userPic">
 									<img src="img/user.jpg" class="img-fluid" />
 								</div>
@@ -165,9 +166,9 @@
 									<p class="name">Awais Khalid</p>
 									<p class="data">This is a sample comment for testing.</p>
 								</div>
-							</div>
+							</div> -->
 							<!-- comment -->
-							<div class="row comment">
+							<!-- <div class="row comment">
 								<div class="col-lg-2 userPic">
 									<img src="img/user.jpg" class="img-fluid" />
 								</div>
@@ -175,17 +176,18 @@
 									<p class="name">Ali Raza</p>
 									<p class="data">This is a sample comment for testing.</p>
 								</div>
-							</div>
+							</div> -->
 							<!-- comment -->
+							<div *ngFor="let commentkey of commentkeys">
 							<div class="row comment">
 								<div class="col-lg-2 userPic">
-									<img src="img/user.jpg" class="img-fluid" />
+									<img src="{{comments[commentkey].user_image}}" class="img-fluid" />
 								</div>
 								<div class="col-lg-10">
-									<p class="name">Zubair Khan</p>
-									<p class="data">This is a sample comment for testing.</p>
+									<p class="name">{{comments[commentkey].User_Name}}</p>
+									<p class="data">{{comments[commentkey].Comment}}</p>
 								</div>
-							</div>
+							</div></div>
 						</div>
 					</div>
 					<div style="margin-top: 40px;"></div>

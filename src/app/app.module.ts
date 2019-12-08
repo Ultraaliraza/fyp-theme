@@ -21,6 +21,9 @@ import { QuestionComponent } from './question/question.component';
 import { ProfileComponent } from './profile/profile.component';
 import { AboutComponent } from './about/about.component';
 import { WomenComponent } from './women/women.component';
+import { ChildComponent } from './child/child.component';
+import { EmploymentComponent } from './employment/employment.component';
+import { OthersComponent } from './others/others.component';
 
 
 
@@ -42,7 +45,10 @@ import { WomenComponent } from './women/women.component';
     QuestionComponent,
     ProfileComponent,
     AboutComponent,
-    WomenComponent
+    WomenComponent,
+    ChildComponent,
+    EmploymentComponent,
+    OthersComponent
   ],
   imports: [
     BrowserModule,
