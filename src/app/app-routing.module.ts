@@ -15,6 +15,9 @@ import { ProfileComponent } from './profile/profile.component';
 import { AboutComponent } from './about/about.component';
 import { ProvertyComponent } from './proverty/proverty.component';
 import { WomenComponent } from './women/women.component';
+import {  ChildComponent } from './child/child.component';
+import {EmploymentComponent} from './employment/employment.component';
+import {OthersComponent} from './others/others.component';
 
 // import { ProvertyComponent } from './proverty/proverty.component';
 import { from } from 'rxjs';
@@ -84,6 +87,16 @@ const routes: Routes = [
 
     path: 'women',
     component: WomenComponent
+  }, {
+
+    path: 'child',
+    component: ChildComponent
+  },{
+    path: 'employment',
+    component: EmploymentComponent
+  },{
+    path: 'others',
+    component: OthersComponent
   },
   {
     path: '**',

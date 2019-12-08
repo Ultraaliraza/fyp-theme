@@ -22,6 +22,9 @@ import { ProfileComponent } from './profile/profile.component';
 import { AboutComponent } from './about/about.component';
 import { WomenComponent } from './women/women.component';
 import { UploadfilesService } from './service/uploadfiles.service';
+import { ChildComponent } from './child/child.component';
+import { EmploymentComponent } from './employment/employment.component';
+import { OthersComponent } from './others/others.component';
 
 
 
@@ -43,7 +46,10 @@ import { UploadfilesService } from './service/uploadfiles.service';
     QuestionComponent,
     ProfileComponent,
     AboutComponent,
-    WomenComponent
+    WomenComponent,
+    ChildComponent,
+    EmploymentComponent,
+    OthersComponent
   ],
   imports: [
     BrowserModule,

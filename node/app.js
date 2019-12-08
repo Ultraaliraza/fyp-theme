@@ -11,42 +11,28 @@ admin.initializeApp({
     credential: admin.credential.cert(serviceAccount),
     databaseURL: "https://helpinghand-90a6a.firebaseio.com"
 });
-const db = admin.database();
-const posts = db.ref("/Posts");
-const allusers = db.ref("/Users")
-const Donors = db.ref("/Donations")
-const users = db.ref("/Users");
-const auth = firebase.auth();
+var db = admin.database();
+let posts = db.ref("/Posts");
+let allusers = db.ref("/Users")
+let Donors = db.ref("/Donations")
+let users = db.ref("/Users")
+let LastPosts = db.ref("/Posts")
 
-app.use(cors());
-app.use(bodyParser.json());
-
-app.post('/register', (req, res) => {
-    const body = req.body;
-    return auth.createUserWithEmailAndPassword(body.email, body.password)
-        .then((userRecord) => {
-            profileBody.uid = userRecord.user.uid;
-
-            auth.currentUser.sendEmailVerification()
-                .then(() => {
-                    users.push().set(body);
-                    // See the UserRecord reference doc for the contents of userRecord.
-                    return response.status(200);
-                })
-                .catch((error) => {
-                    // An error happened.
-                    return response.send({ error1: error });
-                });
-        })
-        .catch((error) => {
-            if (error.code == 'auth/email-already-in-use') {
-                response.status(401).send({ error2: error });
-            } else if (error.code == 'auth/weak-password') {
-                response.status(402).send({ error3: error });
-            } else {
-                response.send({ error4: error });
-            }
-        });
+app.use(cors())
+app.use(bodyParser.json())
+app.post('/register', function (req, res) {
+    var newUser = users.push();
+    newUser.set(req.body);
+    sgMail.setApiKey('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');
+    const msg = {
+        to: req.body.email,
+        from: 'ar690780@gmail.com',
+        subject: 'Your Account is Succesfful registered',
+        text: 'Your Account is registered on Helping Hand Social Network',
+        html: '<strong></strong>',
+    };
+    sgMail.send(msg);
+    res.jsonp({ id: 1, name: 'Ali' });
 });
 
 let key;
@@ -57,6 +43,19 @@ app.post('/home', (req, res) => {
 
     res.json({ success: 1, data: post });
 });
+
+
+// Sending Comments
+
+app.post('/question:key', function (req, res) {
+    let question = posts.push();
+    question.set(req.body);
+    key = post.key;
+
+    res.json({ success: 1, data: question });
+});
+
+
 
 // For Sending Donations
 
@@ -204,16 +203,31 @@ app.get('/posts', (req, res) => {
 app.get('/users', (req, res) => {
 
     let showusers = [];
-    users.once("value", function (snapshot) {
-        snapshot.forEach(function (childSnapshot) {
-            showusers.push({
-                key: childSnapshot.key,
-                post: childSnapshot.val(),
-            })
-        });
-        res.json({ success: 0, data: showusers });
+users.limitToFirst(5).once("value", function (snapshot) {
+    snapshot.forEach(function (childSnapshot) {
+        showusers.push({
+            key: childSnapshot.key,
+            post: childSnapshot.val(),
+        })
     });
 });
+
+//Fetching Last Posts From Database
+
+app.get('/LastPosts', function (req, res) {
+
+    let showLast = [];
+LastPosts.limitToLast(1).once("value", function (snapshot) {
+    snapshot.forEach(function (childSnapshot) {
+        showLast.push({
+            key: childSnapshot.key,
+            post: childSnapshot.val(),
+        })
+    });
+    res.json({ success: 0, data: showLast });
+});
+});
+
 
 
 
@@ -239,6 +253,49 @@ app.get('/education', (req, res) => {
     });
 });
 
+
+// Fetching Posts From Databse (Un-Employment)
+
+app.get('/employment', function (req, res) {
+
+    let EmploymentPosts = [];
+    posts.once("value", function (snapshot) {
+
+        snapshot.forEach(function (childSnapshot) {
+
+            if (childSnapshot.val().Category == 'Un-Employment') {
+                EmploymentPosts.push({
+                    key: childSnapshot.key,
+                    post: childSnapshot.val(),
+                })
+            }
+        });
+
+        res.json({ success: 0, data: EmploymentPosts });
+    });
+});
+
+// Fetching Post From Database (Others)
+
+app.get('/others', function (req, res) {
+
+    let OthersPosts = [];
+    posts.once("value", function (snapshot) {
+
+        snapshot.forEach(function (childSnapshot) {
+
+            if (childSnapshot.val().Category == 'Others') {
+                OthersPosts.push({
+                    key: childSnapshot.key,
+                    post: childSnapshot.val(),
+                })
+            }
+        });
+
+        res.json({ success: 0, data:  OthersPosts });
+    });
+});
+
 // Fetching Posts From Database ( Proverty)
 
 app.get('/proverty', (req, res) => {
@@ -248,7 +305,7 @@ app.get('/proverty', (req, res) => {
 
         snapshot.forEach(function (childSnapshot) {
 
-            if (childSnapshot.val().Category == 'Proverty') {
+            if (childSnapshot.val().Category == 'Poverty') {
                 provertyPosts.push({
                     key: childSnapshot.key,
                     post: childSnapshot.val(),

@@ -41,9 +41,6 @@ $(document).ready(function(){
 		$("#reportModel").fadeOut("slow");
 		$("#postQuestionModelOverlay").fadeOut("slow");
 	});
-	$("#profileChangeOpener").click(function(){
-		$("#changeProfile").click();
-	});
 });
 
 

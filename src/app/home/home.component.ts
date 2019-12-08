@@ -19,16 +19,15 @@ export class HomeComponent implements OnInit {
   myhomeform: FormGroup;
   mydonationform: FormGroup;
   user;
+  lastposts = [];
   users = [];
   constructor(
     private authService: AuthenticationService,
     private formBuilder: FormBuilder,
     private uploadfilesService: UploadfilesService,
     private router: Router
-  ) {
-  }
+  ) { }
   ngOnInit() {
-
     this.authService.user.subscribe((user: any) => {
       this.user = user;
       this.myhomeform = new FormGroup({
@@ -62,6 +61,7 @@ export class HomeComponent implements OnInit {
     });
     this.getPOSTS();
     this.getUsers();
+    this.getLastPosts();
   }
 
   getPOSTS() {
@@ -74,8 +74,21 @@ export class HomeComponent implements OnInit {
   getUsers() {
     this.authService.getUsers().subscribe((data: any) => {
       this.users = data.data;
+
+      console.log(this.users);
     });
 
+  }
+
+  getLastPosts() {
+
+
+    this.authService.getLastPosts().subscribe((data: any) => {
+      this.lastposts = data.data;
+
+      console.log(this.lastposts);
+
+    });
   }
 
   submitFrom() {

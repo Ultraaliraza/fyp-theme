@@ -91,6 +91,10 @@ export class AuthenticationService {
   getOthers() {
     return this.http.get(this.apiHeader + 'others');
   }
+  getLastPosts(){
+    return this.http.get(this.apiHeader + 'LastPosts');
+  }
 
+ 
 
 }
