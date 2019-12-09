@@ -5,7 +5,7 @@ const bodyParser = require('body-parser')
 const admin = require("firebase-admin");
 const serviceAccount = require("./admin.json");
 const sgMail = require('@sendgrid/mail');
-const firebase = require('firebase');
+// const firebase = require('firebase');
 
 admin.initializeApp({
     credential: admin.credential.cert(serviceAccount),
