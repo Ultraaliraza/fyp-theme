@@ -9,25 +9,15 @@ import { AuthenticationService } from 'src/app/service/auth-service/authenticati
   styleUrls: ['./forgetpassword.component.css']
 })
 export class ForgetpasswordComponent implements OnInit {
-
   ForgetForm: FormGroup;
   constructor(private authService: AuthenticationService, private formBuilder: FormBuilder) { }
   ngOnInit() {
     this.ForgetForm = new FormGroup({
-
-      name: new FormControl('') , 
-
-
-
+      email: new FormControl('')
     });
-
   }
-
 
   PasswordReset() {
-
     this.authService.forgetpassword(this.ForgetForm.value);
-
   }
-
 }
