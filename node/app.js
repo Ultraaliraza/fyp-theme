@@ -44,9 +44,7 @@ app.post('/home', (req, res) => {
     res.json({ success: 1, data: post });
 });
 
-
 // Sending Comments
-
 app.post('/question:key', function (req, res) {
     let question = posts.push();
     question.set(req.body);
@@ -55,10 +53,7 @@ app.post('/question:key', function (req, res) {
     res.json({ success: 1, data: question });
 });
 
-
-
 // For Sending Donations
-
 app.post('/home/donations', (req, res) => {
     let donation = Donors.push();
     donation.set(req.body);
@@ -80,7 +75,6 @@ app.get('/donors', (req, res) => {
         res.json({ success: 0, data: donationpost });
     });
 });
-
 
 app.post('/login', (req, res) => {
     let found = 0;
@@ -108,7 +102,6 @@ app.post('/login', (req, res) => {
 });
 
 //   Forget Password
-
 app.post('/forgetpassword', (req, res) => {
     let found = 0;
     key = '';
@@ -183,8 +176,6 @@ app.get('/profile/:key', (req, res) => {
 });
 
 // Fetching Posts from Database ( All Posts)
-
-
 app.get('/posts', (req, res) => {
     let allPosts = [];
     posts.once("value", function (snapshot) {
@@ -199,41 +190,35 @@ app.get('/posts', (req, res) => {
 });
 
 // Fetching All Users From Database
-
 app.get('/users', (req, res) => {
 
     let showusers = [];
-users.limitToFirst(5).once("value", function (snapshot) {
-    snapshot.forEach(function (childSnapshot) {
-        showusers.push({
-            key: childSnapshot.key,
-            post: childSnapshot.val(),
-        })
+    users.limitToFirst(5).once("value", function (snapshot) {
+        snapshot.forEach(function (childSnapshot) {
+            showusers.push({
+                key: childSnapshot.key,
+                post: childSnapshot.val(),
+            })
+        });
     });
 });
 
 //Fetching Last Posts From Database
-
 app.get('/LastPosts', function (req, res) {
 
     let showLast = [];
-LastPosts.limitToLast(1).once("value", function (snapshot) {
-    snapshot.forEach(function (childSnapshot) {
-        showLast.push({
-            key: childSnapshot.key,
-            post: childSnapshot.val(),
-        })
+    LastPosts.limitToLast(1).once("value", function (snapshot) {
+        snapshot.forEach(function (childSnapshot) {
+            showLast.push({
+                key: childSnapshot.key,
+                post: childSnapshot.val(),
+            })
+        });
+        res.json({ success: 0, data: showLast });
     });
-    res.json({ success: 0, data: showLast });
 });
-});
-
-
-
-
 
 // Fetching Posts From Database ( Education)
-
 app.get('/education', (req, res) => {
 
     let educationPosts = [];
@@ -253,9 +238,7 @@ app.get('/education', (req, res) => {
     });
 });
 
-
 // Fetching Posts From Databse (Un-Employment)
-
 app.get('/employment', function (req, res) {
 
     let EmploymentPosts = [];
@@ -292,7 +275,7 @@ app.get('/others', function (req, res) {
             }
         });
 
-        res.json({ success: 0, data:  OthersPosts });
+        res.json({ success: 0, data: OthersPosts });
     });
 });
 
@@ -318,7 +301,6 @@ app.get('/proverty', (req, res) => {
 });
 
 // Fetching Posts From Database ( Marriage)
-
 app.get('/marriage', (req, res) => {
 
     let marriagePosts = [];
@@ -339,7 +321,6 @@ app.get('/marriage', (req, res) => {
 });
 
 // Fetching Posts from Database ( Proverty)
-
 app.get('/women', (req, res) => {
 
     let womenPosts = [];
@@ -360,8 +341,6 @@ app.get('/women', (req, res) => {
 });
 
 // Fetching Posts of Un-Employment
-
-
 app.get('/employment', (req, res) => {
 
     let employmentPosts = [];
@@ -383,9 +362,6 @@ app.get('/employment', (req, res) => {
 
 
 // For Fetching Posts of Others
-
-
-
 // For listing Down Domation Posts
 app.get('/donations', (req, res) => {
 

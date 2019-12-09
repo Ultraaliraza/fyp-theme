@@ -10,8 +10,8 @@ import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 export class QuestionComponent implements OnInit {
   commentform: FormGroup;
   user;
-  posts = [];
-  comments = [];
+  posts;
+  comments;
   commentkeys;
 
   constructor(private route: ActivatedRoute, private authService: AuthenticationService, private router: Router,

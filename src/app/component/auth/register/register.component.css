@@ -1,6 +1,10 @@
-input.ng-touched.ng-invalid{
+input.ng-touched.ng-invalid {
 
-border: 1px solid red;
-box-shadow: 0 0 13px inset rgba(255,0,0,0.2)
+  border: 1px solid red;
+  box-shadow: 0 0 13px inset rgba(255, 0, 0, 0.2)
+}
 
+.other-links a {
+  color: #fff !important;
+  cursor: pointer;
 }

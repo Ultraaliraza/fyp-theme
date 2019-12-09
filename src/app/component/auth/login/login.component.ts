@@ -18,11 +18,18 @@ export class LoginComponent implements OnInit {
     });
   }
   submitFrom() {
-    console.log(this.myForm.value);
     this.authService.login(this.myForm.value);
   }
   updateUser() {
     this.authService.user.next({ email: this.myForm.value.email });
+  }
+
+  facebook() {
+    this.authService.facebook();
+  }
+
+  google() {
+    this.authService.google();
   }
 
 

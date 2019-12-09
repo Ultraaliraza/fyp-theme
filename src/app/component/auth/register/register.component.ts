@@ -26,5 +26,13 @@ export class RegisterComponent implements OnInit {
     this.authService.register(this.myreactiveform.value);
   }
 
-  
+  facebook() {
+    this.authService.facebook();
+  }
+
+  google() {
+    this.authService.google();
+  }
+
+
 }
