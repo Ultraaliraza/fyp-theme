@@ -25,6 +25,7 @@ import { UploadfilesService } from './service/uploadfiles.service';
 import { ChildComponent } from './child/child.component';
 import { EmploymentComponent } from './employment/employment.component';
 import { OthersComponent } from './others/others.component';
+import { VideosComponent } from './videos/videos.component';
 
 
 
@@ -49,7 +50,8 @@ import { OthersComponent } from './others/others.component';
     WomenComponent,
     ChildComponent,
     EmploymentComponent,
-    OthersComponent
+    OthersComponent,
+    VideosComponent
   ],
   imports: [
     BrowserModule,

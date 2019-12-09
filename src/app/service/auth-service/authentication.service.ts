@@ -47,6 +47,9 @@ export class AuthenticationService {
   getquestion(key: any) {
     return this.http.get(this.apiHeader + '/question/' + key);
   }
+  getprofile(key: any) {
+    return this.http.get(this.apiHeader + '/profile/' + key);
+  }
 
   forgetpassword(objR) {
     this.http.post(this.apiHeader + 'forgetpassword', objR).subscribe((data: any) => {

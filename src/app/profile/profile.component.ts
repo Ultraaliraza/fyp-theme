@@ -6,10 +6,25 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
+  authService: any;
+  posts: any;
+  route: any;
 
   constructor() { }
 
   ngOnInit() {
+
+
+    this.route.params.subscribe(postID => {
+      this.authService.getquestion(postID.key)
+        .subscribe((post: any) => {
+          this.posts = post.data.post;
+
+        });
+
+
+    });
+  }
   }
 
-}
+

@@ -153,7 +153,7 @@ app.get('/question/:key', (req, res) => {
                 allPosts = {
                     key: childSnapshot.key,
                     post: childSnapshot.val(),
-                };
+                }
             }
         });
         res.json({ success: 0, data: allPosts });
@@ -173,7 +173,7 @@ app.get('/profile/:key', (req, res) => {
                 userData = {
                     key: childSnapshot.key,
                     post: childSnapshot.val(),
-                };
+                }
             }
         });
         res.json({ success: 0, data: userData });
