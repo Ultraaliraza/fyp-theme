@@ -1,0 +1,9 @@
+<select name="type" class="form-control" [(ngModel)]="accountType">
+    <option selected>Select Account Type</option>
+    <option value="identifier">identifier</option>
+    <option value="volunteer">Volunteer</option>
+    <option value="motivator">Motivator</option>
+</select>
+<div class="form-button">
+    <button id="submit" type="button" class="ibtn" (click)="setType()">Set Type</button>
+</div>

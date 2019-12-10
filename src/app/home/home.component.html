@@ -116,8 +116,11 @@
 						<img src="img/user.jpg" class="img-fluid" />
 						<a href="#">Awais Khalid</a>
 					</div>
-					<div class="body">
+					<!-- <div class="body">
 						<span id="postQustionPopuopOpener">What's in your mind ?</span>
+					</div> -->
+					<div class="body" data-toggle="modal" data-target="#exampleModal">
+						<span>What's in your mind ?</span>
 					</div>
 				</div>
 				<!-- Question -->
@@ -231,11 +234,11 @@
 				<div class="box questions">
 					<h3 class="title">Popular Questions</h3>
 					<div *ngFor="let lastpost of lastposts">
-					<div class="content">
-						<p>
-							<a href="#"> {{lastpost.post.Title}} </a>
-						</p>
-						<!-- <p>
+						<div class="content">
+							<p>
+								<a href="#"> {{lastpost.post.Title}} </a>
+							</p>
+							<!-- <p>
 							<a href="#">What are some of the best life hacks to apply ?</a>
 						</p>
 						<p>
@@ -247,14 +250,15 @@
 						<p>
 							<a href="#">What are the best software companies in the world ?</a>
 						</p> -->
+						</div>
 					</div>
-				</div></div>
+				</div>
 				<br>
 
 
 
 				<div class="box members">
-						<h3 class="title">Recent Joined Members</h3>
+					<h3 class="title">Recent Joined Members</h3>
 
 					<div *ngFor="let user of users">
 
@@ -321,12 +325,53 @@
 		</div>
 	</div> -->
 
-			<!-- ================================================================ -->
-			<!-- ================================================================ -->
 			<!-- ======================= [ MODALS ] ============================= -->
-			<!-- ================================================================ -->
-			<!-- ================================================================ -->
-			<!-- ================================================================ -->
+			<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+				aria-hidden="true">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="exampleModalLabel">Post your question</h5>
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body">
+							<form [formGroup]="myhomeform" (ngSubmit)="submitFrom()">
+								<div class="form-group">
+									<input type="text" formControlName="Title" placeholder="Your Question" />
+								</div>
+								<div class="form-group">
+									<select class="form-group" formControlName="Catagory">
+										<option selected disabled>Choose Category</option>
+										<option value="Education">Education</option>
+										<option value="Society">Society</option>
+										<option value="Women">Women</option>
+										<option value="Child">Child Labour</option>
+										<option value="Un-Employment">Un-Employment</option>
+										<option value="Marriage">Marriage</option>
+										<option value="Proverty">Proverty</option>
+										<option value="Others">Others</option>
+
+									</select>
+								</div>
+								<div class="form-group">
+									<input type="file" accept=".pdf, .doc" (change)="onSelectFile($event)" />
+								</div>
+								<div class="form-group">
+									<input type="file" accept=".png, .jpg" (change)="onSelectFile($event)" />
+								</div>
+								<div class="form-group">
+									<textarea placeholder="Your Content" formControlName="Description"></textarea>
+								</div>
+								<div class="">
+									<button class="submit">Post</button>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
 
 			<div class="models" id="postQuestionModel">
 				<div class="cancel" id="closeQuestionModel">
@@ -353,26 +398,25 @@
 								<option value="Proverty">Proverty</option>
 								<option value="Others">Others</option>
 
-				</select>
-			</div>
-			<!-- <div class="form-group">
+							</select>
+						</div>
+						<!-- <div class="form-group">
 				<input type="text" placeholder="Tags" />
 			</div> -->
-			<div class="form-group">
-				<input type="file" accept=".pdf, .doc" (change)="onSelectFile($event)" />
-			</div>
-			<div class="form-group">
-				<input type="file" accept=".png, .jpg" (change)="onSelectFile($event)" />
-			</div>
-			<div class="form-group">
-				<textarea placeholder="Your Content" formControlName="Description"></textarea>
-			</div>
-			<div class="">
-				<button class="submit">Post</button>
-			</div>
-		</form>
-		</div>
-
+						<!-- <div class="form-group">
+							<input type="file" accept=".pdf, .doc" (change)="onSelectFile($event)" />
+						</div> -->
+						<div class="form-group">
+							<input type="file" accept=".png, .jpg, .pdf, .doc" (change)="onSelectFile($event)" />
+						</div>
+						<div class="form-group">
+							<textarea placeholder="Your Content" formControlName="Description"></textarea>
+						</div>
+						<div class="">
+							<button class="submit">Post</button>
+						</div>
+					</form>
+				</div>
 			</div>
 
 			<div id="postQuestionModelOverlay"></div>

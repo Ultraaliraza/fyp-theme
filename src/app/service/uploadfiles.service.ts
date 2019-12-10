@@ -11,31 +11,33 @@ export class UploadfilesService {
 
   uploadFile() {
     return new Promise((resolve) => {
-      let fileName;
-      let offsetRef = firebase.database().ref(".info/serverTimeOffset");
-      offsetRef.on("value", (snap) => {
-        let currentTime = Date.now() + snap.val();
+      if (this.filesMeta) {
+        let fileName;
+        let offsetRef = firebase.database().ref(".info/serverTimeOffset");
+        offsetRef.on("value", async (snap) => {
+          console.log("1" + snap.val());
+          let currentTime = Date.now() + await snap.val();
+          fileName = currentTime + '_' + this.filesMeta.name;
 
-        // The storage path
-        fileName = currentTime + '_' + this.filesMeta.name;
-      });
+          let storageRef = firebase.storage().ref().child('files' + `/${fileName}`);
 
-      // Reference to storage bucket
-      let storageRef = firebase.storage().ref().child(`${'files'}/${fileName}`);
-
-      // The main task
-      storageRef
-        .put(this.filesMeta.files)
-        .then(async () => {
-          // The file's download URL
-          let downloadURL = await storageRef.getDownloadURL();
-          let fileMetaData = {
-            name: this.filesMeta.name,
-            url: downloadURL,
-            size: this.filesMeta.size
-          }
-          return resolve(fileMetaData);
+          storageRef
+            .put(this.filesMeta.file)
+            .then(async () => {
+              // The file's download URL
+              let downloadURL = await storageRef.getDownloadURL();
+              let fileMetaData = {
+                name: fileName,
+                url: downloadURL,
+                size: this.filesMeta.size
+              }
+              return resolve(fileMetaData);
+            });
         });
+      }
+      else {
+        resolve();
+      }
     });
   }
 }

@@ -10,7 +10,8 @@ import * as firebase from 'firebase';
 export class AuthenticationService {
   keyvalue = '';
   // apiHeader = 'http://localhost:3000/';
-  apiHeader = 'https://us-central1-helpinghand-90a6a.cloudfunctions.net/apis/';
+  // apiHeader = 'https://us-central1-helpinghand-90a6a.cloudfunctions.net/apis/';
+  apiHeader = 'http://localhost:5000/helpinghand-90a6a/us-central1/apis/';
 
   user = new BehaviorSubject({});
   post = new BehaviorSubject({});
@@ -27,30 +28,17 @@ export class AuthenticationService {
 
   login(objR) {
     // send data to the backend server\
-    this.http.post(this.apiHeader + 'login', objR).subscribe((res: any) => {
-      console.log(res)
-      if (res.success == 1) {
+    this.http.post(this.apiHeader + 'login', objR)
+      .subscribe((res: any) => {
+        localStorage.setItem('userMeta', res.data.uid);
         this.user.next(res.data);
-        if (res.data.acountType == 'Identifier') {
-          this.router.navigate(['/home']);
-        }
-        else if (res.data.acountType == 'motivator') {
-          this.router.navigate(['/motivator']);
-        }
-        else if (res.data.acountType == 'donor') {
-          this.router.navigate(['/donor']);
-        }
-      }
-    });
+        this.checkAccountType(res.data.acountType);
+      });
   }
 
   facebook() {
-    var provider = new firebase.auth.FacebookAuthProvider();
-    provider.setCustomParameters({
-      'display': 'popup'
-    });
     return firebase.auth()
-      .signInWithPopup(provider)
+      .signInWithPopup(new firebase.auth.FacebookAuthProvider())
       .then((result: any) => {
         let user = result.user;
         let userBody = {
@@ -61,10 +49,11 @@ export class AuthenticationService {
           uid: user.uid,
         }
 
-        this.http.post(this.apiHeader + '/social', userBody)
-          .subscribe((data) => {
-            localStorage.setItem('userMeta', JSON.stringify(data));
-            this.router.navigate(['/']);
+        this.http.post(this.apiHeader + 'social', userBody)
+          .subscribe((res: any) => {
+            localStorage.setItem('userMeta', res.data.uid);
+            this.user.next(res.data);
+            this.checkAccountType(res.data.acountType);
           });
       }).catch((error: any) => {
         console.log(error);
@@ -72,15 +61,10 @@ export class AuthenticationService {
   }
 
   google() {
-    let provider = new firebase.auth.GoogleAuthProvider();
-    provider.setCustomParameters({
-      'display': 'popup'
-    });
     return firebase.auth()
-      .signInWithPopup(provider)
+      .signInWithPopup(new firebase.auth.GoogleAuthProvider())
       .then((result: any) => {
         let user = result.user;
-        console.log(user);
         let userBody = {
           name: user.displayName,
           email: user.email,
@@ -89,14 +73,38 @@ export class AuthenticationService {
           uid: user.uid,
         }
 
-        this.http.post(this.apiHeader + '/social', userBody)
-          .subscribe((data) => {
-            localStorage.setItem('userMeta', JSON.stringify(data));
-            this.router.navigate(['/']);
+        this.http.post(this.apiHeader + 'social', userBody)
+          .subscribe((res: any) => {
+            console.log(res);
+            localStorage.setItem('userMeta', res.data.uid);
+            this.user.next(res.data);
+            this.checkAccountType(res.data.acountType);
           });
       }).catch((error: any) => {
         console.log(error);
       });
+  }
+
+  checkAccountType(accountType: string) {
+    console.log(accountType);
+    if (accountType) {
+      if (accountType == 'identifier' || accountType == 'Identifier') {
+        this.router.navigate(['/home']);
+      }
+      else if (accountType == 'motivator' || accountType == 'Motivator') {
+        this.router.navigate(['/motivator']);
+      }
+      else if (accountType == 'donor' || accountType == 'Donor') {
+        this.router.navigate(['/donor']);
+      }
+    }
+    else {
+      this.router.navigate(['/set-account-type']);
+    }
+  }
+
+  setAccountType(accountType: string, userID: string) {
+    return this.http.post(this.apiHeader + 'setAccountType', { acountType: accountType, uid: userID });
   }
 
   home(objR) {
@@ -152,7 +160,4 @@ export class AuthenticationService {
   getLastPosts() {
     return this.http.get(this.apiHeader + 'LastPosts');
   }
-
-
-
 }

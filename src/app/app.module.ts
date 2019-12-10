@@ -8,7 +8,7 @@ import { ForgetpasswordComponent } from './forgetpassword/forgetpassword.compone
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { HomeComponent } from './home/home.component';
-import { ActivateGuard } from './activate.guard';
+import { AfterAuthGuard } from './service/auth-guard/after-auth.guard';
 import { UserserviceService } from './userservice.service';
 import { MarriageComponent } from './marriage/marriage.component';
 import { ProvertyComponent } from './proverty/proverty.component';
@@ -25,6 +25,8 @@ import { UploadfilesService } from './service/uploadfiles.service';
 import { ChildComponent } from './child/child.component';
 import { EmploymentComponent } from './employment/employment.component';
 import { OthersComponent } from './others/others.component';
+import { SetAccountTypeComponent } from './component/auth/set-account-type/set-account-type.component';
+import { BeforeAuthGuard } from './service/auth-guard/before-auth.guard';
 
 
 
@@ -37,7 +39,7 @@ import { OthersComponent } from './others/others.component';
     ForgetpasswordComponent,
     HomeComponent,
     MarriageComponent,
-     ProvertyComponent,
+    ProvertyComponent,
     EducationComponent,
     ContactusComponent,
     DonationsComponent,
@@ -49,7 +51,8 @@ import { OthersComponent } from './others/others.component';
     WomenComponent,
     ChildComponent,
     EmploymentComponent,
-    OthersComponent
+    OthersComponent,
+    SetAccountTypeComponent
   ],
   imports: [
     BrowserModule,
@@ -61,7 +64,12 @@ import { OthersComponent } from './others/others.component';
 
 
   ],
-  providers: [ActivateGuard, UserserviceService, UploadfilesService],
+  providers: [
+    AfterAuthGuard,
+    BeforeAuthGuard,
+    UserserviceService,
+    UploadfilesService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

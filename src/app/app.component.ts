@@ -12,14 +12,13 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     var firebaseConfig = {
-      apiKey: "AIzaSyBbYhFMjE_V_6ySKmVm7Ydg9zItA4jrniM",
-      authDomain: "fevrerr-like.firebaseapp.com",
-      databaseURL: "https://fevrerr-like.firebaseio.com",
-      projectId: "fevrerr-like",
-      storageBucket: "fevrerr-like.appspot.com",
-      messagingSenderId: "854243513866",
-      appId: "1:854243513866:web:f030eee83cad7cfd66b1f3",
-      measurementId: "G-9B77BTDPDR"
+      apiKey: "AIzaSyA7DSbicFSqkr65hgE77XI2XlVEUbuej88",
+      authDomain: "helpinghand-90a6a.firebaseapp.com",
+      databaseURL: "https://helpinghand-90a6a.firebaseio.com",
+      projectId: "helpinghand-90a6a",
+      storageBucket: "helpinghand-90a6a.appspot.com",
+      messagingSenderId: "798640926929",
+      appId: "1:798640926929:web:4f93bb3fa46e93fcfa95f0"
     };
     // Initialize Firebase
     firebase.initializeApp(firebaseConfig);
