@@ -28,19 +28,15 @@
               "src/assets/css/fontawesome-all.min.css",
               "src/assets/css/iofrm-style.css",
               "src/assets/css/iofrm-theme12.css",
-               "src/assets/css/ali.css",
-               "src/assets/css/bootstrap.css"
+               "src/assets/css/ali.css"
+               
+
             ],
             "scripts": [
-              "src/assets/js/jquery.min.js",
-              "src/assets/js/popper.min.js",
-              "src/assets/js/bootstrap.min.js",
-              "src/assets/js/main.js",
-              "src/assets/js/tipsy.js",
-              "src/assets/js/jquery-migrate.js",
-              "src/assets/js/modernizr.js",
               "src/assets/js/jquery.js",
+              "src/assets/js/bootstrap.min.js",
               "src/assets/js/custom.js"
+            
             ],
             "es5BrowserSupport": true
           },

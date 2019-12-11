@@ -47,7 +47,7 @@ export class HomeComponent implements OnInit {
       this.mydonationform = new FormGroup({
         Title: new FormControl(''),
         Description: new FormControl(''),
-        Catagory: new FormControl('education'),
+      Category: new FormControl('education'),
         date: new FormControl(),
         name: new FormControl(this.user.name),
         accountType: new FormControl(this.user.accountType),

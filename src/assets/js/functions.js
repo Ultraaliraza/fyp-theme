@@ -1,110 +1,99 @@
-/* ==============================================
-	Preload
-=============================================== */
-$(window).load(function() { // makes sure the whole site is loaded
-	$('#status').fadeOut(); // will first fade out the loading animation
-	$('#preloader').delay(350).fadeOut('slow'); // will fade out the white DIV that covers the website.
-	$('body').delay(350).css({'overflow':'visible'});
-})
-/* ==============================================
-	Sticky nav
-=============================================== */
-$(window).scroll(function(){
-    'use strict';
-    if ($(this).scrollTop() > 1){  
-        $('header').addClass("sticky");
-    }
-    else{
-        $('header').removeClass("sticky");
-    }
-});
+// Retrieving all the messages ON ADMIN AREA
+function worker(){
+	 $.ajax({
 
-/* ==============================================
-	Menu
-=============================================== */
-$('a.open_close').on("click",function() {
-	$('.main-menu').toggleClass('show');
-	$('.layer').toggleClass('layer-is-visible');
-});
-$('a.show-submenu').on("click",function() {
-	$(this).next().toggleClass("show_normal");
-});
-$('a.show-submenu-mega').on("click",function() {
-	$(this).next().toggleClass("show_mega");
-});
+       type: "GET",
+       url: "functions.php",
+       data: {
+           getChatData: 1
+       },
+       success: function(html) {
+           $("#displayMsg").html(html);
+       },
+	   complete: function() {
+	      setTimeout(1000);
+	      worker();
+	   }
 
-$(window).on('resize load',function(){
-if( $(this).width() < 480 )
-{
-	$('a.open_close').on("click",function() {
-	$('.cmn-toggle-switch').removeClass('active')
-});
+   });
 }
-});
 
-/* ==============================================
-	Common
-=============================================== */
+// Retrieving all the messages ON USER SIDE
+function worker_two(){
+	 $.ajax({
 
-<!-- Tooltip -->	
-$('.tooltip-1').tooltip({html:true});
-	
- //accordion	
-function toggleChevron(e) {
-    $(e.target)
-        .prev('.panel-heading')
-        .find("i.indicator")
-        .toggleClass('icon_plus_alt2 icon_minus_alt2');
+       type: "GET",
+       url: "functions.php",
+       data: {
+           getUserChatData: 1
+       },
+       success: function(html) {
+           $("#displayMsg").html(html);
+       },
+	   complete: function() {
+	      setTimeout(1000);
+	      worker_two();
+	   }
+
+   });
 }
-$('#accordion').on('hidden.bs.collapse shown.bs.collapse', toggleChevron);
 
-/* ==============================================
-	Video modal dialog + Parallax + Scroll to top + Incrementer
-=============================================== */
-$(function () {
-'use strict';
-$('.video').magnificPopup({type:'iframe'});	/* video modal*/
-/* Gallery images modal*/
-$('.magnific-gallery').each(function() {
-    $(this).magnificPopup({
-        delegate: 'a', 
-        type: 'image',
-        gallery:{enabled:true}
-    });
-}); 
+var sendMsg;
+var sendMsgUser;
+$(document).ready(function(){
 
-/* Hamburger icon*/
-var toggles = document.querySelectorAll(".cmn-toggle-switch"); 
-  for (var i = toggles.length - 1; i >= 0; i--) {
-    var toggle = toggles[i];
-    toggleHandler(toggle);
-  };
+	sendMsg = function()
+	{
+		var msg = $('#msg').val();
+		if(msg == '')
+		{
 
-  function toggleHandler(toggle) {
-    toggle.addEventListener( "click", function(e) {
-      e.preventDefault();
-      (this.classList.contains("active") === true) ? this.classList.remove("active") : this.classList.add("active");
-    });
-  };
-  
-/* Scroll to top*/
-  $(window).scroll(function() {
-		if($(this).scrollTop() != 0) {
-			$('#toTop').fadeIn();	
-		} else {
-			$('#toTop').fadeOut();
+		}else
+		{
+		 $.ajax({
+
+	           type: "POST",
+	           url: "functions.php",
+	           data: {
+	               sendMessage: msg
+	           },
+	           success: function(html) {
+	               $("#msg").val("");
+	           },complete: function()
+	           {
+	           	scrollFunction();
+	           }
+
+	       });
 		}
-	});
-	$('#toTop').on("click",function() {
-		$('body,html').animate({scrollTop:0},500);
-	});	
-	});
+	}
+
+	sendMsgUser = function()
+	{
+		var msg = $('#msg').val();
+		if(msg == '')
+		{
+
+		}else
+		{
+		 $.ajax({
+
+	           type: "POST",
+	           url: "functions.php",
+	           data: {
+	               sendUserMessage: msg
+	           },
+	           success: function(html) {
+	               $("#msg").val("");
+	           },complete: function()
+	           {
+	           	scrollFunction();
+	           }
+
+	       });
+		}
+	}
+  		
 	
-<!-- testimonial carousel -->	
-$(document).ready(function() {
-  //Set the carousel options
-  $('#quote-carousel').carousel({
-    pause: true,
-    interval: 6000
-  });
 });
+

@@ -1,4 +1,5 @@
 $(document).ready(function(){
+
 	$("#closeBars").click(function(){
 		$('#drawer').animate({right:'-300px'});
 	});	
@@ -40,6 +41,14 @@ $(document).ready(function(){
 	$("#closeReportModel").click(function(){
 		$("#reportModel").fadeOut("slow");
 		$("#postQuestionModelOverlay").fadeOut("slow");
+	});	
+
+	$("#rating li a i").click(function(){
+		var star = $("#rating li a");
+		star.addClass("checked");
+	});
+	$("#openuploadProfile").click(function(){
+		$("#uploadProfile").click();
 	});
 });
 
@@ -60,3 +69,5 @@ $(document).ready(function(){
 
 
 
+
+  

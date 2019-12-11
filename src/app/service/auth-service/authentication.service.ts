@@ -8,6 +8,9 @@ import * as firebase from 'firebase';
   providedIn: 'root'
 })
 export class AuthenticationService {
+  getcomment(value: any) {
+    throw new Error("Method not implemented.");
+  }
   keyvalue = '';
   // apiHeader = 'http://localhost:3000/';
   apiHeader = 'https://us-central1-helpinghand-90a6a.cloudfunctions.net/apis/';
@@ -110,8 +113,16 @@ export class AuthenticationService {
   home(objR) {
     return this.http.post(this.apiHeader + 'home', objR);
   }
+  comment(objR) {
+    return this.http.post(this.apiHeader + 'comments', objR);
+
+  }
+
   getquestion(key: any) {
-    return this.http.get(this.apiHeader + '/question/' + key);
+    return this.http.get(this.apiHeader + 'question/' + key);
+  }
+  getprofile(key: any) {
+    return this.http.get(this.apiHeader + 'profile/' + key);
   }
 
   forgetpassword(objR) {
@@ -122,11 +133,20 @@ export class AuthenticationService {
   getMarriage() {
     return this.http.get(this.apiHeader + 'marriage');
   }
+
+
   getdonations(objR) {
     this.http.post(this.apiHeader + 'home/donations', objR).subscribe((data: any) => {
       this.router.navigate(['/home']);
     });
   }
+  Report(objR) {
+
+    return this.http.post(this.apiHeader + 'question/report', objR);
+
+
+  }
+
 
   getgetdonations() {
     return this.http.get(this.apiHeader + 'donors');

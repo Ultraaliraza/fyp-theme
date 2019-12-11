@@ -1,1 +1,165 @@
-<p>profile works!</p>
+
+<body class="profile">
+<div id="profilePage">
+	<!-- Header -->
+	<header class="nav container-fluid">
+		<div class="logo">
+			<img src="img/logo.png" class="img-fluid" alt="Logo">
+		</div>
+		<div class="bars ml-auto" id="openDrawer">
+			<i class="fas fa-bars fa-2x"></i>
+		</div>
+		<ul class="menu ml-auto" id="navLaptop">
+			<li>
+				<a href="#">Home</a>
+			</li>
+			<li>
+				<a href="#">About Us</a>
+			</li>
+			<li>
+				<a href="#">Jobs</a>
+			</li>
+			<li>
+				<a href="#">Funding</a>
+			</li>
+			<li>
+				<a href="#">Contact Us</a>
+			</li>
+			<li>
+				<input type="text" class="searchbox" placeholder="Search..." />
+				<i class="fas fa-search" id="openSearch"></i>
+			</li>
+			<li>
+				<img src="img/user.jpg" class="img-fluid accountSettingDropdown" id="accountSettingDropdown" />
+				<div class="dropdownPicture" id="dropdownPicture">
+					<div class="options">
+						<p><a href="#">Profile</a></p>
+						<p><a href="#">Settings</a></p>
+						<p><a href="#">Logout</a></p>
+					</div>
+				</div>
+			</li>
+		</ul>
+
+		<div id="drawer">
+			<div class="close-bars">
+				<button id="closeBars">
+					<i class="fa fa-close"></i>
+				</button>
+			</div>
+			<ul>
+				<li>
+					<a href="#">Home</a>
+				</li>
+				<li>
+					<a href="#">About Us</a>
+				</li>
+				<li>
+					<a href="#">Jobs</a>
+				</li>
+				<li>
+					<a href="#">Funding</a>
+				</li>
+				<li>
+					<a href="#">Contact Us</a>
+				</li>
+			</ul>
+		</div>
+
+	</header>
+
+	<!-- Body -->
+	<div class="wrapper">
+		<div class="container-fluid topBar">
+			<div class="col-lg-6">
+				<p class="breadcrumbs"><a href="#">Home</a> / Pages / <span>Profile</span></p>
+			</div>
+		</div>
+		<div class="col-lg-12 cover">
+			<div class="row">
+				<div class="col-lg-3 img">
+					<img src="{{posts.profile_image}}" class="profilePic">
+				</div>
+				<div class="col-lg-9 content">
+					<h4 class="name">{{posts.name}}</h4>
+					<p class="designation">{{posts.acountType}}</p>
+					<div class="social">
+						<ul>
+							<li>
+								<a href={{posts.facebook}}>
+									<i class="fab fa-facebook-f"></i>
+								</a>
+							</li>
+							<li>
+								<a href="#">
+									<i class="fab fa-instagram"></i>
+								</a>
+							</li>
+							<li>
+								<a href="#">
+									<i class="fab fa-twitter"></i>
+								</a>
+							</li>
+							<li>
+								<a href="#">
+									<i class="fab fa-google-plus-g"></i>
+								</a>
+							</li>
+						</ul>
+					</div>
+					<div class='rate_widget'>
+						<p class="head">Rating</p>
+						<ul id="rating">
+							<li><a class='one-star checked'><i class="fas fa-star"></i></a></li>
+							<li><a class='two-stars checked'><i class="fas fa-star"></i></a></li>
+							<li><a class='three-stars checked'><i class="fas fa-star"></i></a></li>
+							<li><a class='four-stars checked'><i class="fas fa-star"></i></a></li>
+							<li><a class='five-stars'><i class="fas fa-star"></i></a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="container about">
+			<div class="row">
+				<div class="col-lg-5">
+					<h4 class="title">About Me</h4>
+					<p class="desc">
+					  {{posts.aboutnote}}
+					</p>
+				</div>
+				<div class="col-lg-7 Questions">
+					<h4 class="title">Questions</h4>
+					<ol>
+						<li>
+							<a href="#">What are the problems of an entrepreneur in todays business?</a>
+						</li>
+						<li>
+							<a href="#">How can I write a good event business proposal?</a>
+						</li>
+						<li>
+							<a href="#">How can I earn money?</a>
+						</li>
+						<li>
+							<a href="#">Dear Leaders of Quora, have you ever had culture issues due to hiring close relatives?</a>
+						</li>
+						<li>
+							<a href="#">How do incubators benefit from businesses/companies?</a>
+						</li>
+						<li>
+							<a href="#">What do you think about a monetization model that relies on investing cash inflow to make a profit? Similarly to a bank.</a>
+						</li>
+						<li>
+							<a href="#">Why should regressive tax be levied on small business enterprises?</a>
+						</li>
+						<li>
+							<a href="#">What are the biggest lessons you have learned in the corporate world?</a>
+						</li>
+					</ol>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+		
+
