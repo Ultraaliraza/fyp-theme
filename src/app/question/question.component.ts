@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/service/auth-service/authentication.service';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { DatePipe } from '@angular/common';
+
 @Component({
   selector: 'app-question',
   templateUrl: './question.component.html',
@@ -13,6 +15,9 @@ export class QuestionComponent implements OnInit {
   posts;
   comments;
   commentkeys;
+  reportform: FormGroup;
+  datePipe = new DatePipe('en-US');
+  postID;
 
   constructor(private route: ActivatedRoute, private authService: AuthenticationService, private router: Router,
     // tslint:disable-next-line:align
@@ -23,38 +28,64 @@ export class QuestionComponent implements OnInit {
     this.authService.user.subscribe((user: any) => {
       this.user = user;
       this.commentform = new FormGroup({
-        Title: new FormControl(''),
-        Description: new FormControl(''),
-        Catagory: new FormControl('education'),
-        date: new FormControl(),
-        name: new FormControl(this.user.name),
-        accountType: new FormControl(this.user.accountType),
-        PostBy: new FormControl(this.user.key),
-        PostImage: new FormControl(''),
-        Time: new FormControl(''),
-        User_profile_image: new FormControl(),
-        PostFile: new FormControl(''),
+        Comment: new FormControl(''),
+        Comment_by: new FormControl(''),
+        User_Name: new FormControl(''),
+        date: new FormControl(''),
+        time: new FormControl(''),
+        user_image: new FormControl(''),
         id: new FormControl('')
       });
 
+      // Report Form
+      this.reportform = new FormGroup({
+        Name: new FormControl(''),
+        Email: new FormControl(this.user.email),
+        Reason: new FormControl('ethical'),
+        Message: new FormControl(),
+        PostId: new FormControl()
 
-
+      });
       this.route.params.subscribe(postID => {
+        this.postID = postID.key;
         this.authService.getquestion(postID.key)
           .subscribe((post: any) => {
             this.posts = post.data.post;
             this.comments = this.posts.Comments;
-            // console.log(this.posts);
-            // console.log(this.comments);
-
+            console.log(this.posts);
+            console.log(this.comments);
             this.commentkeys = Object.keys(this.comments);
-
             console.log(this.commentkeys);
           });
-
-
       });
     });
-  } // end Bracket of NgOnit
+  }// end Bracket of NgOnit
+  submitFrom() {
+
+    const time = this.datePipe.transform(new Date(), 'MM/dd/yyyy hh:mm:ss a');
+    this.commentform.controls.id.setValue(this.postID);
+    const obj = this.commentform.value;
+    //  this.commentform.controls.Date.setValue(time);
+    this.authService.comment(obj).subscribe((data: any) => {
+      console.log(this.commentform.value);
+    });
+  }
+
+
+  reportFrom() {
+
+    this.reportform.controls.PostId.setValue(this.postID);
+    this.authService.Report(this.reportform.value).subscribe((data: any) => {
+      console.log(this.reportform.value);
+    });
+
+  }
+
+  // reportform() {
+
+
+  //   console.log(this.reportform);
+  //   this.authService.getReport(this.reportform.value);
+  // }
 
 }

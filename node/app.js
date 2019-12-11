@@ -17,6 +17,7 @@ let allusers = db.ref("/Users")
 let Donors = db.ref("/Donations")
 let users = db.ref("/Users")
 let LastPosts = db.ref("/Posts")
+ let Report = db.ref("/ReportPost")
 
 app.use(cors())
 app.use(bodyParser.json())
@@ -44,7 +45,6 @@ app.post('/home', (req, res) => {
     res.json({ success: 1, data: post });
 });
 
-// Sending Comments
 app.post('/question:key', function (req, res) {
     let question = posts.push();
     question.set(req.body);
@@ -59,6 +59,18 @@ app.post('/home/donations', (req, res) => {
     donation.set(req.body);
 
     res.json({ success: 1, data: donation });
+});
+// Sending Comments
+
+app.post('/comments', (req, res) => {
+    const body = req.body ;
+    
+    let comments = db.ref("/Posts/"+body.id+"/Comments").push();
+
+    
+    comments.set(body);
+
+    res.json({ success: 1, data: comments});
 });
 
 // for getting Posts
@@ -160,7 +172,7 @@ app.get('/question/:key', (req, res) => {
 app.get('/profile/:key', (req, res) => {
     let key = req.params.key;
     let userData = {};
-    posts.once("value", function (snapshot) {
+    users.once("value", function (snapshot) {
         snapshot.forEach(function (childSnapshot) {
             if (key === childSnapshot.key) {
                 userData = {
@@ -190,33 +202,10 @@ app.get('/posts', (req, res) => {
 });
 
 // Fetching All Users From Database
-app.get('/users', (req, res) => {
 
-    let showusers = [];
-    users.limitToFirst(5).once("value", function (snapshot) {
-        snapshot.forEach(function (childSnapshot) {
-            showusers.push({
-                key: childSnapshot.key,
-                post: childSnapshot.val(),
-            })
-        });
-    });
-});
 
 //Fetching Last Posts From Database
-app.get('/LastPosts', function (req, res) {
 
-    let showLast = [];
-    LastPosts.limitToLast(1).once("value", function (snapshot) {
-        snapshot.forEach(function (childSnapshot) {
-            showLast.push({
-                key: childSnapshot.key,
-                post: childSnapshot.val(),
-            })
-        });
-        res.json({ success: 0, data: showLast });
-    });
-});
 
 // Fetching Posts From Database ( Education)
 app.get('/education', (req, res) => {
@@ -379,6 +368,68 @@ app.get('/donations', (req, res) => {
         });
     });
 });
+
+///////////////////////////////////////////////////////////// Reporting a Post
+
+app.post('/question/report', (req, res) => {
+
+    const body = req.body;
+    let Report = db.ref("/ReportPost/"+body.postID +"/" +body.userID)
+     let reqbody = {Name:body.name }
+    Report.set(reqbody);
+
+    res.json({ success: 1, data: Report });
+});
+
+// Getting 
+
+app.post('/question/getreport', (req, res) => {
+
+    const body = req.body;
+    let Report = db.ref("/ReportPost/"+body.postID +"/" +body.userID)
+
+
+    Report.once("value", function (snapshot) {
+
+        res.json({ success: 1, data: snapshot });
+
+    })
+   
+
+});
+
+app.get('/users', (req, res) => {
+
+    let showusers = [];
+    users.limitToFirst(5).once("value", function (snapshot) {
+        snapshot.forEach(function (childSnapshot) {
+            showusers.push({
+                key: childSnapshot.key,
+                post: childSnapshot.val(),
+            })
+
+
+        });
+        res.json({ success: 0, data: showusers});
+    });
+});
+
+
+//last post
+app.get('/LastPosts', function (req, res) {
+
+    let showLast = [];
+    LastPosts.limitToLast(1).once("value", function (snapshot) {
+        snapshot.forEach(function (childSnapshot) {
+            showLast.push({
+                key: childSnapshot.key,
+                post: childSnapshot.val(),
+            })
+        });
+        res.json({ success: 0, data: showLast });
+    });
+});
+
 // Admin Panel to Delete any User
 
 //App Listening

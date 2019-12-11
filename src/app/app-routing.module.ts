@@ -15,9 +15,11 @@ import { ProfileComponent } from './profile/profile.component';
 import { AboutComponent } from './about/about.component';
 import { ProvertyComponent } from './proverty/proverty.component';
 import { WomenComponent } from './women/women.component';
-import {  ChildComponent } from './child/child.component';
-import {EmploymentComponent} from './employment/employment.component';
-import {OthersComponent} from './others/others.component';
+import { ChildComponent } from './child/child.component';
+import { EmploymentComponent } from './employment/employment.component';
+import { OthersComponent } from './others/others.component';
+import { SettingsComponent } from './settings/settings.component';
+import {VideosComponent} from './videos/videos.component';
 
 // import { ProvertyComponent } from './proverty/proverty.component';
 import { from } from 'rxjs';
@@ -36,9 +38,18 @@ const routes: Routes = [
     component: ContactusComponent
   },
 
+
   {
     path: 'profile/:key',
     component: ProfileComponent
+  },
+  {
+    path: 'settings',
+    component: SettingsComponent
+  },
+  {
+    path: 'videos',
+    component: VideosComponent
   },
   {
     path: 'about ',
@@ -91,10 +102,10 @@ const routes: Routes = [
 
     path: 'child',
     component: ChildComponent
-  },{
+  }, {
     path: 'employment',
     component: EmploymentComponent
-  },{
+  }, {
     path: 'others',
     component: OthersComponent
   },

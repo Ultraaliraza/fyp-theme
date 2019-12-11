@@ -26,6 +26,9 @@ import { ChildComponent } from './child/child.component';
 import { EmploymentComponent } from './employment/employment.component';
 import { OthersComponent } from './others/others.component';
 import { VideosComponent } from './videos/videos.component';
+import { SettingsComponent } from './settings/settings.component';
+import { UserprofileComponent } from './userprofile/userprofile.component';
+import { AdminComponent } from './admin/admin.component';
 
 
 
@@ -51,7 +54,10 @@ import { VideosComponent } from './videos/videos.component';
     ChildComponent,
     EmploymentComponent,
     OthersComponent,
-    VideosComponent
+    VideosComponent,
+    SettingsComponent,
+    UserprofileComponent,
+    AdminComponent
   ],
   imports: [
     BrowserModule,
