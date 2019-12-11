@@ -9,8 +9,8 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
- posts = [];
- about =[];
+  posts;
+  about;
 
   constructor(private route: ActivatedRoute, private authService: AuthenticationService, private router: Router) { }
 
@@ -26,6 +26,6 @@ export class ProfileComponent implements OnInit {
         });
     });
   }
-  }
+}
 
 

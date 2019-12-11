@@ -13,11 +13,8 @@ admin.initializeApp({
 });
 var db = admin.database();
 let posts = db.ref("/Posts");
-let allusers = db.ref("/Users")
 let Donors = db.ref("/Donations")
 let users = db.ref("/Users")
-let LastPosts = db.ref("/Posts")
- let Report = db.ref("/ReportPost")
 
 app.use(cors())
 app.use(bodyParser.json())
@@ -34,58 +31,6 @@ app.post('/register', function (req, res) {
     };
     sgMail.send(msg);
     res.jsonp({ id: 1, name: 'Ali' });
-});
-
-let key;
-app.post('/home', (req, res) => {
-    let post = posts.push();
-    post.set(req.body);
-    key = post.key;
-
-    res.json({ success: 1, data: post });
-});
-
-app.post('/question:key', function (req, res) {
-    let question = posts.push();
-    question.set(req.body);
-    key = post.key;
-
-    res.json({ success: 1, data: question });
-});
-
-// For Sending Donations
-app.post('/home/donations', (req, res) => {
-    let donation = Donors.push();
-    donation.set(req.body);
-
-    res.json({ success: 1, data: donation });
-});
-// Sending Comments
-
-app.post('/comments', (req, res) => {
-    const body = req.body ;
-    
-    let comments = db.ref("/Posts/"+body.id+"/Comments").push();
-
-    
-    comments.set(body);
-
-    res.json({ success: 1, data: comments});
-});
-
-// for getting Posts
-
-app.get('/donors', (req, res) => {
-    let donationpost = [];
-    Donors.once("value", function (snapshot) {
-        snapshot.forEach(function (childSnapshot) {
-            donationpost.push({
-                key: childSnapshot.key,
-                donationpost: childSnapshot.val(),
-            })
-        });
-        res.json({ success: 0, data: donationpost });
-    });
 });
 
 app.post('/login', (req, res) => {
@@ -149,26 +94,86 @@ app.post('/forgetpassword', (req, res) => {
     });
 });
 
-app.get('/question/:key', (req, res) => {
-    let key = req.params.key;
-    let allPosts = {};
-    posts.once("value", function (snapshot) {
-        snapshot.forEach(function (childSnapshot) {
-            if (key === childSnapshot.key) {
-                allPosts = {
-                    key: childSnapshot.key,
-                    post: childSnapshot.val(),
-                }
-            }
-        });
-        res.json({ success: 0, data: allPosts });
-        console.log(allPosts);
-    });
 
+app.post('/social', (request, response) => {
+    let found = 0;
+    const body = request.body;
+    return db.ref('/Users/' + body.uid)
+        .set(body)
+        .then(() => {
+            return users.once("value", (snapshot) => {
+                snapshot.forEach((childSnapshot) => {
+                    var data = childSnapshot.val();
+
+                    let key = childSnapshot.key;
+                    found = 1;
+                    delete data.password;
+                    temp = data;
+                    temp.key = key;
+                });
+                if (found === 1) {
+                    return response.jsonp({ success: 1, data: temp });
+                } else {
+                    return response.jsonp({ success: 0, data: {} });
+                }
+            });
+        })
+        .catch((error) => {
+            return response.json(error);
+        });
+});
+
+app.post('/setAccountType', (req, res) => {
+    const body = req.body;
+    console.log(body);
+    return db.ref('/Users/' + body.uid)
+        .update({ acountType: body.acountType })
+        .then(() => { return res.set(200).send({ msg: 'Account Type Updated' }) })
+        .catch((error) => { return res.send(error) })
+});
+
+
+let key;
+app.post('/home', (req, res) => {
+    let post = posts.push();
+    post.set(req.body);
+    key = post.key;
+
+    res.json({ success: 1, data: post });
+});
+
+// For Sending Donations
+app.post('/home/donations', (req, res) => {
+    let donation = Donors.push();
+    donation.set(req.body);
+
+    res.json({ success: 1, data: donation });
+});
+
+// for getting Posts
+
+app.get('/donors', (req, res) => {
+    let donationpost = [];
+    Donors.once("value", function (snapshot) {
+        snapshot.forEach(function (childSnapshot) {
+            donationpost.push({
+                key: childSnapshot.key,
+                donationpost: childSnapshot.val(),
+            })
+        });
+        res.json({ success: 0, data: donationpost });
+    });
+});
+
+app.post('/question:key', function (req, res) {
+    let question = posts.push();
+    question.set(req.body);
+    key = post.key;
+
+    res.json({ success: 1, data: question });
 });
 
 // Users with Respect to Key
-
 app.get('/profile/:key', (req, res) => {
     let key = req.params.key;
     let userData = {};
@@ -201,11 +206,6 @@ app.get('/posts', (req, res) => {
     });
 });
 
-// Fetching All Users From Database
-
-
-//Fetching Last Posts From Database
-
 
 // Fetching Posts From Database ( Education)
 app.get('/education', (req, res) => {
@@ -227,49 +227,7 @@ app.get('/education', (req, res) => {
     });
 });
 
-// Fetching Posts From Databse (Un-Employment)
-app.get('/employment', function (req, res) {
-
-    let EmploymentPosts = [];
-    posts.once("value", function (snapshot) {
-
-        snapshot.forEach(function (childSnapshot) {
-
-            if (childSnapshot.val().Category == 'Un-Employment') {
-                EmploymentPosts.push({
-                    key: childSnapshot.key,
-                    post: childSnapshot.val(),
-                })
-            }
-        });
-
-        res.json({ success: 0, data: EmploymentPosts });
-    });
-});
-
-// Fetching Post From Database (Others)
-
-app.get('/others', function (req, res) {
-
-    let OthersPosts = [];
-    posts.once("value", function (snapshot) {
-
-        snapshot.forEach(function (childSnapshot) {
-
-            if (childSnapshot.val().Category == 'Others') {
-                OthersPosts.push({
-                    key: childSnapshot.key,
-                    post: childSnapshot.val(),
-                })
-            }
-        });
-
-        res.json({ success: 0, data: OthersPosts });
-    });
-});
-
 // Fetching Posts From Database ( Proverty)
-
 app.get('/proverty', (req, res) => {
 
     let provertyPosts = [];
@@ -329,26 +287,25 @@ app.get('/women', (req, res) => {
     });
 });
 
-// Fetching Posts of Un-Employment
-app.get('/employment', (req, res) => {
+// Fetching Posts From Databse (Un-Employment)
+app.get('/employment', function (req, res) {
 
-    let employmentPosts = [];
+    let EmploymentPosts = [];
     posts.once("value", function (snapshot) {
 
         snapshot.forEach(function (childSnapshot) {
 
-            if (childSnapshot.val().Category == 'Employment') {
-                employmentPosts.push({
+            if (childSnapshot.val().Category == 'Un-Employment') {
+                EmploymentPosts.push({
                     key: childSnapshot.key,
                     post: childSnapshot.val(),
                 })
             }
         });
 
-        res.json({ success: 0, data: employmentPosts });
+        res.json({ success: 0, data: EmploymentPosts });
     });
 });
-
 
 // For Fetching Posts of Others
 // For listing Down Domation Posts
@@ -369,13 +326,85 @@ app.get('/donations', (req, res) => {
     });
 });
 
-///////////////////////////////////////////////////////////// Reporting a Post
 
+// ------------- New Code By Ali
+// Sending Comments
+app.post('/comments', (req, res) => {
+    const body = req.body;
+
+    let comments = db.ref("/Posts/" + body.id + "/Comments").push();
+
+
+    comments.set(body);
+
+    res.json({ success: 1, data: comments });
+});
+
+app.get('/question/:key', (req, res) => {
+    let key = req.params.key;
+    let allPosts = {};
+    posts.once("value", function (snapshot) {
+        snapshot.forEach(function (childSnapshot) {
+            if (key === childSnapshot.key) {
+                allPosts = {
+                    key: childSnapshot.key,
+                    post: childSnapshot.val(),
+                }
+            }
+        });
+        res.json({ success: 0, data: allPosts });
+        console.log(allPosts);
+    });
+
+});
+
+// Fetching Post From Database (Others)
+
+app.get('/others', function (req, res) {
+
+    let OthersPosts = [];
+    posts.once("value", function (snapshot) {
+
+        snapshot.forEach(function (childSnapshot) {
+
+            if (childSnapshot.val().Category == 'Others') {
+                OthersPosts.push({
+                    key: childSnapshot.key,
+                    post: childSnapshot.val(),
+                })
+            }
+        });
+
+        res.json({ success: 0, data: OthersPosts });
+    });
+});
+
+// Fetching Posts of Un-Employment
+app.get('/employment', (req, res) => {
+
+    let employmentPosts = [];
+    posts.once("value", function (snapshot) {
+
+        snapshot.forEach(function (childSnapshot) {
+
+            if (childSnapshot.val().Category == 'Employment') {
+                employmentPosts.push({
+                    key: childSnapshot.key,
+                    post: childSnapshot.val(),
+                })
+            }
+        });
+
+        res.json({ success: 0, data: employmentPosts });
+    });
+});
+
+// Reporting a Post
 app.post('/question/report', (req, res) => {
 
     const body = req.body;
-    let Report = db.ref("/ReportPost/"+body.postID +"/" +body.userID)
-     let reqbody = {Name:body.name }
+    let Report = db.ref("/ReportPost/" + body.postID + "/" + body.userID)
+    let reqbody = { Name: body.name }
     Report.set(reqbody);
 
     res.json({ success: 1, data: Report });
@@ -386,7 +415,7 @@ app.post('/question/report', (req, res) => {
 app.post('/question/getreport', (req, res) => {
 
     const body = req.body;
-    let Report = db.ref("/ReportPost/"+body.postID +"/" +body.userID)
+    let Report = db.ref("/ReportPost/" + body.postID + "/" + body.userID)
 
 
     Report.once("value", function (snapshot) {
@@ -394,7 +423,7 @@ app.post('/question/getreport', (req, res) => {
         res.json({ success: 1, data: snapshot });
 
     })
-   
+
 
 });
 
@@ -410,16 +439,15 @@ app.get('/users', (req, res) => {
 
 
         });
-        res.json({ success: 0, data: showusers});
+        res.json({ success: 0, data: showusers });
     });
 });
 
 
 //last post
 app.get('/LastPosts', function (req, res) {
-
     let showLast = [];
-    LastPosts.limitToLast(1).once("value", function (snapshot) {
+    posts.limitToLast(1).once("value", function (snapshot) {
         snapshot.forEach(function (childSnapshot) {
             showLast.push({
                 key: childSnapshot.key,
