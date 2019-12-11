@@ -19,6 +19,11 @@ import { OthersComponent } from 'src/app/others/others.component';
 import { SetAccountTypeComponent } from 'src/app/component/auth/set-account-type/set-account-type.component';
 import { UploadfilesService } from 'src/app/service/uploadfiles.service';
 import { UserserviceService } from 'src/app/userservice.service';
+import { SettingsComponent } from 'src/app/settings/settings.component';
+import { UserprofileComponent } from 'src/app/userprofile/userprofile.component';
+import { VideosComponent } from 'src/app/videos/videos.component';
+import { EditComponent } from 'src/app/edit/edit.component';
+import { MessagesComponent } from 'src/app/messages/messages.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +41,11 @@ import { UserserviceService } from 'src/app/userservice.service';
     EmploymentComponent,
     OthersComponent,
     SetAccountTypeComponent,
+    VideosComponent,
+    SettingsComponent,
+    UserprofileComponent,
+    EditComponent,
+    MessagesComponent
   ],
   imports: [
     CommonModule,
@@ -44,7 +54,7 @@ import { UserserviceService } from 'src/app/userservice.service';
     HttpClientModule,
     AfterAuthRoutingModule
   ],
-  providers:[
+  providers: [
     UserserviceService,
     UploadfilesService
   ]
