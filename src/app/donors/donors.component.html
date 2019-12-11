@@ -194,22 +194,22 @@
 					<div class="questionBox">
 						<h3 class="title">
 							<a routerLink="/question/{{post.key}}">
-									{{ post.post.Title }}
+									{{ post.donationpost.Title }}
 							</a>
 						</h3>
 						<div class="thumbnail">
-							<img src={{post.post.PostImage}} class="img-fluid">
+							<img src={{post.donationpost.PostImage}} class="img-fluid">
 						</div>
 						<div class="content">
 							<p>
-								{{post.post.Description}}
+								{{post.donationpost.Description}}
 							</p>
 						</div>
 						<div class="meta">
 							<ul class="left">
 								<li>
 									<i class="far fa-calendar"></i>
-									  {{post.post.Date}}		
+									  {{post.donationpost.Date}}		
 								</li>
 							</ul>
 							<ul class="right">
@@ -219,7 +219,7 @@
 								</li> -->
 								<li>
 									<i class="fas fa-crop"></i>
-									 {{post.post.Category}}
+									 Donation
 								</li>
 							</ul>
 						</div>

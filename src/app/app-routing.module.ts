@@ -19,7 +19,10 @@ import { ChildComponent } from './child/child.component';
 import { EmploymentComponent } from './employment/employment.component';
 import { OthersComponent } from './others/others.component';
 import { SettingsComponent } from './settings/settings.component';
-import {VideosComponent} from './videos/videos.component';
+import { VideosComponent } from './videos/videos.component';
+import { UserprofileComponent } from './userprofile/userprofile.component';
+import { EditComponent } from './edit/edit.component';
+import { MessagesComponent } from './messages/messages.component';
 
 // import { ProvertyComponent } from './proverty/proverty.component';
 import { from } from 'rxjs';
@@ -48,6 +51,10 @@ const routes: Routes = [
     component: SettingsComponent
   },
   {
+    path: 'uprofile',
+    component: UserprofileComponent
+  },
+  {
     path: 'videos',
     component: VideosComponent
   },
@@ -58,10 +65,18 @@ const routes: Routes = [
   {
     path: 'motivator',
     component: MotivatorComponent
+  }, {
+    path: 'edit',
+    component: EditComponent
   },
+
   {
     path: 'education',
     component: EducationComponent
+  },
+  {
+    path: 'messages',
+    component: MessagesComponent
   },
   {
     path: 'question/:key',

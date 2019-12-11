@@ -29,6 +29,9 @@ import { VideosComponent } from './videos/videos.component';
 import { SettingsComponent } from './settings/settings.component';
 import { UserprofileComponent } from './userprofile/userprofile.component';
 import { AdminComponent } from './admin/admin.component';
+import { OwnprofileComponent } from './ownprofile/ownprofile.component';
+import { EditComponent } from './edit/edit.component';
+import { MessagesComponent } from './messages/messages.component';
 
 
 
@@ -57,7 +60,10 @@ import { AdminComponent } from './admin/admin.component';
     VideosComponent,
     SettingsComponent,
     UserprofileComponent,
-    AdminComponent
+    AdminComponent,
+    OwnprofileComponent,
+    EditComponent,
+    MessagesComponent
   ],
   imports: [
     BrowserModule,
