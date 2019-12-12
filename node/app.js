@@ -132,7 +132,6 @@ app.post('/setAccountType', (req, res) => {
 
 app.post('/home', (req, res) => {
     const body = req.body;
-    console.log(body.uid);
     let post = db.ref("/Posts/").push();
 
     post.set(body)
@@ -393,7 +392,7 @@ app.get('/LastPosts', (req, res) => {
 app.get('/getallquestion/:uid', (req, res) => {
     const userID = req.params.uid;
     let questions = [];
-    db.ref("/Posts/" + userID).once("value", (snapshot) => {
+    posts.orderByChild("uid").equalTo(userID).once("value", (snapshot) => {
         snapshot.forEach((childSnapshot) => {
             questions.push({
                 key: childSnapshot.key,
@@ -405,18 +404,16 @@ app.get('/getallquestion/:uid', (req, res) => {
 });
 
 // Getting 
-app.get('/deletequestion/:uid/:postid', (req, res) => {
-    const userID = req.params.uid;
+app.get('/deletequestion/:postid', (req, res) => {
     const postID = req.params.postid;
-    db.ref('Posts/' + userID + '/' + postID).remove(() => {
+    db.ref('Posts/' + postID).remove(() => {
         return res.status(200).send({ msg: 'Deleted' });
     });
 });
 
 app.post('/updatequestion', (req, res) => {
     const body = req.body;
-    const updateRef = db.ref("/Posts/" + body.userID + "/" + body.postID)
-    delete body.userID;
+    const updateRef = db.ref("/Posts/" + body.postID)
     delete body.postID;
 
     return updateRef
@@ -445,6 +442,15 @@ app.post('/updatepass', (req, res) => {
 
 
 // ----------------- Ali Updated Code
+
+
+
+
+
+// ====================== Admin ======================
+
+
+
 
 app.listen(3000, function () {
     console.log('Server listening on port 3000')
