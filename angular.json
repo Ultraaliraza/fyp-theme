@@ -24,19 +24,13 @@
             ],
             "styles": [
               "src/styles.css",
-              "src/assets/css/bootstrap.min.css",
               "src/assets/css/fontawesome-all.min.css",
               "src/assets/css/iofrm-style.css",
               "src/assets/css/iofrm-theme12.css",
-               "src/assets/css/ali.css"
-               
-
+              "src/assets/css/ali.css"
             ],
             "scripts": [
-              "src/assets/js/jquery.js",
-              "src/assets/js/bootstrap.min.js",
               "src/assets/js/custom.js"
-            
             ],
             "es5BrowserSupport": true
           },
