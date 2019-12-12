@@ -1,112 +1,108 @@
-
 <body class="settings">
-<div id="settingsPage">
-	<!-- Header -->
-	<header class="nav container-fluid">
-		<div class="logo">
-			<img src="img/logo.png" class="img-fluid" alt="Logo">
-		</div>
-		<div class="bars ml-auto" id="openDrawer">
-			<i class="fas fa-bars fa-2x"></i>
-		</div>
-		<ul class="menu ml-auto" id="navLaptop">
-			<li>
-				<a href="#">Home</a>
-			</li>
-			<li>
-				<a href="#">Message</a>
-			</li>
-			<li>
-				<a href="#">Watch Videos</a>
-			</li>
-			<li>
-				<a href="#">About Us</a>
-			</li>
-			<li>
-				<a href="#">Contact Us</a>
-			</li>
-			
-		</ul>
-
-		<div id="drawer">
-			<div class="close-bars">
-				<button id="closeBars">
-					<i class="fa fa-close"></i>
-				</button>
+	<div id="settingsPage">
+		<!-- Header -->
+		<header class="nav container-fluid">
+			<div class="logo">
+				<img src="img/logo.png" class="img-fluid" alt="Logo">
 			</div>
-			<ul>
+			<div class="bars ml-auto" id="openDrawer">
+				<i class="fas fa-bars fa-2x"></i>
+			</div>
+			<ul class="menu ml-auto" id="navLaptop">
 				<li>
 					<a href="#">Home</a>
+				</li>
+				<li>
+					<a href="#">Message</a>
+				</li>
+				<li>
+					<a href="#">Watch Videos</a>
 				</li>
 				<li>
 					<a href="#">About Us</a>
 				</li>
 				<li>
-					<a href="#">Jobs</a>
-				</li>
-				<li>
-					<a href="#">Funding</a>
-				</li>
-				<li>
 					<a href="#">Contact Us</a>
 				</li>
+
 			</ul>
+
+			<div id="drawer">
+				<div class="close-bars">
+					<button id="closeBars">
+						<i class="fa fa-close"></i>
+					</button>
+				</div>
+				<ul>
+					<li>
+						<a href="#">Home</a>
+					</li>
+					<li>
+						<a href="#">About Us</a>
+					</li>
+					<li>
+						<a href="#">Jobs</a>
+					</li>
+					<li>
+						<a href="#">Funding</a>
+					</li>
+					<li>
+						<a href="#">Contact Us</a>
+					</li>
+				</ul>
+			</div>
+
+		</header>
+
+		<!-- Body -->
+		<div class="container-fluid">
+			<div class="col-lg-4 offset-lg-4 main">
+				<div class="header">
+					<h3>Edit your bio</h3>
+				</div>
+				<div class="body">
+					<div class="profile" id="openuploadProfile">
+						<img src="img/user.jpg" class="img-fluid">
+					</div>
+					<input type="file" accept=".png, .jpg" (change)="uploadfilesService.onSelectFile($event)" />
+					<br />
+					<div class="form-group">
+						<input type="text" class="form-control" placeholder="Your Name" />
+					</div>
+					<div class="form-group">
+						<input type="text" class="form-control" placeholder="Description" />
+					</div>
+					<div class="form-group">
+						<input type="text" class="form-control" placeholder="https://www.facebook.com/@username" />
+					</div>
+					<div class="form-group">
+						<input type="text" class="form-control" placeholder="https://www.instagram.com/@username" />
+					</div>
+					<div class="form-group">
+						<input type="text" class="form-control" placeholder="https://www.twitter.com/@username" />
+					</div>
+					<div class="form-group">
+						<input type="text" class="form-control" placeholder="https://plus.google.com/@username" />
+					</div>
+					<div class="form-group">
+						<button class="update" type="submit">Update</button>
+					</div>
+
+					<div class="clearfix">
+						<br><br>
+					</div>
+					<div class="form-group">
+						<input type="password" [(ngModel)]="password" class="form-control" placeholder="Enter new password" />
+					</div>
+					<div class="form-group">
+						<button class="update" (click)="updatePassword()">Change</button>
+					</div>
+				</div>
+			</div>
 		</div>
 
-	</header>
 
-	<!-- Body -->
-	<div class="container-fluid">
-		<div class="col-lg-4 offset-lg-4 main">
-			<div class="header">
-				<h3>Edit your bio</h3>
-			</div>
-			<div class="body">
-				<div class="profile" id="openuploadProfile">
-					<img src="img/user.jpg" class="img-fluid">
-				</div>
-				<input type="file" name="fileUpload" id="uploadProfile" />
-				<br/>
-				<div class="form-group">
-					<input type="text" class="form-control" placeholder="Your Name" />
-				</div>
-				<div class="form-group">
-					<input type="text" class="form-control" placeholder="Description" />
-				</div>
-				<div class="form-group">
-					<input type="text" class="form-control" placeholder="https://www.facebook.com/@username" />
-				</div>
-				<div class="form-group">
-					<input type="text" class="form-control" placeholder="https://www.instagram.com/@username" />
-				</div>
-				<div class="form-group">
-					<input type="text" class="form-control" placeholder="https://www.twitter.com/@username" />
-				</div>
-				<div class="form-group">
-					<input type="text" class="form-control" placeholder="https://plus.google.com/@username" />
-				</div>
-				<div class="form-group">
-					<button class="update" type="submit">Update</button>
-				</div>
-				
-				<div class="clearfix">
-					<br><br>
-				</div>
-				<div class="form-group">
-					<input type="password" class="form-control" placeholder="Enter new password" />
-				</div>
-				<div class="form-group">
-					<input type="password" class="form-control" placeholder="Confirm new password" />
-				</div>
-				<div class="form-group">
-					<button class="update">Change</button>
-				</div>
-			</div>
-		</div>
-	</div>
-
-
-	<div class="models" id="reportModel">
+		<div class="models" id="reportModel">
 			<div class="cancel" id="closeReportModel">
 				<i class="fa fa-close"></i>
 			</div>
@@ -136,5 +132,5 @@
 				</div>
 			</div>
 		</div>
-	<div id="postQuestionModelOverlay"></div>
-</div>
+		<div id="postQuestionModelOverlay"></div>
+	</div>

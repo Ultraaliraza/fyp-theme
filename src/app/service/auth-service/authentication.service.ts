@@ -113,6 +113,7 @@ export class AuthenticationService {
   home(objR) {
     return this.http.post(this.apiHeader + 'home', objR);
   }
+
   comment(objR) {
     return this.http.post(this.apiHeader + 'comments', objR);
 
@@ -121,6 +122,7 @@ export class AuthenticationService {
   getquestion(key: any) {
     return this.http.get(this.apiHeader + 'question/' + key);
   }
+
   getprofile(key: any) {
     return this.http.get(this.apiHeader + 'profile/' + key);
   }
@@ -130,23 +132,27 @@ export class AuthenticationService {
       this.router.navigate(['/login']);
     });
   }
+
+  updatePassword(password: object) {
+    return this.http.post(this.apiHeader + 'updatepass', password)
+  }
+
   getMarriage() {
     return this.http.get(this.apiHeader + 'marriage');
   }
-
 
   getdonations(objR) {
     this.http.post(this.apiHeader + 'home/donations', objR).subscribe((data: any) => {
       this.router.navigate(['/home']);
     });
   }
+
   Report(objR) {
 
     return this.http.post(this.apiHeader + 'question/report', objR);
 
 
   }
-
 
   getgetdonations() {
     return this.http.get(this.apiHeader + 'donors');
@@ -159,24 +165,31 @@ export class AuthenticationService {
   getEducation() {
     return this.http.get(this.apiHeader + 'education');
   }
+
   getUsers() {
     return this.http.get(this.apiHeader + 'Users');
   }
+
   getProverty() {
     return this.http.get(this.apiHeader + 'proverty');
   }
+
   getWomen() {
     return this.http.get(this.apiHeader + 'women');
   }
+
   getChild() {
     return this.http.get(this.apiHeader + 'child');
   }
+
   getEmployment() {
     return this.http.get(this.apiHeader + 'employment');
   }
+
   getOthers() {
     return this.http.get(this.apiHeader + 'others');
   }
+
   getLastPosts() {
     return this.http.get(this.apiHeader + 'LastPosts');
   }

@@ -40,4 +40,23 @@ export class UploadfilesService {
       }
     });
   }
+
+  
+
+  //  Display selected file 
+  onSelectFile(event) {
+    if (event.target.files) {
+      const file = event.target.files[0];
+      // if (file.size <= 512000) {
+      var reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = (event) => {
+        this.filesMeta = { name: file.name, url: <string>(event.target['result']), size: file.size, file: file };
+      }
+      // }
+    }
+    else {
+      this.filesMeta = undefined;
+    }
+  }
 }

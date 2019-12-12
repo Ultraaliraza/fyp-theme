@@ -4,7 +4,7 @@ const cors = require('cors')
 const bodyParser = require('body-parser')
 const admin = require("firebase-admin");
 const serviceAccount = require("./configs/admin.json");
-const firebaseConfig = require("./firebaseConfig.json");
+const firebaseConfig = require("./configs/firebaseConfig.json");
 const firebase = require('firebase');
 
 admin.initializeApp({
@@ -132,13 +132,14 @@ app.post('/setAccountType', (req, res) => {
         .catch((error) => { return res.send(error) })
 });
 
-let key;
 app.post('/home', (req, res) => {
-    let post = posts.push();
-    post.set(req.body);
-    key = post.key;
+    const body = req.body;
+    console.log(body.uid);
+    let post = db.ref("/Posts/").push();
 
-    res.json({ success: 1, data: post });
+    post.set(body)
+        .then(() => { return res.json({ success: 1 }) })
+        .catch((error) => { return res.send({ Error: error }) });
 });
 
 // For Sending Donations
@@ -286,27 +287,6 @@ app.get('/women', (req, res) => {
     });
 });
 
-// Fetching Posts From Databse (Un-Employment)
-app.get('/employment', function (req, res) {
-
-    let EmploymentPosts = [];
-    posts.once("value", function (snapshot) {
-
-        snapshot.forEach(function (childSnapshot) {
-
-            if (childSnapshot.val().Category == 'Un-Employment') {
-                EmploymentPosts.push({
-                    key: childSnapshot.key,
-                    post: childSnapshot.val(),
-                })
-            }
-        });
-
-        res.json({ success: 0, data: EmploymentPosts });
-    });
-});
-
-// For Fetching Posts of Others
 // For listing Down Domation Posts
 app.get('/donations', (req, res) => {
 
@@ -382,7 +362,7 @@ app.get('/others', function (req, res) {
 app.get('/employment', (req, res) => {
 
     let employmentPosts = [];
-    posts.once("value", function (snapshot) {
+    posts.once("value",  (snapshot) => {
 
         snapshot.forEach(function (childSnapshot) {
 
@@ -454,7 +434,66 @@ app.get('/LastPosts', function (req, res) {
             })
         });
         res.json({ success: 0, data: showLast });
-    });});
+    });
+});
+
+// ----------- Assad New Code
+// Getting 
+app.get('/getallquestion/:uid', (req, res) => {
+    const userID = req.params.uid;
+    let questions = [];
+    db.ref("/Posts/" + userID).once("value", (snapshot) => {
+        snapshot.forEach((childSnapshot) => {
+            questions.push({
+                key: childSnapshot.key,
+                data: childSnapshot.val()
+            });
+        });
+        res.json({ data: questions });
+    });
+});
+
+// Getting 
+app.get('/deletequestion/:uid/:postid', (req, res) => {
+    const userID = req.params.uid;
+    const postID = req.params.postid;
+    db.ref('Posts/' + userID + '/' + postID).remove(() => {
+        return res.status(200).send({ msg: 'Deleted' });
+    });
+});
+
+app.post('/updatequestion', (req, res) => {
+    const body = req.body;
+    const updateRef = db.ref("/Posts/" + body.userID + "/" + body.postID)
+    delete body.userID;
+    delete body.postID;
+
+    return updateRef
+        .update(body)
+        .then(() => { return res.status(200).send({ msg: 'Updated' }); })
+        .catch((error) => { return res.send({ Error: error }) });
+});
+
+app.post('/updateprofile', (req, res) => {
+    const body = req.body;
+    const updateRef = db.ref('Users/' + body.uid + '/about')
+    delete body.uid;
+    updateRef.update(body)
+        .then(() => { return res.status(200).send({ msg: 'Updated' }) })
+        .catch((error) => { return res.send({ Error: error }) });
+});
+
+app.post('/updatepass', (req, res) => {
+    const body = req.body;
+    return auth.currentUser.updatePassword(body.newPassword)
+        .then(() => { return res.status(200).send({ msg: 'Password updated' }) })
+        .catch((error) => { return res.send({ Error: error }) });
+});
+
+// ----------------- Ali New Code
+
+
+// ----------------- Ali Updated Code
 
 app.listen(3000, function () {
     console.log('Server listening on port 3000')
