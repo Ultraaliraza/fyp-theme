@@ -16,7 +16,8 @@ export class RegisterComponent implements OnInit {
       email: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', [Validators.required, Validators.minLength(8)]),
       accountType: new FormControl('identifier'),
-      profile_image: new FormControl()
+      // tslint:disable-next-line:max-line-length
+      profile_image: new FormControl('https://firebasestorage.googleapis.com/v0/b/helpinghand-90a6a.appspot.com/o/Profile_Images%2Fuser-icon-image-placeholder-300-grey.jpg?alt=media&token=8f31ccff-6c58-46ff-94f2-0b4766f0079c')
     });
 
   }
