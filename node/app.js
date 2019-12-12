@@ -2,8 +2,8 @@ const express = require('express');
 const cors = require('cors')
 const bodyParser = require('body-parser')
 const admin = require("firebase-admin");
-const serviceAccount = require("./configs/admin.json");
-const firebaseConfig = require("./configs/firebaseConfig.json");
+const serviceAccount = require("./admin.json");
+const firebaseConfig = require("./firebaseConfig.json");
 const firebase = require('firebase');
 
 const app = express();
@@ -166,19 +166,15 @@ app.get('/donors', (req, res) => {
 app.get('/profile/:key', (req, res) => {
     let key = req.params.key;
     let userData = {};
-    posts.once("value", (snapshot) => {
-        snapshot.forEach((childSnapshot) => {
-            if (key === childSnapshot.key) {
-                userData = {
-                    key: childSnapshot.key,
-                    post: childSnapshot.val(),
-                };
-            }
-        });
-        res.json({ success: 0, data: userData });
-        console.log(userData);
-    });
+    db.ref("/Users/" + key).once("value", (snapshot) => {
 
+        userData = {
+            post: snapshot.val(),
+
+        };
+    res.json({ success: 0, data: userData });
+    console.log(userData);
+});
 });
 
 // Fetching Posts from Database ( All Posts)
@@ -390,8 +386,8 @@ app.get('/LastPosts', (req, res) => {
 
 // ----------- Assad New Code
 // Getting 
-app.get('/getallquestion/:uid', (req, res) => {
-    const userID = req.params.uid;
+app.get('/getallquestion/:id', (req, res) => {
+    const userID = req.params.id;
     let questions = [];
     db.ref("/Posts/" + userID).once("value", (snapshot) => {
         snapshot.forEach((childSnapshot) => {
@@ -427,7 +423,7 @@ app.post('/updatequestion', (req, res) => {
 
 app.post('/updateprofile', (req, res) => {
     const body = req.body;
-    const updateRef = db.ref('Users/' + body.uid + '/about')
+    const updateRef = db.ref('Users/'+body.id)
     delete body.uid;
     updateRef.update(body)
         .then(() => { return res.status(200).send({ msg: 'Updated' }) })

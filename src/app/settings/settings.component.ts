@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UploadfilesService } from '../service/uploadfiles.service';
 import { AuthenticationService } from '../service/auth-service/authentication.service';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-settings',
@@ -9,14 +10,35 @@ import { AuthenticationService } from '../service/auth-service/authentication.se
 })
 export class SettingsComponent implements OnInit {
   password: string;
+  settings: FormGroup;
+  user;
+
+
   constructor(
     public uploadfilesService: UploadfilesService,
     private authService: AuthenticationService,
+    private formBuilder: FormBuilder,
+
+
   ) { }
 
   ngOnInit() {
-  }
+    this.authService.user.subscribe((user: any) => {
+      this.user = user;
+      this.settings = new FormGroup({
+        profile_image: new FormControl(''),
+        about: new FormGroup({
 
+          aboutnote: new FormControl(''),
+          facebook: new FormControl(''),
+          instagram: new FormControl(''),
+          twitter: new FormControl(''),
+          google: new FormControl('')
+
+        })
+      });
+    });
+  }
   updatePassword() {
     let obj = {
       newPassword: this.password
@@ -28,17 +50,18 @@ export class SettingsComponent implements OnInit {
   }
 
 
-  submitFrom() {
-    // const time = this.datePipe.transform(new Date(), 'MM/dd/yyyy hh:mm:ss a');
-    // this.myhomeform.controls.date.setValue(time);
+  submitsettings() {
+    console.log(this.settings.value);
+
+
 
     this.uploadfilesService.uploadFile()
       .then((fileMeta) => {
-        // this.myhomeform.controls.PostImage.setValue(fileMeta);
-        // this.authService.home(this.myhomeform.value)
-        // .subscribe((data: any) => {
+        this.settings.controls.profile_image.setValue(fileMeta['url']);
+        this.authService.Updatesettings(this.settings.value , this.user.id )
+          .subscribe((data: any) => {
 
-        // });
+          });
       });
   }
 

@@ -12,8 +12,8 @@ export class AuthenticationService {
     throw new Error("Method not implemented.");
   }
   keyvalue = '';
-  // apiHeader = 'http://localhost:3000/';
-  apiHeader = 'https://us-central1-helpinghand-90a6a.cloudfunctions.net/apis/';
+  apiHeader = 'http://localhost:3000/';
+  // apiHeader = 'https://us-central1-helpinghand-90a6a.cloudfunctions.net/apis/';
   // apiHeader = 'http://localhost:5000/helpinghand-90a6a/us-central1/apis/';
 
   user = new BehaviorSubject({});
@@ -192,5 +192,15 @@ export class AuthenticationService {
 
   getLastPosts() {
     return this.http.get(this.apiHeader + 'LastPosts');
+  }
+
+  Updatesettings(objR, id: any) {
+    return this.http.post(this.apiHeader + 'updateprofile/' + id, objR);
+
+
+  }
+
+  getUserquestion(id: any) {
+    return this.http.get(this.apiHeader + 'getallquestion/' + id);
   }
 }
