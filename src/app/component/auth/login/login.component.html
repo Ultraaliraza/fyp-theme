@@ -18,6 +18,9 @@
 
                         <input class="form-control" type="text" formControlName="email" placeholder="E-mail Address"
                             required>
+                            <small class="text-danger"
+                            *ngIf="!form.name.valid &&  myForm.get('email').touched">Enter Email First
+                        </small>
                         <input class="form-control" type="password" formControlName="password" placeholder="Password"
                             required>
                         <div class="form-button">

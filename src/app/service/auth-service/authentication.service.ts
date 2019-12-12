@@ -13,8 +13,8 @@ export class AuthenticationService {
   }
   keyvalue = '';
   // apiHeader = 'http://localhost:3000/';
-  // apiHeader = 'https://us-central1-helpinghand-90a6a.cloudfunctions.net/apis/';
-  apiHeader = 'http://localhost:5000/helpinghand-90a6a/us-central1/apis/';
+  apiHeader = 'https://us-central1-helpinghand-90a6a.cloudfunctions.net/apis/';
+  // apiHeader = 'http://localhost:5000/helpinghand-90a6a/us-central1/apis/';
 
   user = new BehaviorSubject({});
   post = new BehaviorSubject({});
