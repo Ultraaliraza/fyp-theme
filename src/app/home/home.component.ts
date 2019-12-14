@@ -91,7 +91,7 @@ export class HomeComponent implements OnInit {
 
     this.uploadfilesService.uploadFile()
       .then((fileMeta) => {
-        this.myhomeform.controls.PostImage.setValue(fileMeta);
+        this.myhomeform.controls.PostImage.setValue(fileMeta['url']);
         this.authService.home(this.myhomeform.value).subscribe((data: any) => {
           this.router.navigate(['/home']);
         });
