@@ -37,7 +37,7 @@ export class AuthenticationService {
 
         localStorage.setItem('userMeta', res.uid);
         this.user.next(res.data);
-        this.checkAccountType(res.data.accountType);
+        this.checkAccountType(res.data.acountType);
       });
   }
 
@@ -59,7 +59,7 @@ export class AuthenticationService {
           .subscribe((res: any) => {
             localStorage.setItem('userMeta', user.uid);
             this.user.next(res.data);
-            this.checkAccountType(res.data.accountType);
+            this.checkAccountType(res.data.acountType);
           });
       }).catch((error: any) => {
         console.log(error);
@@ -91,25 +91,25 @@ export class AuthenticationService {
       });
   }
 
-  checkAccountType(accountType: string) {
-    console.log(accountType);
-    if (accountType) {
-      if (accountType == 'identifier' || accountType == 'Identifier') {
-        return   this.router.navigate(['/home']);
+  checkAccountType(acountType: string) {
+    console.log(acountType);
+    if (acountType) {
+      if (acountType == 'identifier' || acountType == 'Identifier') {
+        return this.router.navigate(['/home']);
       }
-      else if (accountType == 'motivator' || accountType == 'Motivator') {
-       return this.router.navigate(['/motivator']);
+      else if (acountType == 'Councilors' || acountType == 'Councilors') {
+        return this.router.navigate(['/motivator']);
       }
-      else if (accountType == 'donor' || accountType == 'Donor') {
-       return this.router.navigate(['/donor']);
+      else if (acountType == 'donors' || acountType == 'Donors') {
+        return this.router.navigate(['/donor']);
       }
     }
     else {
-     return this.router.navigate(['/set-account-type']);
+      return this.router.navigate(['/set-account-type']);
     }
   }
 
-  setAccountType(accountType: string, userID: string) {
+  setAccountType(acountType: string, userID: string) {
     return this.http.post(this.apiHeader + 'setAccountType', { acountType: accountType, id: userID });
   }
 
@@ -145,7 +145,7 @@ export class AuthenticationService {
   }
 
   getdonations(objR) {
-     return this.http.post(this.apiHeader + 'home/donations', objR);
+    return this.http.post(this.apiHeader + 'home/donations', objR);
   }
 
   Report(objR) {
@@ -213,11 +213,11 @@ export class AuthenticationService {
   Videos(objR) {
     return this.http.post(this.apiHeader + 'postvideo', objR)
   }
-  getUser(){
-    const id = localStorage.getItem( 'userMeta');
-    return this.http.get(this.apiHeader + 'getuserinfo/'+id  ).subscribe((data: any) => {
-      
-       this.user.next(data);
+  getUser() {
+    const id = localStorage.getItem('userMeta');
+    return this.http.get(this.apiHeader + 'getuserinfo/' + id).subscribe((data: any) => {
+
+      this.user.next(data);
 
     });
   }
