@@ -10,14 +10,12 @@
 			</div>
 			<ul class="menu ml-auto" id="navLaptop">
 				<li>
-					<a href="#">Home</a>
+					<a routerLink="/home">Home</a>
 				</li>
 				<li>
-					<a href="#">Ask Question</a>
+					<a routerLink="/videos">Watch Videos</a>
 				</li>
-				<li>
-					<a href="#">Ask Donation</a>
-				</li>
+				
 				<li>
 					<a href="#">About Us</a>
 				</li>
@@ -230,76 +228,29 @@
 				<div class="col-lg-3" id="rightSidebar">
 					<div class="box questions">
 						<h3 class="title">Popular Questions</h3>
+						<div *ngFor="let lastpost of lastposts">
 						<div class="content">
 							<p>
-								<a href="#">Why not to buy bitcoin in 2019 ?</a>
-							</p>
-							<p>
-								<a href="#">What are some of the best life hacks to apply ?</a>
-							</p>
-							<p>
-								<a href="#">What is the coolest application of Blockchain technology?</a>
-							</p>
-							<p>
-								<a href="#">How can I start a career in blockchain technology?</a>
-							</p>
-							<p>
-								<a href="#">What are the best software companies in the world ?</a>
+								<a routerLink="/question/{{lastpost.key}}">{{lastpost.post.Title}}</a>
 							</p>
 						</div>
 					</div>
+					</div>
 					<div class="box members">
 						<h3 class="title">Popular Members</h3>
+						<div *ngFor="let user of users">
+
 						<div class="content">
 							<!-- Member -->
 							<div class="member">
 								<div class="thumbanil">
-									<img src="img/user.jpg" class="img-fluid" />
+									<img src="{{user.post.profile_image}}" class="img-fluid" />
 								</div>
 								<div class="">
-									<a href="#" class="name">Awais Khalid</a>
-									<p class="designation">Web Developer</p>
+									<a href="#" class="name">{{user.post.name}}</a>
+									<p class="designation">{{user.post.accountType}}</p>
 								</div>
 							</div>
-							<!-- Member -->
-							<div class="member">
-								<div class="thumbanil">
-									<img src="img/user.jpg" class="img-fluid" />
-								</div>
-								<div class="">
-									<a href="#" class="name">Zubair Khan</a>
-									<p class="designation">Graphic Designer</p>
-								</div>
-							</div>
-							<!-- Member -->
-							<div class="member">
-								<div class="thumbanil">
-									<img src="img/user.jpg" class="img-fluid" />
-								</div>
-								<div class="">
-									<a href="#" class="name">Rana Afaq Ali</a>
-									<p class="designation">Sakhat Waila</p>
-								</div>
-							</div>
-							<!-- Member -->
-							<div class="member">
-								<div class="thumbanil">
-									<img src="img/user.jpg" class="img-fluid" />
-								</div>
-								<div class="">
-									<a href="#" class="name">Ali Raza</a>
-									<p class="designation">No Idea</p>
-								</div>
-							</div>
-							<!-- Member -->
-							<div class="member">
-								<div class="thumbanil">
-									<img src="img/user.jpg" class="img-fluid" />
-								</div>
-								<div class="">
-									<a href="#" class="name">Ahmad Bhai</a>
-									<p class="designation">Again no idea</p>
-								</div>
 							</div>
 						</div>
 					</div>
@@ -319,13 +270,13 @@
 				<i class="fa fa-close"></i>
 			</div>
 			<div class="header">
-				<h4 class="title">Post your question</h4>
+				<h4 class="title">Raise Your Issue</h4>
 			</div>
 			<div class="body">
 					<form  [formGroup]="myhomeform" (ngSubmit)="submitFrom()">
 	
 				<div class="form-group">
-					<input type="text"formControlName="Title"  placeholder="Your Question" />
+					<input type="text"formControlName="Title"  placeholder="Your Issue" />
 				</div>
 				<div class="form-group" >
 					<select class="form-group" formControlName="Catagory">

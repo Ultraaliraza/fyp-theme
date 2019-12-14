@@ -23,20 +23,19 @@ export class SettingsComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.authService.user.subscribe((user: any) => {
-      this.user = user;
-      this.settings = new FormGroup({
-        profile_image: new FormControl(''),
-        about: new FormGroup({
+     this.user = localStorage.getItem('userMeta');
 
-          aboutnote: new FormControl(''),
-          facebook: new FormControl(''),
-          instagram: new FormControl(''),
-          twitter: new FormControl(''),
-          google: new FormControl('')
+    this.settings = new FormGroup({
+      Profile_Image: new FormControl(''),
+      about: new FormGroup({
 
-        })
-      });
+        aboutnote: new FormControl(''),
+        facebook: new FormControl(''),
+        instagram: new FormControl(''),
+        twitter: new FormControl(''),
+        google: new FormControl('')
+
+      })
     });
   }
   updatePassword() {
@@ -51,14 +50,16 @@ export class SettingsComponent implements OnInit {
 
 
   submitsettings() {
-    console.log(this.settings.value);
 
 
 
     this.uploadfilesService.uploadFile()
       .then((fileMeta) => {
-        this.settings.controls.profile_image.setValue(fileMeta['url']);
-        this.authService.Updatesettings(this.settings.value , this.user.id )
+        if (fileMeta)
+          this.settings.controls.profile_image.setValue(fileMeta['url']);
+        const obj = { form: this.settings.value, id: this.user };
+        console.log(obj);
+        this.authService.Updatesettings(obj)
           .subscribe((data: any) => {
 
           });

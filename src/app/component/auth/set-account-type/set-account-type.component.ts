@@ -6,6 +6,7 @@ import { AuthenticationService } from 'src/app/service/auth-service/authenticati
   templateUrl: './set-account-type.component.html',
   styleUrls: ['./set-account-type.component.css']
 })
+
 export class SetAccountTypeComponent implements OnInit {
 
   accountType: any;
@@ -17,8 +18,8 @@ export class SetAccountTypeComponent implements OnInit {
   ngOnInit() { }
 
   setType() {
-    let uid = localStorage.getItem('userMeta');
-    this.authenticationService.setAccountType(this.accountType, uid)
+    let id = localStorage.getItem('userMeta');
+    this.authenticationService.setAccountType(this.accountType, id)
       .subscribe(
         (success) => {
           return this.authenticationService.checkAccountType(this.accountType);

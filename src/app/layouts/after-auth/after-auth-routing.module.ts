@@ -18,15 +18,19 @@ import { UserprofileComponent } from 'src/app/userprofile/userprofile.component'
 import { VideosComponent } from 'src/app/videos/videos.component';
 import { EditComponent } from 'src/app/edit/edit.component';
 import { MessagesComponent } from 'src/app/messages/messages.component';
+import {WatchvideoComponent} from 'src/app/watchvideo/watchvideo.component';
 
 const routes: Routes = [
   {
+
     path: '',
     children: [
       { path: '', component: HomeComponent },
       { path: 'home', component: HomeComponent },
 
       { path: 'profile/:key', component: ProfileComponent },
+      { path: 'watchvideo/:key', component: WatchvideoComponent },
+
       { path: 'set-account-type', component: SetAccountTypeComponent },
       { path: 'motivator', component: MotivatorComponent },
       { path: 'education', component: EducationComponent },

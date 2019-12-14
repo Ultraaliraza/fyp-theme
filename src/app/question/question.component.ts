@@ -29,12 +29,17 @@ export class QuestionComponent implements OnInit {
       this.user = user;
       this.commentform = new FormGroup({
         Comment: new FormControl(''),
+        // Comment_by: new FormControl(user.key),
+        // User_Name: new FormControl(this.user.name),
         Comment_by: new FormControl(''),
         User_Name: new FormControl(''),
         date: new FormControl(''),
         time: new FormControl(''),
-        user_image: new FormControl(''),
-        id: new FormControl('')
+        postID: new FormControl(''),
+
+        // user_image: new FormControl(this.user.profile_image)
+        user_image: new FormControl('')
+
       });
 
       // Report Form
@@ -62,8 +67,11 @@ export class QuestionComponent implements OnInit {
   }// end Bracket of NgOnit
   submitFrom() {
 
-    const time = this.datePipe.transform(new Date(), 'MM/dd/yyyy hh:mm:ss a');
-    this.commentform.controls.id.setValue(this.postID);
+    const time = this.datePipe.transform(new Date(), 'd-MMM-y');
+    const time1 = this.datePipe.transform(new Date(), 'h:mm a');
+    this.commentform.controls.date.setValue(time);
+    this.commentform.controls.time.setValue(time1);
+    this.commentform.controls.postID.setValue(this.postID);
     const obj = this.commentform.value;
     //  this.commentform.controls.Date.setValue(time);
     this.authService.comment(obj).subscribe((data: any) => {

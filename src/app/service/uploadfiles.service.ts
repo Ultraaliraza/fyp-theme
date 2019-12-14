@@ -41,7 +41,7 @@ export class UploadfilesService {
     });
   }
 
-  
+
 
   //  Display selected file 
   onSelectFile(event) {
