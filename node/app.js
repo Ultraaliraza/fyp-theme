@@ -5,6 +5,7 @@ const admin = require("firebase-admin");
 const serviceAccount = require("./configs/admin.json");
 const firebaseConfig = require("./configs/firebaseConfig.json");
 const firebase = require('firebase');
+const sgMail = require('@sendgrid/mail');
 
 const app = express();
 firebase.initializeApp(firebaseConfig);
@@ -90,7 +91,7 @@ app.post('/forgetpassword', (req, res) => {
     const body = req.body;
     return auth.sendPasswordResetEmail(body.email)
         .then(() => { return res.status(200).send('Email send') })
-        .catch((error) => { return res.status(200).send('Error' + error) });
+        .catch((error) => { return res.send('Error' + error) });
 });
 
 app.post('/social', (request, response) => {
@@ -424,7 +425,7 @@ app.post('/updatequestion', (req, res) => {
 
 app.post('/updateprofile', (req, res) => {
     const body = req.body;
-    const updateRef = db.ref('Users/' + body.uid + '/about')
+    const updateRef = db.ref('Users/' + body.uid)
     delete body.uid;
     updateRef.update(body)
         .then(() => { return res.status(200).send({ msg: 'Updated' }) })
@@ -446,11 +447,97 @@ app.post('/updatepass', (req, res) => {
 
 
 
-
 // ====================== Admin ======================
+// 1) Total Number OF Posts
+app.get('/totalposts', (req, res) => {
+    posts.once("value", (snapshot) => {
+        let count = Object.keys(snapshot.val());
+        return res.status(200).send({ count: count.length });
+    });
+});
 
+// 2) Total Number OF Users
+app.get('/totalusers', (req, res) => {
+    users.once("value", (snapshot) => {
+        let count = Object.keys(snapshot.val());
+        return res.status(200).send({ count: count.length });
+    });
+});
 
+// 3) Total Number OF Videos
+app.get('/totalvideos', (req, res) => {
+    db.ref("/Videos").once("value", (snapshot) => {
+        let count = Object.keys(snapshot.val());
+        return res.status(200).send({ count: count.length });
+    });
+});
 
+// 4) Total Number Of Donations
+app.get('/totaldonors', (req, res) => {
+    Donors.once("value", (snapshot) => {
+        let count = Object.keys(snapshot.val());
+        return res.status(200).send({ count: count.length });
+    });
+});
+
+// 5) Total Number of Reports
+app.get('/totalreportpost', (req, res) => {
+    db.ref("/ReportPost").once("value", (snapshot) => {
+        let count = Object.keys(snapshot.val());
+        return res.status(200).send({ count: count.length });
+    });
+});
+
+// ------- users
+app.get('/getallusers', (req, res) => {
+    users.once("value", (snapshot) => {
+        return res.status(200).send({ users: snapshot.val() });
+    });
+});
+
+// --> change user status
+app.get('/changeuserstatus/:uid/:status', (req, res) => {
+    let userID = req.params.uid;
+    let status = req.params.status;
+    let ref = db.ref("/Users/" + userID);
+    ref.update({ status: status });
+    ref.once("value", (snapshot) => {
+        const data = snapshot.val();
+
+        sgMail.setApiKey('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');
+        const msg = {
+            to: data.email,
+            from: 'ar690780@gmail.com',
+            subject: 'Your Account has been' + status,
+            text: 'Your Account has been' + status + ' on Helping Hand Social Network',
+            html: '<strong></strong>',
+        };
+        sgMail.send(msg)
+        return res.status(200).send({ msg: 'User ' + status });
+    });
+});
+
+// --> delete methods
+app.get('/deletepost/:id', (req, res) => {
+    const postID = req.params.id;
+    db.ref("/Posts/" + postID).remove()
+        .then(() => { return res.status(200).send({ msg: 'Post deleted' }) })
+        .catch((error) => { return res.send({ Error: error }) });
+});
+
+app.get('/deletedonations/:id', (req, res) => {
+    const donation = req.params.id;
+    db.ref("/Donations/" + donation).remove()
+        .then(() => { return res.status(200).send({ msg: 'Donation deleted' }) })
+        .catch((error) => { return res.send({ Error: error }) });
+});
+
+app.get('/deletevideos/:id', (req, res) => {
+    const videoID = req.params.id;
+    db.ref("/Videos/" + videoID).remove()
+        .then(() => { return res.status(200).send({ msg: 'Video deleted' }) })
+        .catch((error) => { return res.send({ Error: error }) });
+});
 
 app.listen(3000, function () {
     console.log('Server listening on port 3000')
