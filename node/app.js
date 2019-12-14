@@ -29,7 +29,7 @@ app.post('/register', (req, res) => {
     const profileBody = {
         email: body.email,
         name: body.name,
-        accountType: body.accountType,
+        acountType: body.acountType,
         profile_image: body.profile_image
     }
 
