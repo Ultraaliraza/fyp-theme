@@ -84,7 +84,7 @@ export class AuthenticationService {
             console.log(userBody.uid);
             localStorage.setItem('userMeta', userBody.uid);
             this.user.next(res.data);
-            this.checkAccountType(res.data.accountType);
+            this.checkAccountType(res.data.acountType);
           });
       }).catch((error: any) => {
         console.log(error);
@@ -110,7 +110,7 @@ export class AuthenticationService {
   }
 
   setAccountType(acountType: string, userID: string) {
-    return this.http.post(this.apiHeader + 'setAccountType', { acountType: accountType, id: userID });
+    return this.http.post(this.apiHeader + 'setAccountType', { acountType: acountType, id: userID });
   }
 
   home(objR) {

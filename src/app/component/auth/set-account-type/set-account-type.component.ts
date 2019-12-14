@@ -9,7 +9,7 @@ import { AuthenticationService } from 'src/app/service/auth-service/authenticati
 
 export class SetAccountTypeComponent implements OnInit {
 
-  accountType: any;
+  acountType: any;
 
   constructor(
     private authenticationService: AuthenticationService,
@@ -19,10 +19,10 @@ export class SetAccountTypeComponent implements OnInit {
 
   setType() {
     let id = localStorage.getItem('userMeta');
-    this.authenticationService.setAccountType(this.accountType, id)
+    this.authenticationService.setAccountType(this.acountType, id)
       .subscribe(
         (success) => {
-          return this.authenticationService.checkAccountType(this.accountType);
+          return this.authenticationService.checkAccountType(this.acountType);
         },
         (error) => {
           console.log(error);

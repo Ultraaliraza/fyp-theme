@@ -30,7 +30,7 @@ export class MotivatorComponent implements OnInit {
         Category: new FormControl('education'),
         Date: new FormControl(),
         Name: new FormControl(this.user.name),
-        accountType: new FormControl(this.user.accountType),
+        acountType: new FormControl(this.user.acountType),
         PostBy: new FormControl(this.user.key),
         PostVideo: new FormControl(''),
         Time: new FormControl(''),
