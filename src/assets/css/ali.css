@@ -1026,3 +1026,23 @@
 	text-decoration: none;
 	outline: 0;
   }
+  .msgBtn{
+	  position: absolute;
+	  right: 60px;
+	  top:170px;
+	  }
+  .msG_btn_profile{
+	  background: none;
+	  border:2px dotted #E32222;
+	  color: #E32222;
+	  font-size: 15px;
+	  padding-left: 40px;
+	  padding-right: 40px;
+	  padding-top: 7px;
+	  padding-bottom: 7px;
+	  transform: .5s;
+  }
+  .msG_btn_profile:hover{
+	background: #E32222;
+	color: #f7f7f7;
+  }

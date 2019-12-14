@@ -72,13 +72,13 @@
 	<div class="wrapper">
 		<div class="container-fluid topBar">
 			<div class="col-lg-6">
-				<p class="breadcrumbs"><a href="#">Home</a> / Pages / <span>Profile</span></p>
+				<!-- <p class="breadcrumbs"><a href="#">Home</a> / Pages / <span>Profile</span></p> -->
 			</div>
 		</div>
 		<div class="col-lg-12 cover">
 			<div class="row">
 				<div class="col-lg-3 img">
-					<img src="{{posts.profile_image}}" class="profilePic">
+				<img src={{posts.profile_image}} class="profilePic">
 				</div>
 				<div class="col-lg-9 content">
 					<h4 class="name">{{posts.name}}</h4>
@@ -117,6 +117,9 @@
 							<li><a class='five-stars'><i class="fas fa-star"></i></a></li>
 						</ul>
 					</div>
+					<div class="msgBtn">
+						<button class="msG_btn_profile"><i class="fas fa-comment"></i>&nbsp;&nbsp; Message</button>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -130,32 +133,13 @@
 				</div>
 				<div class="col-lg-7 Questions">
 					<h4 class="title">Questions</h4>
+					<div *ngFor="let post of question">
 					<ol>
 						<li>
 							<a href="#">What are the problems of an entrepreneur in todays business?</a>
 						</li>
-						<li>
-							<a href="#">How can I write a good event business proposal?</a>
-						</li>
-						<li>
-							<a href="#">How can I earn money?</a>
-						</li>
-						<li>
-							<a href="#">Dear Leaders of Quora, have you ever had culture issues due to hiring close relatives?</a>
-						</li>
-						<li>
-							<a href="#">How do incubators benefit from businesses/companies?</a>
-						</li>
-						<li>
-							<a href="#">What do you think about a monetization model that relies on investing cash inflow to make a profit? Similarly to a bank.</a>
-						</li>
-						<li>
-							<a href="#">Why should regressive tax be levied on small business enterprises?</a>
-						</li>
-						<li>
-							<a href="#">What are the biggest lessons you have learned in the corporate world?</a>
-						</li>
 					</ol>
+				</div>
 				</div>
 			</div>
 		</div>

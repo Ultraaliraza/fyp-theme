@@ -10,13 +10,13 @@
 			</div>
 			<ul class="menu ml-auto" id="navLaptop">
 				<li>
-					<a href="#">Home</a>
+					<a routerLink="/home">Home</a>
 				</li>
 				<li>
 					<a href="#">Message</a>
 				</li>
 				<li>
-					<a href="#">Watch Videos</a>
+					<a routerLink="/videos">Watch Videos</a>
 				</li>
 				<li>
 					<a href="#">About Us</a>
@@ -61,33 +61,36 @@
 					<h3>Edit your bio</h3>
 				</div>
 				<div class="body">
+					<form [formGroup]="settings" (ngSubmit)="submitsettings()">
 					<div class="profile" id="openuploadProfile">
-						<img src="img/user.jpg" class="img-fluid">
+						<img src={{this.user.profile_image}} class="img-fluid">
 					</div>
-					<input type="file" accept=".png, .jpg" (change)="uploadfilesService.onSelectFile($event)" />
+                     
 					<br />
-					<div class="form-group">
-						<input type="text" class="form-control" placeholder="Your Name" />
+					<div formGroupName="about">
+					<div class="" style="padding-top:7px;padding-bottom:20px!important;margin-left:120px!important;">
+						<input type="file" accept=".png, .jpg"  (change)="uploadfilesService.onSelectFile($event)" />
 					</div>
 					<div class="form-group">
-						<input type="text" class="form-control" placeholder="Description" />
+						<input type="text" class="form-control" formControlName="aboutnote" placeholder="Description" />
 					</div>
 					<div class="form-group">
-						<input type="text" class="form-control" placeholder="https://www.facebook.com/@username" />
+						<input type="text" class="form-control" formControlName="facebook" placeholder="https://www.facebook.com/@username" />
 					</div>
 					<div class="form-group">
-						<input type="text" class="form-control" placeholder="https://www.instagram.com/@username" />
+						<input type="text" class="form-control" formControlName="instagram" placeholder="https://www.instagram.com/@username" />
 					</div>
 					<div class="form-group">
-						<input type="text" class="form-control" placeholder="https://www.twitter.com/@username" />
+						<input type="text" class="form-control" formControlName="twitter" placeholder="https://www.twitter.com/@username" />
 					</div>
 					<div class="form-group">
-						<input type="text" class="form-control" placeholder="https://plus.google.com/@username" />
+						<input type="text" class="form-control" formControlName="google" placeholder="https://plus.google.com/@username" />
 					</div>
+				</div>
 					<div class="form-group">
 						<button class="update" type="submit">Update</button>
 					</div>
-
+				</form>
 					<div class="clearfix">
 						<br><br>
 					</div>

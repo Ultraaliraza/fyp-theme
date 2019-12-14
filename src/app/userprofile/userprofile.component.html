@@ -72,17 +72,17 @@
             <div class="wrapper">
                 <div class="container-fluid topBar">
                     <div class="col-lg-6">
-                        <p class="breadcrumbs"><a href="#">Home</a> / Pages / <span>Profile</span></p>
+                        <!-- <p class="breadcrumbs"><a href="#">Home</a> / Pages / <span>Profile</span></p> -->
                     </div>
                 </div>
                 <div class="col-lg-12 cover">
                     <div class="row">
                         <div class="col-lg-3 img">
-                            <img src="{{posts.profile_image}}" class="profilePic">
+                            <img src="{{this.user.profile_image}}" class="profilePic">
                         </div>
                         <div class="col-lg-9 content">
-                            <h4 class="name">{{posts.name}}</h4>
-                            <p class="designation">{{posts.acountType}}</p>
+                            <h4 class="name">{{this.user.name}}</h4>
+                            <p class="designation">{{this.user.accountType}}</p>
                             <div class="social">
                                 <ul>
                                     <li>
@@ -127,13 +127,14 @@
                             <p class="desc">
                               {{posts.aboutnote}}
                             </p>
-                        </div>
+                        </div >
                         <div class="col-lg-7 Questions">
                             <h4 class="title">Questions</h4>
+                            <div *ngFor="let post of question">
                             <ol>
                                 <li>
                                     <div class="row controllers">
-                                        <a href="#">What are the problems of an entrepreneur in todays business?</a>
+                                        <a routerLink="/edit/{{post.key}}">What are the problems of an entrepreneur in todays business?</a>
                                         <a href="">
                                             <i class="fa fa-edit"></i>
                                         </a>
@@ -144,6 +145,7 @@
                                 </li>
                             </ol>
                         </div>
+                    </div>
                     </div>
                 </div>
             </div>

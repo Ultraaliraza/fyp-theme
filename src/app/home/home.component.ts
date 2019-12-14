@@ -18,6 +18,7 @@ export class HomeComponent implements OnInit {
   posts = [];
   myhomeform: FormGroup;
   mydonationform: FormGroup;
+  myvideoform: FormGroup;
   user;
   lastposts = [];
   users = [];
@@ -28,35 +29,51 @@ export class HomeComponent implements OnInit {
     private router: Router
   ) { }
   ngOnInit() {
-    let uid = localStorage.getItem('userMeta');
+    let id = localStorage.getItem('userMeta');
 
     this.authService.user.subscribe((user: any) => {
       this.user = user;
+      console.log(this.user.key);
       this.myhomeform = new FormGroup({
         Title: new FormControl(''),
         Description: new FormControl(''),
-        Catagory: new FormControl('education'),
-        date: new FormControl(),
-        name: new FormControl(this.user.name),
+        Category: new FormControl('education'),
+        Date: new FormControl(),
+        Name: new FormControl(this.user.name),
         accountType: new FormControl(this.user.accountType),
         PostBy: new FormControl(this.user.key),
         PostImage: new FormControl(''),
+        PostFile: new FormControl(''),
         Time: new FormControl(''),
-        User_profile_image: new FormControl(''),
-        uid: new FormControl(uid)
+        profile_image: new FormControl(this.user.profile_image),
+        id: new FormControl(this.user.key)
       });
 
       this.mydonationform = new FormGroup({
         Title: new FormControl(''),
         Description: new FormControl(''),
         Category: new FormControl('education'),
-        date: new FormControl(),
-        name: new FormControl(this.user.name),
+        Date: new FormControl(),
+        Name: new FormControl(this.user.name),
         accountType: new FormControl(this.user.accountType),
         PostBy: new FormControl(this.user.key),
         PostImage: new FormControl(''),
         Time: new FormControl(''),
-        User_profile_image: new FormControl(''),
+        profile_image: new FormControl(''),
+        id: new FormControl('')
+
+      });
+      this.myvideoform = new FormGroup({
+        Title: new FormControl(''),
+        Description: new FormControl(''),
+        Category: new FormControl('education'),
+        Date: new FormControl(),
+        Name: new FormControl(this.user.name),
+        accountType: new FormControl(this.user.accountType),
+        PostBy: new FormControl(this.user.key),
+        Video: new FormControl(''),
+        Time: new FormControl(''),
+        profile_image: new FormControl(this.user.profile_image),
         id: new FormControl('')
 
       });
@@ -86,9 +103,10 @@ export class HomeComponent implements OnInit {
   }
 
   submitFrom() {
-    const time = this.datePipe.transform(new Date(), 'MM/dd/yyyy hh:mm:ss a');
-    this.myhomeform.controls.date.setValue(time);
-
+    const time = this.datePipe.transform(new Date(), 'd-MMM-y');
+    const time1 = this.datePipe.transform(new Date(), 'h:mm a');
+    this.myhomeform.controls.Date.setValue(time);
+    this.myhomeform.controls.Time.setValue(time1);
     this.uploadfilesService.uploadFile()
       .then((fileMeta) => {
         this.myhomeform.controls.PostImage.setValue(fileMeta['url']);
@@ -97,9 +115,35 @@ export class HomeComponent implements OnInit {
         });
       });
   }
+  videoFrom() {
+    const time = this.datePipe.transform(new Date(), 'd-MMM-y');
+    const time1 = this.datePipe.transform(new Date(), 'h:mm a');
+    this.myvideoform.controls.Date.setValue(time);
+    this.myvideoform.controls.Time.setValue(time1);
+
+    this.uploadfilesService.uploadFile()
+      .then((fileMeta) => {
+        this.myhomeform.controls.Video.setValue(fileMeta);
+        this.authService.Videos(this.myvideoform.value).subscribe((data: any) => {
+          this.router.navigate(['/home']);
+        });
+      });
+  }
 
   donFrom() {
-    this.authService.getdonations(this.mydonationform.value);
+    const time = this.datePipe.transform(new Date(), 'd-MMM-y');
+    const time1 = this.datePipe.transform(new Date(), 'h:mm a');
+    this.mydonationform.controls.Date.setValue(time);
+    this.mydonationform.controls.Time.setValue(time1);
+
+
+    this.uploadfilesService.uploadFile()
+      .then((fileMeta) => {
+        this.myhomeform.controls.PostImage.setValue(fileMeta);
+        this.authService.getdonations(this.mydonationform.value).subscribe((data: any) => {
+          this.router.navigate(['/home']);
+        });
+      });
   }
 
 }

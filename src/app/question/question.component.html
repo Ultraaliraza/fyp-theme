@@ -40,10 +40,10 @@
 					<a href="#">Home</a>
 				</li>
 				<li>
-					<a href="#">Ask Question</a>
+					<a href="#">Raise Question</a>
 				</li>
 				<li>
-					<a href="#">Ask Donation</a>
+					<a href="#">Raise Donations</a>
 				</li>
 				<li>
 					<a href="#">About Us</a>
@@ -78,12 +78,10 @@
 						<a routerLink="/proverty">Proverty</a>
 					</li>
 					<li>
-						<i class="fas fa-female"></i>
-						<a routerLink="/women">Women</a>
+						<a href="#">Raise Question</a>
 					</li>
 					<li>
-						<i class="fas fa-child"></i>
-						<a routerLink="/child">Child Labour</a>
+						<a href="#">Raise Donations</a>
 					</li>
 					<li>
 						<i class="fas fa-hands-helping"></i>
@@ -138,34 +136,90 @@
 
 						</ul>
 					</div>
-					<div class="clearfix"></div>
-					<div class="divider"></div>
-					<div class="content">
-						<p>
-							{{posts.Description}}
-						</p>
-					</div>
-					<div class="clearfix"></div>
-					<a routerLink="/{{posts.Postfile}}" class="downloader" download="download">
-						<i class="fa fa-file"></i>
-						&nbsp;&nbsp;
-						<span>{{posts.Postfile}}</span>
-					</a>
-					<br><br>
-					<div class="clearfix"></div>
-				</div>
-				<div class="commentsDiv">
-					<h4 class="title">Comments</h4>
-					<form [formGroup]="commentform" (ngSubmit)="submitFrom()">
-						<div class="commentInput">
-							<textarea class="form-control" formControlName="Comment"
-								placeholder="What's in your mind..."></textarea>
-							<button class="btn btn-warning btn-sm btn-comment" type="submit">Comment</button>
+					<div class="col-lg-6" id="middleDiv">
+						<div class="post">
+							<h4 class="title">
+								{{posts.Title}}
+							</h4>
+							<a href="#">
+								<button class="editPost">
+									<i class="fa fa-pencil"></i>
+								</button>
+							</a>
+							<div class="thumbnail">
+								<a href={{posts.PostImage}} target="blank">
+									<img src={{posts.PostImage}} class="img-fluid" />
+								</a>
+							</div>
+							<div class="meta">
+								<ul class="left">
+									<li>
+										<i class="far fa-calendar"></i>
+										{{posts.Date}}
+									</li>
+									<li>
+										<i class="far fa-user"></i>
+										Posted by <b><a href="">{{posts.Name}}</a></b>
+									</li>
+								</ul>
+								<ul class="right">
+									<li>
+									<li>
+										<i class="fas fa-th-large"></i>
+										{{posts.Category}} &nbsp;&nbsp;
+									</li>
+									<li>
+										<i class="fas fa-sign-out-alt "></i>
+										<span data-toggle="modal" data-target="#reportQuestionModel"
+											style="cursor: pointer;">Report</span>
+									</li>
+
+								</ul>
+							</div>
+							<div class="clearfix"></div>
+							<div class="divider"></div>
+							<div class="content">
+								<p>
+									{{posts.Description}}
+								</p>
+							</div>
+							<div class="clearfix"></div>
+							<a routerLink="/{{posts.Postfile}}" class="downloader" download="download">
+								<i class="fa fa-file"></i>
+								&nbsp;&nbsp;
+								<span>{{posts.Postfile}}</span>
+							</a>
+							<br><br>
+							<div class="clearfix"></div>
 						</div>
-					</form>
-					<div class="wrapper">
-						<!-- comment -->
-						<!-- <div class="row comment">
+						<div class="clearfix"></div>
+						<div class="divider"></div>
+						<div class="content">
+							<p>
+								{{posts.Description}}
+							</p>
+						</div>
+						<div class="clearfix"></div>
+						<a routerLink="/{{posts.Postfile}}" class="downloader" download="download">
+							<i class="fa fa-file"></i>
+							&nbsp;&nbsp;
+							<span>{{posts.Postfile}}</span>
+						</a>
+						<br><br>
+						<div class="clearfix"></div>
+					</div>
+					<div class="commentsDiv">
+						<h4 class="title">Comments</h4>
+						<form [formGroup]="commentform" (ngSubmit)="submitFrom()">
+							<div class="commentInput">
+								<textarea class="form-control" formControlName="Comment"
+									placeholder="What's in your mind..."></textarea>
+								<button class="btn btn-warning btn-sm btn-comment" type="submit">Comment</button>
+							</div>
+						</form>
+						<div class="wrapper">
+							<!-- comment -->
+							<!-- <div class="row comment">
 								<div class="col-lg-2 userPic">
 									<img src="img/user.jpg" class="img-fluid" />
 								</div>
@@ -174,8 +228,8 @@
 									<p class="data">This is a sample comment for testing.</p>
 								</div>
 							</div> -->
-						<!-- comment -->
-						<!-- <div class="row comment">
+							<!-- comment -->
+							<!-- <div class="row comment">
 								<div class="col-lg-2 userPic">
 									<img src="img/user.jpg" class="img-fluid" />
 								</div>
@@ -184,84 +238,100 @@
 									<p class="data">This is a sample comment for testing.</p>
 								</div>
 							</div> -->
-						<!-- comment -->
-						<div *ngFor="let commentkey of commentkeys">
-							<div class="row comment">
-								<div class="col-lg-2 userPic">
-									<img src="{{comments[commentkey].user_image}}" class="img-fluid" />
-								</div>
-								<div class="col-lg-10">
-									<p class="name">{{comments[commentkey].User_Name}}</p>
-									<p class="data">{{comments[commentkey].Comment}}</p>
+							<!-- comment -->
+							<div *ngFor="let commentkey of commentkeys">
+								<div class="row comment">
+									<div class="col-lg-2 userPic">
+										<img src="{{comments[commentkey].user_image}}" class="img-fluid" />
+									</div>
+									<div class="col-lg-10">
+										<p class="name">{{comments[commentkey].User_Name}}</p>
+										<p class="data">{{comments[commentkey].Comment}}</p>
+									</div>
 								</div>
 							</div>
 						</div>
 					</div>
-				</div>
-				<div style="margin-top: 40px;"></div>
-			</div>
-			<div class="col-lg-3" id="rightSidebar">
-				<div class="box questions">
-					<h3 class="title">Popular Questions</h3>
-					<div></div>
-					<div class="content">
-						<p>
-							<a href="#">Why not to buy bitcoin in 2019 ?</a>
-						</p>
-					</div>
-				</div>
-			</div>
-			<div class="box members">
-				<h3 class="title">Popular Members</h3>
-				<div class="content">
-					<!-- Member -->
-					<div class="member">
-						<div class="thumbanil">
-							<img src="img/user.jpg" class="img-fluid" />
+					<div class="col-lg-3" id="rightSidebar">
+						<div class="box questions">
+							<h3 class="title">Popular Questions</h3>
+							<div></div>
+							<div class="content">
+								<p>
+									<a href="#">Why not to buy bitcoin in 2019 ?</a>
+								</p>
+							</div>
 						</div>
-						<div class="">
-							<a href="#" class="name">Awais Khalid</a>
-							<p class="designation">Web Developer</p>
-						</div>
-					</div>
 
+						<div class="box members">
+							<h3 class="title">Popular Members</h3>
+							<div class="content">
+								<!-- Member -->
+								<div class="member">
+									<div class="thumbanil">
+										<img src="img/user.jpg" class="img-fluid" />
+									</div>
+									<div class="">
+										<a href="#" class="name">Awais Khalid</a>
+										<p class="designation">Web Developer</p>
+									</div>
+								</div>
+
+							</div>
+						</div>
+
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-</div>
+
+	<script>
+		var btn = document.getElementById('closeReportQuestionModel');
+		var model = document.getElementById('reportQuestionModel');
+		btn.addEventListener("click", hideModel);
+		function hideModel() {
+			model.css('display', 'none');
+		}
+	</script>
+
+	<div class="modal fade models" id="reportQuestionModel" tabindex="-1" role="dialog"
+		aria-labelledby="reportModelLabel" aria-hidden="true">
+		<div class="close" id="closeReportQuestionModel"
+			style="cursor:pointer;color:#555;float:right;margin-right: 5px;margin-top: 5px;">
+			X
+		</div>
+		<div class="header">
+			<h4 class="title">Report this post</h4>
+		</div>
+		<div class="body">
+			<form [formGroup]="reportform" (ngSubmit)="reportFrom()">
+				<div class="form-group">
+					<input type="text" placeholder="Full Name" formControlName="Name" />
+				</div>
+				<div class="form-group">
+					<input type="text" placeholder="Email Address" formControlName="Email" />
+				</div>
+				<div class="form-group">
+					<select formControlName="Reason">
+						<option selected disabled>Why you are reporting this post</option>
+						<option value="Abuse">Abuse</option>
+						<option value="Religious">Religious</option>
+						<option value="UnEthical">Un Ethical</option>
+					</select>
+				</div>
+				<div class="form-group">
+					<textarea placeholder="Your Message" formControlName="Message"></textarea>
+				</div>
+				<div class="">
+					<button class="submit" type="submit">Post</button>
+				</div>
 
 
-<div class="models" id="reportModel">
-	<div class="cancel" id="closeReportModel">
-		<i class="fa fa-close"></i>
+			</form>
+
+
+
+		</div>
 	</div>
-	<div class="header">
-		<h4 class="title">Report this post</h4>
-	</div>
-	<div class="body">
-		<form [formGroup]="reportform" (ngSubmit)="reportFrom()">
-			<div class="form-group">
-				<input type="text" placeholder="Full Name" formControlName="Name" />
-			</div>
-			<div class="form-group">
-				<input type="text" placeholder="Email Address" formControlName="Email" />
-			</div>
-			<div class="form-group">
-				<select formControlName="Reason">
-					<option selected disabled>Why you are reporting this post</option>
-					<option value="Abuse">Abuse</option>
-					<option value="Religious">Religious</option>
-					<option value="UnEthical">Un Ethical</option>
-				</select>
-			</div>
-			<div class="form-group">
-				<textarea placeholder="Your Message" formControlName="Message"></textarea>
-			</div>
-			<div class="">
-				<button class="submit" type="submit">Post</button>
-			</div>
-		</form>
-	</div>
-</div>
-<div id="postQuestionModelOverlay"></div>
+	<div id="postQuestionModelOverlay"></div>

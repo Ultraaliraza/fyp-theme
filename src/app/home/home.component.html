@@ -2,7 +2,7 @@
 	<!-- Header -->
 	<header class="nav container-fluid">
 		<div class="logo">
-			<img src="img/logo.png" class="img-fluid" alt="Logo">
+			<img src="" class="img-fluid" alt="Logo">
 		</div>
 		<div class="bars ml-auto" id="openDrawer">
 			<i class="fas fa-bars fa-2x"></i>
@@ -12,14 +12,18 @@
 				<a href="#">Home</a>
 			</li>
 			<li>
-				<a href="#">Ask Question</a>
+				<a href="#" data-toggle="modal" data-target="#exampleModal">Raise Question</a>
 			</li>
 			<li>
-				<a href="#">Ask Donation</a>
+				<a href="#" data-toggle="modal" data-target="#donationsModal">Raise Donations</a>
 			</li>
 			<li>
-				<a href="#">About Us</a>
-			</li>
+					<a href="#" data-toggle="modal" data-target="#VideoModal">Upload Video</a>
+				</li>
+			<li>
+					<a href="#">Messages</a>
+				</li>
+			
 			<li>
 				<a href="#">Contact Us</a>
 			</li>
@@ -27,14 +31,12 @@
 				<input type="text" class="searchbox" placeholder="Search..." />
 				<i class="fas fa-search" id="openSearch"></i>
 			</li>
-			<li>
-				<img src="img/user.jpg" class="img-fluid accountSettingDropdown" id="accountSettingDropdown" />
-				<div class="dropdownPicture" id="dropdownPicture">
-					<div class="options">
-						<p><a href="#">Profile</a></p>
-						<p><a href="#">Settings</a></p>
-						<p><a href="#">Logout</a></p>
-					</div>
+			<li class="dropdown">
+				<img src={{this.user.profile_image}} class="img-fluid accountSettingDropdown dropdown-toggle" id="accountSettingDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" />
+				<div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="margin-right:50px;">
+					<a class="dropdown-item"routerLink="/uprofile">Profile</a>
+					<a class="dropdown-item" routerLink="/settings">Settings</a>
+					<a class="dropdown-item" href="#">Logout</a>
 				</div>
 			</li>
 		</ul>
@@ -50,10 +52,10 @@
 					<a routerLink="/home">Home</a>
 				</li>
 				<li>
-					<a href="#">Ask Question</a>
+					<a href="#">Raise Question</a>
 				</li>
 				<li>
-					<a href="#">Ask Donation</a>
+					<a href="#">Raise Donations</a>
 				</li>
 				<li>
 					<a href="#">About Us</a>
@@ -113,8 +115,8 @@
 			<div class="col-lg-6" id="middleDiv">
 				<div class="col-lg-12 ask-question">
 					<div class="head">
-						<img src="img/user.jpg" class="img-fluid" />
-						<a href="#">Awais Khalid</a>
+						<img src={{this.user.profile_image}} class="img-fluid" />
+						<a routerLink="/uprofile">{{this.user.name}}</a>
 					</div>
 					<!-- <div class="body">
 						<span id="postQustionPopuopOpener">What's in your mind ?</span>
@@ -270,7 +272,7 @@
 								</div>
 								<div class="">
 									<a routerLink="/profile/{{user.key}}" class="name">{{user.post.name}}</a>
-									<p class="designation">{{user.post.acountType}}</p>
+									<p class="designation">{{user.post.accountType}}</p>
 								</div>
 							</div>
 
@@ -331,7 +333,7 @@
 				<div class="modal-dialog" role="document">
 					<div class="modal-content">
 						<div class="modal-header">
-							<h5 class="modal-title" id="exampleModalLabel">Post your question</h5>
+							<h5 class="modal-title" id="exampleModalLabel">Raise Your Issue</h5>
 							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 								<span aria-hidden="true">&times;</span>
 							</button>
@@ -339,10 +341,10 @@
 						<div class="modal-body">
 							<form [formGroup]="myhomeform" (ngSubmit)="submitFrom()">
 								<div class="form-group">
-									<input type="text" formControlName="Title" placeholder="Your Question" />
+									<input type="text" formControlName="Title" placeholder="Your Issue" />
 								</div>
 								<div class="form-group">
-									<select class="form-group" formControlName="Catagory">
+									<select class="form-group" formControlName="Category">
 										<option selected disabled>Choose Category</option>
 										<option value="Education">Education</option>
 										<option value="Society">Society</option>
@@ -371,6 +373,86 @@
 					</div>
 				</div>
 			</div>
+
+			<!-- ======================= [ MODALS ] ============================= -->
+			<div class="modal fade" id="VideoModal" tabindex="-1" role="dialog" aria-labelledby="VideoModalLabel"
+				aria-hidden="true">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="VideoModalLabel">Raise Your Issue Video</h5>
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body">
+							<form [formGroup]="myvideoform" (ngSubmit)="videoFrom()">
+								<div class="form-group">
+									<input type="text" formControlName="Details" placeholder="Your Video Title" />
+								</div>
+								<div class="form-group">
+									<select class="form-group" formControlName="Category">
+										<option selected disabled>Choose Category</option>
+										<option value="Education">Education</option>
+										<option value="Society">Society</option>
+										<option value="Women">Women</option>
+										<option value="Child">Child Labour</option>
+										<option value="Un-Employment">Un-Employment</option>
+										<option value="Marriage">Marriage</option>
+										<option value="Proverty">Proverty</option>
+										<option value="Others">Others</option>
+									</select>
+								</div>
+								<div class="form-group">
+									<input type="file" accept=".MP4, .3GP ,.WEBM ,.M4P ,.MKV" (change)="uploadfilesService.onSelectFile($event)" />
+								</div>
+								
+								<div class="form-group">
+									<textarea placeholder="Your Content" formControlName="Description"></textarea>
+								</div>
+								<div class="">
+									<button class="submit">Post</button>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- ======================= [ MODALS ] ============================= -->
+			<div class="modal fade" id="donationsModal" tabindex="-1" role="dialog" aria-labelledby="donationsModalLabel"
+				aria-hidden="true">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="donationsModalLabel">Ask for donations</h5>
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body">
+							<form [formGroup]="mydonationform" (ngSubmit)="donFrom()">
+								<div class="form-group">
+									<input type="text" formControlName="Title" placeholder="Title For Donation" />
+								</div>
+								<div class="form-group">
+									<input type="file" accept=".pdf, .doc" (change)="uploadfilesService.onSelectFile($event)" />
+								</div>
+								<div class="form-group">
+									<input type="file" accept=".png, .jpg" (change)="uploadfilesService.onSelectFile($event)" />
+								</div>
+								<div class="form-group">
+									<textarea placeholder="Your Content" formControlName="Description"></textarea>
+								</div>
+								<div class="">
+									<button class="submit">Post</button>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+
 		</div>
 	</div>
 </div>

@@ -12,8 +12,8 @@ export class AuthenticationService {
     throw new Error("Method not implemented.");
   }
   keyvalue = '';
-  // apiHeader = 'http://localhost:3000/';
-  apiHeader = 'https://us-central1-helpinghand-90a6a.cloudfunctions.net/apis/';
+  apiHeader = 'http://localhost:3000/';
+  // apiHeader = 'https://us-central1-helpinghand-90a6a.cloudfunctions.net/apis/';
   // apiHeader = 'http://localhost:5000/helpinghand-90a6a/us-central1/apis/';
 
   user = new BehaviorSubject({});
@@ -33,9 +33,11 @@ export class AuthenticationService {
     // send data to the backend server\
     this.http.post(this.apiHeader + 'login', objR)
       .subscribe((res: any) => {
-        localStorage.setItem('userMeta', res.data.uid);
+        console.log(res);
+
+        localStorage.setItem('userMeta', res.uid);
         this.user.next(res.data);
-        this.checkAccountType(res.data.acountType);
+        this.checkAccountType(res.data.accountType);
       });
   }
 
@@ -48,15 +50,16 @@ export class AuthenticationService {
           name: user.displayName,
           email: user.email,
           phone: user.phoneNumber,
-          photo: user.photoURL,
-          uid: user.uid,
+          profile_image: user.photoURL,
+          uid: user.uid
+
         }
 
         this.http.post(this.apiHeader + 'social', userBody)
           .subscribe((res: any) => {
-            localStorage.setItem('userMeta', res.data.uid);
+            localStorage.setItem('userMeta', user.uid);
             this.user.next(res.data);
-            this.checkAccountType(res.data.acountType);
+            this.checkAccountType(res.data.accountType);
           });
       }).catch((error: any) => {
         console.log(error);
@@ -72,16 +75,16 @@ export class AuthenticationService {
           name: user.displayName,
           email: user.email,
           phone: user.phoneNumber,
-          photo: user.photoURL,
-          uid: user.uid,
+          profile_image: user.photoURL,
+          uid: user.uid
         }
 
         this.http.post(this.apiHeader + 'social', userBody)
           .subscribe((res: any) => {
-            console.log(res);
-            localStorage.setItem('userMeta', res.data.uid);
+            console.log(userBody.uid);
+            localStorage.setItem('userMeta', userBody.uid);
             this.user.next(res.data);
-            this.checkAccountType(res.data.acountType);
+            this.checkAccountType(res.data.accountType);
           });
       }).catch((error: any) => {
         console.log(error);
@@ -92,22 +95,22 @@ export class AuthenticationService {
     console.log(accountType);
     if (accountType) {
       if (accountType == 'identifier' || accountType == 'Identifier') {
-        this.router.navigate(['/home']);
+        return   this.router.navigate(['/home']);
       }
       else if (accountType == 'motivator' || accountType == 'Motivator') {
-        this.router.navigate(['/motivator']);
+       return this.router.navigate(['/motivator']);
       }
       else if (accountType == 'donor' || accountType == 'Donor') {
-        this.router.navigate(['/donor']);
+       return this.router.navigate(['/donor']);
       }
     }
     else {
-      this.router.navigate(['/set-account-type']);
+     return this.router.navigate(['/set-account-type']);
     }
   }
 
   setAccountType(accountType: string, userID: string) {
-    return this.http.post(this.apiHeader + 'setAccountType', { acountType: accountType, uid: userID });
+    return this.http.post(this.apiHeader + 'setAccountType', { acountType: accountType, id: userID });
   }
 
   home(objR) {
@@ -134,7 +137,7 @@ export class AuthenticationService {
   }
 
   updatePassword(password: object) {
-    return this.http.post(this.apiHeader + 'updatepass', password)
+    return this.http.post(this.apiHeader + 'updatepass', password);
   }
 
   getMarriage() {
@@ -142,9 +145,7 @@ export class AuthenticationService {
   }
 
   getdonations(objR) {
-    this.http.post(this.apiHeader + 'home/donations', objR).subscribe((data: any) => {
-      this.router.navigate(['/home']);
-    });
+     return this.http.post(this.apiHeader + 'home/donations', objR);
   }
 
   Report(objR) {
@@ -192,5 +193,32 @@ export class AuthenticationService {
 
   getLastPosts() {
     return this.http.get(this.apiHeader + 'LastPosts');
+  }
+
+  Updatesettings(objR) {
+    return this.http.post(this.apiHeader + 'updateprofile/', objR);
+
+
+  }
+
+  getUserquestion(id: any) {
+    return this.http.get(this.apiHeader + 'getallquestion/' + id);
+  }
+  Editpost(objR) {
+    return this.http.get(this.apiHeader + 'updatequestion', objR);
+  }
+  getVideos() {
+    return this.http.get(this.apiHeader + 'videos');
+  }
+  Videos(objR) {
+    return this.http.post(this.apiHeader + 'postvideo', objR)
+  }
+  getUser(){
+    const id = localStorage.getItem( 'userMeta');
+    return this.http.get(this.apiHeader + 'getuserinfo/'+id  ).subscribe((data: any) => {
+      
+       this.user.next(data);
+
+    });
   }
 }

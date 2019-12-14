@@ -2,8 +2,8 @@ const express = require('express');
 const cors = require('cors')
 const bodyParser = require('body-parser')
 const admin = require("firebase-admin");
-const serviceAccount = require("./configs/admin.json");
-const firebaseConfig = require("./configs/firebaseConfig.json");
+const serviceAccount = require("./admin.json");
+const firebaseConfig = require("./firebaseConfig.json");
 const firebase = require('firebase');
 const sgMail = require('@sendgrid/mail');
 
@@ -17,6 +17,8 @@ const db = admin.database();
 let posts = db.ref("/Posts");
 let Donors = db.ref("/Donations")
 let users = db.ref("/Users");
+let videos = db.ref("/Videos");
+
 const auth = firebase.auth();
 
 app.use(cors({ origin: true }));
@@ -28,12 +30,11 @@ app.post('/register', (req, res) => {
         email: body.email,
         name: body.name,
         accountType: body.accountType,
-        uid: ''
+        profile_image: body.profile_image
     }
 
     return auth.createUserWithEmailAndPassword(body.email, body.password)
         .then((userRecord) => {
-            profileBody.uid = userRecord.user.uid;
 
             return auth.currentUser.sendEmailVerification()
                 .then(() => {
@@ -74,7 +75,7 @@ app.post('/login', (req, res) => {
 
             return db.ref('Users/' + userinfo.user.uid)
                 .on("value", (snapshot) => {
-                    return res.status(200).send({ data: snapshot.val() });
+                    return res.status(200).send({ data: snapshot.val(), uid: userinfo.user.uid });
                 });
         })
         .catch((error) => {
@@ -97,25 +98,30 @@ app.post('/forgetpassword', (req, res) => {
 app.post('/social', (request, response) => {
     let found = 0;
     const body = request.body;
-    return db.ref('/Users/' + body.uid)
-        .set(body)
+    console.log(body);
+    let ref = db.ref('/Users/' + body.uid)
+    delete body.uid;
+    return ref.set(body)
         .then(() => {
-            return users.once("value", (snapshot) => {
-                snapshot.forEach((childSnapshot) => {
-                    var data = childSnapshot.val();
-
-                    let key = childSnapshot.key;
-                    found = 1;
-                    delete data.password;
-                    temp = data;
-                    temp.key = key;
-                });
-                if (found === 1) {
-                    return response.jsonp({ success: 1, data: temp });
-                } else {
-                    return response.jsonp({ success: 0, data: {} });
-                }
+            return ref.on("value", (snapshot) => {
+                return response.status(200).send({ data: snapshot.val() });
             });
+            // .once("value", (snapshot) => {
+            //     snapshot.forEach((childSnapshot) => {
+            //         var data = childSnapshot.val();
+
+            //         let key = childSnapshot.key;
+            //         found = 1;
+
+            //         temp = data;
+            //         temp.key = key;
+            //     });
+            //     if (found === 1) {
+            //         return response.jsonp({ success: 1, data: temp });
+            //     } else {
+            //         return response.jsonp({ success: 0, data: {} });
+            //     }
+            // });
         })
         .catch((error) => {
             return response.json(error);
@@ -125,7 +131,7 @@ app.post('/social', (request, response) => {
 app.post('/setAccountType', (req, res) => {
     const body = req.body;
     console.log(body);
-    return db.ref('/Users/' + body.uid)
+    return db.ref('/Users/' + body.id)
         .update({ acountType: body.acountType })
         .then(() => { return res.set(200).send({ msg: 'Account Type Updated' }) })
         .catch((error) => { return res.send(error) })
@@ -166,19 +172,15 @@ app.get('/donors', (req, res) => {
 app.get('/profile/:key', (req, res) => {
     let key = req.params.key;
     let userData = {};
-    posts.once("value", (snapshot) => {
-        snapshot.forEach((childSnapshot) => {
-            if (key === childSnapshot.key) {
-                userData = {
-                    key: childSnapshot.key,
-                    post: childSnapshot.val(),
-                };
-            }
-        });
+    db.ref("/Users/" + key).once("value", (snapshot) => {
+
+        userData = {
+            post: snapshot.val(),
+
+        };
         res.json({ success: 0, data: userData });
         console.log(userData);
     });
-
 });
 
 // Fetching Posts from Database ( All Posts)
@@ -286,7 +288,8 @@ app.get('/donations', (req, res) => {
 // Sending Comments
 app.post('/comments', (req, res) => {
     const body = req.body;
-    let comments = db.ref("/Posts/" + body.id + "/Comments").push();
+    let comments = db.ref("/Posts/" + body.postID + "/Comments").push();
+    delete body.postID
     comments.set(body);
     res.json({ success: 1, data: comments });
 });
@@ -390,10 +393,10 @@ app.get('/LastPosts', (req, res) => {
 
 // ----------- Assad New Code
 // Getting 
-app.get('/getallquestion/:uid', (req, res) => {
-    const userID = req.params.uid;
+app.get('/getallquestion/:id', (req, res) => {
+    const userID = req.params.id;
     let questions = [];
-    posts.orderByChild("uid").equalTo(userID).once("value", (snapshot) => {
+    db.ref("/Posts/").orderByChild(PostBy).equalTo(userID).once("value", (snapshot) => {
         snapshot.forEach((childSnapshot) => {
             questions.push({
                 key: childSnapshot.key,
@@ -418,18 +421,23 @@ app.post('/updatequestion', (req, res) => {
     delete body.postID;
 
     return updateRef
-        .update(body)
+        .update(body.form)
         .then(() => { return res.status(200).send({ msg: 'Updated' }); })
         .catch((error) => { return res.send({ Error: error }) });
 });
 
 app.post('/updateprofile', (req, res) => {
     const body = req.body;
-    const updateRef = db.ref('Users/' + body.uid)
-    delete body.uid;
-    updateRef.update(body)
+
+    console.log(body);
+
+    const updateRef = db.ref('Users/' + body.id)
+    delete body.id;
+    updateRef.update(body.form)
         .then(() => { return res.status(200).send({ msg: 'Updated' }) })
         .catch((error) => { return res.send({ Error: error }) });
+
+
 });
 
 app.post('/updatepass', (req, res) => {
@@ -441,6 +449,30 @@ app.post('/updatepass', (req, res) => {
 
 // ----------------- Ali New Code
 
+
+
+
+
+// Gettings Videos ( No Videos Table Right Now)
+app.get('/videos', (req, res) => {
+    let allVideos = [];
+    videos.once("value", (snapshot) => {
+        snapshot.forEach((childSnapshot) => {
+            allVideos.push({
+                key: childSnapshot.key,
+                post: childSnapshot.val(),
+            })
+        });
+        res.json({ success: 0, data: allVideos });
+    });
+});
+
+app.post('/postvideo', (req, res) => {
+    let postvideos = videos.push();
+    postvideos.set(req.body);
+
+    res.json({ success: 1, data: postvideos });
+});
 
 // ----------------- Ali Updated Code
 

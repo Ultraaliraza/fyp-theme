@@ -10,12 +10,14 @@ import { ContactusComponent } from './contactus/contactus.component';
 import { AboutComponent } from './about/about.component';
 import { UploadfilesService } from './service/uploadfiles.service';
 import { BeforeAuthGuard } from './service/auth-guard/before-auth.guard';
+import { WatchvideoComponent } from './watchvideo/watchvideo.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     AboutComponent,
-    ContactusComponent
+    ContactusComponent,
+    WatchvideoComponent
   ],
   imports: [
     BrowserModule,

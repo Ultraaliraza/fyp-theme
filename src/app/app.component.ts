@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import * as firebase from 'firebase';
+import { AuthenticationService } from './service/auth-service/authentication.service';
 
 @Component({
   selector: 'app-root',
@@ -8,9 +9,10 @@ import * as firebase from 'firebase';
 })
 export class AppComponent implements OnInit {
   title = 'FYP-THEME';
-  constructor() { }
+  constructor(private auth: AuthenticationService) { }
 
   ngOnInit() {
+    // this.auth.getUser();
     var firebaseConfig = {
       apiKey: "AIzaSyA7DSbicFSqkr65hgE77XI2XlVEUbuej88",
       authDomain: "helpinghand-90a6a.firebaseapp.com",
@@ -22,5 +24,7 @@ export class AppComponent implements OnInit {
     };
     // Initialize Firebase
     firebase.initializeApp(firebaseConfig);
+    
   }
+   
 }
