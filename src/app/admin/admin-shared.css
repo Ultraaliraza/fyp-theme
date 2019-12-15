@@ -1,0 +1,88 @@
+* {
+  font-family: 'Poppins', Arial, sans-serif;
+}
+
+.home .panel .panel-widget {
+  background: #eee;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  text-align: center;
+}
+
+.home .panel .panel-widget .large {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.home .panel .panel-widget .text-muted {
+  font-size: 16px;
+  margin-top: 15px;
+}
+
+.adminAside .sidebar {
+  height: 100vh;
+  position: absolute;
+  left: 0;
+  top: 0;
+  background: #e9e9e9;
+}
+
+.adminAside .sidebar .profile-userpic {
+  max-width: 80px;
+  margin: 0 auto;
+  margin-top: 60px;
+}
+
+.adminAside .sidebar .profile-usertitle {
+  text-align: center;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.adminAside .sidebar .profile-usertitle-name {
+  padding-bottom: 5px;
+}
+
+.adminAside .sidebar .profile-usertitle-status {
+  color: green;
+}
+
+.adminAside ul.menu {
+  margin-top: 20px;
+}
+
+.adminAside ul.menu li a {
+  color: #555;
+  font-size: 15px;
+}
+
+.adminAside .divider {
+  width: 100px;
+  border-bottom: 1px solid #ccc;
+  margin: 0 auto;
+}
+
+header {
+  width: 100%;
+  /* height:40px; */
+  background: #333;
+  z-index: 2000;
+  position: relative;
+  top: 0;
+  color: #fff;
+  font-size: 22px;
+  padding-left: 40px;
+  padding-top: 5px;
+  padding-bottom: 2px;
+}
+
+.home table.table .trash {
+  background: none;
+  border: none;
+  font-size: 24px;
+  outline: none;
+}
+
+.home table.table .tableImg {
+  width: 70px;
+}

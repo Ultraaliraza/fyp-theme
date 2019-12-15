@@ -15,8 +15,7 @@ import { BeforeAuthGuard } from './service/auth-guard/before-auth.guard';
   declarations: [
     AppComponent,
     AboutComponent,
-    ContactusComponent,
-
+    ContactusComponent
   ],
   imports: [
     BrowserModule,

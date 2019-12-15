@@ -6,7 +6,7 @@ import { AuthenticationService } from 'src/app/service/auth-service/authenticati
   templateUrl: './donations.component.html',
   styleUrls: ['./donations.component.css']
 })
-export class DonationsComponent implements OnInit {
+export class AdminDonationsComponent implements OnInit {
 
   donations = [];
   constructor(private authService: AuthenticationService) { }

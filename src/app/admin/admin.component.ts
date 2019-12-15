@@ -4,7 +4,7 @@ import { AuthenticationService } from '../service/auth-service/authentication.se
 @Component({
   selector: 'app-admin',
   templateUrl: './admin.component.html',
-  styleUrls: ['./admin.component.css']
+  styleUrls: ['./admin.component.css', './admin-shared.css']
 })
 export class AdminComponent implements OnInit {
   totaluser;
@@ -28,7 +28,7 @@ export class AdminComponent implements OnInit {
       console.log(this.totaldonation);
     });
   }
-    getBannCount() {
+  getBannCount() {
     this.authService.getBannCount().subscribe((data: any) => {
       this.totalbanuser = data.data;
       console.log(this.totalbanuser);
@@ -56,8 +56,6 @@ export class AdminComponent implements OnInit {
   getUsersCount() {
     this.authService.getUsersCount().subscribe((data: any) => {
       this.totaluser = data.data;
-      console.log(this.totaluser);
-
     });
   }
 
