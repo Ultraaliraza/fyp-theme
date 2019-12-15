@@ -27,7 +27,7 @@ export class WatchvideoComponent implements OnInit {
   ngOnInit() {
     // this.route.params.subscribe(postID => {
     //   this.postID = postID.key;
-    //   // this.authService.getVideos( postID.key)
+    //   // this.authService.getVideos(postID.key)
     //     .subscribe((post: any) => {
     //       this.posts = post.data.post;
     //       this.comments = this.posts.Comments;

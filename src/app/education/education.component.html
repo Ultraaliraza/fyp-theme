@@ -9,7 +9,7 @@
 				<i class="fas fa-bars fa-2x"></i>
 			</div>
 			<ul class="menu ml-auto" id="navLaptop">
-				<li>
+				<!-- <li>
 					<a routerLink="/home">Home</a>
 				</li>
 				<li>
@@ -21,18 +21,18 @@
 				</li>
 				<li>
 					<a href="#">Contact Us</a>
-				</li>
-				<li>
+				</li> -->
+				<!-- <li>
 					<input type="text" class="searchbox" placeholder="Search..." />
 					<i class="fas fa-search" id="openSearch"></i>
-				</li>
+				</li> -->
 				<li>
 					<img src="img/user.jpg" class="img-fluid accountSettingDropdown" id="accountSettingDropdown" />
 					<div class="dropdownPicture" id="dropdownPicture">
 						<div class="options">
-							<p><a href="#">Profile</a></p>
-							<p><a href="#">Settings</a></p>
-							<p><a href="#">Logout</a></p>
+								<a class="dropdown-item"routerLink="/uprofile">Profile</a>
+								<a class="dropdown-item" routerLink="/settings">Settings</a>
+								<a class="dropdown-item" href="#">Logout</a>
 						</div>
 					</div>
 				</li>
@@ -111,11 +111,11 @@
 				<div class="col-lg-6" id="middleDiv">
 					<div class="col-lg-12 ask-question">
 						<div class="head">
-							<img src="img/user.jpg" class="img-fluid" />
-							<a href="#">Awais Khalid</a>
+							<!-- <img src="img/user.jpg" class="img-fluid" /> -->
+							<!-- <a href="#">Awais Khalid</a> -->
 						</div>
 						<div class="body">
-							<span id="postQustionPopuopOpener">What's in your mind ?</span>	
+							<!-- <span id="postQustionPopuopOpener">What's in your mind ?</span>	 -->
 						</div>
 					</div>
 					<!-- Question -->
@@ -247,7 +247,7 @@
 									<img src="{{user.post.profile_image}}" class="img-fluid" />
 								</div>
 								<div class="">
-									<a href="#" class="name">{{user.post.name}}</a>
+										<a routerLink="/profile/{{user.key}}" class="name">{{user.post.name}}</a>
 									<p class="designation">{{user.post.acountType}}</p>
 								</div>
 							</div>

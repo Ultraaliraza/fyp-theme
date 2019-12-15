@@ -1046,3 +1046,24 @@
 	background: #E32222;
 	color: #f7f7f7;
   }
+
+  @media screen and (max-width:700px){
+	.cover .img{
+		/* float: left; */
+	}  
+	.cover .img img{
+		float: left;
+	}  
+	.cover .content{
+		float: right;
+	  }
+	  .about{
+		  margin-top:150px;
+	  }
+	.about  .title{
+		margin-left: -10px;
+	}
+	.about .Questions .title{
+		margin-left: -65px;
+	}
+  }

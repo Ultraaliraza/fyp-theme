@@ -18,6 +18,8 @@ let posts = db.ref("/Posts");
 let Donors = db.ref("/Donations")
 let users = db.ref("/Users");
 let videos = db.ref("/Videos");
+let bann = db.ref("/BannUser");
+let report = db.ref("/ReportPost");
 
 const auth = firebase.auth();
 
@@ -355,7 +357,7 @@ app.post('/question/report', (req, res) => {
     res.json({ success: 1, data: Report });
 });
 
-// Getting 
+// Getting
 app.post('/question/getreport', (req, res) => {
     const body = req.body;
     let Report = db.ref("/ReportPost/" + body.postID + "/" + body.userID)
@@ -392,7 +394,7 @@ app.get('/LastPosts', (req, res) => {
 });
 
 // ----------- Assad New Code
-// Getting 
+// Getting
 app.get('/getallquestion/:id', (req, res) => {
     const userID = req.params.id;
     let questions = [];
@@ -407,7 +409,7 @@ app.get('/getallquestion/:id', (req, res) => {
     });
 });
 
-// Getting 
+// Getting
 app.get('/deletequestion/:postid', (req, res) => {
     const postID = req.params.postid;
     db.ref('Posts/' + postID).remove(() => {
@@ -450,10 +452,38 @@ app.post('/updatepass', (req, res) => {
 // ----------------- Ali New Code
 
 
+//Get All Report Posts
+
+app.get('/reports', (req, res) => {
+  let allReports = [];
+  report.once("value", (snapshot) => {
+      snapshot.forEach((childSnapshot) => {
+          allReports.push({
+              key: childSnapshot.key,
+              post: childSnapshot.val(),
+          })
+      });
+      res.json({ success: 0, data: allReports });
+  });
+});
+
+//Get All bannuser
+
+app.get('/bannuser', (req, res) => {
+  let allBannUser = [];
+  bann.once("value", (snapshot) => {
+      snapshot.forEach((childSnapshot) => {
+          allBannUser.push({
+              key: childSnapshot.key,
+              post: childSnapshot.val(),
+          })
+      });
+      res.json({ success: 0, data: allBannUser });
+  });
+});
 
 
-
-// Gettings Videos ( No Videos Table Right Now)
+// Gettings All Videos
 app.get('/videos', (req, res) => {
     let allVideos = [];
     videos.once("value", (snapshot) => {
@@ -466,6 +496,53 @@ app.get('/videos', (req, res) => {
         res.json({ success: 0, data: allVideos });
     });
 });
+
+
+
+// Getting Video Data W.r.t Key
+
+app.get('/getVideos/:Key', (req, res) => {
+
+    let key = req.params.key;
+    let allVideos = {};
+    videos.once("value", (snapshot) => {
+
+        snapshot.forEach((childSnapshot) => {
+
+            if (key === childSnapshot.key) {
+
+                allVideos = {
+
+                    key: childSnapshot.key,
+                    post: childSnapshot.val(),
+                }
+            }
+        });
+        res.json({ success: 0, data: allVideos });
+        console.log(allPosts);
+    });
+
+
+});
+
+app.get('/question/:key', (req, res) => {
+    let key = req.params.key;
+    let allPosts = {};
+    posts.once("value", (snapshot) => {
+        snapshot.forEach((childSnapshot) => {
+            if (key === childSnapshot.key) {
+                allPosts = {
+                    key: childSnapshot.key,
+                    post: childSnapshot.val(),
+                }
+            }
+        });
+        res.json({ success: 0, data: allPosts });
+        console.log(allPosts);
+    });
+
+});
+
 
 app.post('/postvideo', (req, res) => {
     let postvideos = videos.push();

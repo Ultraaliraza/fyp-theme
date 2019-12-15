@@ -211,7 +211,7 @@ export class AuthenticationService {
     return this.http.get(this.apiHeader + 'videos');
   }
   Videos(objR) {
-    return this.http.post(this.apiHeader + 'postvideo', objR)
+    return this.http.post(this.apiHeader + 'postvideo', objR);
   }
   getUser() {
     const id = localStorage.getItem('userMeta');
@@ -220,5 +220,64 @@ export class AuthenticationService {
       this.user.next(data);
 
     });
+
+
   }
+  // getVideoData(key: any) {
+  //   return this.http.get(this.apiHeader + 'getVideos/' +Key);
+  // }
+
+  //All Admin Panel Paths
+
+  getUsersCount() {
+    return this.http.get(this.apiHeader + 'totalusers');
+  }
+  getDonationsCount() {
+    return this.http.get(this.apiHeader + 'totaldonors');
+  }
+  getVideosCount() {
+    return this.http.get(this.apiHeader + 'totalvideos')
+  }
+  getReportsCount() {
+    return this.http.get(this.apiHeader + 'totalreportpost');
+  }
+  getBannCount() {
+    return this.http.get(this.apiHeader + 'totalbannuser');
+
+  }
+  getPostCount() {
+    return this.http.get(this.apiHeader + 'totalposts');
+
+  }
+  getAllUsers() {
+
+    return this.http.get(this.apiHeader + 'getallusers');
+  }
+
+  Deleteuser() {
+    return this.http.get(this.apiHeader + '/changeuserstatus');
+  }
+
+  getAllDonations() {
+    return this.http.get(this.apiHeader + '/donations');
+  }
+
+  getAllPosts() {
+
+    return this.http.get(this.apiHeader + '/posts');
+  }
+
+  getAllReports() { // New Code by ALIRAZA
+    return this.http.get(this.apiHeader + 'reports');
+  }
+  getAllVideos() {
+    return this.http.get(this.apiHeader + 'videos');
+
+  }
+  getAllBannUsers() {
+
+    return this.http.get(this.apiHeader + 'bannuser');
+
+  }
+
 }

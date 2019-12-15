@@ -18,7 +18,18 @@ import { UserprofileComponent } from 'src/app/userprofile/userprofile.component'
 import { VideosComponent } from 'src/app/videos/videos.component';
 import { EditComponent } from 'src/app/edit/edit.component';
 import { MessagesComponent } from 'src/app/messages/messages.component';
-// import {WatchvideoComponent} from 'src/app/watchvideo/watchvideo.component';
+import { WatchvideoComponent } from 'src/app/watchvideo/watchvideo.component';
+import { AdminComponent } from 'src/app/admin/admin.component';
+import { SidebarComponent } from 'src/app/admin/sidebar/sidebar.component';
+import { UsersComponent } from 'src/app/admin/users/users.component';
+import { AdminvideosComponent } from 'src/app/admin/adminvideos/adminvideos.component';
+import { DonationsComponent } from 'src/app/admin/donations/donations.component';
+import { BannusersComponent } from 'src/app/admin/bannusers/bannusers.component';
+import { PostsComponent } from 'src/app/admin/posts/posts.component';
+import { ReportsComponent } from 'src/app/admin/reports/reports.component';
+
+//Admin Panel Routes
+
 
 const routes: Routes = [
   {
@@ -29,7 +40,18 @@ const routes: Routes = [
       { path: 'home', component: HomeComponent },
 
       { path: 'profile/:key', component: ProfileComponent },
-      // { path: 'watchvideo/:key', component: WatchvideoComponent },
+      { path: 'watchvideo/:key', component: WatchvideoComponent },
+      // {
+      //   path: 'admin', component: AdminComponent, children [
+      //     { path: 'sidebar', component: SidebarComponent },
+
+      //     { path: 'adminvideos', component: AdminvideosComponent },
+      //     { path: 'donations', component: DonationsComponent },
+      //     { path: 'bannUsers', component: BannusersComponent },
+      //     { path: 'posts', component: PostsComponent },
+      //     { path: 'Reports', component: ReportsComponent }
+
+      //   ]},
 
       { path: 'set-account-type', component: SetAccountTypeComponent },
       { path: 'motivator', component: MotivatorComponent },

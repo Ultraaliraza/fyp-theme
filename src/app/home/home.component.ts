@@ -41,12 +41,12 @@ export class HomeComponent implements OnInit {
         Date: new FormControl(),
         Name: new FormControl(this.user.name),
         acountType: new FormControl(this.user.acountType),
-        PostBy: new FormControl(this.user.key),
+        PostBy: new FormControl('pR0pfcDDZRS9l1MCIKkxQNUstw53'),
         PostImage: new FormControl(''),
-        PostFile: new FormControl(''),
+        Postfile: new FormControl(''),
         Time: new FormControl(''),
-        profile_image: new FormControl(this.user.profile_image),
-        id: new FormControl(this.user.key)
+       User_profile_image: new FormControl(this.user.profile_image),
+        id: new FormControl('')
       });
 
       this.mydonationform = new FormGroup({
@@ -109,8 +109,11 @@ export class HomeComponent implements OnInit {
     this.myhomeform.controls.Time.setValue(time1);
     this.uploadfilesService.uploadFile()
       .then((fileMeta) => {
-        this.myhomeform.controls.PostImage.setValue(fileMeta['url']);
+        // tslint:disable-next-line:no-string-literal
+        // this.myhomeform.controls.PostImage.setValue(fileMeta['url']);
         this.authService.home(this.myhomeform.value).subscribe((data: any) => {
+
+          console.log(this.myhomeform.value);
           this.router.navigate(['/home']);
         });
       });

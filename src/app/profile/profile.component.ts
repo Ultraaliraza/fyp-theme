@@ -24,12 +24,8 @@ export class ProfileComponent implements OnInit {
         .subscribe((post: any) => {
           this.posts = post.data.post;
           console.log(this.posts);
-          console.log(this.id);
-
-
         });
       this.authService.getUserquestion(this.id).subscribe((ques: any) => {
-
         this.question = ques.data.ques;
         console.log(this.question);
 
