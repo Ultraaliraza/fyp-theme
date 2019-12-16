@@ -19,7 +19,9 @@
             <th></th>
             <th>ID</th>
             <th>Title</th>
-            <th>Posted By</th>
+            <th>User Name</th>
+            <th>User Key</th>
+            <th>Description</th>
             <th>Category</th>
             <th>Image</th>
             <th>File</th>
@@ -27,25 +29,28 @@
         </tr>
     </thead>
     <tbody>
-        <tr>
-            <td>1</td>
-            <td>rf7M6lcuyhZDQIO3jIocDGn2Wbm1</td>
-            <td>Awais Khalid</td>
-            <td>awais.khalid800@gmail.com</td>
-            <td>Education</td>
+        <tr *ngFor="let post of posts">
+            <td></td>
+            <td>{{post.key}}</td>
+            <td>{{post.post.Title}}</td>
+            <td>{{post.post.Name}}</td>
+            <td>{{post.post.PostBy}}</td>
+            <td>{{post.post.Description}}</td>
+            <td>{{post.post.Category}}</td>
+
             <td>
-                <a href="https://shorturl.at/bmnTW" target="blank">
-                    <img src="https://shorturl.at/bmnTW" class="img-responsive tableImg" alt="image" />
+                <a routerLink="{{post.post.PostImage}}"target="blank">
+                    <img src="{{post.post.PostImage}}" class="img-responsive tableImg" alt="image" />
                 </a>
             </td>
             <td>
-                <a href="https://shorturl.at/bmnTW" download="download" style="color:#555;margin-left: 10px;">
+                <a routerLink="{{post.post.Postfile}}" download="download" style="color:#555;margin-left: 10px;">
                     <i class="fa fa-file fa-lg"></i>
                 </a>
             </td>
             <td class="text-center">
                 <form action="#" method="POST">
-                    <button class="trash"><i class="fa fa-trash"></i></button>
+                    <button class="trash" (click)="delete(post.key)"><i class="fa fa-trash"></i></button>
                 </form>
             </td>
         </tr>

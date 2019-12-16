@@ -63,7 +63,8 @@ import { AdminDashboardComponent } from 'src/app/admin/admin-dashboard/admin-das
     PostsComponent,
     ReportsComponent,
     AdminvideosComponent,
-    AdminDashboardComponent
+    AdminDashboardComponent,
+
   ],
   imports: [
     CommonModule,

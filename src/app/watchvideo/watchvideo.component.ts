@@ -13,7 +13,7 @@ import { DatePipe } from '@angular/common';
 export class WatchvideoComponent implements OnInit {
   commentform: FormGroup;
   user;
-  posts;
+  posts ;
   comments;
   commentkeys;
   reportform: FormGroup;
@@ -30,6 +30,7 @@ export class WatchvideoComponent implements OnInit {
       this.authService.getVideoData(postID.key)
         .subscribe((post: any) => {
           this.posts = post.data.post;
+          console.log(this.posts.Details);
           this.comments = this.posts.Comments;
           console.log(this.posts);
           console.log(this.comments);

@@ -19,32 +19,37 @@
             <th></th>
             <th>ID</th>
             <th>Title</th>
-            <th>Posted By</th>
+            <th>User Name</th>
+            <th>User Key</th>
+            <th>Description</th>
             <th>Image</th>
             <th>File</th>
             <th>Delete</th>
         </tr>
     </thead>
     <tbody>
-        <tr>
+        <tr *ngFor="let post of posts">
             <td>1</td>
-            <td>rf7M6lcuyhZDQIO3jIocDGn2Wbm1</td>
-            <td>Awais Khalid</td>
-            <td>awais.khalid800@gmail.com</td>
+            <td>{{post.key}}</td>
+            <td>{{post.donationpost.Title}}</td>
+            <td>{{post.donationpost.Name}}</td>
+            <td>{{post.donationpost.PostBy}}</td>
+            <td>{{post.donationpost.Description}}</td>
+
             <td>
-                <a href="https://shorturl.at/bmnTW" target="blank">
-                    <img src="https://shorturl.at/bmnTW" class="img-responsive tableImg" alt="image" />
+                <a routerLink="{{post.donationpost.PostImage}}" target="blank">
+                    <img src="{{post.donationpost.PostImage}}" class="img-responsive tableImg" alt="image" />
                 </a>
             </td>
             <td>
-                <a href="https://shorturl.at/bmnTW" download="download" style="color:#555;margin-left: 10px;">
+                <a href="{{post.donationpost.Postfile}}" download="download" style="color:#555;margin-left: 10px;">
                     <i class="fa fa-file fa-lg"></i>
                 </a>
             </td>
             <td class="text-center">
-                <form action="#" method="POST">
-                    <button class="trash"><i class="fa fa-trash"></i></button>
-                </form>
+
+                    <button class="trash" type="submit"  (click)="delete(post.key)"><i class="fa fa-trash"></i></button>
+
             </td>
         </tr>
     </tbody>

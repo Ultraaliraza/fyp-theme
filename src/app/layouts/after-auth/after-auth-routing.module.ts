@@ -47,7 +47,7 @@ const routes: Routes = [
           { path: 'donations', component: AdminDonationsComponent },
           { path: 'bannUsers', component: BannusersComponent },
           { path: 'posts', component: PostsComponent },
-          { path: 'Reports', component: ReportsComponent }
+          { path: 'Reports', component: ReportsComponent },
         ]
       },
       { path: 'set-account-type', component: SetAccountTypeComponent },

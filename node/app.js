@@ -177,7 +177,7 @@ app.post("/home/donations", (req, res) => {
   res.json({ success: 1, data: donation });
 });
 
-// for getting Posts
+// for getting Donations
 app.get("/donors", (req, res) => {
   let donationpost = [];
   Donors.once("value", snapshot => {
@@ -289,7 +289,7 @@ app.get("/women", (req, res) => {
 // For listing Down Domation Posts
 app.get("/donations", (req, res) => {
   let donationsPosts = [];
-  posts.once("value", snapshot => {
+  Donors.once("value", snapshot => {
     snapshot.forEach(childSnapshot => {
       if (childSnapshot.val().Catagory === "donation") {
         donationsPosts.push({
@@ -298,6 +298,7 @@ app.get("/donations", (req, res) => {
         });
       }
     });
+    res.json({ success: 0, data: donationPosts });
   });
 });
 
@@ -668,6 +669,7 @@ app.get("/deletedonations/:id", (req, res) => {
 
 app.get("/deletevideos/:id", (req, res) => {
   const videoID = req.params.id;
+  console.log(videoID);
   db.ref("/Videos/" + videoID)
     .remove()
     .then(() => {

@@ -22,26 +22,26 @@
             <th>Email</th>
             <th>Account Type</th>
             <th>Image</th>
-            <!-- <th>Delete</th> -->
+             <th>Delete</th>
         </tr>
     </thead>
     <tbody>
-        <tr>
-            <td>1</td>
-            <td>rf7M6lcuyhZDQIO3jIocDGn2Wbm1</td>
-            <td>Awais Khalid</td>
-            <td>awais.khalid800@gmail.com</td>
-            <td>Kch b ni</td>
+        <tr *ngFor="let post of posts">
+            <td></td>
+            <td>{{post.key}}</td>
+            <td>{{post.post.name}}</td>
+            <td>{{post.post.email}}</td>
+            <td>{{post.post.acountType}}</td>
             <td>
-                <a href="https://shorturl.at/bmnTW" target="blank">
-                    <img src="https://shorturl.at/bmnTW" class="img-responsive tableImg" alt="image" />
+                <a href="{{post.post.profile_image}}" target="blank">
+                    <img src="{{post.post.profile_image}}" class="img-responsive tableImg" alt="image" />
                 </a>
             </td>
-            <!-- <td class="text-center">
+            <td class="text-center">
                        <form action="#" method="POST">
                            <button class="trash"><i class="fa fa-trash"></i></button>
-                       </form> 
-                    </td> -->
+                       </form>
+                    </td>
         </tr>
 
 

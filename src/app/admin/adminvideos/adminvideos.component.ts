@@ -8,20 +8,23 @@ import { AuthenticationService } from 'src/app/service/auth-service/authenticati
 })
 export class AdminvideosComponent implements OnInit {
 
-  videos =[];
+  posts = [];
 
-  constructor(private authService: AuthenticationService) { }
+  constructor(public authService: AuthenticationService) { }
 
   ngOnInit() {
-      this.authService.getAllVideos();
+    this.getAllVideos();
   }
   getAllVideos() {
 
 
-    this.authService.getAllVideos().subscribe((data: any) =>{
+    this.authService.getAllVideos().subscribe((data: any) => {
 
-    this.videos = data.data ;
+      this.posts = data.data;
+      console.log(this.posts);
 
     });
   }
+
+
 }
