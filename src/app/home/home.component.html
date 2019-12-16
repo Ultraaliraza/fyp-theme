@@ -2,7 +2,7 @@
 	<!-- Header -->
 	<header class="nav container-fluid">
 		<div class="logo">
-    <h1 id="logo">Helping Hand</h1>
+    <img src="https://firebasestorage.googleapis.com/v0/b/helpinghand-90a6a.appspot.com/o/Post%20Images%2Flogo.jpg?alt=media&token=627a433f-992a-4c41-b5d7-2f734fe4eed9" class="img-fluid">
         	</div>
 		<div class="bars ml-auto" id="openDrawer">
 			<i class="fas fa-bars fa-2x"></i>
@@ -32,13 +32,13 @@
 				<i class="fas fa-search" id="openSearch"></i>
 			</li>
 			<li class="dropdown">
-				<img src={{this.user.profile_image}} class="img-fluid accountSettingDropdown dropdown-toggle" id="accountSettingDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" />
-				<div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="margin-right:50px;">
-					<a class="dropdown-item"routerLink="/uprofile">Profile</a>
-					<a class="dropdown-item" routerLink="/settings">Settings</a>
-					<a class="dropdown-item" (click)="authService.logout()">Logout</a>
-				</div>
-			</li>
+        <img src={{this.user.profile_image}} class="img-fluid accountSettingDropdown dropdown-toggle" id="accountSettingDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" />
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="margin-right:50px;">
+          <a class="dropdown-item"routerLink="/uprofile">Profile</a>
+          <a class="dropdown-item" routerLink="/settings">Settings</a>
+          <a class="dropdown-item" href="#">Logout</a>
+        </div>
+      </li>
 		</ul>
 
 		<div id="drawer">

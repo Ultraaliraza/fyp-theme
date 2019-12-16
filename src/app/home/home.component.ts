@@ -41,7 +41,7 @@ export class HomeComponent implements OnInit {
         Date: new FormControl(),
         Name: new FormControl(this.user.name),
         acountType: new FormControl(this.user.acountType),
-        PostBy: new FormControl('pR0pfcDDZRS9l1MCIKkxQNUstw53'),
+        PostBy: new FormControl(id),
         PostImage: new FormControl(''),
         Postfile: new FormControl(''),
         Time: new FormControl(''),
@@ -52,11 +52,11 @@ export class HomeComponent implements OnInit {
       this.mydonationform = new FormGroup({
         Title: new FormControl(''),
         Description: new FormControl(''),
-        Category: new FormControl('education'),
+        Category: new FormControl('Donation'),
         Date: new FormControl(),
         Name: new FormControl(this.user.name),
         acountType: new FormControl(this.user.acountType),
-        PostBy: new FormControl(this.user.key),
+        PostBy: new FormControl(id),
         Postfile: new FormControl(''),
         PostImage: new FormControl(''),
         Time: new FormControl(''),
@@ -70,7 +70,7 @@ export class HomeComponent implements OnInit {
         Date: new FormControl(),
         UserName: new FormControl(this.user.name),
         acountType: new FormControl(this.user.acountType),
-        UploadedBy: new FormControl(this.user.key),
+        UploadedBy: new FormControl(id),
         Video: new FormControl(''),
         Time: new FormControl(''),
         Profile_Image: new FormControl(this.user.profile_image),
@@ -139,14 +139,26 @@ export class HomeComponent implements OnInit {
     this.mydonationform.controls.Date.setValue(time);
     this.mydonationform.controls.Time.setValue(time1);
 
-
     this.uploadfilesService.uploadFile()
-      .then((fileMeta) => {
-        this.myhomeform.controls.PostImage.setValue(fileMeta);
-        this.authService.getdonations(this.mydonationform.value).subscribe((data: any) => {
+    .then((urls) => {
+      this.mydonationform.controls.PostImage.setValue(urls['imageURL']);
+      this.mydonationform.controls.Postfile.setValue(urls['docURL']);
+
+      this.authService.getdonations(this.mydonationform.value)
+        .subscribe(() => {
           this.router.navigate(['/home']);
         });
-      });
+    });
+    this.uploadfilesService.uploadFile()
+    .then((urls) => {
+      this.myhomeform.controls.PostImage.setValue(urls['imageURL']);
+      this.myhomeform.controls.Postfile.setValue(urls['docURL']);
+
+      this.authService.home(this.mydonationform.value)
+        .subscribe(() => {
+          this.router.navigate(['/home']);
+        });
+    });
   }
 
 }

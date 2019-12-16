@@ -62,6 +62,7 @@ export class MotivatorComponent implements OnInit {
   getPOSTS() {
     this.authService.getPosts().subscribe((data: any) => {
       this.posts = data.data;
+      console.log(this.posts);
     });
   }
 }

@@ -2,7 +2,7 @@
         <!-- Header -->
         <header class="nav container-fluid">
             <div class="logo">
-                <img src="img/logo.png" class="img-fluid" alt="Logo">
+                <img src="https://firebasestorage.googleapis.com/v0/b/helpinghand-90a6a.appspot.com/o/Post%20Images%2Flogo.jpg?alt=media&token=627a433f-992a-4c41-b5d7-2f734fe4eed9" class="img-fluid" alt="Logo">
             </div>
             <div class="bars ml-auto" id="openDrawer">
                 <i class="fas fa-bars fa-2x"></i>
@@ -11,7 +11,7 @@
                 <li>
                     <a href="#">Home</a>
                 </li>
-                 
+
                 <li>
                         <a href="#">Messages</a>
                     </li>
@@ -26,15 +26,15 @@
                     <i class="fas fa-search" id="openSearch"></i>
                 </li>
                 <li class="dropdown">
-                    <img src="img/user.jpg" class="img-fluid accountSettingDropdown dropdown-toggle" id="accountSettingDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" />
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="margin-right:50px;">
-                        <a class="dropdown-item" href="#">Profile</a>
-                        <a class="dropdown-item" href="#">Settings</a>
-                        <a class="dropdown-item" href="#">Logout</a>
-                    </div>
+                  <img src={{this.user.profile_image}} class="img-fluid accountSettingDropdown dropdown-toggle" id="accountSettingDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" />
+                  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="margin-right:50px;">
+                    <a class="dropdown-item"routerLink="/uprofile">Profile</a>
+                    <a class="dropdown-item" routerLink="/settings">Settings</a>
+                    <a class="dropdown-item" href="#">Logout</a>
+                  </div>
                 </li>
             </ul>
-    
+
             <div id="drawer">
                 <div class="close-bars">
                     <button id="closeBars">
@@ -59,9 +59,9 @@
                     </li>
                 </ul>
             </div>
-    
+
         </header>
-    
+
         <!-- Body -->
         <div class="container-fluid">
             <div class="row">
@@ -103,7 +103,7 @@
                             <i class="fab fa-youtube"></i>
                             <a routerLink="/videos">Videos</a>
                         </li>
-    
+
                     </ul>
                 </div>
                 <div class="col-lg-6" id="middleDiv">
@@ -138,7 +138,7 @@
                             <ul class="left">
                                 <li>
                                     <i class="far fa-calendar"></i>
-                                    20 April, 2019		
+                                    20 April, 2019
                                 </li>
                             </ul>
                             <ul class="right">
@@ -172,7 +172,7 @@
                             <ul class="left">
                                 <li>
                                     <i class="far fa-calendar"></i>
-                                    20 April, 2019		
+                                    20 April, 2019
                                 </li>
                             </ul>
                             <ul class="right">
@@ -222,7 +222,7 @@
                                 </ul>
                             </div>
                         </div>
-    
+
                     </div>
                 </div>
                 <div *ngFor="let lastpost of lastposts"></div>
@@ -250,14 +250,14 @@
                         </div>
                     </div>
                     <br>
-    
-    
-    
+
+
+
                     <div class="box members">
                         <h3 class="title">Recent Joined Members</h3>
-    
+
                         <div *ngFor="let user of users">
-    
+
                             <div class="content">
                                 <!-- Member -->
                                 <div class="member">
@@ -269,13 +269,13 @@
                                         <p class="designation">{{user.post.acountType}}</p>
                                     </div>
                                 </div>
-    
+
                             </div>
                         </div>
                     </div>
                 </div>
                 <!-- Member -->
-    
+
                 <!-- <div class="member">
                                 <div class="thumbanil">
                                     <img src="img/user.jpg" class="img-fluid" />
@@ -315,12 +315,12 @@
                                     <p class="designation">Again no idea</p>
                                 </div> -->
                 <!-- </div> -->
-    
-                <!-- 				
+
+                <!--
                 </div>
             </div>
         </div> -->
-    
+
                 <!-- ======================= [ MODALS ] ============================= -->
                 <!-- <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
                     aria-hidden="true">
@@ -367,7 +367,7 @@
                         </div>
                     </div>
                 </div> -->
-    
+
                 <!-- ======================= [ MODALS ] ============================= -->
                 <div class="modal fade" id="donationsModal" tabindex="-1" role="dialog" aria-labelledby="donationsModalLabel"
                     aria-hidden="true">
@@ -401,7 +401,7 @@
                         </div>
                     </div>
                 </div>
-    
+
             </div>
         </div>
     </div>

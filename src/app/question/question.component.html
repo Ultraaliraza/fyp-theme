@@ -26,6 +26,14 @@
 			<li>
 				<input type="text" class="searchbox" placeholder="Search..." />
 				<i class="fas fa-search" id="openSearch"></i>
+      </li>
+      <li class="dropdown">
+				<img src={{this.user.profile_image}} class="img-fluid accountSettingDropdown dropdown-toggle" id="accountSettingDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" />
+				<div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="margin-right:50px;">
+					<a class="dropdown-item"routerLink="/uprofile">Profile</a>
+					<a class="dropdown-item" routerLink="/settings">Settings</a>
+					<a class="dropdown-item" (click)="authService.logout()">Logout</a>
+				</div>
 			</li>
 		</ul>
 
@@ -101,7 +109,7 @@
 			</div>
 			<div class="col-lg-6" id="middleDiv">
 				<div class="post">
-					
+
 							<h4 class="title">
 								{{posts.Title}}
 							</h4>
@@ -147,11 +155,11 @@
 									{{posts.Description}}
 								</p>
 							</div>
-							
+
 							<br><br>
 							<div class="clearfix"></div>
 						</div>
-						
+
 						<div class="clearfix"></div>
 						<a routerLink="/{{posts.Postfile}}" class="downloader" download="download">
 							<i class="fa fa-file"></i>
@@ -197,7 +205,7 @@
 											<img src="{{comments[commentkey].user_image}}" class="img-fluid" />
 										</div>
 										<div class="col-lg-10">
-											<p class="name">{{comments[commentkey].User_Name}}</p>
+											<p class="name">{{comments[commentkey].User_Name}} <span class="date">{{comments[commentkey].date}}</span> </p>
 											<p class="data">{{comments[commentkey].Comment}}</p>
 										</div>
 									</div>
@@ -205,8 +213,8 @@
 							</div>
 						</div>
 					</div>
-					
-		
+
+
 					<div class="col-lg-3" id="rightSidebar">
 						<div class="box questions">
 							<h3 class="title">Popular Questions</h3>

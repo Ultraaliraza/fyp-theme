@@ -24,9 +24,9 @@ let report = db.ref("/ReportPost");
 const auth = firebase.auth();
 
 app.use(cors({ origin: true }));
-app.use(bodyParser.json())
+app.use(bodyParser.json());
 
-app.post('/register', (req, res) => {
+app.post("/register", (req, res) => {
   const body = req.body;
   const profileBody = {
     email: body.email,
@@ -424,7 +424,6 @@ app.get("/getallquestion/:id", (req, res) => {
       });
       res.json({ data: questions });
     });
-  res.json({ data: questions });
 });
 
 // Getting
@@ -568,23 +567,6 @@ app.post("/postvideo", (req, res) => {
   res.json({ success: 1, data: postvideos });
 });
 
-app.get('/logout', (request, response) => {
-  auth.signOut()
-    .then(() => {
-      return response.status(200).send({ msg: 'User Loggedout' });
-    });
-});
-
-
-app.post("/currentuserinfo", (request, response) => {
-  const body = request.body;
-  let ref = db.ref("/Users/" + body.uid);
-  ref.on("value", snapshot => {
-    return response.status(200).send({ data: snapshot.val() });
-  });
-});
-
-
 // ----------------- Ali Updated Code
 
 // ====================== Admin ======================
@@ -698,6 +680,6 @@ app.get("/deletevideos/:id", (req, res) => {
     });
 });
 
-app.listen(3000, function () {
+app.listen(3000, function() {
   console.log("Server listening on port 3000");
 });

@@ -27,20 +27,22 @@ export class QuestionComponent implements OnInit {
   }
 
   ngOnInit() {
+    let id = localStorage.getItem('userMeta');
+
     this.authService.user.subscribe((user: any) => {
       this.user = user;
       this.commentform = new FormGroup({
         Comment: new FormControl(''),
         // Comment_by: new FormControl(user.key),
         // User_Name: new FormControl(this.user.name),
-        Comment_by: new FormControl(''),
-        User_Name: new FormControl(''),
+        Comment_by: new FormControl(id),
+        User_Name: new FormControl(this.user.name),
         date: new FormControl(''),
         time: new FormControl(''),
         postID: new FormControl(''),
 
-        // user_image: new FormControl(this.user.profile_image)
-        user_image: new FormControl('')
+        user_image: new FormControl(this.user.profile_image)
+        // user_image: new FormControl('')
 
       });
 

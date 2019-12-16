@@ -78,7 +78,7 @@ export class UploadfilesService {
     });
   }
 
-  //  Display selected file 
+  //  Display selected file
   onSelectFile(event) {
     if (event.target.files) {
       const file = event.target.files[0];

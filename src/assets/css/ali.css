@@ -42,7 +42,7 @@
 	color: rgba(14,19,24,.7);
 	font-weight: 400;
 	font-size: 16px;
-	text-decoration: none;	
+	text-decoration: none;
 	cursor: pointer;
 }
 .nav ul.menu li i{
@@ -291,7 +291,7 @@
 .models .body input, .models .body select{
 	width: 100%;
 	padding-left: 15px;
-	font-size: 15px;	
+	font-size: 15px;
 	border:1px solid #eee;
 	padding-top: 10px;
 	padding-bottom: 10px;
@@ -301,7 +301,7 @@
 	width: 100%;
 	height: 150px;
 	padding-left: 15px;
-	font-size: 15px;	
+	font-size: 15px;
 	border:1px solid #eee;
 	padding-top: 10px;
 	padding-bottom: 10px;
@@ -393,7 +393,7 @@
 #contactPage #form input{
 	width: 100%;
 	padding-left: 15px;
-	font-size: 15px;	
+	font-size: 15px;
 	border:1px solid #eee;
 	padding-top: 10px;
 	padding-bottom: 10px;
@@ -403,7 +403,7 @@
 	width: 100%;
 	height: 150px;
 	padding-left: 15px;
-	font-size: 15px;	
+	font-size: 15px;
 	border:1px solid #eee;
 	padding-top: 10px;
 	padding-bottom: 10px;
@@ -467,7 +467,7 @@
 	clear: left;
 	padding-top: 20px;
 	padding-bottom: 30px;
-	padding-left: 20px;	
+	padding-left: 20px;
 }
 #homePage .questionBox .title{
 	font-size:22px;
@@ -568,7 +568,7 @@
 	color: #f7f7f7;
 	font-weight: 500;
 	float: right;
-	margin-top: 10px;	
+	margin-top: 10px;
 }
 #PostPage #middleDiv .commentsDiv .wrapper{
 	margin-top: 50px;
@@ -808,7 +808,7 @@
 }
 .updateQuestion .header h4{
 	font-size: 20px;
-	font-weight:600;	
+	font-weight:600;
 	font-family: "Open Sans", sans-serif;
 }
 .updateQuestion input, .updateQuestion select, .updateQuestion textarea{
@@ -843,23 +843,23 @@
 .chatbox .bg-white {
 	background-color: #fff;
   }
-  
+
   .chatbox .friend-list {
 	list-style: none;
   margin-left: -40px;
   }
-  
+
   .chatbox .friend-list li {
 	border-bottom: 1px solid #eee;
   }
-  
+
   .chatbox .friend-list li a img {
 	float: left;
 	width: 45px;
 	height: 45px;
 	margin-right: 0px;
   }
-  
+
   .chatbox  .friend-list li a {
 	position: relative;
 	display: block;
@@ -870,33 +870,33 @@
 	-ms-transition: all .2s ease;
 	-o-transition: all .2s ease;
   }
-  
+
   .chatbox .friend-list li.active a {
 	background-color: #f1f5fc;
   }
-  
-  .chatbox .friend-list li a .friend-name, 
+
+  .chatbox .friend-list li a .friend-name,
   .chatbox .friend-list li a .friend-name:hover {
 	color: #777;
   }
-  
+
   .chatbox .friend-list li a .last-message {
 	width: 65%;
 	white-space: nowrap;
 	text-overflow: ellipsis;
 	overflow: hidden;
   }
-  
+
   .chatbox .friend-list li a .time {
 	position: absolute;
 	top: 10px;
 	right: 8px;
   }
-  
+
   .chatbox small,.chatbox  .small {
 	font-size: 85%;
   }
-  
+
   .chatbox .friend-list li a .chat-alert {
 	position: absolute;
 	right: 8px;
@@ -904,20 +904,20 @@
 	font-size: 10px;
 	padding: 3px 5px;
   }
-  
+
   .chatbox .chat-message {
 	padding: 60px 20px 115px;
   }
-  
+
   .chatbox .chat {
 	  list-style: none;
 	  margin: 0;
   }
-  
+
   .chatbox .chat-message{
-	  background: #f9f9f9;  
+	  background: #f9f9f9;
   }
-  
+
   .chatbox .chat li img {
 	width: 45px;
 	height: 45px;
@@ -925,20 +925,20 @@
 	-moz-border-radius: 50em;
 	-webkit-border-radius: 50em;
   }
-  
+
   .chatbox img {
 	max-width: 100%;
   }
-  
+
   .chatbox .chat-body {
 	padding-bottom: 20px;
   }
-  
+
   .chatbox .chat li.left .chat-body {
 	margin-left: 70px;
 	background-color: #fff;
   }
-  
+
   .chatbox .chat li .chat-body {
 	position: relative;
 	font-size: 11px;
@@ -948,17 +948,17 @@
 	-moz-box-shadow: 0 1px 1px rgba(0,0,0,.05);
 	-webkit-box-shadow: 0 1px 1px rgba(0,0,0,.05);
   }
-  
-  
+
+
   .chat li .chat-body .header {
 	padding-bottom: 5px;
 	border-bottom: 1px solid #f1f5fc;
   }
-  
+
   .chatbox .chat li .chat-body p {
 	margin: 0;
   }
-  
+
   .chatbox .chat li.left .chat-body:before {
 	position: absolute;
 	top: 10px;
@@ -976,7 +976,7 @@
 	-ms-transform: rotate(-45deg);
 	-o-transform: rotate(-45deg);
   }
-  
+
   .chatbox .chat li.right .chat-body:before {
 	position: absolute;
 	top: 10px;
@@ -994,16 +994,16 @@
 	-ms-transform: rotate(45deg);
 	-o-transform: rotate(45deg);
   }
-  
+
   .chatbox .chat li {
 	margin: 15px 0;
   }
-  
+
   .chatbox .chat li.right .chat-body {
 	margin-right: 70px;
 	background-color: #fff;
   }
-  
+
   .chatbox .chat-box {
 	position: fixed;
 	bottom: 0;
@@ -1017,11 +1017,11 @@
 	-ms-transition: all .5s ease;
 	-o-transition: all .5s ease;
   }
-  
+
   .chatbox .primary-font {
 	color: #3c8dbc;
   }
-  
+
   .chatbox a:hover, .chatbox a:active, .chatbox a:focus {
 	text-decoration: none;
 	outline: 0;
@@ -1050,10 +1050,10 @@
   @media screen and (max-width:700px){
 	.cover .img{
 		/* float: left; */
-	}  
+	}
 	.cover .img img{
 		float: left;
-	}  
+	}
 	.cover .content{
 		float: right;
 	  }
@@ -1066,4 +1066,22 @@
 	.about .Questions .title{
 		margin-left: -65px;
 	}
+  }
+  .comment .date{
+    font-size:14px;
+    margin-left: 10px;
+  }
+ .embed-responsive video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    z-index: 0;
+    -ms-transform: translateX(-50%) translateY(-50%);
+    -moz-transform: translateX(-50%) translateY(-50%);
+    -webkit-transform: translateX(-50%) translateY(-50%);
+    transform: translateX(-50%) translateY(-50%);
   }

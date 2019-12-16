@@ -4,7 +4,7 @@
             <!-- Header -->
             <header class="nav container-fluid">
                 <div class="logo">
-                    <img src="img/logo.png" class="img-fluid" alt="Logo">
+                    <img src="https://firebasestorage.googleapis.com/v0/b/helpinghand-90a6a.appspot.com/o/Post%20Images%2Flogo.jpg?alt=media&token=627a433f-992a-4c41-b5d7-2f734fe4eed9" class="img-fluid" alt="Logo">
                 </div>
                 <div class="bars ml-auto" id="openDrawer">
                     <i class="fas fa-bars fa-2x"></i>
@@ -29,18 +29,16 @@
                         <input type="text" class="searchbox" placeholder="Search..." />
                         <i class="fas fa-search" id="openSearch"></i>
                     </li>
-                    <li>
-                        <img src="img/user.jpg" class="img-fluid accountSettingDropdown" id="accountSettingDropdown" />
-                        <div class="dropdownPicture" id="dropdownPicture">
-                            <div class="options">
-                                <p><a href="#">Profile</a></p>
-                                <p><a href="#">Settings</a></p>
-                                <p><a href="#">Logout</a></p>
-                            </div>
-                        </div>
+                    <li class="dropdown">
+                      <img src={{this.user.profile_image}} class="img-fluid accountSettingDropdown dropdown-toggle" id="accountSettingDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" />
+                      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="margin-right:50px;">
+                        <a class="dropdown-item"routerLink="/uprofile">Profile</a>
+                        <a class="dropdown-item" routerLink="/settings">Settings</a>
+                        <a class="dropdown-item" href="#">Logout</a>
+                      </div>
                     </li>
                 </ul>
-        
+
                 <div id="drawer">
                     <div class="close-bars">
                         <button id="closeBars">
@@ -65,9 +63,9 @@
                         </li>
                     </ul>
                 </div>
-        
+
             </header>
-        
+
             <!-- Body -->
             <div class="wrapper">
                 <div class="container-fluid topBar">
@@ -108,14 +106,7 @@
                                 </ul>
                             </div>
                             <div class='rate_widget'>
-                                <p class="head">Rating</p>
-                                <ul id="rating">
-                                    <li><a class='one-star checked'><i class="fas fa-star"></i></a></li>
-                                    <li><a class='two-stars checked'><i class="fas fa-star"></i></a></li>
-                                    <li><a class='three-stars checked'><i class="fas fa-star"></i></a></li>
-                                    <li><a class='four-stars checked'><i class="fas fa-star"></i></a></li>
-                                    <li><a class='five-stars'><i class="fas fa-star"></i></a></li>
-                                </ul>
+                                <p class="head"><span>Wah</span>, <span>Pakistan</span></p>
                             </div>
                         </div>
                     </div>
@@ -130,7 +121,7 @@
                         </div >
                         <div class="col-lg-7 Questions">
                             <h4 class="title">Questions</h4>
-                            <div *ngFor="let post of question">
+                            <!-- <div *ngFor="let post of question"> -->
                             <ol>
                                 <li>
                                     <div class="row controllers">
@@ -144,12 +135,11 @@
                                     </div>
                                 </li>
                             </ol>
-                        </div>
+                        <!-- </div> -->
                     </div>
                     </div>
                 </div>
             </div>
         </div>
-                
-        
-        
+
+

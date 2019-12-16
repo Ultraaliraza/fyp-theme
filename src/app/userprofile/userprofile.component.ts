@@ -14,6 +14,7 @@ user ;
   constructor(private authService: AuthenticationService) { }
 
   ngOnInit() {
+    let id = localStorage.getItem('userMeta');
     this.authService.user.subscribe((user: any) => {
       this.user = user;
     });
