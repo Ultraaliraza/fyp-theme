@@ -8,19 +8,25 @@ import { AuthenticationService } from 'src/app/service/auth-service/authenticati
 })
 export class PostsComponent implements OnInit {
 
-  Posts = [];
+  posts = [];
 
   constructor(private authService: AuthenticationService) { }
 
   ngOnInit() {
 
-    this.authService.getAllPosts();
+    this.getAllPosts();
   }
-  getAlllPosts() {
+  getAllPosts() {
 
     this.authService.getAllPosts().subscribe((data: any) => {
-      this.Posts = data.data;
+      this.posts = data.data;
+      console.log(this.posts);
 
     });
+  }
+  delete(id) {
+    console.log(id);
+    this.authService.deletePosts(id);
+
   }
 }

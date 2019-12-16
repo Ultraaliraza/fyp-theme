@@ -28,7 +28,7 @@
 					<i class="fas fa-search" id="openSearch"></i>
 				</li>
 			</ul>
-	
+
 			<div id="drawer">
 				<div class="close-bars">
 					<button id="closeBars">
@@ -53,9 +53,9 @@
 					</li>
 				</ul>
 			</div>
-	
+
 		</header>
-	
+
 		<!-- Body -->
 		<div class="container-fluid">
 			<div class="row">
@@ -101,20 +101,18 @@
 				</div>
 				<div class="col-lg-6" id="middleDiv">
 					<div class="post">
-						
+
 								<h4 class="title">
-									{{posts.Title}}
+									{{posts.Details}}
 								</h4>
 								<a href="#">
 									<button class="editPost">
 										<i class="fa fa-pencil"></i>
 									</button>
 								</a>
-								<div class="thumbnail">
-									<a href={{posts.PostImage}} target="blank">
-										<img src={{posts.PostImage}} class="img-fluid" />
-									</a>
-								</div>
+                <div class="embed-responsive embed-responsive-16by9">
+                    <iframe class="embed-responsive-item" src="{{posts.Video}}" allowfullscreen></iframe>
+                  </div>
 								<div class="meta">
 									<ul class="left">
 										<li>
@@ -137,7 +135,7 @@
 											<span data-toggle="modal" data-target="#reportQuestionModel"
 												style="cursor: pointer;">Report</span>
 										</li>
-	
+
 									</ul>
 								</div>
 								<div class="clearfix"></div>
@@ -147,11 +145,11 @@
 										{{posts.Description}}
 									</p>
 								</div>
-								
+
 								<br><br>
 								<div class="clearfix"></div>
 							</div>
-						
+
 							<br><br>
 							<div class="clearfix"></div>
 							<div class="commentsDiv">
@@ -199,8 +197,8 @@
 								</div>
 							</div>
 						</div>
-						
-			
+
+
 						<div class="col-lg-3" id="rightSidebar">
 							<div class="box questions">
 								<h3 class="title">Popular Questions</h3>
@@ -211,11 +209,11 @@
 									</p>
 								</div>
 							</div></div>
-	
+
 							<div class="box members">
 								<h3 class="title">Popular Members</h3>
 								<div *ngFor="let user of users" >
-	
+
 								<div class="content">
 									<!-- Member -->
 									<div class="member">
@@ -227,17 +225,17 @@
 											<p class="designation">{{user.post.acountType}}</p>
 										</div>
 									</div>
-	
+
 								</div>
 								</div>
 							</div>
-	
+
 						</div>
 					</div>
 				</div>
 			<!-- </div> -->
 		</div>
-	
+
 		<script>
 			var btn = document.getElementById('closeReportQuestionModel');
 			var model = document.getElementById('reportQuestionModel');
@@ -246,7 +244,7 @@
 				model.css('display', 'none');
 			}
 		</script>
-	
+
 		<div class="modal fade models reportQuestionModel" id="reportQuestionModel">
 			<!-- <div class="close" id="closeReportQuestionModel"
 				style="cursor:pointer;color:#555;float:right;margin-right: 5px;margin-top: 5px;">
@@ -279,12 +277,12 @@
 					<div class="">
 						<button class="submit" type="submit">Post</button>
 					</div>
-	
-	
+
+
 				</form>
-	
-	
-	
+
+
+
 			</div>
 		 </div>
 		</div>

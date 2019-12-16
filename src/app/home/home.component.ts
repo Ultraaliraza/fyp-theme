@@ -57,23 +57,23 @@ export class HomeComponent implements OnInit {
         Name: new FormControl(this.user.name),
         acountType: new FormControl(this.user.acountType),
         PostBy: new FormControl(this.user.key),
+        Postfile: new FormControl(''),
         PostImage: new FormControl(''),
         Time: new FormControl(''),
-        profile_image: new FormControl(''),
-        id: new FormControl('')
+        User_profile_image: new FormControl(this.user.profile_image),
+        Id: new FormControl('')
 
       });
       this.myvideoform = new FormGroup({
         Title: new FormControl(''),
-        Description: new FormControl(''),
-        Category: new FormControl('education'),
+        Details: new FormControl(''),
         Date: new FormControl(),
-        Name: new FormControl(this.user.name),
+        UserName: new FormControl(this.user.name),
         acountType: new FormControl(this.user.acountType),
-        PostBy: new FormControl(this.user.key),
+        UploadedBy: new FormControl(this.user.key),
         Video: new FormControl(''),
         Time: new FormControl(''),
-        profile_image: new FormControl(this.user.profile_image),
+        Profile_Image: new FormControl(this.user.profile_image),
         id: new FormControl('')
 
       });

@@ -2,14 +2,14 @@
 	<!-- Header -->
 	<header class="nav container-fluid">
 		<div class="logo">
-			<img src="" class="img-fluid" alt="Logo">
-		</div>
+    <h1 id="logo">Helping Hand</h1>
+        	</div>
 		<div class="bars ml-auto" id="openDrawer">
 			<i class="fas fa-bars fa-2x"></i>
 		</div>
 		<ul class="menu ml-auto" id="navLaptop">
 			<li>
-				<a href="#">Home</a>
+				<a routerLink="/home">Home</a>
 			</li>
 			<li>
 				<a href="#" data-toggle="modal" data-target="#exampleModal">Raise Question</a>
@@ -21,9 +21,9 @@
 					<a href="#" data-toggle="modal" data-target="#VideoModal">Upload Video</a>
 				</li>
 			<li>
-					<a href="#">Messages</a>
+					<a routerLink="/messages">Messages</a>
 				</li>
-			
+
 			<li>
 				<a href="#">Contact Us</a>
 			</li>
@@ -144,7 +144,7 @@
 						<ul class="left">
 							<li>
 								<i class="far fa-calendar"></i>
-								20 April, 2019		
+								20 April, 2019
 							</li>
 						</ul>
 						<ul class="right">
@@ -178,7 +178,7 @@
 						<ul class="left">
 							<li>
 								<i class="far fa-calendar"></i>
-								20 April, 2019		
+								20 April, 2019
 							</li>
 						</ul>
 						<ul class="right">
@@ -322,7 +322,7 @@
 							</div> -->
 			<!-- </div> -->
 
-			<!-- 				
+			<!--
 			</div>
 		</div>
 	</div> -->
@@ -388,9 +388,9 @@
 						<div class="modal-body">
 							<form [formGroup]="myvideoform" (ngSubmit)="videoFrom()">
 								<div class="form-group">
-									<input type="text" formControlName="Details" placeholder="Your Video Title" />
+									<input type="text" formControlName="Title" placeholder="Your Video Title" />
 								</div>
-								<div class="form-group">
+								<!-- <div class="form-group">
 									<select class="form-group" formControlName="Category">
 										<option selected disabled>Choose Category</option>
 										<option value="Education">Education</option>
@@ -402,13 +402,13 @@
 										<option value="Proverty">Proverty</option>
 										<option value="Others">Others</option>
 									</select>
-								</div>
+								</div> -->
 								<div class="form-group">
 									<input type="file" accept=".MP4, .3GP ,.WEBM ,.M4P ,.MKV" (change)="uploadfilesService.onSelectFile($event)" />
 								</div>
-								
+
 								<div class="form-group">
-									<textarea placeholder="Your Content" formControlName="Description"></textarea>
+									<textarea placeholder="Your Content" formControlName="Details"></textarea>
 								</div>
 								<div class="">
 									<button class="submit">Post</button>

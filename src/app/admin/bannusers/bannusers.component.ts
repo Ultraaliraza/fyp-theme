@@ -7,18 +7,19 @@ import { AuthenticationService } from 'src/app/service/auth-service/authenticati
   styleUrls: ['./bannusers.component.css']
 })
 export class BannusersComponent implements OnInit {
-  Bann = [];
+     posts =[];
   constructor(private authService: AuthenticationService) { }
 
   ngOnInit() {
 
-    this.authService.getAllBannUsers();
+    this.getAllUsers();
   }
-  getAllBannUsers() {
+  getAllUsers() {
 
-    this.authService.getAllBannUsers().subscribe((data: any) => {
+    this.authService.getAllUsers().subscribe((data: any) => {
 
-      this.Bann = data.data;
+      this.posts = data.data;
+      console.log(this.posts);
 
     });
   }

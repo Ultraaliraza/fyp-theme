@@ -23,7 +23,7 @@
 				<li>
 						<a href="#">Messages</a>
 					</li>
-				
+
 				<li>
 					<a href="#">Contact Us</a>
 				</li>
@@ -40,7 +40,7 @@
 					</div>
 				</li>
 			</ul>
-	
+
 			<div id="drawer">
 				<div class="close-bars">
 					<button id="closeBars">
@@ -65,9 +65,9 @@
 					</li>
 				</ul>
 			</div>
-	
+
 		</header>
-	
+
 		<!-- Body -->
 		<div class="container-fluid">
 			<div class="row">
@@ -109,7 +109,7 @@
 							<i class="fab fa-youtube"></i>
 							<a routerLink="/videos">Videos</a>
 						</li>
-	
+
 					</ul>
 				</div>
 				<div class="col-lg-6" id="middleDiv">
@@ -144,7 +144,7 @@
 							<ul class="left">
 								<li>
 									<i class="far fa-calendar"></i>
-									20 April, 2019		
+									20 April, 2019
 								</li>
 							</ul>
 							<ul class="right">
@@ -178,7 +178,7 @@
 							<ul class="left">
 								<li>
 									<i class="far fa-calendar"></i>
-									20 April, 2019		
+									20 April, 2019
 								</li>
 							</ul>
 							<ul class="right">
@@ -228,7 +228,7 @@
 								</ul>
 							</div>
 						</div>
-	
+
 					</div>
 				</div>
 				<div *ngFor="let lastpost of lastposts"></div>
@@ -256,14 +256,14 @@
 						</div>
 					</div>
 					<br>
-	
-	
-	
+
+
+
 					<div class="box members">
 						<h3 class="title">Recent Joined Members</h3>
-	
+
 						<div *ngFor="let user of users">
-	
+
 							<div class="content">
 								<!-- Member -->
 								<div class="member">
@@ -275,13 +275,13 @@
 										<p class="designation">{{user.post.acountType}}</p>
 									</div>
 								</div>
-	
+
 							</div>
 						</div>
 					</div>
 				</div>
 				<!-- Member -->
-	
+
 				<!-- <div class="member">
 								<div class="thumbanil">
 									<img src="img/user.jpg" class="img-fluid" />
@@ -321,12 +321,12 @@
 									<p class="designation">Again no idea</p>
 								</div> -->
 				<!-- </div> -->
-	
-				<!-- 				
+
+				<!--
 				</div>
 			</div>
 		</div> -->
-	
+
 				<!-- ======================= [ MODALS ] ============================= -->
 				<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
 					aria-hidden="true">
@@ -373,7 +373,7 @@
 						</div>
 					</div>
 				</div>
-	
+
 				<!-- ======================= [ MODALS ] ============================= -->
 				<div class="modal fade" id="VideoModal" tabindex="-1" role="dialog" aria-labelledby="VideoModalLabel"
 					aria-hidden="true">
@@ -390,7 +390,7 @@
 									<div class="form-group">
 										<input type="text" formControlName="Title" placeholder="Your Video Title" />
 									</div>
-									<div class="form-group">
+									<!-- <div class="form-group">
 										<select class="form-group" formControlName="Category">
 											<option selected disabled>Choose Category</option>
 											<option value="Education">Education</option>
@@ -402,11 +402,11 @@
 											<option value="Proverty">Proverty</option>
 											<option value="Others">Others</option>
 										</select>
-									</div>
+									</div> -->
 									<div class="form-group">
 										<input type="file" accept=".MP4, .3GP ,.WEBM ,.M4P" (change)="uploadfilesService.onSelectFile($event)" />
 									</div>
-									
+
 									<div class="form-group">
 										<textarea placeholder="Your Content" formControlName="Description"></textarea>
 									</div>
@@ -418,7 +418,7 @@
 						</div>
 					</div>
 				</div>
-	
+
 				<!-- ======================= [ MODALS ] ============================= -->
 				<div class="modal fade" id="donationsModal" tabindex="-1" role="dialog" aria-labelledby="donationsModalLabel"
 					aria-hidden="true">
@@ -452,7 +452,7 @@
 						</div>
 					</div>
 				</div>
-	
+
 			</div>
 		</div>
 	</div>

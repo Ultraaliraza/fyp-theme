@@ -12,9 +12,9 @@ export class AuthenticationService {
     throw new Error("Method not implemented.");
   }
   keyvalue = '';
-  // apiHeader = 'http://localhost:3000/';
+  apiHeader = 'http://localhost:3000/';
   // apiHeader = 'https://us-central1-helpinghand-90a6a.cloudfunctions.net/apis/';
-  apiHeader = 'http://localhost:5000/helpinghand-90a6a/us-central1/apis/';
+  // apiHeader = 'http://localhost:5000/helpinghand-90a6a/us-central1/apis/';
 
   user = new BehaviorSubject({});
   post = new BehaviorSubject({});
@@ -223,9 +223,9 @@ export class AuthenticationService {
 
 
   }
-  // getVideoData(key: any) {
-  //   return this.http.get(this.apiHeader + 'getVideos/' +Key);
-  // }
+  getVideoData(key: any) {
+    return this.http.get(this.apiHeader + 'getVideos/' + key);
+  }
 
   //All Admin Panel Paths
 
@@ -251,20 +251,16 @@ export class AuthenticationService {
   }
   getAllUsers() {
 
-    return this.http.get(this.apiHeader + 'getallusers');
-  }
-
-  Deleteuser() {
-    return this.http.get(this.apiHeader + '/changeuserstatus');
+    return this.http.get(this.apiHeader + 'users');
   }
 
   getAllDonations() {
-    return this.http.get(this.apiHeader + '/donations');
+    return this.http.get(this.apiHeader + 'donors');
   }
 
   getAllPosts() {
 
-    return this.http.get(this.apiHeader + '/posts');
+    return this.http.get(this.apiHeader + 'posts');
   }
 
   getAllReports() { // New Code by ALIRAZA
@@ -297,4 +293,27 @@ export class AuthenticationService {
       this.router.navigate(['/']);
     })
   }
+  deleteDonations(id: any) {
+
+    return this.http.get(this.apiHeader + 'deletedonations/' + id);
+  }
+
+  deleteUsers(id: any) {
+
+    // return this.http.get(this.apiHeader + '/', + id);
+  }
+
+
+  deleteVideos(id: any) {
+    console.log(id);
+    return this.http.get(this.apiHeader + 'deletevideos/' + id);
+  }
+
+  deletePosts(id: any) {
+
+    console.log(id);
+
+    return this.http.get(this.apiHeader + 'deletepost/' + id);
+  }
+
 }

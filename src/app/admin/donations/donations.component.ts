@@ -8,20 +8,28 @@ import { AuthenticationService } from 'src/app/service/auth-service/authenticati
 })
 export class AdminDonationsComponent implements OnInit {
 
-  donations = [];
+  posts = [];
+  key;
   constructor(private authService: AuthenticationService) { }
 
   ngOnInit() {
 
-    this.authService.getAllDonations();
+    this.getAllDonations();
   }
 
   getAllDonations() {
 
     this.authService.getAllDonations().subscribe((data: any) => {
-      this.donations = data.data;
+      this.posts = data.data;
+      console.log(this.posts);
 
 
     });
+  }
+  delete(id) {
+
+    console.log(id);
+
+    this.authService.deleteDonations(id);
   }
 }

@@ -8,19 +8,20 @@ import { AuthenticationService } from 'src/app/service/auth-service/authenticati
 })
 export class ReportsComponent implements OnInit {
 
-  Reports = [];
+  posts = [];
 
   constructor(private authService: AuthenticationService) { }
 
   ngOnInit() {
-    this.authService.getAllReports();
+    this.getAllReports();
   }
   getAllReports() {
 
 
     this.authService.getAllReports().subscribe((data: any) => {
 
-      this.Reports = data.data;
+      this.posts = data.data;
+      console.log(this.posts);
 
     });
   }

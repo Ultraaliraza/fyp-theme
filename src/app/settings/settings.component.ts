@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UploadfilesService } from '../service/uploadfiles.service';
 import { AuthenticationService } from '../service/auth-service/authentication.service';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-settings',
@@ -26,10 +26,14 @@ export class SettingsComponent implements OnInit {
      this.user = localStorage.getItem('userMeta');
 
     this.settings = new FormGroup({
-      Profile_Image: new FormControl(''),
+      profile_image: new FormControl(''),
       about: new FormGroup({
 
         aboutnote: new FormControl(''),
+        city: new FormControl('', Validators.required),
+        country: new FormControl('',Validators.required),
+        phonenumber: new FormControl(''),
+
         facebook: new FormControl(''),
         instagram: new FormControl(''),
         twitter: new FormControl(''),

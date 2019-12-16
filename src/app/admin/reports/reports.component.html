@@ -20,25 +20,28 @@
             <th>ID</th>
             <th>Reason</th>
             <th>Report By</th>
+            <th>Reporter Email</th>
             <th>Post ID</th>
             <th>Message</th>
             <!-- <th>Delete</th> -->
         </tr>
     </thead>
     <tbody>
-        <tr>
-            <td>1</td>
-            <td>rf7M6lcuyhZDQIO3jIocDGn2Wbm1</td>
-            <td>Awais Khalid</td>
-            <td>awais.khalid800@gmail.com</td>
-            <td>Kch b ni</td>
+        <tr *ngFor="let post of posts">
+            <td></td>
+            <td>{{post.key}}</td>
+            <td>{{post.post.Reason}}</td>
+            <td>{{post.post.Name}}</td>
+            <td>{{post.post.Email}}</td>
+
+            <td>{{post.post.PostID}}</td>
             <td>
                 Message
             </td>
             <!-- <td class="text-center">
                        <form action="#" method="POST">
                            <button class="trash"><i class="fa fa-trash"></i></button>
-                       </form> 
+                       </form>
                     </td> -->
         </tr>
 
