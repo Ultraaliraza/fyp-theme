@@ -20,7 +20,6 @@ import { EditComponent } from 'src/app/edit/edit.component';
 import { MessagesComponent } from 'src/app/messages/messages.component';
 import { WatchvideoComponent } from 'src/app/watchvideo/watchvideo.component';
 import { AdminComponent } from 'src/app/admin/admin.component';
-import { UsersComponent } from 'src/app/admin/users/users.component';
 import { AdminvideosComponent } from 'src/app/admin/adminvideos/adminvideos.component';
 import { AdminDonationsComponent } from 'src/app/admin/donations/donations.component';
 import { BannusersComponent } from 'src/app/admin/bannusers/bannusers.component';
