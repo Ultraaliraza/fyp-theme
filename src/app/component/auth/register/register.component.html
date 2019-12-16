@@ -35,6 +35,9 @@
                         <div>
                             <input class="form-control" type="password" formControlName="password"
                                 placeholder="Password">
+                                <small class="text-danger"
+                                *ngIf="!form.password.valid">Minimum 8 character Password
+                            </small>
                         </div>
 
                         <select name="type" class="form-control" formControlName="acountType">

@@ -12,9 +12,9 @@ export class AuthenticationService {
     throw new Error("Method not implemented.");
   }
   keyvalue = '';
-  // apiHeader = 'http://localhost:3000/';
+  apiHeader = 'http://localhost:3000/';
   // apiHeader = 'https://us-central1-helpinghand-90a6a.cloudfunctions.net/apis/';
-  apiHeader = 'http://localhost:5000/helpinghand-90a6a/us-central1/apis/';
+  // apiHeader = 'http://localhost:5000/helpinghand-90a6a/us-central1/apis/';
 
   user = new BehaviorSubject({});
   post = new BehaviorSubject({});
@@ -223,9 +223,9 @@ export class AuthenticationService {
 
 
   }
-  // getVideoData(key: any) {
-  //   return this.http.get(this.apiHeader + 'getVideos/' +Key);
-  // }
+  getVideoData(key: any) {
+    return this.http.get(this.apiHeader + 'getVideos/' + key);
+  }
 
   //All Admin Panel Paths
 

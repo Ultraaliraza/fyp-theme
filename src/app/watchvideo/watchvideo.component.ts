@@ -25,18 +25,19 @@ export class WatchvideoComponent implements OnInit {
     private formbuilder: FormBuilder) { }
 
   ngOnInit() {
-    // this.route.params.subscribe(postID => {
-    //   this.postID = postID.key;
-    //   // this.authService.getVideos(postID.key)
-    //     .subscribe((post: any) => {
-    //       this.posts = post.data.post;
-    //       this.comments = this.posts.Comments;
-    //       console.log(this.posts);
-    //       console.log(this.comments);
-    //       this.commentkeys = Object.keys(this.comments);
-    //       console.log(this.commentkeys);
-    //     });
-    // });
+    this.route.params.subscribe(postID => {
+      this.postID = postID.key;
+      this.authService.getVideoData(postID.key)
+        .subscribe((post: any) => {
+          this.posts = post.data.post;
+          this.comments = this.posts.Comments;
+          console.log(this.posts);
+          console.log(this.comments);
+          this.commentkeys = Object.keys(this.comments);
+          console.log(this.commentkeys);
+        });
+    });
+
   }
 
 }

@@ -26,15 +26,15 @@ export class MotivatorComponent implements OnInit {
       this.user = user;
       this.myvideoform = new FormGroup({
         Title: new FormControl(''),
-        Description: new FormControl(''),
+        Details: new FormControl(''),
         Category: new FormControl('education'),
         Date: new FormControl(),
-        Name: new FormControl(this.user.name),
+        UserName: new FormControl(this.user.name),
         acountType: new FormControl(this.user.acountType),
-        PostBy: new FormControl(this.user.key),
-        PostVideo: new FormControl(''),
+        UploadedBy: new FormControl(this.user.key),
+        Video: new FormControl(''),
         Time: new FormControl(''),
-        profile_image: new FormControl(''),
+        Profile_Image: new FormControl(''),
         id: new FormControl('')
 
       });
