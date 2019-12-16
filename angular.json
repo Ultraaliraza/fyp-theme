@@ -23,7 +23,6 @@
               "src/assets"
             ],
             "styles": [
-
               "src/assets/css/fontawesome-all.min.css",
               "src/assets/css/iofrm-style.css",
               "src/assets/css/iofrm-theme12.css",
@@ -31,9 +30,6 @@
             ],
             "scripts": [
               "src/assets/js/custom.js",
-              "src/assets/js/bootstrap.min.js",
-              "src/assets/js/jquery.js"
-
             ],
             "es5BrowserSupport": true
           },

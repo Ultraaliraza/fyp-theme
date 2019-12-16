@@ -2,28 +2,10 @@
   font-family: 'Poppins', Arial, sans-serif;
 }
 
-.home .panel .panel-widget {
-  background: #eee;
-  padding-top: 40px;
-  padding-bottom: 40px;
-  text-align: center;
-}
-
-.home .panel .panel-widget .large {
-  font-size: 20px;
-  font-weight: 600;
-}
-
-.home .panel .panel-widget .text-muted {
-  font-size: 16px;
-  margin-top: 15px;
-}
-
 .adminAside .sidebar {
   height: 100vh;
   position: absolute;
   left: 0;
-  top: 0;
   background: #e9e9e9;
 }
 
@@ -85,4 +67,80 @@ header {
 
 .home table.table .tableImg {
   width: 70px;
+}
+
+/* =================== Bootstrap */
+.img-responsive {
+  display: block;
+  max-width: 100%;
+  height: auto
+}
+
+.divider {
+  height: 1px;
+  margin: 9px 0;
+  overflow: hidden;
+  background-color: #e5e5e5
+}
+
+.home ::ng-deep nav {
+  width: 100%;
+}
+
+.admin-nav {
+  padding-left: 0;
+  margin-bottom: 0;
+  list-style: none
+}
+
+.admin-nav>li {
+  position: relative;
+  display: block
+}
+
+.admin-nav>li>a {
+  position: relative;
+  display: block;
+  padding: 10px 15px
+}
+
+.admin-nav>li>a:focus,
+.admin-nav>li>a:hover {
+  text-decoration: none;
+  background-color: #eee
+}
+
+.admin-nav>li.disabled>a {
+  color: #777
+}
+
+.admin-nav>li.disabled>a:focus,
+.admin-nav>li.disabled>a:hover {
+  color: #777;
+  text-decoration: none;
+  cursor: not-allowed;
+  background-color: transparent
+}
+
+.admin-nav .open>a,
+.admin-nav .open>a:focus,
+.admin-nav .open>a:hover {
+  background-color: #eee;
+  border-color: #337ab7
+}
+
+.admin-nav:after {
+  clear: both
+}
+
+.page-header {
+  padding-bottom: 9px;
+  margin: 40px 0 20px;
+  border-bottom: 1px solid #eee
+}
+
+
+.home ::ng-deep .breadcrumb {
+  border-radius: 0;
+  padding: 5px 10px;
 }

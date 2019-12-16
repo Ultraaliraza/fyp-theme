@@ -27,7 +27,6 @@ import { MessagesComponent } from 'src/app/messages/messages.component';
 import { AdminComponent } from 'src/app/admin/admin.component';
 import { WatchvideoComponent } from 'src/app/watchvideo/watchvideo.component';
 import { SidebarComponent } from 'src/app/admin/sidebar/sidebar.component';
-import { UsersComponent } from 'src/app/admin/users/users.component';
 import { BannusersComponent } from 'src/app/admin/bannusers/bannusers.component';
 import { PostsComponent } from 'src/app/admin/posts/posts.component';
 import { ReportsComponent } from 'src/app/admin/reports/reports.component';
@@ -59,7 +58,6 @@ import { AdminDashboardComponent } from 'src/app/admin/admin-dashboard/admin-das
     AdminComponent,
     WatchvideoComponent,
     SidebarComponent,
-    UsersComponent,
     AdminDonationsComponent,
     BannusersComponent,
     PostsComponent,
