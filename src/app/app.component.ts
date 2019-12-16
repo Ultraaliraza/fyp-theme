@@ -24,7 +24,7 @@ export class AppComponent implements OnInit {
     };
     // Initialize Firebase
     firebase.initializeApp(firebaseConfig);
-    
+    this.auth.getcurrentuserinfo();
   }
-   
+
 }

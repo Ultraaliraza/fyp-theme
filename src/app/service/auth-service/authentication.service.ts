@@ -280,4 +280,21 @@ export class AuthenticationService {
 
   }
 
+  getcurrentuserinfo() {
+    let id = { uid: localStorage.getItem('userMeta') };
+    if (id.uid) {
+      this.http.post(this.apiHeader + 'currentuserinfo', id)
+        .subscribe((userinfo) => {
+          console.log(userinfo);
+          this.user.next(userinfo['data']);
+        })
+    }
+  }
+
+  logout() {
+    return this.http.get(this.apiHeader + 'logout').subscribe(() => {
+      localStorage.clear();
+      this.router.navigate(['/']);
+    })
+  }
 }

@@ -45,7 +45,7 @@ export class HomeComponent implements OnInit {
         PostImage: new FormControl(''),
         Postfile: new FormControl(''),
         Time: new FormControl(''),
-       User_profile_image: new FormControl(this.user.profile_image),
+        User_profile_image: new FormControl(this.user.profile_image),
         id: new FormControl('')
       });
 
@@ -108,14 +108,14 @@ export class HomeComponent implements OnInit {
     this.myhomeform.controls.Date.setValue(time);
     this.myhomeform.controls.Time.setValue(time1);
     this.uploadfilesService.uploadFile()
-      .then((fileMeta) => {
-        // tslint:disable-next-line:no-string-literal
-        // this.myhomeform.controls.PostImage.setValue(fileMeta['url']);
-        this.authService.home(this.myhomeform.value).subscribe((data: any) => {
+      .then((urls) => {
+        this.myhomeform.controls.PostImage.setValue(urls['imageURL']);
+        this.myhomeform.controls.Postfile.setValue(urls['docURL']);
 
-          console.log(this.myhomeform.value);
-          this.router.navigate(['/home']);
-        });
+        this.authService.home(this.myhomeform.value)
+          .subscribe(() => {
+            this.router.navigate(['/home']);
+          });
       });
   }
   videoFrom() {
