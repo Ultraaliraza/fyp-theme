@@ -32,9 +32,8 @@
                     <li class="dropdown">
                       <img src={{this.user.profile_image}} class="img-fluid accountSettingDropdown dropdown-toggle" id="accountSettingDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" />
                       <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="margin-right:50px;">
-                        <a class="dropdown-item"routerLink="/uprofile">Profile</a>
                         <a class="dropdown-item" routerLink="/settings">Settings</a>
-                        <a class="dropdown-item" href="#">Logout</a>
+                        <a class="dropdown-item" (click)="authService.logout()">Logout</a>
                       </div>
                     </li>
                 </ul>
@@ -76,7 +75,7 @@
                 <div class="col-lg-12 cover">
                     <div class="row">
                         <div class="col-lg-3 img">
-                            <img src="{{this.user.profile_image}}" class="profilePic">
+                            <img src="{{user.profile_image}}" class="profilePic">
                         </div>
                         <div class="col-lg-9 content">
                             <h4 class="name">{{this.user.name}}</h4>
@@ -121,22 +120,25 @@
                         </div >
                         <div class="col-lg-7 Questions">
                             <h4 class="title">Questions</h4>
-                            <!-- <div *ngFor="let post of question"> -->
+                            <div *ngFor="let post of question">
                             <ol>
                                 <li>
                                     <div class="row controllers">
-                                        <a routerLink="/edit/{{post.key}}">What are the problems of an entrepreneur in todays business?</a>
+                                        <a routerLink="">What are the problems of an entrepreneur in todays business?</a>
                                         <a href="">
                                             <i class="fa fa-edit"></i>
                                         </a>
                                         <form action="">
-                                            <button> <i class="fa fa-trash"></i> </button>
+                                            <button> <i class="fa fa-trash" (click)="authService.deletePosts(post.key)"></i> </button>
                                         </form>
                                     </div>
+
                                 </li>
+
                             </ol>
+                          </div>
+
                         <!-- </div> -->
-                    </div>
                     </div>
                 </div>
             </div>

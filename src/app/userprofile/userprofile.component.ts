@@ -17,13 +17,16 @@ user ;
     let id = localStorage.getItem('userMeta');
     this.authService.user.subscribe((user: any) => {
       this.user = user;
+
+
     });
-    this.authService.getUserquestion(this.user.id).subscribe((posts: any) => {
+    this.authService.getUserquestion(id).subscribe((posts: any) => {
 
       this.question = posts.data.ques;
       console.log(this.question);
 
     });
   }
+
 
 }

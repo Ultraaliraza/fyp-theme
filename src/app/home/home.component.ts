@@ -114,7 +114,9 @@ export class HomeComponent implements OnInit {
 
         this.authService.home(this.myhomeform.value)
           .subscribe(() => {
-            this.router.navigate(['/home']);
+            this.myhomeform.reset();
+
+            this.getPOSTS();
           });
       });
   }
@@ -126,9 +128,10 @@ export class HomeComponent implements OnInit {
 
     this.uploadfilesService.uploadFile()
       .then((fileMeta) => {
-        this.myhomeform.controls.Video.setValue(fileMeta);
+        this.myvideoform.controls.Video.setValue(fileMeta);
         this.authService.Videos(this.myvideoform.value).subscribe((data: any) => {
-          this.router.navigate(['/home']);
+            this.myvideoform.reset();
+            this.getPOSTS();
         });
       });
   }
@@ -146,7 +149,8 @@ export class HomeComponent implements OnInit {
 
       this.authService.getdonations(this.mydonationform.value)
         .subscribe(() => {
-          this.router.navigate(['/home']);
+          this.mydonationform.reset();
+          this.getPOSTS();
         });
     });
     this.uploadfilesService.uploadFile()

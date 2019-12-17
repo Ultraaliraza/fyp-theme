@@ -36,7 +36,7 @@
 					<div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="margin-right:50px;">
 						<a class="dropdown-item"routerLink="/uprofile">Profile</a>
 						<a class="dropdown-item" routerLink="/settings">Settings</a>
-						<a class="dropdown-item" href="#">Logout</a>
+						<a class="dropdown-item" (click)="authService.logout()">Logout</a>
 					</div>
 				</li>
 			</ul>
@@ -121,7 +121,7 @@
 						<!-- <div class="body">
 							<span id="postQustionPopuopOpener">What's in your mind ?</span>
 						</div> -->
-						<div class="body" data-toggle="modal" data-target="#exampleModal">
+						<div class="body" data-toggle="modal" data-target="#VideoModal">
 							<span>What's in your mind ?</span>
 						</div>
 					</div>
@@ -327,52 +327,7 @@
 			</div>
 		</div> -->
 
-				<!-- ======================= [ MODALS ] ============================= -->
-				<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-					aria-hidden="true">
-					<div class="modal-dialog" role="document">
-						<div class="modal-content">
-							<div class="modal-header">
-								<h5 class="modal-title" id="exampleModalLabel">Raise Your Issue</h5>
-								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-									<span aria-hidden="true">&times;</span>
-								</button>
-							</div>
-							<div class="modal-body">
-								<form [formGroup]="myhomeform" (ngSubmit)="submitFrom()">
-									<div class="form-group">
-										<input type="text" formControlName="Title" placeholder="Your Issue" />
-									</div>
-									<div class="form-group">
-										<select class="form-group" formControlName="Category">
-											<option selected disabled>Choose Category</option>
-											<option value="Education">Education</option>
-											<option value="Society">Society</option>
-											<option value="Women">Women</option>
-											<option value="Child">Child Labour</option>
-											<option value="Un-Employment">Un-Employment</option>
-											<option value="Marriage">Marriage</option>
-											<option value="Proverty">Proverty</option>
-											<option value="Others">Others</option>
-										</select>
-									</div>
-									<div class="form-group">
-										<input type="file" accept=".pdf, .doc" (change)="uploadfilesService.onSelectFile($event)" />
-									</div>
-									<div class="form-group">
-										<input type="file" accept=".png, .jpg" (change)="uploadfilesService.onSelectFile($event)" />
-									</div>
-									<div class="form-group">
-										<textarea placeholder="Your Content" formControlName="Description"></textarea>
-									</div>
-									<div class="">
-										<button class="submit">Post</button>
-									</div>
-								</form>
-							</div>
-						</div>
-					</div>
-				</div>
+
 
 				<!-- ======================= [ MODALS ] ============================= -->
 				<div class="modal fade" id="VideoModal" tabindex="-1" role="dialog" aria-labelledby="VideoModalLabel"
@@ -419,39 +374,6 @@
 					</div>
 				</div>
 
-				<!-- ======================= [ MODALS ] ============================= -->
-				<div class="modal fade" id="donationsModal" tabindex="-1" role="dialog" aria-labelledby="donationsModalLabel"
-					aria-hidden="true">
-					<div class="modal-dialog" role="document">
-						<div class="modal-content">
-							<div class="modal-header">
-								<h5 class="modal-title" id="donationsModalLabel">Ask for donations</h5>
-								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-									<span aria-hidden="true">&times;</span>
-								</button>
-							</div>
-							<div class="modal-body">
-								<form [formGroup]="mydonationform" (ngSubmit)="donFrom()">
-									<div class="form-group">
-										<input type="text" formControlName="Title" placeholder="Title For Donation" />
-									</div>
-									<div class="form-group">
-										<input type="file" accept=".pdf, .doc" (change)="uploadfilesService.onSelectFile($event)" />
-									</div>
-									<div class="form-group">
-										<input type="file" accept=".png, .jpg" (change)="uploadfilesService.onSelectFile($event)" />
-									</div>
-									<div class="form-group">
-										<textarea placeholder="Your Content" formControlName="Description"></textarea>
-									</div>
-									<div class="">
-										<button class="submit">Post</button>
-									</div>
-								</form>
-							</div>
-						</div>
-					</div>
-				</div>
 
 			</div>
 		</div>

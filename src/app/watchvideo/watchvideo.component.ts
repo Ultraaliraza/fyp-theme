@@ -19,12 +19,22 @@ export class WatchvideoComponent implements OnInit {
   reportform: FormGroup;
   datePipe = new DatePipe('en-US');
   postID;
+  lastposts = [];
+  users = [];
+
 
   constructor(private route: ActivatedRoute, private authService: AuthenticationService, private router: Router,
     // tslint:disable-next-line:align
     private formbuilder: FormBuilder) { }
 
   ngOnInit() {
+
+    let id = localStorage.getItem('userMeta');
+    this.authService.user.subscribe((user: any) => {
+      this.user = user;
+    });
+    this.getUsers();
+    this.getLastPosts();
     this.route.params.subscribe(postID => {
       this.postID = postID.key;
       this.authService.getVideoData(postID.key)
@@ -39,6 +49,33 @@ export class WatchvideoComponent implements OnInit {
         });
     });
 
+  }
+  submitFrom()
+  {
+    const time = this.datePipe.transform(new Date(), 'd-MMM-y');
+    const time1 = this.datePipe.transform(new Date(), 'h:mm a');
+    this.commentform.controls.date.setValue(time);
+    this.commentform.controls.time.setValue(time1);
+    this.commentform.controls.postID.setValue(this.postID);
+    const obj = this.commentform.value;
+    //  this.commentform.controls.Date.setValue(time);
+    this.authService.Videocomment(obj).subscribe((data: any) => {
+      this.commentform.reset();
+      console.log(this.commentform.value);
+    });
+  }
+  getLastPosts() {
+    this.authService.getLastPosts().subscribe((data: any) => {
+      this.lastposts = data.data;
+      console.log(this.lastposts);
+    });
+
+  }
+
+  getUsers() {
+    this.authService.getUsers().subscribe((data: any) => {
+      this.users = data.data;
+    });
   }
 
 }

@@ -11,11 +11,15 @@ export class EducationComponent implements OnInit {
   posts = [];
   lastposts = [];
   users = [];
+  user;
 
   constructor(private authService: AuthenticationService) { }
 
   ngOnInit() {
-
+    let id = localStorage.getItem('userMeta');
+    this.authService.user.subscribe((user: any) => {
+      this.user = user;
+    });
     this.getEducation();
     this.getUsers();
     this.getLastPosts();

@@ -20,6 +20,7 @@ export class UploadfilesService {
 
   uploadFile() {
     return new Promise((resolve) => {
+      console.log(this.filesMeta.image);
       if (this.filesMeta) {
         let fileName;
         let offsetRef = firebase.database().ref(".info/serverTimeOffset");
@@ -82,6 +83,7 @@ export class UploadfilesService {
   onSelectFile(event) {
     if (event.target.files) {
       const file = event.target.files[0];
+      console.log(file);
       if (file.type === 'application/pdf' || file.type === 'application/msword') {
         var reader = new FileReader();
         reader.readAsDataURL(file);

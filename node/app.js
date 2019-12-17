@@ -413,7 +413,7 @@ app.get("/getallquestion/:id", (req, res) => {
   const userID = req.params.id;
   let questions = [];
   db.ref("/Posts/")
-    .orderByChild(PostBy)
+    .orderByChild('PostBy')
     .equalTo(userID)
     .once("value", snapshot => {
       snapshot.forEach(childSnapshot => {
@@ -479,6 +479,25 @@ app.post("/updatepass", (req, res) => {
 });
 
 // ----------------- Ali New Code
+
+//Posting Report
+app.post("/reportFrom", (req, res) => {
+  let postreports = report.push();
+  postreports.set(req.body);
+
+  res.json({ success: 1, data: postreports });
+});
+
+//Posting comments on Video
+
+app.post("/vidscomments", (req, res) => {
+  const body = req.body;
+  let comments = db.ref("/Videos/" + body.postID + "/Comments").push();
+  delete body.postID;
+  comments.set(body);
+  res.json({ success: 1, data: comments });
+});
+
 
 //Get All Report Posts
 

@@ -31,10 +31,14 @@ export class VideosComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    let id = localStorage.getItem('userMeta');
+    this.authService.user.subscribe((user: any) => {
+      this.user = user;
+    });
 
-      this.getVideos();
-      this.getUsers();
-      this.getLastPosts();
+    this.getVideos();
+    this.getUsers();
+    this.getLastPosts();
   }
   getVideos() {
     this.authService.getVideos().subscribe((data: any) => {

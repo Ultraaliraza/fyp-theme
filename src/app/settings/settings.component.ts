@@ -13,7 +13,7 @@ export class SettingsComponent implements OnInit {
   settings: FormGroup;
   user;
 
-
+key;
   constructor(
     public uploadfilesService: UploadfilesService,
     private authService: AuthenticationService,
@@ -23,7 +23,8 @@ export class SettingsComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-     this.user = localStorage.getItem('userMeta');
+    let id = localStorage.getItem('userMeta');
+    this.key = id;
 
     this.settings = new FormGroup({
       profile_image: new FormControl(''),
@@ -31,8 +32,12 @@ export class SettingsComponent implements OnInit {
 
         aboutnote: new FormControl(''),
         city: new FormControl('', Validators.required),
-        country: new FormControl('',Validators.required),
-        phonenumber: new FormControl(''),
+        country: new FormControl('', Validators.required),
+        phonenumber: new FormControl('' ,[
+          Validators.required,
+          Validators.pattern("^[0-9]*$"),
+          Validators.maxLength(13),
+        ]),
 
         facebook: new FormControl(''),
         instagram: new FormControl(''),
@@ -58,16 +63,19 @@ export class SettingsComponent implements OnInit {
 
 
     this.uploadfilesService.uploadFile()
-      .then((fileMeta) => {
-        if (fileMeta)
-          this.settings.controls.profile_image.setValue(fileMeta['url']);
-        const obj = { form: this.settings.value, id: this.user };
+      .then((urls) => {
+      console.log(urls['imageURL']);
+
+        if (urls['imageURL'])
+          this.settings.controls.profile_image.setValue(urls['imageURL']);
+        const obj = { form: this.settings.value, id: this.key };
         console.log(obj);
         this.authService.Updatesettings(obj)
           .subscribe((data: any) => {
 
           });
       });
+
   }
 
 }

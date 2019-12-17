@@ -19,5 +19,6 @@ export class ForgetpasswordComponent implements OnInit {
 
   PasswordReset() {
     this.authService.forgetpassword(this.ForgetForm.value);
+
   }
 }

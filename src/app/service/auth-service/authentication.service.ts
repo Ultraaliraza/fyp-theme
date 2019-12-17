@@ -12,7 +12,7 @@ export class AuthenticationService {
     throw new Error("Method not implemented.");
   }
   keyvalue = '';
-  // apiHeader = 'http://localhost:3000/';
+      //  apiHeader = 'http://localhost:3000/';
   apiHeader = 'https://us-central1-helpinghand-90a6a.cloudfunctions.net/apis/';
   // apiHeader = 'http://localhost:5000/helpinghand-90a6a/us-central1/apis/';
 
@@ -32,13 +32,28 @@ export class AuthenticationService {
   login(objR) {
     // send data to the backend server\
     this.http.post(this.apiHeader + 'login', objR)
-      .subscribe((res: any) => {
-        console.log(res);
+      .subscribe(
 
-        localStorage.setItem('userMeta', res.uid);
-        this.user.next(res.data);
-        this.checkAccountType(res.data.acountType);
-      });
+
+        (res: any) => {
+          console.log(res);
+
+          localStorage.setItem('userMeta', res.uid);
+          this.user.next(res.data);
+          this.checkAccountType(res.data.acountType);
+        },
+        (error) => {
+          if (error.status == 401) {
+            alert('User Not Found');
+          }
+          else if (error.status == 402) {
+            alert('Wrong Password ')
+          }
+
+
+        }
+
+      );
   }
 
   facebook() {
@@ -115,10 +130,15 @@ export class AuthenticationService {
 
   home(objR) {
     return this.http.post(this.apiHeader + 'home', objR);
+
   }
 
   comment(objR) {
     return this.http.post(this.apiHeader + 'comments', objR);
+
+  }
+  Videocomment(objR) {
+    return this.http.post(this.apiHeader + 'vidscomments', objR);
 
   }
 
@@ -132,12 +152,14 @@ export class AuthenticationService {
 
   forgetpassword(objR) {
     this.http.post(this.apiHeader + 'forgetpassword', objR).subscribe((data: any) => {
-      this.router.navigate(['/login']);
     });
+    this.router.navigate(['/login']);
   }
 
   updatePassword(password: object) {
     return this.http.post(this.apiHeader + 'updatepass', password);
+
+    this.router.navigate(['/settings']);
   }
 
   getMarriage() {
@@ -148,11 +170,9 @@ export class AuthenticationService {
     return this.http.post(this.apiHeader + 'home/donations', objR);
   }
 
-  Report(objR) {
+  reportFrom(objR){
 
-    return this.http.post(this.apiHeader + 'question/report', objR);
-
-
+    return this.http.post(this.apiHeader +'reportFrom', objR);
   }
 
   getgetdonations() {

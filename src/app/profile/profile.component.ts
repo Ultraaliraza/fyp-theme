@@ -10,12 +10,14 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class ProfileComponent implements OnInit {
   posts = [];
-  about;
+  abouts = [];
   id;
-  question = [];
+  questions = [];
+  user;
   constructor(private route: ActivatedRoute, private authService: AuthenticationService, private router: Router) { }
 
   ngOnInit() {
+    let user = localStorage.getItem('userMeta');
 
 
     this.route.params.subscribe(userID => {
@@ -26,8 +28,8 @@ export class ProfileComponent implements OnInit {
           console.log(this.posts);
         });
       this.authService.getUserquestion(this.id).subscribe((ques: any) => {
-        this.question = ques.data.ques;
-        console.log(this.question);
+        this.questions = ques.data.ques;
+        console.log(this.questions);
 
       });
     });

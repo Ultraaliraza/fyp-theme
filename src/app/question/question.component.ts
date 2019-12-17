@@ -47,14 +47,7 @@ export class QuestionComponent implements OnInit {
       });
 
       // Report Form
-      this.reportform = new FormGroup({
-        Name: new FormControl(''),
-        Email: new FormControl(this.user.email),
-        Reason: new FormControl('ethical'),
-        Message: new FormControl(),
-        PostId: new FormControl()
 
-      });
       this.route.params.subscribe(postID => {
         this.postID = postID.key;
         this.authService.getquestion(postID.key)
@@ -67,6 +60,15 @@ export class QuestionComponent implements OnInit {
             console.log(this.commentkeys);
           });
       });
+    });
+
+    this.reportform = new FormGroup({
+      Name: new FormControl(this.user.Name),
+      Email: new FormControl(this.user.email),
+      Reason: new FormControl('ethical'),
+      // Message: new FormControl(),
+      PostID: new FormControl(this.postID)
+
     });
 
     this.getUsers();
@@ -96,16 +98,19 @@ export class QuestionComponent implements OnInit {
     const obj = this.commentform.value;
     //  this.commentform.controls.Date.setValue(time);
     this.authService.comment(obj).subscribe((data: any) => {
+      this.commentform.reset();
       console.log(this.commentform.value);
     });
   }
 
 
   reportFrom() {
+    console.log(this.reportform.value);
 
-    this.reportform.controls.PostId.setValue(this.postID);
+    this.reportform.controls.postID.setValue(this.postID);
     this.authService.Report(this.reportform.value).subscribe((data: any) => {
       console.log(this.reportform.value);
+
     });
 
   }

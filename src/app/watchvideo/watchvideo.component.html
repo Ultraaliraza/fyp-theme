@@ -26,7 +26,15 @@
 				<li>
 					<input type="text" class="searchbox" placeholder="Search..." />
 					<i class="fas fa-search" id="openSearch"></i>
-				</li>
+        </li>
+        <li class="dropdown">
+            <img src={{this.user.profile_image}} class="img-fluid accountSettingDropdown dropdown-toggle" id="accountSettingDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" />
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="margin-right:50px;">
+              <a class="dropdown-item"routerLink="/uprofile">Profile</a>
+              <a class="dropdown-item" routerLink="/settings">Settings</a>
+              <a class="dropdown-item" (click)="authService.logout()">Logout</a>
+            </div>
+          </li>
 			</ul>
 
 			<div id="drawer">
@@ -50,7 +58,15 @@
 					</li>
 					<li>
 						<a href="#">Contact Us</a>
-					</li>
+          </li>
+          <li class="dropdown">
+              <img src={{this.user.profile_image}} class="img-fluid accountSettingDropdown dropdown-toggle" id="accountSettingDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" />
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="margin-right:50px;">
+                <a class="dropdown-item"routerLink="/uprofile">Profile</a>
+                <a class="dropdown-item" routerLink="/settings">Settings</a>
+                <a class="dropdown-item" (click)="authService.logout()">Logout</a>
+              </div>
+            </li>
 				</ul>
 			</div>
 
@@ -258,7 +274,7 @@
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
 			</div>
 			<div class="body">
-				<form [formGroup]="reportform" (ngSubmit)="reportFrom()">
+				<!-- <form [formGroup]="reportform" (ngSubmit)="reportFrom()">
 					<div class="form-group">
 						<input type="text" placeholder="Full Name" formControlName="Name" />
 					</div>
@@ -281,7 +297,7 @@
 					</div>
 
 
-				</form>
+				</form> -->
 
 
 

@@ -1,388 +1,338 @@
 
 <div id="homePage">
-    <!-- Header -->
-    <header class="nav container-fluid">
-        <div class="logo">
-            <img src="https://firebasestorage.googleapis.com/v0/b/helpinghand-90a6a.appspot.com/o/Post%20Images%2Flogo.jpg?alt=media&token=627a433f-992a-4c41-b5d7-2f734fe4eed9" class="img-fluid" alt="Logo">
-        </div>
-        <div class="bars ml-auto" id="openDrawer">
-            <i class="fas fa-bars fa-2x"></i>
-        </div>
-        <ul class="menu ml-auto" id="navLaptop">
-            <li>
-                <a href="#">Home</a>
-            </li>
-            <li>
-                <a href="#">Raise Question</a>
-            </li>
-            <li>
-                <a href="#">Raise Donations</a>
-            </li>
-            <li>
-                <a href="#">About Us</a>
-            </li>
-            <li>
-                <a href="#">Contact Us</a>
-            </li>
-            <li>
-                <input type="text" class="searchbox" placeholder="Search..." />
-                <i class="fas fa-search" id="openSearch"></i>
-            </li>
-            <li class="dropdown">
-              <img src={{this.user.profile_image}} class="img-fluid accountSettingDropdown dropdown-toggle" id="accountSettingDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" />
-              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="margin-right:50px;">
-                <a class="dropdown-item"routerLink="/uprofile">Profile</a>
-                <a class="dropdown-item" routerLink="/settings">Settings</a>
-                <a class="dropdown-item" href="#">Logout</a>
-              </div>
-            </li>
-        </ul>
+		<!-- Header -->
+		<header class="nav container-fluid">
+			<div class="logo">
+				<img src="https://firebasestorage.googleapis.com/v0/b/helpinghand-90a6a.appspot.com/o/Post%20Images%2Flogo.jpg?alt=media&token=627a433f-992a-4c41-b5d7-2f734fe4eed9" class="img-fluid" alt="Logo">
+			</div>
+			<div class="bars ml-auto" id="openDrawer">
+				<i class="fas fa-bars fa-2x"></i>
+			</div>
+			<ul class="menu ml-auto" id="navLaptop">
+				<!-- <li>
+					<a routerLink="/home">Home</a>
+				</li>
+				<li>
+					<a routerLink="/videos">Watch Videos</a>
+				</li>
 
-        <div id="drawer">
-            <div class="close-bars">
-                <button id="closeBars">
-                    <i class="fa fa-close"></i>
-                </button>
-            </div>
-            <ul>
-                <li>
-                    <a href="#">Home</a>
-                </li>
-                <li>
-                    <a href="#">About Us</a>
-                </li>
-                <li>
-                    <a href="#">Jobs</a>
-                </li>
-                <li>
-                    <a href="#">Funding</a>
-                </li>
-                <li>
-                    <a href="#">Contact Us</a>
-                </li>
-            </ul>
-        </div>
+				<li>
+					<a href="#">About Us</a>
+				</li>
+				<li>
+					<a href="#">Contact Us</a>
+				</li> -->
+				<!-- <li>
+					<input type="text" class="searchbox" placeholder="Search..." />
+					<i class="fas fa-search" id="openSearch"></i>
+				</li> -->
+				<li class="dropdown">
+					<img src={{this.user.profile_image}} class="img-fluid accountSettingDropdown dropdown-toggle" id="accountSettingDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" />
+					<div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="margin-right:50px;">
+						<a class="dropdown-item"routerLink="/uprofile">Profile</a>
+						<a class="dropdown-item" routerLink="/settings">Settings</a>
+						<a class="dropdown-item" (click)="authService.logout()">Logout</a>
+					</div>
+				</li>
+			</ul>
 
-    </header>
+			<div id="drawer">
+				<div class="close-bars">
+					<button id="closeBars">
+						<i class="fa fa-close"></i>
+					</button>
+				</div>
+				<ul>
+					<li>
+						<a href="#">Home</a>
+					</li>
+					<li>
+						<a href="#">About Us</a>
+					</li>
+					<li>
+						<a href="#">Jobs</a>
+					</li>
+					<li>
+						<a href="#">Funding</a>
+					</li>
+					<li>
+						<a href="#">Contact Us</a>
+					</li>
+				</ul>
+			</div>
 
-    <!-- Body -->
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-lg-3" id="leftSidebar">
-                <ul>
-                    <li>
-                        <i class="fas fa-rss"></i>
-                        <a href="#">Feed</a>
-                    </li>
-                    <li>
-                            <i class="fas fa-university"></i>
-                            <a href="#">Education</a>
-                    </li>
-                    <li>
-                        <i class="fas fa-microchip"></i>
-                        <a href="#">Marriage</a>
-                    </li>
-                    <li>
-                        <i class="fas fa-parachute-box"></i>
-                        <a href="#">Proverty</a>
-                    </li>
-                    <li>
-                        <i class="fas fa-female"></i>
-                        <a href="#" >Women</a>
-                    </li>
-                    <li>
-                        <i class="fas fa-child"></i>
-                        <a href="#">Child Labour</a>
-                    </li>
-                    <li>
-                        <i class="fas fa-hands-helping"></i>
-                        <a href="#">Un-Employment</a>
-                    </li>
-                    <li>
-                        <i class="fas fa-microchip"></i>
-                        <a href="#">Others</a>
-                    </li>
-                    <!-- <li>
-                        <i class="fas fa-users"></i>
-                        <a href="#">Employees</a>
-                    </li> -->
+		</header>
 
-                </ul>
-            </div>
-            <div class="col-lg-6" id="middleDiv">
-                <div class="col-lg-12 ask-question">
-                    <div class="head">
-                        <img src="img/user.jpg" class="img-fluid" />
-                        <a href="#">Awais Khalid</a>
-                    </div>
-                    <div class="body">
-                        <span id="postQustionPopuopOpener">What's in your mind ?</span>
-                    </div>
-                </div>
-                <!-- Question -->
-                <!-- <div class="questionBox">
-                    <h3 class="title">
-                        <a href="#">
-                            What are some of the best rare natural phenomena that occur on Earth?
-                        </a>
-                    </h3>
-                    <div class="thumbnail">
-                        <img src="img/q2.webp" class="img-fluid">
-                    </div>
-                    <div class="content">
-                        <p>
-                            By witnessing so many negative scenarios happening around us, we are becoming pessimistic while slowly and gradually forgetting the hidden treasure of the earth.
-                        </p>
-                    </div>
-                    <div class="meta">
-                        <ul class="left">
-                            <li>
-                                <i class="far fa-calendar"></i>
-                                20 April, 2019
-                            </li>
-                        </ul>
-                        <ul class="right">
-                            <li>
-                                <i class="far fa-thumbs-up"></i>
-                                20
-                            </li>
-                            <li>
-                                <i class="far fa-comment"></i>
-                                10
-                            </li>
-                        </ul>
-                    </div>
-                </div> -->
-                <!-- Question -->
-                <!-- <div class="questionBox">
-                    <h3 class="title">
-                        <a href="#">
-                            What are non-Bitcoin/cryptocurrency applications of blockchain technology?
-                        </a>
-                    </h3>
-                    <div class="thumbnail">
-                        <img src="img/q3.png" class="img-fluid">
-                    </div>
-                    <div class="content">
-                        <p>
-                            Blockchain is probably the best idea of this century that will find it's way in our life probably in the next century, probably never.
-                        </p>
-                    </div>
-                    <div class="meta">
-                        <ul class="left">
-                            <li>
-                                <i class="far fa-calendar"></i>
-                                20 April, 2019
-                            </li>
-                        </ul>
-                        <ul class="right">
-                            <li>
-                                <i class="far fa-thumbs-up"></i>
-                                20
-                            </li>
-                            <li>
-                                <i class="far fa-comment"></i>
-                                10
-                            </li>
-                        </ul>
-                    </div>
-                </div> -->
-                <!-- Question -->
-                <div *ngFor="let post of posts" >
-                <div class="questionBox">
-                    <h3 class="title">
-                        <a routerLink="/question/{{post.key}}">
-                                {{ post.post.Title }}
-                        </a>
-                    </h3>
-                    <div class="thumbnail">
-                        <img src={{post.post.PostImage}} class="img-fluid">
-                    </div>
-                    <div class="content">
-                        <p>
-                            {{post.post.Description}}
-                        </p>
-                    </div>
-                    <div class="meta">
-                        <ul class="left">
-                            <li>
-                                <i class="far fa-calendar"></i>
-                                  {{post.post.Date}}
-                            </li>
-                        </ul>
-                        <ul class="right">
-                            <!-- <li>
-                                <i class="far fa-thumbs-up"></i>
-                                20
-                            </li> -->
-                            <li>
-                                <i class="fas fa-crop"></i>
-                                 {{post.post.Category}}
-                            </li>
-                        </ul>
-                    </div>
-                </div>
+		<!-- Body -->
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-lg-3" id="leftSidebar">
+					<ul>
+						<li>
+							<i class="fas fa-rss"></i>
+							<a routerLink="/home">Feed</a>
+						</li>
+						<li>
+							<i class="fas fa-university"></i>
+							<a routerLink="/education">Education</a>
+						</li>
+						<li>
+							<i class="fas fa-microchip"></i>
+							<a routerLink="/marriage">Marriage</a>
+						</li>
+						<li>
+							<i class="fas fa-parachute-box"></i>
+							<a routerLink="/proverty">Proverty</a>
+						</li>
+						<li>
+							<i class="fas fa-female"></i>
+							<a routerLink="/women">Women</a>
+						</li>
+						<li>
+							<i class="fas fa-child"></i>
+							<a routerLink="/child">Child Labour</a>
+						</li>
+						<li>
+							<i class="fas fa-hands-helping"></i>
+							<a routerLink="/employment">Un-Employment</a>
+						</li>
+						<li>
+							<i class="fas fa-microchip"></i>
+							<a routerLink="/others">Others</a>
+						</li>
+						<li>
+							<i class="fab fa-youtube"></i>
+							<a routerLink="/videos">Videos</a>
+						</li>
+						</ul>
+				</div>
+				<div class="col-lg-6" id="middleDiv">
+					<div class="col-lg-12 ask-question">
+						<div class="head">
+							<!-- <img src="img/user.jpg" class="img-fluid" /> -->
+							<!-- <a href="#">Awais Khalid</a> -->
+						</div>
+						<div class="body">
+							<!-- <span id="postQustionPopuopOpener">What's in your mind ?</span>	 -->
+						</div>
+					</div>
+					<!-- Question -->
+					<!-- <div class="questionBox">
+						<h3 class="title">
+							<a href="#">
+								What are some of the best rare natural phenomena that occur on Earth?
+							</a>
+						</h3>
+						<div class="thumbnail">
+							<img src="img/q2.webp" class="img-fluid">
+						</div>
+						<div class="content">
+							<p>
+								By witnessing so many negative scenarios happening around us, we are becoming pessimistic while slowly and gradually forgetting the hidden treasure of the earth.
+							</p>
+						</div>
+						<div class="meta">
+							<ul class="left">
+								<li>
+									<i class="far fa-calendar"></i>
+									20 April, 2019
+								</li>
+							</ul>
+							<ul class="right">
+								<li>
+									<i class="far fa-thumbs-up"></i>
+									20
+								</li>
+								<li>
+									<i class="far fa-comment"></i>
+									10
+								</li>
+							</ul>
+						</div>
+					</div> -->
+					<!-- Question -->
+					<!-- <div class="questionBox">
+						<h3 class="title">
+							<a href="#">
+								What are non-Bitcoin/cryptocurrency applications of blockchain technology?
+							</a>
+						</h3>
+						<div class="thumbnail">
+							<img src="img/q3.png" class="img-fluid">
+						</div>
+						<div class="content">
+							<p>
+								Blockchain is probably the best idea of this century that will find it's way in our life probably in the next century, probably never.
+							</p>
+						</div>
+						<div class="meta">
+							<ul class="left">
+								<li>
+									<i class="far fa-calendar"></i>
+									20 April, 2019
+								</li>
+							</ul>
+							<ul class="right">
+								<li>
+									<i class="far fa-thumbs-up"></i>
+									20
+								</li>
+								<li>
+									<i class="far fa-comment"></i>
+									10
+								</li>
+							</ul>
+						</div>
+					</div> -->
+					<!-- Question -->
+					<div *ngFor="let post of posts" >
+					<div class="questionBox">
+						<h3 class="title">
+							<a routerLink="/question/{{post.key}}">
+									{{ post.post.Title }}
+							</a>
+						</h3>
+						<div class="thumbnail">
+							<img src={{post.post.PostImage}} class="img-fluid">
+						</div>
+						<div class="content">
+							<p>
+								{{post.post.Description}}
+							</p>
+						</div>
+						<div class="meta">
+							<ul class="left">
+								<li>
+									<i class="far fa-calendar"></i>
+									  {{post.post.Date}}
+								</li>
+							</ul>
+							<ul class="right">
+								<!-- <li>
+									<i class="far fa-thumbs-up"></i>
+									20
+								</li> -->
+								<li>
+									<i class="fas fa-crop"></i>
+									 {{post.post.Category}}
+								</li>
+							</ul>
+						</div>
+					</div>
 
-            </div>
-        </div>
+				</div>
+			</div>
 
-            <div class="col-lg-3" id="rightSidebar">
-                <div class="box questions">
-                    <h3 class="title">Popular Questions</h3>
-                    <div class="content">
-                        <p>
-                            <a href="#">Why not to buy bitcoin in 2019 ?</a>
-                        </p>
-                        <p>
-                            <a href="#">What are some of the best life hacks to apply ?</a>
-                        </p>
-                        <p>
-                            <a href="#">What is the coolest application of Blockchain technology?</a>
-                        </p>
-                        <p>
-                            <a href="#">How can I start a career in blockchain technology?</a>
-                        </p>
-                        <p>
-                            <a href="#">What are the best software companies in the world ?</a>
-                        </p>
-                    </div>
-                </div>
-                <div class="box members">
-                    <h3 class="title">Popular Members</h3>
-                    <div class="content">
-                        <!-- Member -->
-                        <div class="member">
-                            <div class="thumbanil">
-                                <img src="img/user.jpg" class="img-fluid" />
-                            </div>
-                            <div class="">
-                                <a href="#" class="name">Awais Khalid</a>
-                                <p class="designation">Web Developer</p>
-                            </div>
-                        </div>
-                        <!-- Member -->
-                        <div class="member">
-                            <div class="thumbanil">
-                                <img src="img/user.jpg" class="img-fluid" />
-                            </div>
-                            <div class="">
-                                <a href="#" class="name">Zubair Khan</a>
-                                <p class="designation">Graphic Designer</p>
-                            </div>
-                        </div>
-                        <!-- Member -->
-                        <div class="member">
-                            <div class="thumbanil">
-                                <img src="img/user.jpg" class="img-fluid" />
-                            </div>
-                            <div class="">
-                                <a href="#" class="name">Rana Afaq Ali</a>
-                                <p class="designation">Sakhat Waila</p>
-                            </div>
-                        </div>
-                        <!-- Member -->
-                        <div class="member">
-                            <div class="thumbanil">
-                                <img src="img/user.jpg" class="img-fluid" />
-                            </div>
-                            <div class="">
-                                <a href="#" class="name">Ali Raza</a>
-                                <p class="designation">No Idea</p>
-                            </div>
-                        </div>
-                        <!-- Member -->
-                        <div class="member">
-                            <div class="thumbanil">
-                                <img src="img/user.jpg" class="img-fluid" />
-                            </div>
-                            <div class="">
-                                <a href="#" class="name">Ahmad Bhai</a>
-                                <p class="designation">Again no idea</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+				<div class="col-lg-3" id="rightSidebar">
+					<div class="box questions">
+						<h3 class="title">Popular Questions</h3>
+						<div *ngFor="let lastpost of lastposts">
+						<div class="content">
+							<p>
+								<a routerLink="/question/{{lastpost.key}}">{{lastpost.post.Title}}</a>
+							</p>
+						</div>
+					</div>
+					</div>
+					<div class="box members">
+						<h3 class="title">Popular Members</h3>
+						<div *ngFor="let user of users">
 
-    <!-- ================================================================ -->
-    <!-- ================================================================ -->
-    <!-- ======================= [ MODALS ] ============================= -->
-    <!-- ================================================================ -->
-    <!-- ================================================================ -->
-    <!-- ================================================================ -->
+						<div class="content">
+							<!-- Member -->
+							<div class="member">
+								<div class="thumbanil">
+									<img src="{{user.post.profile_image}}" class="img-fluid" />
+								</div>
+								<div class="">
+										<a routerLink="/profile/{{user.key}}" class="name">{{user.post.name}}</a>
+									<p class="designation">{{user.post.acountType}}</p>
+								</div>
+							</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 
-    <!-- <div class="models" id="postQuestionModel">
-        <div class="cancel" id="closeQuestionModel">
-            <i class="fa fa-close"></i>
-        </div>
-        <div class="header">
-            <h4 class="title">Raise Your Issue</h4>
-        </div>
-        <div class="body">
-                <form  [formGroup]="myhomeform" (ngSubmit)="submitFrom()">
+		<!-- ================================================================ -->
+		<!-- ================================================================ -->
+		<!-- ======================= [ MODALS ] ============================= -->
+		<!-- ================================================================ -->
+		<!-- ================================================================ -->
+		<!-- ================================================================ -->
 
-            <div class="form-group">
-                <input type="text"formControlName="Title"  placeholder="Your Issue" />
-            </div>
-            <div class="form-group" >
-                <select class="form-group" formControlName="Catagory">
-                    <option selected disabled>Choose Category</option>
-                    <option value="Education">Education</option>
-                    <option value="Society">Society</option>
-                    <option value="Women">Women</option>
-                    <option value="Child">Child Labour</option>
-                    <option value="Employment">Un-Employment</option>
-                    <option value="Marriage">Marriage</option>
-                    <option value="Proverty">Proverty</option>
-                    <option value="Others">Others</option> -->
+		<!-- <div class="models" id="postQuestionModel">
+			<div class="cancel" id="closeQuestionModel">
+				<i class="fa fa-close"></i>
+			</div>
+			<div class="header">
+				<h4 class="title">Raise Your Issue</h4>
+			</div>
+			<div class="body">
+					<form  [formGroup]="myhomeform" (ngSubmit)="submitFrom()">
+
+				<div class="form-group">
+					<input type="text"formControlName="Title"  placeholder="Your Issue" />
+				</div>
+				<div class="form-group" >
+					<select class="form-group" formControlName="Catagory">
+						<option selected disabled>Choose Category</option>
+						<option value="Education">Education</option>
+						<option value="Society">Society</option>
+						<option value="Women">Women</option>
+						<option value="Child">Child Labour</option>
+						<option value="Employment">Un-Employment</option>
+						<option value="Marriage">Marriage</option>
+						<option value="Proverty">Proverty</option>
+						<option value="Others">Others</option> -->
 
 
 
 
 
-                <!-- </select>
-            </div> -->
-            <!-- <div class="form-group">
-                <input type="text" placeholder="Tags" />
-            </div> -->
-            <!-- <div class="form-group">
-                <input type="file" />
-            </div>
-            <div class="form-group">
-                <textarea placeholder="Your Content" formControlName="Description"></textarea>
-            </div>
-            <div class="">
-                <button class="submit">Post</button>
-            </div>
-        </form>
-        </div>
+					<!-- </select>
+				</div> -->
+				<!-- <div class="form-group">
+					<input type="text" placeholder="Tags" />
+				</div> -->
+				<!-- <div class="form-group">
+					<input type="file" />
+				</div>
+				<div class="form-group">
+					<textarea placeholder="Your Content" formControlName="Description"></textarea>
+				</div>
+				<div class="">
+					<button class="submit">Post</button>
+				</div>
+			</form>
+			</div>
 
-    </div> -->
+		</div> -->
 
-    <!-- <div id="postQuestionModelOverlay"></div>
+		<!-- <div id="postQuestionModelOverlay"></div>
 
-    <div class="models" id="DonationsModel">
-        <div class="cancel" id="closeDonationsModel">
-            <i class="fa fa-close"></i>
-        </div>
-        <div class="header">
-            <h4 class="title">Ask for donations</h4>
-        </div>
-        <div class="body">
-            <div class="form-group">
-                <input type="text" placeholder="Full Name" />
-            </div>
-            <div class="form-group">
-                <input type="text" placeholder="Email Address" />
-            </div>
-            <div class="form-group">
-                <textarea placeholder="Your Message"></textarea>
-            </div>
-            <div class="">
-                <button class="submit">Post</button>
-            </div>
-        </div>
-    </div>
-</div> -->
+		<div class="models" id="DonationsModel">
+			<div class="cancel" id="closeDonationsModel">
+				<i class="fa fa-close"></i>
+			</div>
+			<div class="header">
+				<h4 class="title">Ask for donations</h4>
+			</div>
+			<div class="body">
+				<div class="form-group">
+					<input type="text" placeholder="Full Name" />
+				</div>
+				<div class="form-group">
+					<input type="text" placeholder="Email Address" />
+				</div>
+				<div class="form-group">
+					<textarea placeholder="Your Message"></textarea>
+				</div>
+				<div class="">
+					<button class="submit">Post</button>
+				</div>
+			</div>
+		</div>
+	</div> -->

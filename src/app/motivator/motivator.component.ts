@@ -22,6 +22,8 @@ export class MotivatorComponent implements OnInit {
   constructor(private authService: AuthenticationService) { }
 
   ngOnInit() {
+    let id = localStorage.getItem('userMeta');
+
     this.authService.user.subscribe((user: any) => {
       this.user = user;
       this.myvideoform = new FormGroup({
@@ -30,12 +32,10 @@ export class MotivatorComponent implements OnInit {
         Category: new FormControl('education'),
         Date: new FormControl(),
         UserName: new FormControl(this.user.name),
-        acountType: new FormControl(this.user.acountType),
-        UploadedBy: new FormControl(this.user.key),
+        UploadedBy: new FormControl(id),
         Video: new FormControl(''),
         Time: new FormControl(''),
-        Profile_Image: new FormControl(''),
-        id: new FormControl('')
+        Profile_Image: new FormControl(this.user.profile_image)
 
       });
     });
@@ -43,6 +43,8 @@ export class MotivatorComponent implements OnInit {
 
 
     this.getPOSTS();
+    this.getUsers();
+    this.getLastPosts();
 
   }
   videoFrom() {
@@ -63,6 +65,17 @@ export class MotivatorComponent implements OnInit {
     this.authService.getPosts().subscribe((data: any) => {
       this.posts = data.data;
       console.log(this.posts);
+    });
+  }
+  getLastPosts() {
+    this.authService.getLastPosts().subscribe((data: any) => {
+      this.lastposts = data.data;
+    });
+  }
+
+  getUsers() {
+    this.authService.getUsers().subscribe((data: any) => {
+      this.users = data.data;
     });
   }
 }

@@ -16,13 +16,12 @@
                     </div>
                     <form [formGroup]="myForm" (ngSubmit)="submitFrom()">
 
-                        <input class="form-control" type="text" formControlName="email" placeholder="E-mail Address"
-                            >
-                            
+                        <input class="form-control" type="text" formControlName="email" placeholder="E-mail Address" >
+
                         <input class="form-control" type="password" formControlName="password" placeholder="Password"
                             >
                         <div class="form-button">
-                            <button id="submit" type="submit" class="ibtn" >Login</button> 
+                            <button id="submit" type="submit" class="ibtn" >Login</button>
                             <a routerLink="/forgetpassword">Forget password?</a>
                         </div>
                     </form>

@@ -29,14 +29,12 @@
 				<input type="text" class="searchbox" placeholder="Search..." />
 				<i class="fas fa-search" id="openSearch"></i>
 			</li>
-			<li>
-				<img src="img/user.jpg" class="img-fluid accountSettingDropdown" id="accountSettingDropdown" />
-				<div class="dropdownPicture" id="dropdownPicture">
-					<div class="options">
-						<p><a href="#">Profile</a></p>
-						<p><a href="#">Settings</a></p>
-						<p><a href="#">Logout</a></p>
-					</div>
+      <li class="dropdown">
+				<img src={{this.user.profile_image}} class="img-fluid accountSettingDropdown dropdown-toggle" id="accountSettingDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" />
+				<div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="margin-right:50px;">
+					<a class="dropdown-item"routerLink="/uprofile">Profile</a>
+					<a class="dropdown-item" routerLink="/settings">Settings</a>
+					<a class="dropdown-item" (click)="authService.logout()">Logout</a>
 				</div>
 			</li>
 		</ul>
@@ -146,5 +144,5 @@
 		</div>
 	</div>
 </div>
-		
+
 

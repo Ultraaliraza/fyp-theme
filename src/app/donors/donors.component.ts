@@ -10,6 +10,8 @@ export class DonorsComponent implements OnInit {
 
   posts = [];
   user;
+  users =[];
+  lastposts =[];
 
   constructor(private authService: AuthenticationService) { }
 
@@ -21,6 +23,8 @@ export class DonorsComponent implements OnInit {
     });
 
     this.getgetdonations();
+    this.getLastPosts();
+    this.getUsers();
   }
 
   getgetdonations() {
@@ -31,5 +35,15 @@ export class DonorsComponent implements OnInit {
     });
 
   }
+  getLastPosts() {
+    this.authService.getLastPosts().subscribe((data: any) => {
+      this.lastposts = data.data;
+    });
+  }
 
+  getUsers() {
+    this.authService.getUsers().subscribe((data: any) => {
+      this.users = data.data;
+    });
+  }
 }
