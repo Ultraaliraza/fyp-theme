@@ -13,8 +13,8 @@ export class AuthenticationService {
   }
   keyvalue = '';
   // apiHeader = 'http://localhost:3000/';
-  apiHeader = 'https://us-central1-helpinghand-90a6a.cloudfunctions.net/apis/';
-  // apiHeader = 'http://localhost:5000/helpinghand-90a6a/us-central1/apis/';
+  // apiHeader = 'https://us-central1-helpinghand-90a6a.cloudfunctions.net/apis/';
+  apiHeader = 'http://localhost:5000/helpinghand-90a6a/us-central1/apis/';
 
   user = new BehaviorSubject({});
   post = new BehaviorSubject({});
@@ -34,7 +34,6 @@ export class AuthenticationService {
     this.http.post(this.apiHeader + 'login', objR)
       .subscribe((res: any) => {
         console.log(res);
-
         localStorage.setItem('userMeta', res.uid);
         this.user.next(res.data);
         this.checkAccountType(res.data.acountType);
@@ -97,7 +96,7 @@ export class AuthenticationService {
       if (acountType == 'identifier' || acountType == 'Identifier') {
         return this.router.navigate(['/home']);
       }
-      else if (acountType == 'Councilors' || acountType == 'Councilors') {
+      else if (acountType == 'councilors' || acountType == 'Councilors') {
         return this.router.navigate(['/motivator']);
       }
       else if (acountType == 'donors' || acountType == 'Donors') {
@@ -215,13 +214,10 @@ export class AuthenticationService {
   }
   getUser() {
     const id = localStorage.getItem('userMeta');
-    return this.http.get(this.apiHeader + 'getuserinfo/' + id).subscribe((data: any) => {
-
-      this.user.next(data);
-
-    });
-
-
+    return this.http.get(this.apiHeader + 'getuserinfo/' + id)
+      .subscribe((data: any) => {
+        this.user.next(data);
+      });
   }
   getVideoData(key: any) {
     return this.http.get(this.apiHeader + 'getVideos/' + key);
