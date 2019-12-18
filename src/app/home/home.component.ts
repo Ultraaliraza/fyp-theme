@@ -109,17 +109,23 @@ export class HomeComponent implements OnInit {
     this.myhomeform.controls.Time.setValue(time1);
     this.uploadfilesService.uploadFile()
       .then((urls) => {
-        this.myhomeform.controls.PostImage.setValue(urls['imageURL']);
-        this.myhomeform.controls.Postfile.setValue(urls['docURL']);
+        if (urls['imageURL'])
+          this.myhomeform.controls.PostImage.setValue(urls['imageURL']);
+        if (urls['docURL'])
+          this.myhomeform.controls.Postfile.setValue(urls['docURL']);
 
         this.authService.home(this.myhomeform.value)
           .subscribe(() => {
             this.myhomeform.reset();
 
             this.getPOSTS();
+            this.router.navigate(['/home']);
+            this.uploadfilesService.urls = { docURL: undefined, videoURL: undefined, imageURL: undefined }
+            this.uploadfilesService.filesMeta = { doc: undefined, image: undefined, video: undefined }
           });
       });
   }
+
   videoFrom() {
     const time = this.datePipe.transform(new Date(), 'd-MMM-y');
     const time1 = this.datePipe.transform(new Date(), 'h:mm a');
@@ -127,8 +133,9 @@ export class HomeComponent implements OnInit {
     this.myvideoform.controls.Time.setValue(time1);
 
     this.uploadfilesService.uploadFile()
-      .then((fileMeta) => {
-        this.myvideoform.controls.Video.setValue(fileMeta);
+      .then((urls) => {
+        if (urls['videoURL'])
+          this.myhomeform.controls.Video.setValue(urls['videoURL']);
         this.authService.Videos(this.myvideoform.value).subscribe((data: any) => {
             this.myvideoform.reset();
             this.getPOSTS();

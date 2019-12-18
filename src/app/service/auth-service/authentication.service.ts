@@ -12,7 +12,7 @@ export class AuthenticationService {
     throw new Error("Method not implemented.");
   }
   keyvalue = '';
-      //  apiHeader = 'http://localhost:3000/';
+  //  apiHeader = 'http://localhost:3000/';
   apiHeader = 'https://us-central1-helpinghand-90a6a.cloudfunctions.net/apis/';
   // apiHeader = 'http://localhost:5000/helpinghand-90a6a/us-central1/apis/';
 
@@ -112,7 +112,7 @@ export class AuthenticationService {
       if (acountType == 'identifier' || acountType == 'Identifier') {
         return this.router.navigate(['/home']);
       }
-      else if (acountType == 'Councilors' || acountType == 'Councilors') {
+      else if (acountType == 'councilors' || acountType == 'Councilors') {
         return this.router.navigate(['/motivator']);
       }
       else if (acountType == 'donors' || acountType == 'Donors') {
@@ -170,9 +170,9 @@ export class AuthenticationService {
     return this.http.post(this.apiHeader + 'home/donations', objR);
   }
 
-  reportFrom(objR){
+  reportFrom(objR) {
 
-    return this.http.post(this.apiHeader +'reportFrom', objR);
+    return this.http.post(this.apiHeader + 'reportFrom', objR);
   }
 
   getgetdonations() {
@@ -235,13 +235,10 @@ export class AuthenticationService {
   }
   getUser() {
     const id = localStorage.getItem('userMeta');
-    return this.http.get(this.apiHeader + 'getuserinfo/' + id).subscribe((data: any) => {
-
-      this.user.next(data);
-
-    });
-
-
+    return this.http.get(this.apiHeader + 'getuserinfo/' + id)
+      .subscribe((data: any) => {
+        this.user.next(data);
+      });
   }
   getVideoData(key: any) {
     return this.http.get(this.apiHeader + 'getVideos/' + key);

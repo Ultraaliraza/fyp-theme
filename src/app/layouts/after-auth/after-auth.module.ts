@@ -3,13 +3,10 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { AfterAuthRoutingModule } from './after-auth-routing.module';
-import { HomeComponent } from 'src/app/home/home.component';
 import { MarriageComponent } from 'src/app/marriage/marriage.component';
 import { ProvertyComponent } from 'src/app/proverty/proverty.component';
 import { EducationComponent } from 'src/app/education/education.component';
 import { DonationsComponent } from 'src/app/donations/donations.component';
-import { MotivatorComponent } from 'src/app/motivator/motivator.component';
-import { DonorsComponent } from 'src/app/donors/donors.component';
 import { QuestionComponent } from 'src/app/question/question.component';
 import { ProfileComponent } from 'src/app/profile/profile.component';
 import { WomenComponent } from 'src/app/women/women.component';
@@ -33,16 +30,20 @@ import { ReportsComponent } from 'src/app/admin/reports/reports.component';
 import { AdminvideosComponent } from 'src/app/admin/adminvideos/adminvideos.component';
 import { AdminDonationsComponent } from 'src/app/admin/donations/donations.component';
 import { AdminDashboardComponent } from 'src/app/admin/admin-dashboard/admin-dashboard.component';
+import { DonorsGuard } from 'src/app/service/auth-guard/donors.guard';
+import { CouncillorGuard } from 'src/app/service/auth-guard/councillor.guard';
+import { IdentifierGuard } from 'src/app/service/auth-guard/identifier.guard';
+import { RedirectGuardService } from 'src/app/service/auth-guard/redirect-guard.guard';
+import { HomeComponent } from 'src/app/home/home.component';
+import { MotivatorComponent } from 'src/app/motivator/motivator.component';
+import { DonorsComponent } from 'src/app/donors/donors.component';
 
 @NgModule({
   declarations: [
-    HomeComponent,
     MarriageComponent,
     ProvertyComponent,
     EducationComponent,
     DonationsComponent,
-    MotivatorComponent,
-    DonorsComponent,
     QuestionComponent,
     ProfileComponent,
     WomenComponent,
@@ -64,7 +65,9 @@ import { AdminDashboardComponent } from 'src/app/admin/admin-dashboard/admin-das
     ReportsComponent,
     AdminvideosComponent,
     AdminDashboardComponent,
-
+    // HomeComponent,
+    // MotivatorComponent,
+    // DonorsComponent
   ],
   imports: [
     CommonModule,
@@ -75,7 +78,11 @@ import { AdminDashboardComponent } from 'src/app/admin/admin-dashboard/admin-das
   ],
   providers: [
     UserserviceService,
-    UploadfilesService
+    UploadfilesService,
+    // DonorsGuard,
+    // CouncillorGuard,
+    // IdentifierGuard,
+    // RedirectGuardService
   ]
 })
 export class AfterAuthModule { }

@@ -1,11 +1,8 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { HomeComponent } from 'src/app/home/home.component';
 import { ProfileComponent } from 'src/app/profile/profile.component';
 import { SetAccountTypeComponent } from 'src/app/component/auth/set-account-type/set-account-type.component';
-import { MotivatorComponent } from 'src/app/motivator/motivator.component';
 import { EducationComponent } from 'src/app/education/education.component';
-import { DonorsComponent } from 'src/app/donors/donors.component';
 import { MarriageComponent } from 'src/app/marriage/marriage.component';
 import { ProvertyComponent } from 'src/app/proverty/proverty.component';
 import { WomenComponent } from 'src/app/women/women.component';
@@ -26,18 +23,19 @@ import { BannusersComponent } from 'src/app/admin/bannusers/bannusers.component'
 import { PostsComponent } from 'src/app/admin/posts/posts.component';
 import { ReportsComponent } from 'src/app/admin/reports/reports.component';
 import { AdminDashboardComponent } from 'src/app/admin/admin-dashboard/admin-dashboard.component';
-
-//Admin Panel Routes
-
+import { IdentifierGuard } from 'src/app/service/auth-guard/identifier.guard';
+import { CouncillorGuard } from 'src/app/service/auth-guard/councillor.guard';
+import { DonorsGuard } from 'src/app/service/auth-guard/donors.guard';
+import { RedirectGuardService } from 'src/app/service/auth-guard/redirect-guard.guard';
+import { HomeComponent } from 'src/app/home/home.component';
+import { MotivatorComponent } from 'src/app/motivator/motivator.component';
+import { DonorsComponent } from 'src/app/donors/donors.component';
 
 const routes: Routes = [
   {
-
     path: '',
     children: [
-      { path: '', component: HomeComponent },
-      { path: 'home', component: HomeComponent },
-
+      
       { path: 'profile/:key', component: ProfileComponent },
       { path: 'watchvideo/:key', component: WatchvideoComponent },
       {
@@ -51,9 +49,7 @@ const routes: Routes = [
         ]
       },
       { path: 'set-account-type', component: SetAccountTypeComponent },
-      { path: 'motivator', component: MotivatorComponent },
       { path: 'education', component: EducationComponent },
-      { path: 'donors', component: DonorsComponent },
       { path: 'marriage', component: MarriageComponent },
       { path: 'proverty', component: ProvertyComponent },
       { path: 'women', component: WomenComponent },
@@ -66,12 +62,9 @@ const routes: Routes = [
       { path: 'videos', component: VideosComponent },
       { path: 'edit', component: EditComponent },
       { path: 'messages', component: MessagesComponent },
-
-      { path: '**', redirectTo: '/home', pathMatch: 'full' }
     ]
   }
 ];
-
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
