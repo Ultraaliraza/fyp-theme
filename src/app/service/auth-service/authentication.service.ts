@@ -171,7 +171,6 @@ export class AuthenticationService {
   }
 
   reportFrom(objR) {
-
     return this.http.post(this.apiHeader + 'reportFrom', objR);
   }
 

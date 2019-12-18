@@ -45,8 +45,11 @@ app.post("/register", (req, res) => {
             .ref("/Users/" + userRecord.user.uid)
             .set(profileBody)
             .then(() => {
-              // See the UserRecord reference doc for the contents of userRecord.
-              return res.status(200).json({ uid: userRecord.user.uid });
+              db.ref("/" + profileBody.acountType + "/" + userRecord.user.uid).set(profileBody)
+                .then(() => {
+                  // See the UserRecord reference doc for the contents of userRecord.
+                  return res.status(200).json({ uid: userRecord.user.uid });
+                });
             })
             .catch(error => {
               return res.send(error);
@@ -141,19 +144,27 @@ app.post("/social", (request, response) => {
     });
 });
 
+
 app.post("/setAccountType", (req, res) => {
   const body = req.body;
   console.log(body);
-  return db
-    .ref("/Users/" + body.id)
-    .update({ acountType: body.acountType })
+  let ref = db.ref("/Users/" + body.id);
+
+  return ref.update({ acountType: body.acountType })
     .then(() => {
-      return res.set(200).send({ msg: "Account Type Updated" });
+      ref.on("value", snapshot => {
+        let userinfo = snapshot.val();
+        db.ref("/" + userinfo.acountType + "/" + body.id).set(userinfo)
+          .then(() => {
+            return res.set(200).send({ msg: "Account Type Updated" });
+          });
+      });
     })
     .catch(error => {
       return res.send(error);
     });
 });
+
 
 app.post("/home", (req, res) => {
   const body = req.body;
@@ -699,6 +710,6 @@ app.get("/deletevideos/:id", (req, res) => {
     });
 });
 
-app.listen(3000, function() {
+app.listen(3000, function () {
   console.log("Server listening on port 3000");
 });

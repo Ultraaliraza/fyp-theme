@@ -2,8 +2,9 @@
 	<!-- Header -->
 	<header class="nav container-fluid">
 		<div class="logo">
-    <img src="https://firebasestorage.googleapis.com/v0/b/helpinghand-90a6a.appspot.com/o/Post%20Images%2Flogo.jpg?alt=media&token=627a433f-992a-4c41-b5d7-2f734fe4eed9" class="img-fluid">
-        	</div>
+			<img src="https://firebasestorage.googleapis.com/v0/b/helpinghand-90a6a.appspot.com/o/Post%20Images%2Flogo.jpg?alt=media&token=627a433f-992a-4c41-b5d7-2f734fe4eed9"
+				class="img-fluid">
+		</div>
 		<div class="bars ml-auto" id="openDrawer">
 			<i class="fas fa-bars fa-2x"></i>
 		</div>
@@ -18,11 +19,11 @@
 				<a href="#" data-toggle="modal" data-target="#donationsModal">Raise Donations</a>
 			</li>
 			<li>
-					<a href="#" data-toggle="modal" data-target="#VideoModal">Upload Video</a>
-				</li>
+				<a href="#" data-toggle="modal" data-target="#VideoModal">Upload Video</a>
+			</li>
 			<li>
-					<a routerLink="/messages">Messages</a>
-				</li>
+				<a routerLink="/messages">Messages</a>
+			</li>
 
 			<li>
 				<a href="#">Contact Us</a>
@@ -32,9 +33,10 @@
 				<i class="fas fa-search" id="openSearch"></i>
 			</li>
 			<li class="dropdown">
-				<img src={{this.user.profile_image}} class="img-fluid accountSettingDropdown dropdown-toggle" id="accountSettingDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" />
+				<img src={{this.user.profile_image}} class="img-fluid accountSettingDropdown dropdown-toggle"
+					id="accountSettingDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" />
 				<div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="margin-right:50px;">
-					<a class="dropdown-item"routerLink="/uprofile">Profile</a>
+					<a class="dropdown-item" routerLink="/uprofile">Profile</a>
 					<a class="dropdown-item" routerLink="/settings">Settings</a>
 					<a class="dropdown-item" (click)="authService.logout()">Logout</a>
 				</div>
@@ -357,10 +359,12 @@
 									</select>
 								</div>
 								<div class="form-group">
-									<input type="file" accept=".pdf, .doc" (change)="uploadfilesService.onSelectFile($event)" />
+									<input type="file" accept=".pdf, .doc"
+										(change)="uploadfilesService.onSelectFile($event)" />
 								</div>
 								<div class="form-group">
-									<input type="file" accept=".png, .jpg" (change)="uploadfilesService.onSelectFile($event)" />
+									<input type="file" accept=".png, .jpg"
+										(change)="uploadfilesService.onSelectFile($event)" />
 								</div>
 								<div class="form-group">
 									<textarea placeholder="Your Content" formControlName="Description"></textarea>
@@ -404,7 +408,8 @@
 									</select>
 								</div> -->
 								<div class="form-group">
-									<input type="file" accept=".MP4, .3GP ,.WEBM ,.M4P ,.MKV" (change)="uploadfilesService.onSelectFile($event)" />
+									<input type="file" accept=".MP4, .3GP, .MKV"
+										(change)="uploadfilesService.onSelectFile($event)" />
 								</div>
 
 								<div class="form-group">
@@ -420,8 +425,8 @@
 			</div>
 
 			<!-- ======================= [ MODALS ] ============================= -->
-			<div class="modal fade" id="donationsModal" tabindex="-1" role="dialog" aria-labelledby="donationsModalLabel"
-				aria-hidden="true">
+			<div class="modal fade" id="donationsModal" tabindex="-1" role="dialog"
+				aria-labelledby="donationsModalLabel" aria-hidden="true">
 				<div class="modal-dialog" role="document">
 					<div class="modal-content">
 						<div class="modal-header">
@@ -436,10 +441,12 @@
 									<input type="text" formControlName="Title" placeholder="Title For Donation" />
 								</div>
 								<div class="form-group">
-									<input type="file" accept=".pdf, .doc" (change)="uploadfilesService.onSelectFile($event)" />
+									<input type="file" accept=".pdf, .doc"
+										(change)="uploadfilesService.onSelectFile($event)" />
 								</div>
 								<div class="form-group">
-									<input type="file" accept=".png, .jpg" (change)="uploadfilesService.onSelectFile($event)" />
+									<input type="file" accept=".png, .jpg"
+										(change)="uploadfilesService.onSelectFile($event)" />
 								</div>
 								<div class="form-group">
 									<textarea placeholder="Your Content" formControlName="Description"></textarea>
