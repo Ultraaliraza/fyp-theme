@@ -14,6 +14,7 @@ export class AdminvideosComponent implements OnInit {
 
   ngOnInit() {
     this.getAllVideos();
+
   }
   getAllVideos() {
 
@@ -26,5 +27,10 @@ export class AdminvideosComponent implements OnInit {
     });
   }
 
+  deleteVideos(id) {
+    console.log(id);
+    this.authService.deleteVideos(id);
+
+  }
 
 }

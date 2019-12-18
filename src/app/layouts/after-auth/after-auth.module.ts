@@ -37,6 +37,8 @@ import { RedirectGuardService } from 'src/app/service/auth-guard/redirect-guard.
 import { HomeComponent } from 'src/app/home/home.component';
 import { MotivatorComponent } from 'src/app/motivator/motivator.component';
 import { DonorsComponent } from 'src/app/donors/donors.component';
+import { AdminGuard } from 'src/app/service/auth-guard/admin.guard';
+
 
 @NgModule({
   declarations: [
@@ -65,6 +67,7 @@ import { DonorsComponent } from 'src/app/donors/donors.component';
     ReportsComponent,
     AdminvideosComponent,
     AdminDashboardComponent,
+
     // HomeComponent,
     // MotivatorComponent,
     // DonorsComponent
@@ -79,6 +82,7 @@ import { DonorsComponent } from 'src/app/donors/donors.component';
   providers: [
     UserserviceService,
     UploadfilesService,
+    AdminGuard
     // DonorsGuard,
     // CouncillorGuard,
     // IdentifierGuard,

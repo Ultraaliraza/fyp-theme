@@ -12,8 +12,8 @@ export class AuthenticationService {
     throw new Error("Method not implemented.");
   }
   keyvalue = '';
-  //  apiHeader = 'http://localhost:3000/';
-  apiHeader = 'https://us-central1-helpinghand-90a6a.cloudfunctions.net/apis/';
+   apiHeader = 'http://localhost:4000/';
+  // apiHeader = 'https://us-central1-helpinghand-90a6a.cloudfunctions.net/apis/';
   // apiHeader = 'http://localhost:5000/helpinghand-90a6a/us-central1/apis/';
 
   user = new BehaviorSubject({});
@@ -25,6 +25,12 @@ export class AuthenticationService {
     // send data to the backend server\
     this.http.post(this.apiHeader + 'register', objR)
       .subscribe(data => {
+
+        (error) => {
+
+          if (error.status == 401)
+            alert('Email Already in used');
+        }
         this.router.navigate(['/login']);
       });
   }
@@ -320,9 +326,9 @@ export class AuthenticationService {
   }
 
 
-  deleteVideos(id: any) {
-    console.log(id);
-    return this.http.get(this.apiHeader + 'deletevideos/' + id);
+  deleteVideos(uid: string) {
+    console.log(uid);
+    return this.http.get(this.apiHeader + 'deleteadminvideos/' + uid);
   }
 
   deletePosts(id: any) {

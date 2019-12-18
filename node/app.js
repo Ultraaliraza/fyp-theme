@@ -475,10 +475,10 @@ app.post("/updatepass", (req, res) => {
 
 //Posting Report
 app.post("/reportFrom", (req, res) => {
-  let postreports = report.push();
-  postreports.set(req.body);
+  report.push().set(req.body).then(() =>{
+    res.json({ success: 1, data: postreports });
+  });
 
-  res.json({ success: 1, data: postreports });
 });
 
 //Posting comments on Video
@@ -679,8 +679,8 @@ app.get("/deletedonations/:id", (req, res) => {
       });
 });
 
-app.get("/deletevideos/:id", (req, res) => {
-  const videoID = req.params.id;
+app.post("/deleteadminvideos", (req, res) => {
+  const videoID = req.body.id;
   console.log(videoID);
   db.ref("/Videos/" + videoID)
       .remove()

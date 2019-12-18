@@ -22,6 +22,8 @@ export class DonorsGuard implements CanActivate {
         this.router.navigate(['/home']);
       if (user.acountType == 'councilors' || user.acountType == 'Councilors')
         this.router.navigate(['/motivator']);
+        if (user.acountType == 'admin' || user.acountType == 'Admin')
+          this.router.navigate(['/admin']);
       return status = false;
     });
     console.log(status);

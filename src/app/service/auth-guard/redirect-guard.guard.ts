@@ -25,6 +25,8 @@ export class RedirectGuardService implements CanActivate {
           this.router.navigate(['/donors']);
         if (user.acountType == 'councilors' || user.acountType == 'Councilors')
           this.router.navigate(['/motivator']);
+          if (user.acountType == 'admin' || user.acountType == 'Admin')
+          this.router.navigate(['/admin']);
         return true;
       }
     });

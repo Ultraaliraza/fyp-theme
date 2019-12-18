@@ -3,7 +3,7 @@ import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router, CanAc
 import { AuthenticationService } from '../auth-service/authentication.service';
 
 @Injectable()
-export class IdentifierGuard implements CanActivate {
+export class AdminGuard implements CanActivate {
   constructor(
     private router: Router,
     private authenticationService: AuthenticationService
@@ -16,18 +16,18 @@ export class IdentifierGuard implements CanActivate {
       .subscribe(async userinfo => {
         user = await userinfo;
         console.log(user.acountType);
-        if (user.acountType == 'identifier' || user.acountType == 'Identifier')
+        if (user.acountType == 'admin' || user.acountType == 'Admin')
           return status = true;
+        if (user.acountType == 'identifier' || user.acountType == 'Identifier')
+          this.router.navigate(['/home']);
 
         if (user.acountType == 'donors' || user.acountType == 'Donors')
           this.router.navigate(['/donors']);
         if (user.acountType == 'councilors' || user.acountType == 'Councilors')
           this.router.navigate(['/motivator']);
-          if (user.acountType == 'admin' || user.acountType == 'Admin')
-          this.router.navigate(['/admin']);
         return status = false;
       })
-      console.log(status);
+    console.log(status);
     return true;
   }
 }

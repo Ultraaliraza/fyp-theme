@@ -30,12 +30,13 @@ import { RedirectGuardService } from 'src/app/service/auth-guard/redirect-guard.
 import { HomeComponent } from 'src/app/home/home.component';
 import { MotivatorComponent } from 'src/app/motivator/motivator.component';
 import { DonorsComponent } from 'src/app/donors/donors.component';
+import { AdminGuard } from 'src/app/service/auth-guard/admin.guard';
 
 const routes: Routes = [
   {
     path: '',
     children: [
-      
+
       { path: 'profile/:key', component: ProfileComponent },
       { path: 'watchvideo/:key', component: WatchvideoComponent },
       {
@@ -46,7 +47,7 @@ const routes: Routes = [
           { path: 'bannUsers', component: BannusersComponent },
           { path: 'posts', component: PostsComponent },
           { path: 'Reports', component: ReportsComponent },
-        ]
+        ], canActivate:[AdminGuard]
       },
       { path: 'set-account-type', component: SetAccountTypeComponent },
       { path: 'education', component: EducationComponent },

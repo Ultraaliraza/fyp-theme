@@ -106,20 +106,9 @@ export class QuestionComponent implements OnInit {
 
   reportFrom() {
     console.log(this.reportform.value);
-
     this.reportform.controls.postID.setValue(this.postID);
-    // this.authService.Report(this.reportform.value).subscribe((data: any) => {
-    //   console.log(this.reportform.value);
-
-    // });
-
+    this.authService.reportFrom(this.reportform.value).subscribe((data: any) => {
+      console.log(this.reportform.value);
+    })
   }
-
-  // reportform() {
-
-
-  //   console.log(this.reportform);
-  //   this.authService.getReport(this.reportform.value);
-  // }
-
 }
