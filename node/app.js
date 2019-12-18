@@ -686,8 +686,8 @@ app.get("/deletedonations/:id", (req, res) => {
     });
 });
 
-app.get("/deletevideos/:id", (req, res) => {
-  const videoID = req.params.id;
+app.post("/deleteadminvideos", (req, res) => {
+  const videoID = req.body.id;
   console.log(videoID);
   db.ref("/Videos/" + videoID)
     .remove()
@@ -699,6 +699,25 @@ app.get("/deletevideos/:id", (req, res) => {
     });
 });
 
-app.listen(3000, function() {
+
+
+
+app.get("/videosadmindel/:id", (req, res) => {
+  const videoID = req.params.id;
+  console.log(videoID);
+  // db.ref("/Videos/" + videoID)
+  //   .remove()
+  //   .then(() => {
+  //     return res.status(200).send({ msg: "Video deleted" });
+  //   })
+  //   .catch(error => {
+  //     return res.send({ Error: error });
+  //   });
+});
+
+
+
+
+app.listen(4000, function() {
   console.log("Server listening on port 3000");
 });

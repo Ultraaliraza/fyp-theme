@@ -69,12 +69,10 @@ export class HomeComponent implements OnInit {
         Details: new FormControl(''),
         Date: new FormControl(),
         UserName: new FormControl(this.user.name),
-        acountType: new FormControl(this.user.acountType),
         UploadedBy: new FormControl(id),
         Video: new FormControl(''),
         Time: new FormControl(''),
-        Profile_Image: new FormControl(this.user.profile_image),
-        id: new FormControl('')
+        Profile_Image: new FormControl(this.user.profile_image)
 
       });
     });

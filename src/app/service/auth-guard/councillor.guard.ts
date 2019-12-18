@@ -23,6 +23,8 @@ export class CouncillorGuard implements CanActivate {
         this.router.navigate(['/home']);
       if (user.acountType == 'donors' || user.acountType == 'Donors')
       this.router.navigate(['/donors']);
+      if (user.acountType == 'admin' || user.acountType == 'Admin')
+          this.router.navigate(['/admin']);
       return status = false;
     });
     return true;

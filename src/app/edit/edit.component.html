@@ -8,7 +8,7 @@
                 <i class="fas fa-bars fa-2x"></i>
             </div>
             <ul class="menu ml-auto" id="navLaptop">
-                <li>
+                <!-- <li>
                     <a href="#">Home</a>
                 </li>
                 <li>
@@ -23,22 +23,20 @@
                 <li>
                     <a href="#">Contact Us</a>
                 </li>
-                <li>
-                    <input type="text" class="searchbox" placeholder="Search..." />
+                <li> -->
+                    <!-- <input type="text" class="searchbox" placeholder="Search..." />
                     <i class="fas fa-search" id="openSearch"></i>
-                </li>
-                <li>
-                    <img src="img/user.jpg" class="img-fluid accountSettingDropdown" id="accountSettingDropdown" />
-                    <div class="dropdownPicture" id="dropdownPicture">
-                        <div class="options">
-                            <p><a href="#">Profile</a></p>
-                            <p><a href="#">Settings</a></p>
-                            <p><a href="#">Logout</a></p>
-                        </div>
+                </li> -->
+                <li class="dropdown">
+                    <img src={{this.user.profile_image}} class="img-fluid accountSettingDropdown dropdown-toggle" id="accountSettingDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" />
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="margin-right:50px;">
+                      <a class="dropdown-item"routerLink="/uprofile">Profile</a>
+                      <a class="dropdown-item" routerLink="/settings">Settings</a>
+                      <a class="dropdown-item" (click)="authService.logout()">Logout</a>
                     </div>
-                </li>
+                  </li>
             </ul>
-    
+
             <div id="drawer">
                 <div class="close-bars">
                     <button id="closeBars">
@@ -63,9 +61,9 @@
                     </li>
                 </ul>
             </div>
-    
+
         </header>
-    
+
         <!-- Body -->
         <div class="container-fluid">
             <div class="row">
@@ -107,18 +105,18 @@
                             <i class="fab fa-youtube"></i>
                             <a routerLink="/videos">Videos</a>
                         </li>
-    
+
                     </ul>
                 </div>
                 <div class="col-lg-6 updateQuestion" id="middleDiv">
                         <div class="col-lg-10 offset-lg-1">
-                            
+
                             <div class="header">
                                 <h4 class="title">Edit Question</h4>
                             </div>
                             <div class="body">
-                                <form [formGroup]="myhomeform" (ngSubmit)="submitFrom()">
-        
+                                <!-- <form [formGroup]="myhomeform" (ngSubmit)="submitFrom()"> -->
+
                                 <div class="form-group">
                                     <input type="text" formControlName="Title" placeholder="Your Issue" />
                                 </div>
@@ -133,7 +131,7 @@
                                         <option value="Marriage">Marriage</option>
                                         <option value="Proverty">Proverty</option>
                                         <option value="Others">Others</option>
-        
+
                             </select>
                         </div>
                         <!-- <div class="form-group">
@@ -153,9 +151,9 @@
                         <div class="">
                             <button class="submit">Post</button>
                         </div>
-                    </form>
+                    <!-- </form> -->
                     </div>
-            
+
                     </div>
                 </div>
                 <div *ngFor="let lastpost of lastposts"></div>
@@ -182,14 +180,14 @@
                         </div>
                     </div></div>
                     <br>
-    
-    
-    
+
+
+
                     <div class="box members">
                             <h3 class="title">Recent Joined Members</h3>
-    
+
                         <div *ngFor="let user of users">
-    
+
                             <div class="content">
                                 <!-- Member -->
                                 <div class="member">
@@ -201,13 +199,13 @@
                                         <p class="designation">{{user.post.acountType}}</p>
                                     </div>
                                 </div>
-    
+
                             </div>
                         </div>
                     </div>
                 </div>
                 <!-- Member -->
-    
+
                 <!-- <div class="member">
                                 <div class="thumbanil">
                                     <img src="img/user.jpg" class="img-fluid" />
@@ -247,20 +245,20 @@
                                     <p class="designation">Again no idea</p>
                                 </div> -->
                 <!-- </div> -->
-    
-                <!-- 				
+
+                <!--
                 </div>
             </div>
         </div> -->
-    
+
                 <!-- ================================================================ -->
                 <!-- ================================================================ -->
                 <!-- ======================= [ MODALS ] ============================= -->
                 <!-- ================================================================ -->
                 <!-- ================================================================ -->
                 <!-- ================================================================ -->
-    
-                <div class="models" id="postQuestionModel">
+
+                <!-- <div class="models" id="postQuestionModel">
                     <div class="cancel" id="closeQuestionModel">
                         <i class="fa fa-close"></i>
                     </div>
@@ -269,7 +267,7 @@
                     </div>
                     <div class="body">
                         <form [formGroup]="myhomeform" (ngSubmit)="submitFrom()">
-    
+
                             <div class="form-group">
                                 <input type="text" formControlName="Title" placeholder="Your Issue" />
                             </div>
@@ -284,13 +282,13 @@
                                     <option value="Marriage">Marriage</option>
                                     <option value="Proverty">Proverty</option>
                                     <option value="Others">Others</option>
-    
+
                     </select>
                 </div>
-                <!-- <div class="form-group">
+                 <div class="form-group">
                     <input type="text" placeholder="Tags" />
                 </div> -->
-                <div class="form-group">
+                <!-- <div class="form-group">
                     <input type="file" accept=".pdf, .doc" (change)="onSelectFile($event)" />
                 </div>
                 <div class="form-group">
@@ -304,12 +302,12 @@
                 </div>
             </form>
             </div>
-    
-                </div>
-    
+
+                </div> -->
+
                 <div id="postQuestionModelOverlay"></div>
-    
-                <div class="models" id="DonationsModel">
+
+                <!-- <div class="models" id="DonationsModel">
                     <div class="cancel" id="closeDonationsModel">
                         <i class="fa fa-close"></i>
                     </div>
@@ -331,4 +329,4 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->

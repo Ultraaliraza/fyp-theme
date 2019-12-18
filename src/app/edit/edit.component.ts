@@ -8,15 +8,19 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./edit.component.css']
 })
 export class EditComponent implements OnInit {
-
+  lastposts = [];
+  users = [];
+  user;
   user;
   postid;
 
   constructor(private route: ActivatedRoute, private authService: AuthenticationService, private router: Router) { }
 
   ngOnInit() {
-
-    this.user = this.user.key;
+    let id = localStorage.getItem('userMeta');
+    this.authService.user.subscribe((user: any) => {
+      this.user = user;
+    });
 
     this.route.params.subscribe(postID => {
       this.postid = postID.key;
@@ -25,5 +29,18 @@ export class EditComponent implements OnInit {
       this.authService.Editpost(obj);
     });
 
+  }
+  getLastPosts() {
+    this.authService.getLastPosts().subscribe((data: any) => {
+      this.lastposts = data.data;
+      console.log(this.lastposts);
+    });
+
+  }
+
+  getUsers() {
+    this.authService.getUsers().subscribe((data: any) => {
+      this.users = data.data;
+    });
   }
 }
