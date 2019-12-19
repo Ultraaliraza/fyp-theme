@@ -11,7 +11,6 @@ export class EditComponent implements OnInit {
   lastposts = [];
   users = [];
   user;
-  user;
   postid;
 
   constructor(private route: ActivatedRoute, private authService: AuthenticationService, private router: Router) { }
