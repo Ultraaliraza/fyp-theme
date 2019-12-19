@@ -13,8 +13,8 @@ export class AuthenticationService {
   }
   keyvalue = '';
   //  apiHeader = 'http://localhost:3000/';
-  apiHeader = 'https://us-central1-helpinghand-90a6a.cloudfunctions.net/apis/';
-  // apiHeader = 'http://localhost:5000/helpinghand-90a6a/us-central1/apis/';
+  // apiHeader = 'https://us-central1-helpinghand-90a6a.cloudfunctions.net/apis/';
+  apiHeader = 'http://localhost:5000/helpinghand-90a6a/us-central1/apis/';
 
   user = new BehaviorSubject({});
   post = new BehaviorSubject({});
@@ -112,6 +112,16 @@ export class AuthenticationService {
       });
   }
 
+  forgetpassword(objR) {
+    this.http.post(this.apiHeader + 'forgetpassword', objR).subscribe((data: any) => {
+    });
+    this.router.navigate(['/login']);
+  }
+
+  setAccountType(acountType: string, userID: string) {  
+    return this.http.post(this.apiHeader + 'setAccountType', { acountType: acountType, id: userID });
+  } 
+
   checkAccountType(acountType: string) {
     console.log(acountType);
     if (acountType) {
@@ -128,10 +138,6 @@ export class AuthenticationService {
     else {
       return this.router.navigate(['/set-account-type']);
     }
-  }
-
-  setAccountType(acountType: string, userID: string) {
-    return this.http.post(this.apiHeader + 'setAccountType', { acountType: acountType, id: userID });
   }
 
   home(objR) {
@@ -153,19 +159,12 @@ export class AuthenticationService {
   }
 
   getprofile(key: any) {
-    return this.http.get(this.apiHeader + 'profile/' + key);
+    return this.http.get(this.apiHeader + '   /' + key);
   }
 
-  forgetpassword(objR) {
-    this.http.post(this.apiHeader + 'forgetpassword', objR).subscribe((data: any) => {
-    });
-    this.router.navigate(['/login']);
-  }
 
   updatePassword(password: object) {
     return this.http.post(this.apiHeader + 'updatepass', password);
-
-    this.router.navigate(['/settings']);
   }
 
   getMarriage() {
@@ -312,7 +311,7 @@ export class AuthenticationService {
   logout() {
     return this.http.get(this.apiHeader + 'logout').subscribe(() => {
       localStorage.clear();
-      this.router.navigate(['/']);
+      this.router.navigate(['/login']);
     })
   }
   deleteDonations(id: any) {
@@ -320,15 +319,9 @@ export class AuthenticationService {
     return this.http.get(this.apiHeader + 'deletedonations/' + id);
   }
 
-  deleteUsers(id: any) {
-
-    // return this.http.get(this.apiHeader + '/', + id);
-  }
-
-
   deleteVideos(uid: string) {
     console.log(uid);
-    return this.http.get(this.apiHeader + 'deleteadminvideos/' + uid);
+    return this.http.get(this.apiHeader + 'deletevideos/' + uid);
   }
 
   deletePosts(id: any) {
