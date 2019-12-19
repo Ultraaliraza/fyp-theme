@@ -20,7 +20,6 @@ export class UploadfilesService {
 
   uploadFile() {
     return new Promise((resolve) => {
-      console.log(this.filesMeta.image);
       if (this.filesMeta) {
         let fileName;
         let offsetRef = firebase.database().ref(".info/serverTimeOffset");
@@ -68,6 +67,7 @@ export class UploadfilesService {
                 // The file's download URL
                 let downloadURL = await storageRef.getDownloadURL();
                 this.urls.videoURL = downloadURL;
+                console.log(this.urls);
                 return resolve(this.urls);
               });
           }
@@ -98,11 +98,15 @@ export class UploadfilesService {
           this.filesMeta.image = { name: file.name, url: <string>(event.target['result']), size: file.size, file: file };
         }
       }
-      else if (file.type === '') {
+      else if (
+        file.type === 'video/mp4' ||
+        file.type === 'video/x-matroska' ||
+        file.type === 'video/3gpp') {
         var reader = new FileReader();
         reader.readAsDataURL(file);
         reader.onload = (event) => {
           this.filesMeta.video = { name: file.name, url: <string>(event.target['result']), size: file.size, file: file };
+          console.log(this.filesMeta);
         }
       }
     }

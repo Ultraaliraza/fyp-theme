@@ -29,82 +29,85 @@ app.use(bodyParser.json());
 app.post("/register", (req, res) => {
   const body = req.body;
   const profileBody = {
-    email: body.email,
-    name: body.name,
-    acountType: body.acountType,
-    profile_image: body.profile_image
+      email: body.email,
+      name: body.name,
+      acountType: body.acountType,
+      profile_image: body.profile_image
   };
 
   return auth
-    .createUserWithEmailAndPassword(body.email, body.password)
-    .then(userRecord => {
-      return auth.currentUser
-        .sendEmailVerification()
-        .then(() => {
-          return db
-            .ref("/Users/" + userRecord.user.uid)
-            .set(profileBody)
-            .then(() => {
-              // See the UserRecord reference doc for the contents of userRecord.
-              return res.status(200).json({ uid: userRecord.user.uid });
-            })
-            .catch(error => {
-              return res.send(error);
-            });
-        })
-        .catch(error => {
-          // An error happened.
-          return res.send({ error1: error });
-        });
-    })
-    .catch(error => {
-      if (error.code === "auth/email-already-in-use") {
-        res.status(401).send({ error2: error });
-      } else if (error.code === "auth/weak-password") {
-        res.status(402).send({ error3: error });
-      } else {
-        res.send({ error4: error });
-      }
-    });
+      .createUserWithEmailAndPassword(body.email, body.password)
+      .then(userRecord => {
+          return auth.currentUser
+              .sendEmailVerification()
+              .then(() => {
+                  return db
+                      .ref("/Users/" + userRecord.user.uid)
+                      .set(profileBody)
+                      .then(() => {
+                          db.ref("/" + profileBody.acountType + "/" + userRecord.user.uid).set(profileBody)
+                              .then(() => {
+                                  // See the UserRecord reference doc for the contents of userRecord.
+                                  return res.status(200).json({ uid: userRecord.user.uid });
+                              });
+                      })
+                      .catch(error => {
+                          return res.send(error);
+                      });
+              })
+              .catch(error => {
+                  // An error happened.
+                  return res.send({ error1: error });
+              });
+      })
+      .catch(error => {
+          if (error.code === "auth/email-already-in-use") {
+              res.status(401).send({ error2: error });
+          } else if (error.code === "auth/weak-password") {
+              res.status(402).send({ error3: error });
+          } else {
+              res.send({ error4: error });
+          }
+      });
 });
 
 app.post("/login", (req, res) => {
   const body = req.body;
   if (!body.email || !body.password)
-    return res.status(403).send("Must fill required fields");
+      return res.status(403).send("Must fill required fields");
 
   const fb = firebase.auth();
   return fb
-    .signInWithEmailAndPassword(body.email, body.password)
-    .then(userinfo => {
-      if (!userinfo.user.emailVerified)
-        return res.status(302).send("Email not Verified");
+      .signInWithEmailAndPassword(body.email, body.password)
+      .then(userinfo => {
+          if (!userinfo.user.emailVerified)
+              return res.status(302).send("Email not Verified");
 
-      return db.ref("Users/" + userinfo.user.uid).on("value", snapshot => {
-        return res
-          .status(200)
-          .send({ data: snapshot.val(), uid: userinfo.user.uid });
+          return db.ref("Users/" + userinfo.user.uid).on("value", snapshot => {
+              return res
+                  .status(200)
+                  .send({ data: snapshot.val(), uid: userinfo.user.uid });
+          });
+      })
+      .catch(error => {
+          if (error.code === "auth/user-not-found") {
+              res.status(401).send(error);
+          } else if (error.code === "auth/wrong-password") {
+              res.status(402).send(error);
+          }
       });
-    })
-    .catch(error => {
-      if (error.code === "auth/user-not-found") {
-        res.status(401).send(error);
-      } else if (error.code === "auth/wrong-password") {
-        res.status(402).send(error);
-      }
-    });
 });
 
 app.post("/forgetpassword", (req, res) => {
   const body = req.body;
   return auth
-    .sendPasswordResetEmail(body.email)
-    .then(() => {
-      return res.status(200).send("Email send");
-    })
-    .catch(error => {
-      return res.send("Error" + error);
-    });
+      .sendPasswordResetEmail(body.email)
+      .then(() => {
+          return res.status(200).send("Email send");
+      })
+      .catch(error => {
+          return res.send("Error" + error);
+      });
 });
 
 app.post("/social", (request, response) => {
@@ -114,45 +117,35 @@ app.post("/social", (request, response) => {
   let ref = db.ref("/Users/" + body.uid);
   delete body.uid;
   return ref
-    .set(body)
-    .then(() => {
-      return ref.on("value", snapshot => {
-        return response.status(200).send({ data: snapshot.val() });
+      .set(body)
+      .then(() => {
+          return ref.on("value", snapshot => {
+              return response.status(200).send({ data: snapshot.val() });
+          });
+      })
+      .catch(error => {
+          return response.json(error);
       });
-      // .once("value", (snapshot) => {
-      //     snapshot.forEach((childSnapshot) => {
-      //         var data = childSnapshot.val();
-
-      //         let key = childSnapshot.key;
-      //         found = 1;
-
-      //         temp = data;
-      //         temp.key = key;
-      //     });
-      //     if (found === 1) {
-      //         return response.jsonp({ success: 1, data: temp });
-      //     } else {
-      //         return response.jsonp({ success: 0, data: {} });
-      //     }
-      // });
-    })
-    .catch(error => {
-      return response.json(error);
-    });
 });
 
 app.post("/setAccountType", (req, res) => {
   const body = req.body;
   console.log(body);
-  return db
-    .ref("/Users/" + body.id)
-    .update({ acountType: body.acountType })
-    .then(() => {
-      return res.set(200).send({ msg: "Account Type Updated" });
-    })
-    .catch(error => {
-      return res.send(error);
-    });
+  let ref = db.ref("/Users/" + body.id);
+
+  return ref.update({ acountType: body.acountType })
+      .then(() => {
+          ref.on("value", snapshot => {
+              let userinfo = snapshot.val();
+              db.ref("/" + userinfo.acountType + "/" + body.id).set(userinfo)
+                  .then(() => {
+                      return res.set(200).send({ msg: "Account Type Updated" });
+                  });
+          });
+      })
+      .catch(error => {
+          return res.send(error);
+      });
 });
 
 app.post("/home", (req, res) => {
@@ -160,13 +153,13 @@ app.post("/home", (req, res) => {
   let post = db.ref("/Posts/").push();
 
   post
-    .set(body)
-    .then(() => {
-      return res.json({ success: 1 });
-    })
-    .catch(error => {
-      return res.send({ Error: error });
-    });
+      .set(body)
+      .then(() => {
+          return res.json({ success: 1 });
+      })
+      .catch(error => {
+          return res.send({ Error: error });
+      });
 });
 
 // For Sending Donations
@@ -181,13 +174,13 @@ app.post("/home/donations", (req, res) => {
 app.get("/donors", (req, res) => {
   let donationpost = [];
   Donors.once("value", snapshot => {
-    snapshot.forEach(childSnapshot => {
-      donationpost.push({
-        key: childSnapshot.key,
-        donationpost: childSnapshot.val()
+      snapshot.forEach(childSnapshot => {
+          donationpost.push({
+              key: childSnapshot.key,
+              donationpost: childSnapshot.val()
+          });
       });
-    });
-    return res.json({ success: 0, data: donationpost });
+      return res.json({ success: 0, data: donationpost });
   });
 });
 
@@ -196,11 +189,11 @@ app.get("/profile/:key", (req, res) => {
   let key = req.params.key;
   let userData = {};
   db.ref("/Users/" + key).once("value", snapshot => {
-    userData = {
-      post: snapshot.val()
-    };
-    res.json({ success: 0, data: userData });
-    console.log(userData);
+      userData = {
+          post: snapshot.val()
+      };
+      res.json({ success: 0, data: userData });
+      console.log(userData);
   });
 });
 
@@ -208,13 +201,13 @@ app.get("/profile/:key", (req, res) => {
 app.get("/posts", (req, res) => {
   let allPosts = [];
   posts.once("value", snapshot => {
-    snapshot.forEach(childSnapshot => {
-      allPosts.push({
-        key: childSnapshot.key,
-        post: childSnapshot.val()
+      snapshot.forEach(childSnapshot => {
+          allPosts.push({
+              key: childSnapshot.key,
+              post: childSnapshot.val()
+          });
       });
-    });
-    res.json({ success: 0, data: allPosts });
+      res.json({ success: 0, data: allPosts });
   });
 });
 
@@ -222,16 +215,16 @@ app.get("/posts", (req, res) => {
 app.get("/education", (req, res) => {
   let educationPosts = [];
   posts.once("value", snapshot => {
-    snapshot.forEach(childSnapshot => {
-      if (childSnapshot.val().Category === "Education") {
-        educationPosts.push({
-          key: childSnapshot.key,
-          post: childSnapshot.val()
-        });
-      }
-    });
+      snapshot.forEach(childSnapshot => {
+          if (childSnapshot.val().Category === "Education") {
+              educationPosts.push({
+                  key: childSnapshot.key,
+                  post: childSnapshot.val()
+              });
+          }
+      });
 
-    res.json({ success: 0, data: educationPosts });
+      res.json({ success: 0, data: educationPosts });
   });
 });
 
@@ -239,16 +232,16 @@ app.get("/education", (req, res) => {
 app.get("/proverty", (req, res) => {
   let provertyPosts = [];
   posts.once("value", snapshot => {
-    snapshot.forEach(childSnapshot => {
-      if (childSnapshot.val().Category === "Proverty") {
-        provertyPosts.push({
-          key: childSnapshot.key,
-          post: childSnapshot.val()
-        });
-      }
-    });
+      snapshot.forEach(childSnapshot => {
+          if (childSnapshot.val().Category === "Proverty") {
+              provertyPosts.push({
+                  key: childSnapshot.key,
+                  post: childSnapshot.val()
+              });
+          }
+      });
 
-    res.json({ success: 0, data: provertyPosts });
+      res.json({ success: 0, data: provertyPosts });
   });
 });
 
@@ -256,16 +249,16 @@ app.get("/proverty", (req, res) => {
 app.get("/marriage", (req, res) => {
   let marriagePosts = [];
   posts.once("value", snapshot => {
-    snapshot.forEach(childSnapshot => {
-      if (childSnapshot.val().Category === "Marriage") {
-        marriagePosts.push({
-          key: childSnapshot.key,
-          post: childSnapshot.val()
-        });
-      }
-    });
+      snapshot.forEach(childSnapshot => {
+          if (childSnapshot.val().Category === "Marriage") {
+              marriagePosts.push({
+                  key: childSnapshot.key,
+                  post: childSnapshot.val()
+              });
+          }
+      });
 
-    res.json({ success: 0, data: marriagePosts });
+      res.json({ success: 0, data: marriagePosts });
   });
 });
 
@@ -273,16 +266,16 @@ app.get("/marriage", (req, res) => {
 app.get("/women", (req, res) => {
   let womenPosts = [];
   posts.once("value", snapshot => {
-    snapshot.forEach(childSnapshot => {
-      if (childSnapshot.val().Category === "Women") {
-        womenPosts.push({
-          key: childSnapshot.key,
-          post: childSnapshot.val()
-        });
-      }
-    });
+      snapshot.forEach(childSnapshot => {
+          if (childSnapshot.val().Category === "Women") {
+              womenPosts.push({
+                  key: childSnapshot.key,
+                  post: childSnapshot.val()
+              });
+          }
+      });
 
-    res.json({ success: 0, data: womenPosts });
+      res.json({ success: 0, data: womenPosts });
   });
 });
 
@@ -290,15 +283,15 @@ app.get("/women", (req, res) => {
 app.get("/donations", (req, res) => {
   let donationsPosts = [];
   Donors.once("value", snapshot => {
-    snapshot.forEach(childSnapshot => {
-      if (childSnapshot.val().Catagory === "donation") {
-        donationsPosts.push({
-          key: childSnapshot.key,
-          post: childSnapshot.val()
-        });
-      }
-    });
-    res.json({ success: 0, data: donationPosts });
+      snapshot.forEach(childSnapshot => {
+          if (childSnapshot.val().Catagory === "donation") {
+              donationsPosts.push({
+                  key: childSnapshot.key,
+                  post: childSnapshot.val()
+              });
+          }
+      });
+      res.json({ success: 0, data: donationPosts });
   });
 });
 
@@ -315,16 +308,16 @@ app.get("/question/:key", (req, res) => {
   let key = req.params.key;
   let allPosts = {};
   posts.once("value", snapshot => {
-    snapshot.forEach(childSnapshot => {
-      if (key === childSnapshot.key) {
-        allPosts = {
-          key: childSnapshot.key,
-          post: childSnapshot.val()
-        };
-      }
-    });
-    res.json({ success: 0, data: allPosts });
-    console.log(allPosts);
+      snapshot.forEach(childSnapshot => {
+          if (key === childSnapshot.key) {
+              allPosts = {
+                  key: childSnapshot.key,
+                  post: childSnapshot.val()
+              };
+          }
+      });
+      res.json({ success: 0, data: allPosts });
+      console.log(allPosts);
   });
 });
 
@@ -333,15 +326,15 @@ app.get("/question/:key", (req, res) => {
 app.get("/others", (req, res) => {
   let OthersPosts = [];
   posts.once("value", snapshot => {
-    snapshot.forEach(childSnapshot => {
-      if (childSnapshot.val().Category === "Others") {
-        OthersPosts.push({
-          key: childSnapshot.key,
-          post: childSnapshot.val()
-        });
-      }
-    });
-    res.json({ success: 0, data: OthersPosts });
+      snapshot.forEach(childSnapshot => {
+          if (childSnapshot.val().Category === "Others") {
+              OthersPosts.push({
+                  key: childSnapshot.key,
+                  post: childSnapshot.val()
+              });
+          }
+      });
+      res.json({ success: 0, data: OthersPosts });
   });
 });
 
@@ -349,15 +342,15 @@ app.get("/others", (req, res) => {
 app.get("/employment", (req, res) => {
   let employmentPosts = [];
   posts.once("value", snapshot => {
-    snapshot.forEach(childSnapshot => {
-      if (childSnapshot.val().Category === "Employment") {
-        employmentPosts.push({
-          key: childSnapshot.key,
-          post: childSnapshot.val()
-        });
-      }
-    });
-    res.json({ success: 0, data: employmentPosts });
+      snapshot.forEach(childSnapshot => {
+          if (childSnapshot.val().Category === "Employment") {
+              employmentPosts.push({
+                  key: childSnapshot.key,
+                  post: childSnapshot.val()
+              });
+          }
+      });
+      res.json({ success: 0, data: employmentPosts });
   });
 });
 
@@ -376,20 +369,20 @@ app.post("/question/getreport", (req, res) => {
   const body = req.body;
   let Report = db.ref("/ReportPost/" + body.postID + "/" + body.userID);
   Report.once("value", snapshot => {
-    res.json({ success: 1, data: snapshot });
+      res.json({ success: 1, data: snapshot });
   });
 });
 
 app.get("/users", (req, res) => {
   let showusers = [];
   users.limitToFirst(5).once("value", snapshot => {
-    snapshot.forEach(childSnapshot => {
-      showusers.push({
-        key: childSnapshot.key,
-        post: childSnapshot.val()
+      snapshot.forEach(childSnapshot => {
+          showusers.push({
+              key: childSnapshot.key,
+              post: childSnapshot.val()
+          });
       });
-    });
-    res.json({ success: 0, data: showusers });
+      res.json({ success: 0, data: showusers });
   });
 });
 
@@ -397,13 +390,13 @@ app.get("/users", (req, res) => {
 app.get("/LastPosts", (req, res) => {
   let showLast = [];
   posts.limitToLast(1).once("value", snapshot => {
-    snapshot.forEach(childSnapshot => {
-      showLast.push({
-        key: childSnapshot.key,
-        post: childSnapshot.val()
+      snapshot.forEach(childSnapshot => {
+          showLast.push({
+              key: childSnapshot.key,
+              post: childSnapshot.val()
+          });
       });
-    });
-    res.json({ success: 0, data: showLast });
+      res.json({ success: 0, data: showLast });
   });
 });
 
@@ -413,24 +406,24 @@ app.get("/getallquestion/:id", (req, res) => {
   const userID = req.params.id;
   let questions = [];
   db.ref("/Posts/")
-    .orderByChild('PostBy')
-    .equalTo(userID)
-    .once("value", snapshot => {
-      snapshot.forEach(childSnapshot => {
-        questions.push({
-          key: childSnapshot.key,
-          data: childSnapshot.val()
-        });
+      .orderByChild('PostBy')
+      .equalTo(userID)
+      .once("value", snapshot => {
+          snapshot.forEach(childSnapshot => {
+              questions.push({
+                  key: childSnapshot.key,
+                  data: childSnapshot.val()
+              });
+          });
+          res.json({ data: questions });
       });
-      res.json({ data: questions });
-    });
 });
 
 // Getting
 app.get("/deletequestion/:postid", (req, res) => {
   const postID = req.params.postid;
   db.ref("Posts/" + postID).remove(() => {
-    return res.status(200).send({ msg: "Deleted" });
+      return res.status(200).send({ msg: "Deleted" });
   });
 });
 
@@ -440,13 +433,13 @@ app.post("/updatequestion", (req, res) => {
   delete body.postID;
 
   return updateRef
-    .update(body.form)
-    .then(() => {
-      return res.status(200).send({ msg: "Updated" });
-    })
-    .catch(error => {
-      return res.send({ Error: error });
-    });
+      .update(body.form)
+      .then(() => {
+          return res.status(200).send({ msg: "Updated" });
+      })
+      .catch(error => {
+          return res.send({ Error: error });
+      });
 });
 
 app.post("/updateprofile", (req, res) => {
@@ -457,25 +450,25 @@ app.post("/updateprofile", (req, res) => {
   const updateRef = db.ref("Users/" + body.id);
   delete body.id;
   updateRef
-    .update(body.form)
-    .then(() => {
-      return res.status(200).send({ msg: "Updated" });
-    })
-    .catch(error => {
-      return res.send({ Error: error });
-    });
+      .update(body.form)
+      .then(() => {
+          return res.status(200).send({ msg: "Updated" });
+      })
+      .catch(error => {
+          return res.send({ Error: error });
+      });
 });
 
 app.post("/updatepass", (req, res) => {
   const body = req.body;
   return auth.currentUser
-    .updatePassword(body.newPassword)
-    .then(() => {
-      return res.status(200).send({ msg: "Password updated" });
-    })
-    .catch(error => {
-      return res.send({ Error: error });
-    });
+      .updatePassword(body.newPassword)
+      .then(() => {
+          return res.status(200).send({ msg: "Password updated" });
+      })
+      .catch(error => {
+          return res.send({ Error: error });
+      });
 });
 
 // ----------------- Ali New Code
@@ -504,13 +497,13 @@ app.post("/vidscomments", (req, res) => {
 app.get("/reports", (req, res) => {
   let allReports = [];
   report.once("value", snapshot => {
-    snapshot.forEach(childSnapshot => {
-      allReports.push({
-        key: childSnapshot.key,
-        post: childSnapshot.val()
+      snapshot.forEach(childSnapshot => {
+          allReports.push({
+              key: childSnapshot.key,
+              post: childSnapshot.val()
+          });
       });
-    });
-    res.json({ success: 0, data: allReports });
+      res.json({ success: 0, data: allReports });
   });
 });
 
@@ -519,13 +512,13 @@ app.get("/reports", (req, res) => {
 app.get("/bannuser", (req, res) => {
   let allBannUser = [];
   bann.once("value", snapshot => {
-    snapshot.forEach(childSnapshot => {
-      allBannUser.push({
-        key: childSnapshot.key,
-        post: childSnapshot.val()
+      snapshot.forEach(childSnapshot => {
+          allBannUser.push({
+              key: childSnapshot.key,
+              post: childSnapshot.val()
+          });
       });
-    });
-    res.json({ success: 0, data: allBannUser });
+      res.json({ success: 0, data: allBannUser });
   });
 });
 
@@ -533,13 +526,13 @@ app.get("/bannuser", (req, res) => {
 app.get("/videos", (req, res) => {
   let allVideos = [];
   videos.once("value", snapshot => {
-    snapshot.forEach(childSnapshot => {
-      allVideos.push({
-        key: childSnapshot.key,
-        post: childSnapshot.val()
+      snapshot.forEach(childSnapshot => {
+          allVideos.push({
+              key: childSnapshot.key,
+              post: childSnapshot.val()
+          });
       });
-    });
-    res.json({ success: 0, data: allVideos });
+      res.json({ success: 0, data: allVideos });
   });
 });
 
@@ -549,16 +542,16 @@ app.get("/getVideos/:key", (req, res) => {
   let key = req.params.key;
   let allVideos = {};
   videos.once("value", snapshot => {
-    snapshot.forEach(childSnapshot => {
-      if (key === childSnapshot.key) {
-        allVideos = {
-          key: childSnapshot.key,
-          post: childSnapshot.val()
-        };
-      }
-    });
-    res.json({ success: 0, data: allVideos });
-    console.log(allVideos);
+      snapshot.forEach(childSnapshot => {
+          if (key === childSnapshot.key) {
+              allVideos = {
+                  key: childSnapshot.key,
+                  post: childSnapshot.val()
+              };
+          }
+      });
+      res.json({ success: 0, data: allVideos });
+      console.log(allVideos);
   });
 });
 
@@ -566,16 +559,16 @@ app.get("/question/:key", (req, res) => {
   let key = req.params.key;
   let allPosts = {};
   posts.once("value", snapshot => {
-    snapshot.forEach(childSnapshot => {
-      if (key === childSnapshot.key) {
-        allPosts = {
-          key: childSnapshot.key,
-          post: childSnapshot.val()
-        };
-      }
-    });
-    res.json({ success: 0, data: allPosts });
-    console.log(allPosts);
+      snapshot.forEach(childSnapshot => {
+          if (key === childSnapshot.key) {
+              allPosts = {
+                  key: childSnapshot.key,
+                  post: childSnapshot.val()
+              };
+          }
+      });
+      res.json({ success: 0, data: allPosts });
+      console.log(allPosts);
   });
 });
 
@@ -592,47 +585,47 @@ app.post("/postvideo", (req, res) => {
 // 1) Total Number OF Posts
 app.get("/totalposts", (req, res) => {
   posts.once("value", snapshot => {
-    let count = Object.keys(snapshot.val());
-    return res.status(200).send({ count: count.length });
+      let count = Object.keys(snapshot.val());
+      return res.status(200).send({ count: count.length });
   });
 });
 
 // 2) Total Number OF Users
 app.get("/totalusers", (req, res) => {
   users.once("value", snapshot => {
-    let count = Object.keys(snapshot.val());
-    return res.status(200).send({ count: count.length });
+      let count = Object.keys(snapshot.val());
+      return res.status(200).send({ count: count.length });
   });
 });
 
 // 3) Total Number OF Videos
 app.get("/totalvideos", (req, res) => {
   db.ref("/Videos").once("value", snapshot => {
-    let count = Object.keys(snapshot.val());
-    return res.status(200).send({ count: count.length });
+      let count = Object.keys(snapshot.val());
+      return res.status(200).send({ count: count.length });
   });
 });
 
 // 4) Total Number Of Donations
 app.get("/totaldonors", (req, res) => {
   Donors.once("value", snapshot => {
-    let count = Object.keys(snapshot.val());
-    return res.status(200).send({ count: count.length });
+      let count = Object.keys(snapshot.val());
+      return res.status(200).send({ count: count.length });
   });
 });
 
 // 5) Total Number of Reports
 app.get("/totalreportpost", (req, res) => {
   db.ref("/ReportPost").once("value", snapshot => {
-    let count = Object.keys(snapshot.val());
-    return res.status(200).send({ count: count.length });
+      let count = Object.keys(snapshot.val());
+      return res.status(200).send({ count: count.length });
   });
 });
 
 // ------- users
 app.get("/getallusers", (req, res) => {
   users.once("value", snapshot => {
-    return res.status(200).send({ users: snapshot.val() });
+      return res.status(200).send({ users: snapshot.val() });
   });
 });
 
@@ -643,21 +636,21 @@ app.get("/changeuserstatus/:uid/:status", (req, res) => {
   let ref = db.ref("/Users/" + userID);
   ref.update({ status: status });
   ref.once("value", snapshot => {
-    const data = snapshot.val();
+      const data = snapshot.val();
 
-    sgMail.setApiKey(
-      "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"
-    );
-    const msg = {
-      to: data.email,
-      from: "ar690780@gmail.com",
-      subject: "Your Account has been" + status,
-      text:
-        "Your Account has been" + status + " on Helping Hand Social Network",
-      html: "<strong></strong>"
-    };
-    sgMail.send(msg);
-    return res.status(200).send({ msg: "User " + status });
+      sgMail.setApiKey(
+          "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"
+      );
+      const msg = {
+          to: data.email,
+          from: "ar690780@gmail.com",
+          subject: "Your Account has been" + status,
+          text:
+              "Your Account has been" + status + " on Helping Hand Social Network",
+          html: "<strong></strong>"
+      };
+      sgMail.send(msg);
+      return res.status(200).send({ msg: "User " + status });
   });
 });
 
@@ -665,44 +658,40 @@ app.get("/changeuserstatus/:uid/:status", (req, res) => {
 app.get("/deletepost/:id", (req, res) => {
   const postID = req.params.id;
   db.ref("/Posts/" + postID)
-    .remove()
-    .then(() => {
-      return res.status(200).send({ msg: "Post deleted" });
-    })
-    .catch(error => {
-      return res.send({ Error: error });
-    });
+      .remove()
+      .then(() => {
+          return res.status(200).send({ msg: "Post deleted" });
+      })
+      .catch(error => {
+          return res.send({ Error: error });
+      });
 });
 
 app.get("/deletedonations/:id", (req, res) => {
   const donation = req.params.id;
   db.ref("/Donations/" + donation)
-    .remove()
-    .then(() => {
-      return res.status(200).send({ msg: "Donation deleted" });
-    })
-    .catch(error => {
-      return res.send({ Error: error });
-    });
+      .remove()
+      .then(() => {
+          return res.status(200).send({ msg: "Donation deleted" });
+      })
+      .catch(error => {
+          return res.send({ Error: error });
+      });
 });
 
 app.post("/deleteadminvideos", (req, res) => {
   const videoID = req.body.id;
   console.log(videoID);
   db.ref("/Videos/" + videoID)
-    .remove()
-    .then(() => {
-      return res.status(200).send({ msg: "Video deleted" });
-    })
-    .catch(error => {
-      return res.send({ Error: error });
-    });
+      .remove()
+      .then(() => {
+          return res.status(200).send({ msg: "Video deleted" });
+      })
+      .catch(error => {
+          return res.send({ Error: error });
+      });
 });
 
-
-
-
-
-app.listen(4000, function() {
+app.listen(3000, function () {
   console.log("Server listening on port 3000");
 });

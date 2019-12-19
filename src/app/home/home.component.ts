@@ -132,8 +132,9 @@ export class HomeComponent implements OnInit {
 
     this.uploadfilesService.uploadFile()
       .then((urls) => {
+        console.log(urls);
         if (urls['videoURL'])
-          this.myhomeform.controls.Video.setValue(urls['videoURL']);
+          this.myvideoform.controls.Video.setValue(urls['videoURL']);
         this.authService.Videos(this.myvideoform.value).subscribe((data: any) => {
             this.myvideoform.reset();
             this.getPOSTS();
