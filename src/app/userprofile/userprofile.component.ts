@@ -18,6 +18,9 @@ user ;
     this.authService.user.subscribe((user: any) => {
       this.user = user;
 
+      console.log(this.user);
+
+
 
     });
     this.authService.getUserquestion(id).subscribe((posts: any) => {

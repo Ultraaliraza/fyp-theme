@@ -40,7 +40,6 @@ export class WatchvideoComponent implements OnInit {
       this.authService.getVideoData(postID.key)
         .subscribe((post: any) => {
           this.posts = post.data.post;
-          console.log(this.posts.Details);
           this.comments = this.posts.Comments;
           console.log(this.posts);
           console.log(this.comments);

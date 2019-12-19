@@ -17,7 +17,7 @@ export class RegisterComponent implements OnInit {
       password: new FormControl('', [Validators.required, Validators.minLength(8)]),
       acountType: new FormControl(''),
       // tslint:disable-next-line:max-line-length
-      profile_image: new FormControl('https://firebasestorage.googleapis.com/v0/b/helpinghand-90a6a.appspot.com/o/Profile_Images%2Fuser-icon-image-placeholder-300-grey.jpg?alt=media&token=02ca32a9-52c7-4278-89a7-f89255a8298f')
+      profile_image: new FormControl('https://firebasestorage.googleapis.com/v0/b/helpinghand-90a6a.appspot.com/o/Post%20Images%2Fuser.jpg?alt=media&token=d2adb6ef-98c3-4a80-88a2-25e1fdab0340')
     });
 
   }

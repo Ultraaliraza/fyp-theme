@@ -11,12 +11,12 @@
 				<li>
 					<a href="#">Home</a>
 				</li>
-				<li>
+				<!-- <li>
 					<a href="#">Ask Question</a>
 				</li>
 				<li>
 					<a href="#">Ask Donation</a>
-				</li>
+				</li> -->
 				<li>
 					<a routerLink="/About">About Us</a>
 				</li>
@@ -117,7 +117,6 @@
 				</div>
 				<div class="col-lg-6" id="middleDiv">
 					<div class="post">
-
 								<h4 class="title">
 									{{posts.Details}}
 								</h4>
@@ -128,7 +127,7 @@
 								</a>
                 <div class="embed-responsive embed-responsive-16by9">
                   <video playsinline="playsinline" autoplay="autoplay" controls>
-                    <source src="https://storage.googleapis.com/coverr-main/mp4/Mt_Baker.mp4" type="video/mp4 ">
+                    <source src="{{posts.Video}}" type=".MP4, .3GP ,.WEBM ,.M4P ,.MKV">
                   </video>
                 </div>
 								<div class="meta">
@@ -139,7 +138,7 @@
 										</li>
 										<li>
 											<i class="far fa-user"></i>
-											Posted by <b><a href="">{{posts.Name}}</a></b>
+											Posted by <b><a href="">{{posts.UserName}}</a></b>
 										</li>
 									</ul>
 									<ul class="right">
